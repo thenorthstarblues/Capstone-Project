@@ -5,7 +5,8 @@
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-drag-and-drop": "^2.3.0"
+    "react-drag-and-drop": "^2.3.0",
+    "interact.js": "1.2.8"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
