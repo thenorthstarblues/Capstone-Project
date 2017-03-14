@@ -1,10 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {connect} from 'react-redux';
+import {dispatchTest} from './reducers/rootReducer';
 
-class App extends Component {
-  render() {
-    return (
+const mstp = (state) =>{
+  return {}
+
+}
+
+const mdtp = (dispatch) => {
+  return {
+    test (){
+      dispatch(dispatchTest('woohoo'))
+    }
+  }
+}
+
+const test = ()=>{
+  return(
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -14,8 +28,10 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
-    );
-  }
+    )
 }
+
+const App = connect(mstp,mdtp)(test);
+
 
 export default App;
