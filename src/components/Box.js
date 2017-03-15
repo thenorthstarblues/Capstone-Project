@@ -29,21 +29,15 @@ class Box extends Component {
 		  })
       .on('resizemove', (event) => {
         const target = event.target;
-        const x = (parseFloat(target.getAttribute('data-x')) || 0);
-        const y = (parseFloat(target.getAttribute('data-y')) || 0);
+        const x = this.state.x;
+        const y = this.state.y;
 
         this.setState({
-          x: event.deltaRect.left,
-          y: event.deltaRect.top,
+          x: x + event.deltaRect.left,
+          y: y + event.deltaRect.top,
           high: event.rect.height,
           wide: event.rect.width,
         })
-
-        target.style.webkitTransform = target.style.transform =
-            'translate(' + x + 'px,' + y + 'px)';
-
-        target.setAttribute('data-x', x);
-        target.setAttribute('data-y', y);
       });
   }
 
