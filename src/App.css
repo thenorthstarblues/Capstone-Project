@@ -38,6 +38,7 @@
 
 .drop-target {
   background-color: #29e;
+  opacity: 0.25;
   border-color: #fff;
   border-style: solid;
 }

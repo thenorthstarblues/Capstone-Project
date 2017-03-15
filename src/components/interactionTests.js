@@ -33,11 +33,11 @@ class InteractionTest extends Component {
 
 		return (
           <div>
-    		  <div id="frame" className="col-lg-8">
+    		  <div id="grid-snap" className="col-lg-8">
     	      	{/*<div id="" className="" style={this.state.dummystyle} />*/}
                 <div id="" className="" />
                     {grids.map((grid,i)=>{
-                        return <Grid id={i} w={this.state.dummystyle.width/12-4} h={this.state.dummystyle.height/rowsNum-2}/>
+                        return <Grid id={'grid'+i} w={this.state.dummystyle.width/12-4} h={this.state.dummystyle.height/rowsNum-2}/>
                     })}
               </div>
               <div id="sidebar" className="col-lg-4">

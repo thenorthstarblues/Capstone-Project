@@ -21,6 +21,15 @@ class Grid extends Component {
     interact(ReactDOM.findDOMNode(this))
       .draggable({
         onmove: this.onMove,
+        snap: { // this then will snap to a 10 x 10 grid location... see example to make sure there is a consistent origin
+          targets: [interact.createSnapGrid({ x: 10, y: 10 })],
+          range: Infinity,
+          relativePoints: [ { x: 0, y: 0 } ]
+        },
+      })
+      .resizable({ // need to improve this logic
+        preserveAspectRatio: false,
+        edges: { left: true, right: true, bottom: true, top: true }
       })
       .on('resizemove', (event) => {
         const target = event.target;
@@ -39,7 +48,7 @@ class Grid extends Component {
         // only accept elements matching this CSS selector
         accept: '.yes-drop',
         // Require a 75% element overlap for a drop to be possible
-        overlap: 0.1,
+        overlap: 0.9,
 
         // listen for drop related events:
 
