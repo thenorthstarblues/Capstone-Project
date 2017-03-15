@@ -9,6 +9,8 @@ class Box extends Component {
     this.state = {
       x: 0,
       y: 0,
+      wide: 100,
+      high: 100,
     };
     this.onMove = this.onMove.bind(this);
   }
@@ -20,13 +22,35 @@ class Box extends Component {
     interact(ReactDOM.findDOMNode(this))
       .draggable({
         onmove: this.onMove,
+      })
+      .resizable({
+		    preserveAspectRatio: false,
+		    edges: { left: true, right: true, bottom: true, top: true }
+		  })
+      .on('resizemove', (event) => {
+        const target = event.target;
+        const x = (parseFloat(target.getAttribute('data-x')) || 0);
+        const y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+        this.setState({
+          x: event.deltaRect.left,
+          y: event.deltaRect.top,
+          high: event.rect.height,
+          wide: event.rect.width,
+        })
+
+        target.style.webkitTransform = target.style.transform =
+            'translate(' + x + 'px,' + y + 'px)';
+
+        target.setAttribute('data-x', x);
+        target.setAttribute('data-y', y);
       });
   }
 
   style() {
     return {
-      height: 100,
-      width: 100,
+      height: this.state.high,
+      width: this.state.wide,
       backgroundColor: "none",
       border: "solid",
       display: "inline-block",
