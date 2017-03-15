@@ -6,7 +6,7 @@ import InteractionTests from './components/interactionTests.js';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App col-lg-12">
         <InteractionTests />
       </div>
     );

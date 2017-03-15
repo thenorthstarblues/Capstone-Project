@@ -60,7 +60,7 @@ class Box extends Component {
 
   render() {
     return (
-      <div style={this.style()}></div>
+      <div className="yes-drop" style={this.style()}></div>
     )
   }
 }
