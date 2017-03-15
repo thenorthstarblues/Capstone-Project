@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import interact from 'interact.js';
-import Box from './Box';
+//import ReactDOM from 'react-dom';
+//import interact from 'interact.js';
 import Grid from './Grid';
 
 class InteractionTest extends Component {

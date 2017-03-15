@@ -42,13 +42,17 @@ class Grid extends Component {
         edges: { left: true, right: true, bottom: true, top: true }
       })
       .on('resizemove', (event) => {
-        const target = event.target;
+        //const target = event.target;
         const x = this.state.x;
         const y = this.state.y;
 
+        console.log('move variables:', x, y, event);
+
         this.setState({
-          x: x + event.deltaRect.left,
-          y: y + event.deltaRect.top,
+          // x: x + event.deltaRect.left,
+          // y: y + event.deltaRect.top,
+          x: x,
+          y: y,
           high: event.rect.height,
           wide: event.rect.width,
         })
