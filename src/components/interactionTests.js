@@ -41,8 +41,6 @@ class InteractionTest extends Component {
                     })}
               </div>
               <div id="sidebar" className="col-lg-4">
-        	      	<Box />
-                    <Box />
               </div>
           </div>
 	    )

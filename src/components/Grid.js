@@ -17,6 +17,8 @@ class Grid extends Component {
     }
     this.onMove=this.onMove.bind(this);
     this.ondrop=this.ondrop.bind(this);
+    this.onleave=this.onleave.bind(this);
+    this.restrict=this.restrict.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +30,8 @@ class Grid extends Component {
           range: Infinity,
           relativePoints: [ { x: 0, y: 0 } ]
         },
-        // restrict: {
+        restrict: this.restrict,//bind to local and get parent from state NOT WORKING!!!!!
+        // restrict: { //so how to lock elements to their parents... without knowing their parents
         //   restriction: ReactDOM.findDOMNode(this).parentNode,
         //   elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
         //   endOnly: true
@@ -55,7 +58,7 @@ class Grid extends Component {
         // only accept elements matching this CSS selector
         accept: '.yes-drop',
         // Require a 75% element overlap for a drop to be possible
-        overlap: 0.9,
+        overlap: 1,
 
         // listen for drop related events:
 
@@ -72,13 +75,8 @@ class Grid extends Component {
           draggableElement.classList.add('can-drop');
           draggableElement.textContent = 'Dragged in';
         },
-        ondragleave: function (event) {
-          // remove the drop feedback style
-          event.target.classList.remove('drop-target');
-          event.relatedTarget.classList.remove('can-drop');
-          event.relatedTarget.textContent = 'Dragged out';
-        },
-        ondrop: this.ondrop,
+        ondragleave: this.onleave, //dragged out... remove child here
+        ondrop: this.ondrop, //stopped moving, child added to list
         ondropdeactivate: function (event) {
           // remove active dropzone feedback
           event.target.classList.remove('drop-active');
@@ -91,21 +89,44 @@ class Grid extends Component {
   //anything where you need both event relationships and access to local state... needs to be out here and bound to state.
 
   onMove=((e)=>{
+
     this.setState({
       x: this.state.x + e.dx,
       y: this.state.y + e.dy,
     });
   });
 
-
-  ondrop=((e)=>{
+  ondrop=((e)=>{ // adds child ditto to dispatch
     e.relatedTarget.textContent = 'Dropped';
 
     var newChild =this.state.children.concat(e.relatedTarget.id);
     this.setState({children: newChild});
     //child is easy... based on listening structure ... parent will be rough...
+  })
 
-    console.log(this.state);
+  onleave=((e)=> { //will have a dispatch action later...
+    var children = this.state.children;
+    var childLocation = this.state.children.indexOf(e.relatedTarget.id);
+    if (childLocation){ //will have a dispatch action later...
+      children[childLocation]= null;
+    };
+
+    this.setState({children: children}); //not longer fucking with this! moving onto size issues.
+
+    console.log('leave:', e);
+          e.target.classList.remove('drop-target');
+          e.relatedTarget.classList.remove('can-drop');
+          e.relatedTarget.textContent = 'Dragged out';
+
+  })
+
+  restrict=((e)=> { //not yet working
+    console.log(this.state.parent);
+    return {
+          restriction: this.state.parent,
+          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+          endOnly: true
+        };
   })
 
   // style() {
