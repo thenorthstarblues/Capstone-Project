@@ -9,12 +9,14 @@ class Grid extends Component {
     this.state = {
       x: 0,
       y: 0,
+      id: this.props.id,
       wide: this.props.w,
       high: this.props.h,
-      parents: [],
+      parent: [],
       children: [],
     }
     this.onMove=this.onMove.bind(this);
+    this.ondrop=this.ondrop.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +28,11 @@ class Grid extends Component {
           range: Infinity,
           relativePoints: [ { x: 0, y: 0 } ]
         },
+        // restrict: {
+        //   restriction: ReactDOM.findDOMNode(this).parentNode,
+        //   elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+        //   endOnly: true
+        // },
       })
       .resizable({ // need to improve this logic
         preserveAspectRatio: false,
@@ -71,10 +78,7 @@ class Grid extends Component {
           event.relatedTarget.classList.remove('can-drop');
           event.relatedTarget.textContent = 'Dragged out';
         },
-        ondrop: function (event) {
-          event.relatedTarget.textContent = 'Dropped';
-          console.log('thing dropped: ', event.relatedTarget, 'box dropped into: ', event.target );
-        },
+        ondrop: this.ondrop,
         ondropdeactivate: function (event) {
           // remove active dropzone feedback
           event.target.classList.remove('drop-active');
@@ -84,13 +88,25 @@ class Grid extends Component {
 
   }
 
+  //anything where you need both event relationships and access to local state... needs to be out here and bound to state.
+
   onMove=((e)=>{
     this.setState({
       x: this.state.x + e.dx,
       y: this.state.y + e.dy,
     });
-
   });
+
+
+  ondrop=((e)=>{
+    e.relatedTarget.textContent = 'Dropped';
+
+    var newChild =this.state.children.concat(e.relatedTarget.id);
+    this.setState({children: newChild});
+    //child is easy... based on listening structure ... parent will be rough...
+
+    console.log(this.state);
+  })
 
   // style() {
   //   return {
@@ -112,7 +128,7 @@ class Grid extends Component {
     //we should change the interaction type
 
     return (
-      <div className="dropzone yes-drop" style={this.style()}></div>
+      <div className="dropzone yes-drop" id={this.state.id} style={this.style()}></div>
     )
   }
 }
