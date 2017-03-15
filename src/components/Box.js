@@ -12,12 +12,8 @@ class Box extends Component {
       wide: 100,
       high: 100,
     };
-    this.onMove = this.onMove.bind(this);
   }
-  onMove(e) {
-   let coordsObj = { x: this.state.x + e.dx, y: this.state.y + e.dy }
-   this.setState(coordsObj);
-  }
+
   componentDidMount() {
     interact(ReactDOM.findDOMNode(this))
       .draggable({
@@ -52,6 +48,7 @@ class Box extends Component {
       transform: `translate(${this.state.x}px, ${this.state.y}px)`,
     }
   }
+
   render() {
     return (
       <div style={this.style()}></div>

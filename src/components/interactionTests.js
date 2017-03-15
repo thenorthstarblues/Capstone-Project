@@ -19,21 +19,7 @@ class InteractionTest extends Component {
     this.setStyle=this.setStyle.bind(this);
   }
 
-	setStyle = ((obj) => {
-
-		return {
-			backgroundColor: "none",
-			border: "solid",
-			display: "inline-block",
-			borderRadius: 5,
-			width: 50,
-			height: 50,
-			transform: `translate(${this.state[obj].x}px, ${this.state[obj].y}px)`,
-		};
-	});
-
 	render= (() => {
-
 		return (
 		  <div id="frame">
 		  	<p>really?</p>
