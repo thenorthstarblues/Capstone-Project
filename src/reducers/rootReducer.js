@@ -8,10 +8,6 @@ const initialState = {
 //dont forget to set state types!
 
 
-const testFunc = (payload) => {
-  type: 'test',
-  payload
-}
 const reducer = (state= initialState, action) => {
 
   const newState = Object.assign({}, state);
@@ -28,9 +24,7 @@ const reducer = (state= initialState, action) => {
   return newState;
 }
 
-export const dispatchTest = (payload) => {
-  return dispatch => {dispatch(testFunc(payload))};
-};
+
 
 
  const rootReducer = combineReducers({

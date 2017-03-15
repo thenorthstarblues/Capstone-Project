@@ -2,7 +2,6 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {connect} from 'react-redux';
-import {dispatchTest} from './reducers/rootReducer';
 
 const mstp = (state) =>{
   return {}
@@ -10,14 +9,10 @@ const mstp = (state) =>{
 }
 
 const mdtp = (dispatch) => {
-  return {
-    test (){
-      dispatch(dispatchTest('woohoo'))
-    }
-  }
+  return {}
 }
 
-const test = ()=>{
+const App = ()=>{
   return(
       <div className="App">
         <div className="App-header">
@@ -31,7 +26,6 @@ const test = ()=>{
     )
 }
 
-const App = connect(mstp,mdtp)(test);
 
 
-export default App;
+export default connect(mstp,mdtp)(App);
