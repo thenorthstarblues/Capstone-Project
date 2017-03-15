@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import {routerReducer} from 'react-router-redux';
 //for when/if we add more combineReducers do it here
 
 const initialState = {
@@ -11,7 +12,7 @@ const testFunc = (payload) => {
   type: 'test',
   payload
 }
-const rootReducer = (state= initialState, action) => {
+const reducer = (state= initialState, action) => {
 
   const newState = Object.assign({}, state);
 
@@ -32,8 +33,10 @@ export const dispatchTest = (payload) => {
 };
 
 
-//  const rootReducer = combineReducers({
-//   main: reducer,
-// });
+ const rootReducer = combineReducers({
+  main: reducer,
+  router: routerReducer
+});
+
 
 export default rootReducer;
