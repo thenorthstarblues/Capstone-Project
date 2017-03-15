@@ -16,7 +16,6 @@ class InteractionTest extends Component {
     	 	height: 400,
     	 },
     }
-    this.setStyle=this.setStyle.bind(this);
   }
 
 	render= (() => {

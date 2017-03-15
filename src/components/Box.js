@@ -37,6 +37,15 @@ class Box extends Component {
       });
   }
 
+  onMove=((e)=>{
+    this.setState({
+      x: this.state.x + e.dx,
+      y: this.state.y + e.dy,
+    });
+
+  });
+
+
   style() {
     return {
       height: this.state.high,
