@@ -1,35 +1,68 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ReactDOM from 'react-dom';
+import interact from 'interact.js';
+import Box from './components/Box';
+import Grid from './components/Grid';
+import { setBox, loadParentBox, addBox } from './reducers/boxes'
 import {connect} from 'react-redux';
-import {dispatchTest} from './reducers/rootReducer';
 
-const mstp = (state) =>{
-  return {}
+const mapStateToProps = (state) => {
+	return {
+		boxes: state.boxes
+	}
 }
 
-const mdtp = (dispatch) => {
-  return {
-    test (){
-      dispatch(dispatchTest('woohoo'))
-    }
-  }
+const mapDispatchToProps = (dispatch) => {
+	return {
+		setBox(box){
+			dispatch(setBox(box))
+		},
+		loadParentBox(){
+			dispatch(loadParentBox())
+		},
+		addBox(){
+			dispatch(addBox())
+		}
+	}
 }
+
 
 class App extends Component {
-  render(){
-    return(
-        <div className="App">
-          <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Welcome to React</h2>
-          </div>
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
-        </div>
-      )
+  constructor(props) {
+    super(props);
+    this.state={
+		boxCount: 1,
+	}
   }
+
+  componentWillMount(){
+	  this.props.loadParentBox();
+  }
+
+	render= (() => {
+		const box = this.props;
+		console.log('this box ', box);
+
+		return (
+			<div className="App col-lg-12">
+				<div>
+					<div id="frame" className="col-lg-8">
+						{
+							<Box x={box.x} y={box.y} height={box.height} width={box.width} setBox={this.props.setBox} />
+						}
+					</div>
+					<div id="sidebar" className="col-lg-4">
+						<button
+						className={"btn btn-primary btn-lg"}
+						>Add New Box</button>
+					</div>
+				</div>
+			</div>
+	    )
+	});
 }
 
-export default connect(mstp,mdtp)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// <Box setBox={this.props.setBox} box={this.props.box} />
+

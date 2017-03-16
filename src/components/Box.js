@@ -4,43 +4,35 @@ import interact from 'interact.js';
 
 
 class Box extends Component {
-  constructor() {
-    super();
-    this.state = {
-      x: 0,
-      y: 0,
-      wide: 100,
-      high: 100,
-    };
-  }
-
   componentDidMount() {
     interact(ReactDOM.findDOMNode(this))
       .draggable({
         onmove: this.onMove,
       })
-      .resizable({
-		    preserveAspectRatio: false,
-		    edges: { left: true, right: true, bottom: true, top: true }
-		  })
-      .on('resizemove', (event) => {
-        const target = event.target;
-        const x = this.state.x;
-        const y = this.state.y;
+      // .resizable({
+		  //   preserveAspectRatio: true,
+		  //   edges: { left: true, right: true, bottom: true, top: true }
+		  // })
+      // .on('resizemove', (event) => {
+      //   const x = this.props.box.box.x;
+      //   const y = this.props.box.box.y;
 
-        this.setState({
-          x: x + event.deltaRect.left,
-          y: y + event.deltaRect.top,
-          high: event.rect.height,
-          wide: event.rect.width,
-        })
-      });
+      //   this.props.setBox({
+      //     x: x + event.deltaRect.left,
+      //     y: y + event.deltaRect.top,
+      //     high: event.rect.height,
+      //     wide: event.rect.width,
+      //   })
+      // });
   }
 
   onMove=((e)=>{
-    this.setState({
-      x: this.state.x + e.dx,
-      y: this.state.y + e.dy,
+    this.props.setBox({
+      id: this.props.id,
+      x: this.props.x + e.dx,
+      y: this.props.y + e.dy,
+      high: this.props.height,
+      wide: this.props.width,
     });
 
   });
@@ -48,19 +40,19 @@ class Box extends Component {
 
   style() {
     return {
-      height: this.state.high,
-      width: this.state.wide,
+      height: this.props.height,
+      width: this.props.width,
       backgroundColor: "none",
       border: "solid",
       display: "inline-block",
       borderRadius: 5,
-      transform: `translate(${this.state.x}px, ${this.state.y}px)`,
+      transform: `translate(${this.props.x}px, ${this.props.y}px)`,
     }
   }
 
   render() {
     return (
-      <div style={this.style()}></div>
+      <div className="yes-drop" style={this.style()}></div>
     )
   }
 }

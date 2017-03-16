@@ -22,3 +22,42 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.dropzone {
+  display: inline-block;
+  border: dashed 0.5px #a9a9a9;
+  margin: 0px 2px;
+  padding: 0px;
+  transition: background-color 0.3s;
+}
+
+.drop-active {
+  border-color: #aaa;
+}
+
+.drop-target {
+  background-color: #29e;
+  opacity: 0.25;
+  border-color: #fff;
+  border-style: solid;
+}
+
+.drag-drop {
+  display: inline-block;
+  min-width: 40px;
+  padding: 2em 0.5em;
+
+  color: #fff;
+  background-color: #29e;
+  border: solid 2px #fff;
+
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+
+  transition: background-color 0.3s;
+}
+
+.drag-drop.can-drop {
+  color: #000;
+  background-color: #4e4;
+}
