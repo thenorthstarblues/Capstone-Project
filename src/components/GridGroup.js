@@ -14,7 +14,6 @@ class Grid extends Component {
       high: this.props.h,
       parent: [],
       children: [],
-      class: '', // for later updates/alterations
       tag: this.props.type, // likewise, for four generators
     }
     this.onMove=this.onMove.bind(this);
@@ -32,11 +31,12 @@ class Grid extends Component {
           range: Infinity,
           relativePoints: [ { x: 0, y: 0 } ]
         },
-        restrict: {
-          restriction: ReactDOM.findDOMNode(this).parentNode,
-          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-          endOnly: true
-        },
+        restrict: this.restrict,//bind to local and get parent from state NOT WORKING!!!!!
+        // restrict: { //so how to lock elements to their parents... without knowing their parents
+        //   restriction: ReactDOM.findDOMNode(this).parentNode,
+        //   elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+        //   endOnly: true
+        // },
       })
       .resizable({ // need to improve this logic
         preserveAspectRatio: false,
@@ -45,11 +45,6 @@ class Grid extends Component {
           targets: [interact.createSnapGrid({ x: 10, y: 10 })],
           range: Infinity,
           relativePoints: [ { x: 0, y: 0 } ]
-        },
-        restrict: {
-          restriction: ReactDOM.findDOMNode(this).parentNode,
-          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-          endOnly: true
         },
       })
       .on('resizemove', (event) => {
@@ -147,18 +142,19 @@ class Grid extends Component {
 
   render() {
 
-    //different types as different components
     let typeClass;
-    switch(this.state.tag){
-      case('div'): typeClass = 'basicBox'; break;
-      case('h1'): typeClass = 'basicH1'; break;
-      case('img'): typeClass = 'basicImg'; break;
-      default: typeClass = 'basicBox'; break;
-    }
+    if (this.state.tag==='div'){typeClass = 'basicBox';};
+    if (this.state.tag==='h1'){typeClass = 'basicH1';};
+    if (this.state.tag==='img'){typeClass = 'basicImg';};
+
+    console.log(this.state.tag);
 
 
     return (
-      <rect className={`dropzone yes-drop ${typeClass}`} id={this.state.id} height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="2px" ry="2px" />
+      <g  id={this.state.id} className="dropzone yes-drop" >
+        <rect className="borderGen" height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="3px" ry="3px" />
+        <rect className={`dropzone yes-drop ${typeClass}`} id={this.state.id} height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="3px" ry="3px" />
+      </g>
     )
   }
 }

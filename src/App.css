@@ -37,7 +37,6 @@
 }
 
 .drop-target {
-  background-color: #29e;
   opacity: 0.25;
   border-color: #fff;
   border-style: solid;
@@ -59,6 +58,29 @@
 }
 
 .drag-drop.can-drop {
-  color: #000;
+  color: #ffffff;
   background-color: #4e4;
+}
+
+.basicBox{
+  fill: #ffffff;
+  fill-opacity: 0.1;
+  stroke: #000000;
+  stroke-width: 2px;
+  stroke-opacity: 1;
+}
+
+.basicH1{
+  fill: #3d3d3d;
+  fill-opacity: 0.75;
+  stroke: none;
+}
+
+.basicImg{
+  fill: #8c8c8c;
+  fill-opacity: 0.75;
+  stroke: #000000;
+  stroke-width: 1px;
+  stroke-opacity: 1;
+
 }
