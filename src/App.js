@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
-import Box from './components/Box';
 import Grid from './components/Grid';
-import { setBox, loadParentBox, addBox } from './reducers/boxes'
+import { setBox, addBox, removeBox } from './reducers/boxes'
 import {connect} from 'react-redux';
+import './App.css';
 
 const mapStateToProps = (state) => {
+	const ids = Object.keys(state.boxes);
 	return {
-		boxes: state.boxes
+		boxes: state.boxes,
+		boxIds: ids,
+		nextBoxId: Number(ids[ids.length - 1] + 1),
 	}
 }
 
@@ -17,43 +20,47 @@ const mapDispatchToProps = (dispatch) => {
 		setBox(box){
 			dispatch(setBox(box))
 		},
-		loadParentBox(){
-			dispatch(loadParentBox())
+		addBox(boxId){
+			dispatch(addBox(boxId))
 		},
-		addBox(){
-			dispatch(addBox())
+		removeBox(boxId){
+			dispatch(removeBox(boxId))
 		}
 	}
 }
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state={
-		boxCount: 1,
+	constructor(props){
+		super(props);
+		this.boxAdder = this.boxAdder.bind(this);
 	}
-  }
 
-  componentWillMount(){
-	  this.props.loadParentBox();
-  }
+	boxAdder(){
+		const id = Number(this.props.nextBoxId);
+		this.props.addBox(id);
+	}
 
 	render= (() => {
-		const box = this.props;
-		console.log('this box ', box);
+		const boxes = this.props.boxes;
+		const boxIds = this.props.boxIds;
 
 		return (
 			<div className="App col-lg-12">
 				<div>
-					<div id="frame" className="col-lg-8">
+					<div id="grid-snap" className="col-lg-8">
+						<svg id="drawHere" width="900px" height="600px" onClick={this.add}>
 						{
-							<Box x={box.x} y={box.y} height={box.height} width={box.width} setBox={this.props.setBox} />
+							boxIds.map(box => (
+								<Grid id={box} x={boxes[box].x} y = {boxes[box].y} h={boxes[box].height} w={boxes[box].width} type='div' />
+							))
 						}
+						</svg>
 					</div>
 					<div id="sidebar" className="col-lg-4">
 						<button
 						className={"btn btn-primary btn-lg"}
+						onClick={this.boxAdder}
 						>Add New Box</button>
 					</div>
 				</div>
@@ -63,6 +70,3 @@ class App extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-// <Box setBox={this.props.setBox} box={this.props.box} />
-

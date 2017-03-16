@@ -7,23 +7,52 @@ class Grid extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      x: 0,
-      y: 0,
+      x: this.props.x,
+      y: this.props.y,
+      id: this.props.id,
       wide: this.props.w,
       high: this.props.h,
-      parents: [],
+      parent: [],
       children: [],
+      class: '', // for later updates/alterations
+      tag: this.props.type, // likewise, for four generators
     }
     this.onMove=this.onMove.bind(this);
+    this.ondrop=this.ondrop.bind(this);
+    this.onleave=this.onleave.bind(this);
+    this.restrict=this.restrict.bind(this);
   }
 
   componentDidMount() {
     interact(ReactDOM.findDOMNode(this))
       .draggable({
         onmove: this.onMove,
+        snap: { // this then will snap to a 10 x 10 grid location... see example to make sure there is a consistent origin
+          targets: [interact.createSnapGrid({ x: 10, y: 10 })],
+          range: Infinity,
+          relativePoints: [ { x: 0, y: 0 } ]
+        },
+        restrict: {
+          restriction: ReactDOM.findDOMNode(this).parentNode,
+          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+          endOnly: true
+        },
+      })
+      .resizable({ // need to improve this logic
+        preserveAspectRatio: false,
+        edges: { left: true, right: true, bottom: true, top: true },
+        snap: { // this then will snap to a 10 x 10 grid location... see example to make sure there is a consistent origin
+          targets: [interact.createSnapGrid({ x: 10, y: 10 })],
+          range: Infinity,
+          relativePoints: [ { x: 0, y: 0 } ]
+        },
+        restrict: {
+          restriction: ReactDOM.findDOMNode(this).parentNode,
+          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+          endOnly: true
+        },
       })
       .on('resizemove', (event) => {
-        const target = event.target;
         const x = this.state.x;
         const y = this.state.y;
 
@@ -39,7 +68,7 @@ class Grid extends Component {
         // only accept elements matching this CSS selector
         accept: '.yes-drop',
         // Require a 75% element overlap for a drop to be possible
-        overlap: 0.1,
+        overlap: 1,
 
         // listen for drop related events:
 
@@ -56,16 +85,8 @@ class Grid extends Component {
           draggableElement.classList.add('can-drop');
           draggableElement.textContent = 'Dragged in';
         },
-        ondragleave: function (event) {
-          // remove the drop feedback style
-          event.target.classList.remove('drop-target');
-          event.relatedTarget.classList.remove('can-drop');
-          event.relatedTarget.textContent = 'Dragged out';
-        },
-        ondrop: function (event) {
-          event.relatedTarget.textContent = 'Dropped';
-          console.log('thing dropped: ', event.relatedTarget, 'box dropped into: ', event.target );
-        },
+        ondragleave: this.onleave, //dragged out... remove child here
+        ondrop: this.ondrop, //stopped moving, child added to list
         ondropdeactivate: function (event) {
           // remove active dropzone feedback
           event.target.classList.remove('drop-active');
@@ -75,35 +96,61 @@ class Grid extends Component {
 
   }
 
+  //anything where you need both event relationships and access to local state... needs to be out here and bound to state.
+
   onMove=((e)=>{
+
     this.setState({
       x: this.state.x + e.dx,
       y: this.state.y + e.dy,
     });
-
   });
 
-  // style() {
-  //   return {
-  //     height: this.state.high,
-  //     width: this.state.wide,
-  //   }
-  // }
+  ondrop=((e)=>{ // adds child ditto to dispatch
+    e.relatedTarget.textContent = 'Dropped';
 
-  style() {
+    var newChild =this.state.children.concat(e.relatedTarget.id);
+    this.setState({children: newChild});
+    //child is easy... based on listening structure ... parent will be rough...
+  })
+
+  onleave=((e)=> { //will have a dispatch action later...
+    var children = this.state.children;
+    var childLocation = this.state.children.indexOf(e.relatedTarget.id);
+    if (childLocation){ //will have a dispatch action later...
+      children[childLocation]= null;
+    };
+
+    this.setState({children: children}); //not longer fucking with this! moving onto size issues.
+
+    console.log('leave:', e);
+          e.target.classList.remove('drop-target');
+          e.relatedTarget.classList.remove('can-drop');
+          e.relatedTarget.textContent = 'Dragged out';
+
+  })
+
+  restrict=((e)=> { //not yet working
+    console.log(this.state.parent);
     return {
-      height: this.state.high,
-      width: this.state.wide,
-      transform: `translate(${this.state.x}px, ${this.state.y}px)`,
-    }
-  }
+          restriction: this.state.parent,
+          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+          endOnly: true
+        };
+  })
+
 
   render() {
-
-    //we should change the interaction type
+    let typeClass;
+    switch(this.state.tag){
+      case('div'): typeClass = 'basicBox'; break;
+      case('h1'): typeClass = 'basicH1'; break;
+      case('img'): typeClass = 'basicImg'; break;
+      default: typeClass = 'basicBox'; break;
+    }
 
     return (
-      <div className="dropzone yes-drop" style={this.style()}></div>
+      <rect className={`dropzone yes-drop ${typeClass}`} id={this.state.id} height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="2px" ry="2px" />
     )
   }
 }

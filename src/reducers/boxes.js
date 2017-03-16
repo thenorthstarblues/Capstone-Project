@@ -1,4 +1,14 @@
-const initialState = {};
+const initialState = {
+  0: {
+    id: 0,
+    x: 0,
+    y: 0,
+    width: 900,
+    height: 600,
+    children: [],
+    parent: null,
+  }
+};
 
 //constants
 const ADD_BOX = 'ADD_BOX'
@@ -14,34 +24,40 @@ export const setBox = (box) => {
   }
 }
 
-export const addBox = (box) => {
+export const addBox = (id) => {
   return {
     type: ADD_BOX,
     box: {
+      id: id,
       x: 0,
       y: 0,
       width: 100,
       height: 100,
+      children: [],
+      parent: null,
     }
   }
 }
 
-export const loadParentBox = () => {
-  return {
-    type: LOAD_PARENT_BOX,
-    box: {
-      id: 0,
-      x: 0,
-      y: 0,
-      width: 900,
-      height: 600,
-    }
-  }
-}
+// export const loadParentBox = () => {
+//   return {
+//     type: LOAD_PARENT_BOX,
+//     box: {
+//       id: 0,
+//       x: 0,
+//       y: 0,
+//       width: 900,
+//       height: 600,
+//       children: [],
+//       parent: null,
+//     }
+//   }
+// }
 
 export const removeBox = (boxId) => {
   return {
-    type: REMOVE_BOX
+    type: REMOVE_BOX,
+    boxId,
   }
 }
 
@@ -54,9 +70,7 @@ const boxesReducer = (prevState = initialState, action) => {
       newState[action.box.id] = action.box;
       break;
     case ADD_BOX:
-      const box = action.box;
-      box.id = Object.keys(newState).length;
-      newState[box.id] = box;
+      newState[action.box.id] = action.box;
       break;
     case REMOVE_BOX:
       delete newState[action.box.id];
