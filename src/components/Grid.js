@@ -156,7 +156,7 @@ class Grid extends Component {
 
 
     return (
-      <rect className={`dropzone yes-drop ${typeClass}`} id={this.state.id} height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="2px" ry="2px" children = {this.state.child} />
+      <rect className={`dropzone yes-drop ${typeClass}`} id={this.state.id} height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="2px" ry="2px" data={this.state.child} />
     )
   }
 }
