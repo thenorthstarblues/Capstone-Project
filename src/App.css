@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding: 20px;
 }
 
 .App-logo {
@@ -21,6 +22,67 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.dropzone {
+  display: inline-block;
+  border: dashed 0.5px #a9a9a9;
+  margin: 0px 2px;
+  padding: 0px;
+  transition: background-color 0.3s;
+}
+
+.drop-active {
+  border-color: #aaa;
+}
+
+.drop-target {
+  opacity: 0.25;
+  border-color: #fff;
+  border-style: solid;
+}
+
+.drag-drop {
+  display: inline-block;
+  min-width: 40px;
+  padding: 2em 0.5em;
+
+  color: #fff;
+  background-color: #29e;
+  border: solid 2px #fff;
+
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+
+  transition: background-color 0.3s;
+}
+
+.drag-drop.can-drop {
+  color: #ffffff;
+  background-color: #4e4;
+}
+
+.basicBox{
+  fill: #ffffff;
+  fill-opacity: 0.1;
+  stroke: #000000;
+  stroke-width: 2px;
+  stroke-opacity: 1;
+}
+
+.basicH1{
+  fill: #3d3d3d;
+  fill-opacity: 0.75;
+  stroke: none;
+}
+
+.basicImg{
+  fill: #8c8c8c;
+  fill-opacity: 0.75;
+  stroke: #000000;
+  stroke-width: 1px;
+  stroke-opacity: 1;
+
 }
 
 .custom-modal {
