@@ -20,7 +20,7 @@ class Grid extends Component {
     this.onMove=this.onMove.bind(this);
     this.ondrop=this.ondrop.bind(this);
     this.onleave=this.onleave.bind(this);
-    this.restrict=this.restrict.bind(this);
+    //this.visualDelete=this.visualDelete.bind(this);
   }
 
   componentDidMount() {
@@ -67,7 +67,14 @@ class Grid extends Component {
           high: event.rect.height,
           wide: event.rect.width,
         })
-
+      })
+      .on('doubletap', (event)=>{ //testing only
+            this.setState({x:0});
+            this.setState({y:0});
+            this.setState({wide:0});
+            this.setState({high:0});
+            this.setState({id:''});
+            this.setState({tag: 'none'});
       })
       .dropzone({
         // only accept elements matching this CSS selector
@@ -104,7 +111,6 @@ class Grid extends Component {
   //anything where you need both event relationships and access to local state... needs to be out here and bound to state.
 
   onMove=((e)=>{
-
     this.setState({
       x: this.state.x + e.dx,
       y: this.state.y + e.dy,
@@ -135,15 +141,6 @@ class Grid extends Component {
 
   })
 
-  restrict=((e)=> { //not yet working
-    console.log(this.state.parent);
-    return {
-          restriction: this.state.parent,
-          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-          endOnly: true
-        };
-  })
-
 
   render() {
 
@@ -153,12 +150,13 @@ class Grid extends Component {
       case('div'): typeClass = 'basicBox'; break;
       case('h1'): typeClass = 'basicH1'; break;
       case('img'): typeClass = 'basicImg'; break;
+      case('none'): typeClass = 'basicErase'; break; //just testing
       default: typeClass = 'basicBox'; break;
     }
 
 
     return (
-      <rect className={`dropzone yes-drop ${typeClass}`} id={this.state.id} height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="2px" ry="2px" />
+      <rect className={`dropzone yes-drop ${typeClass}`} id={this.state.id} height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="2px" ry="2px" children = {this.state.child} />
     )
   }
 }
