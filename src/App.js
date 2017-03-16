@@ -10,17 +10,7 @@ import Code from './Codemirror';
 
 class App extends Component {
 
-
-const mstp = (state) =>{
-  return {}
-
-}
-
-const mdtp = (dispatch) => {
-  return {}
-}
-
-render()=>{
+render = ()=>{
   return(
       <div className="App">
         <SplitPane split="vertical" defaultSize={200} primary="first">
@@ -41,3 +31,14 @@ render()=>{
 }
 
 export default connect(mstp,mdtp)(App);
+
+
+
+const mstp = (state) =>{
+  return {}
+
+}
+
+const mdtp = (dispatch) => {
+  return {}
+}
