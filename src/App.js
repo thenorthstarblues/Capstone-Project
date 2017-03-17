@@ -59,56 +59,55 @@ class App extends Component {
 		this.props.addBox(id);
 	}
 
-	render= (() => {
+	render(){
 		const boxes = this.props.boxes;
 		const boxIds = this.props.boxIds;
 
 		return (
-		<div className="App">
-        	<SplitPane split="vertical" defaultSize={200} primary="first">
-	        	<div>
-	          		<Code />
-	        	</div>
-	        	<div>
-					<div className="App col-lg-12">
-						<div>
-							<div id="grid-snap" className="col-lg-8">
-								<svg id="drawHere" width="900px" height="600px" onClick={this.add}>
-								{
-									boxIds.map(box => (
-										<Grid key={box}
-													setBox={this.props.setBox}
-													removeBox={this.props.removeBox}
-													setParent={this.props.setParent}
-													addChild={this.props.addChild}
-													removeParent={this.props.removeParent}
-													removeChild={this.props.removeChild}
-													id={box}
-													x={boxes[box].x}
-													y = {boxes[box].y}
-													height={boxes[box].height}
-													width={boxes[box].width}
-													children={boxes[box].children}
-													parent={boxes[box].parent}
-													/>
-									))
-								}
-								</svg>
-							</div>
-							<div id="sidebar" className="col-lg-4">
-								<button
-								className={"btn btn-primary btn-lg"}
-								onClick={this.boxAdder}
-								>Add New Box</button>
-							</div>
-						</div>
+			<div className="App">
+				<SplitPane split="vertical" defaultSize={200} primary="first">
+					<div>
+						<Code />
 					</div>
-					<CodeModal />
-				</div>
-			</SplitPane>
-		</div>
-	    )
-	});
+						<div className="App">
+							<div>
+								<div id="grid-snap" className="col-lg-12">
+									<svg id="drawHere" width="1100px" height="650px">
+										{
+											boxIds.map(box => (
+												<Grid key={box}
+															setBox={this.props.setBox}
+															removeBox={this.props.removeBox}
+															setParent={this.props.setParent}
+															addChild={this.props.addChild}
+															removeParent={this.props.removeParent}
+															removeChild={this.props.removeChild}
+															id={box}
+															x={boxes[box].x}
+															y = {boxes[box].y}
+															height={boxes[box].height}
+															width={boxes[box].width}
+															children={boxes[box].children}
+															parent={boxes[box].parent}
+															/>
+													))
+												}
+												<TrashCan removeBox={this.props.removeBox} />
+											</svg>
+										</div>
+									</div>
+								<div className="button-box">
+									<CodeModal />
+									<button
+										className={"btn btn-primary btn-lg"}
+										onClick={this.boxAdder}
+										>Add New Box</button>
+								</div>
+						</div>
+				</SplitPane>
+			</div>
+		)
+	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

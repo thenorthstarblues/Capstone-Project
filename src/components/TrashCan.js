@@ -13,21 +13,20 @@ class TrashCan extends Component {
     interact(ReactDOM.findDOMNode(this))
       .dropzone({
         ondrop: this.onDrop,
-        ondragleave: this.onLeave,
       })
   }
 
   onDrop = (e) => {
-    console.log(e.relatedTarget.id + ' was trashed ');
+    console.log('box was dropped')
     this.props.removeBox(+e.relatedTarget.id);
   }
 
   render() {
-
     return (
-        <div className="trash">
-          <span className="glyphicon glyphicon-trash"></span>
-        </div>
+      <g>
+          <rect x="910" y="350" width="190" height="200" rx="2px" ry="2px" className="basicBox" />
+          <text x="1000" y="400">TRASH ZONE</text>
+      </g>
     )
   }
 }

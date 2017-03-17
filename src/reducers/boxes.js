@@ -2,7 +2,7 @@ const initialState = {
   0: {
     id: 0,
     x: 0,
-    y: 0,
+    y: 30,
     width: 900,
     height: 600,
     children: [],
@@ -32,8 +32,8 @@ export const addBox = (id) => {
     type: ADD_BOX,
     box: {
       id: +id,
-      x: 20,
-      y: 20,
+      x: 30,
+      y: 30,
       width: 100,
       height: 100,
       children: [],
@@ -92,7 +92,7 @@ const boxesReducer = (prevState = initialState, action) => {
       newState[action.box.id] = action.box;
       break;
     case REMOVE_BOX:
-      delete newState[action.box.id];
+      delete newState[action.boxId];
       break;
     case SET_PARENT:
       newState[action.childId].parent = action.parentId;

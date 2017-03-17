@@ -56,7 +56,7 @@ class Grid extends Component {
         })
       })
       .on('resizeend', (event) => {
-        alert('resize ended');
+        console.log('resize ended');
       })
       .dropzone({
         ondrop: this.onDrop,
@@ -88,13 +88,13 @@ class Grid extends Component {
     this.props.removeChild(+e.target.id, +e.relatedTarget.id);
   }
 
-  restrict=((e)=> {
+  restrict = (e) => {
     return {
           restriction: this.props.parent,
           elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
           endOnly: true
         };
-  })
+  }
 
 
   render() {
