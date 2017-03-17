@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 import Grid from './components/Grid';
-import { setBox, addBox, removeBox } from './reducers/boxes'
+import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes'
 import {connect} from 'react-redux';
 import './App.css';
 
@@ -25,6 +25,18 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		removeBox(boxId){
 			dispatch(removeBox(boxId))
+		},
+		setParent(parentId, childId){
+			dispatch(setParent(parentId, childId))
+		},
+		addChild(parentId, childId){
+			dispatch(addChild(parentId, childId))
+		},
+		removeParent(childId){
+			dispatch(removeParent(childId))
+		},
+		removeChild(parentId, childId){
+			dispatch(removeChild(parentId, childId))
 		}
 	}
 }
@@ -52,7 +64,21 @@ class App extends Component {
 						<svg id="drawHere" width="900px" height="600px" onClick={this.add}>
 						{
 							boxIds.map(box => (
-								<Grid id={box} x={boxes[box].x} y = {boxes[box].y} h={boxes[box].height} w={boxes[box].width} type='div' />
+								<Grid key={box}
+											setBox={this.props.setBox}
+											removeBox={this.props.removeBox}
+											setParent={this.props.setParent}
+											addChild={this.props.addChild}
+											removeParent={removeParent}
+											removeChild={removeChild}
+											id={box}
+											x={boxes[box].x}
+											y = {boxes[box].y}
+											height={boxes[box].height}
+											width={boxes[box].width}
+											children={boxes[box].children}
+											parent={boxes[box].parent}
+											/>
 							))
 						}
 						</svg>
