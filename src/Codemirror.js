@@ -4,15 +4,15 @@ require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/xml/xml');
 require('codemirror/mode/markdown/markdown');
 require('codemirror/lib/codemirror.css')
-import {connect} from 'react-redux'
+//import {connect} from 'react-redux'
 
-var htmlData = require('./fsRead').data || `//display code here`
+//var htmlData = require('./fsRead').data || `//display code here`
 
 
 
 
 //this is codemirror supplied code for testing purposes
-const codetest = React.createClass({
+/*const codetest = React.createClass({
     getInitialState: function() {
         return {
             code: htmlData,
@@ -31,7 +31,7 @@ const codetest = React.createClass({
     }
 });
 export {codetest}
-
+*/
 
 
   //this is real code
@@ -42,9 +42,10 @@ const Code = (props) => {
       mode: 'javascript',
       lineNumbers: true,
 
-      }} />
+     
+      }} value={props.htmlString}/>
   )
 }
 
-export default connect()(codetest);
+export default Code;
 
