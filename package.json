@@ -3,10 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-    "bootstrap": "^3.3.7",
-    "interact.js": "1.2.8",
-=======
     "axios": "^0.15.3",
     "body-parser": "^1.17.1",
     "bootstrap": "^3.3.7",
@@ -18,7 +14,6 @@
     "pg": "^6.1.4",
     "pg-hstore": "^2.3.2",
     "pg-native": "^1.10.0",
->>>>>>> master
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.8",
     "react-codemirror": "^0.3.0",
@@ -26,19 +21,13 @@
     "react-drag-and-drop": "^2.3.0",
     "react-redux": "^5.0.3",
     "react-router": "^4.0.0",
-<<<<<<< HEAD
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.0",
     "redux-logger": "^2.8.2",
-    "redux-thunk": "^2.2.0"
-=======
+    "redux-thunk": "^2.2.0",
     "react-router-redux": "^5.0.0-alpha.3",
     "react-split-pane": "^0.1.59",
-    "redux": "^3.6.0",
-    "redux-logger": "^2.8.2",
-    "redux-thunk": "^2.2.0",
     "sequelize": "^3.30.2"
->>>>>>> master
   },
   "devDependencies": {
     "react-scripts": "0.9.5",

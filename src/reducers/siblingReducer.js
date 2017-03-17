@@ -1,5 +1,5 @@
 //testingOnly folder for some fake initial data;
-import {dummyData0, dummyData1} from './testingOnly/dummyLayoutData.js';
+import {dummyData0, dummyData1} from './dummyLayoutData.js';
 
 
 export const SIB_RECOG = 'SIB_RECOG';

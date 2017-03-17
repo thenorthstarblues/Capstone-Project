@@ -1,11 +1,14 @@
-
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 import Grid from './components/Grid';
-import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes'
+import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
+
 import {connect} from 'react-redux';
+import CodeModal from './codemirror_modal';
+import {codetest} from './Codemirror';
+import SplitPane from 'react-split-pane';
+import Code from './Codemirror';
 import './App.css';
 
 const mapStateToProps = (state) => {
@@ -60,85 +63,51 @@ class App extends Component {
 		const boxIds = this.props.boxIds;
 
 		return (
-			<div className="App col-lg-12">
-				<div>
-					<div id="grid-snap" className="col-lg-8">
-						<svg id="drawHere" width="900px" height="600px" onClick={this.add}>
-						{
-							boxIds.map(box => (
-								<Grid key={box}
-											setBox={this.props.setBox}
-											removeBox={this.props.removeBox}
-											setParent={this.props.setParent}
-											addChild={this.props.addChild}
-											removeParent={removeParent}
-											removeChild={removeChild}
-											id={box}
-											x={boxes[box].x}
-											y = {boxes[box].y}
-											height={boxes[box].height}
-											width={boxes[box].width}
-											children={boxes[box].children}
-											parent={boxes[box].parent}
-											/>
-							))
-						}
-						</svg>
+		<div className="App">
+        	<SplitPane split="vertical" defaultSize={200} primary="first">
+	        	<div>
+	          		<Code />
+	        	</div>
+	        	<div>
+					<div className="App col-lg-12">
+						<div>
+							<div id="grid-snap" className="col-lg-8">
+								<svg id="drawHere" width="900px" height="600px" onClick={this.add}>
+								{
+									boxIds.map(box => (
+										<Grid key={box}
+													setBox={this.props.setBox}
+													removeBox={this.props.removeBox}
+													setParent={this.props.setParent}
+													addChild={this.props.addChild}
+													removeParent={removeParent}
+													removeChild={removeChild}
+													id={box}
+													x={boxes[box].x}
+													y = {boxes[box].y}
+													height={boxes[box].height}
+													width={boxes[box].width}
+													children={boxes[box].children}
+													parent={boxes[box].parent}
+													/>
+									))
+								}
+								</svg>
+							</div>
+							<div id="sidebar" className="col-lg-4">
+								<button
+								className={"btn btn-primary btn-lg"}
+								onClick={this.boxAdder}
+								>Add New Box</button>
+							</div>
+						</div>
 					</div>
-					<div id="sidebar" className="col-lg-4">
-						<button
-						className={"btn btn-primary btn-lg"}
-						onClick={this.boxAdder}
-						>Add New Box</button>
-					</div>
+					<CodeModal />
 				</div>
-			</div>
+			</SplitPane>
+		</div>
 	    )
 	});
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-=======
-import './App.css';
-import InteractionTests from './components/interactionTests.js';
-import {connect} from 'react-redux';
-import CodeModal from './codemirror_modal';
-import {codetest} from './Codemirror';
-import SplitPane from 'react-split-pane';
-import Code from './Codemirror';
-
-class App extends Component {
-
-render = ()=>{
-  return(
-      <div className="App">
-        <SplitPane split="vertical" defaultSize={200} primary="first">
-        <div>
-          <Code />
-        </div>
-        <div>
-          <div className="App col-lg-12">
-            <InteractionTests />
-          </div>
-          <CodeModal />
-         </div>
-      </SplitPane>
-      </div>
-    )
-}
-
-}
-
-export default connect(mstp,mdtp)(App);
-
-
-
-const mstp = (state) =>{
-  return {}
-
-}
-
-const mdtp = (dispatch) => {
-  return {}
-}
->>>>>>> master
