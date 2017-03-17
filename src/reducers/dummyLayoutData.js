@@ -1,4 +1,4 @@
-export const dummyData0={
+const dummyData00={
 	0:{ height:600, width:900, x:0, y:0, parent:[], children:[17, 1], tag: 'div' },
 	17:{ height:340, width:420, x:79, y:220, parent:[], children:[2,3,4,10,15,14,13,9,8,7], tag: 'div' },
 	1:{ height:340, width:210, x:539, y: 220, parent:[], children:[6,5,11,12,16], tag: 'div' },
@@ -19,7 +19,7 @@ export const dummyData0={
 	16:{ height:170, width:140, x:549, y:260, parent:[], children:[], tag: 'img' },
 };
 
-export const dummyData1={
+const dummyData11={
 	0:{ height:300, width:680, x:129, y:220, parent:[], children:[], tag: 'div' },
 	1:{ height:60, width:220, x:139, y:450, parent:[], children:[], tag: 'div' },
 	2:{ height:60, width:170, x:409, y:450, parent:[], children:[], tag: 'div' },
@@ -31,6 +31,23 @@ export const dummyData1={
 	7:{ height:180, width:90, x:709, y:230, parent:[], children:[], tag: 'img'},
 };
 
+const quickParents = (data => {
+	const origKeys = Object.keys(data);
+
+	origKeys.forEach(key=>{
+		if (data[key].children){
+			data[key].children.forEach(childId=>{
+				data[childId].parent = key;
+			})
+		}
+
+	})
+
+	return data;
+});
+
+export const dummyData0 = quickParents(dummyData00);
+export const dummyData1 = quickParents(dummyData11);
 
 
 
