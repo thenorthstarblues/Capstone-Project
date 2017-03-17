@@ -9,6 +9,12 @@ const initialState = {
     parent: null,
   }
 };
+const htmlState ={
+  html: '//HTML',
+  css:'//CSS'
+}
+//conversion functions
+import {getFormattedHtml, getCss} from '../previewCreator'
 
 //constants
 const ADD_BOX = 'ADD_BOX'
@@ -18,8 +24,38 @@ const SET_PARENT = 'SET_PARENT'
 const ADD_CHILD = 'ADD_CHILD'
 const REMOVE_PARENT = 'REMOVE_PARENT'
 const REMOVE_CHILD = 'REMOVE_CHILD'
+const CREATE_HTML = 'CREATE_HTML'
+const CREATE_CSS = 'CREATE_CSS'
 
 //action creators
+const setHtml = (html)=>{
+  return {
+    type: CREATE_HTML,
+    html
+  }
+}
+const setCss = (css)=>{
+  return {
+    type:CREATE_CSS,
+    css
+  }
+}
+
+export const createCss = () =>{ //eventually pass something in 
+  return dispatch => {
+    const cssString =getCss();
+    dispatch(setCss(cssString))
+  }
+}
+
+export const htmlCreator = (elements) =>{
+  return dispatch => {
+    const htmlString = getFormattedHtml(elements);
+    dispatch(setHtml(htmlString))
+  }
+}
+
+
 export const setBox = (box) => {
   return {
     type: SET_BOX,
@@ -104,7 +140,8 @@ const boxesReducer = (prevState = initialState, action) => {
       newState[action.childId].parent = null;
       break;
     case REMOVE_CHILD:
-      newState[action.parentId].children = newState[action.parentId].children.filter(elem => elem != action.childId);
+      newState[action.parentId].children = newState[action.parentId].children.filter(elem => elem !== action.childId);
+      break;
     default:
       return prevState;
   }
@@ -112,3 +149,19 @@ const boxesReducer = (prevState = initialState, action) => {
 }
 
 export default boxesReducer;
+
+
+export const htmlReducer = (state = htmlState, action)=>{
+  const newState = Object.assign({}, state);
+  switch(action.type){
+    case CREATE_HTML:
+      newState.html = action.html;
+      break;
+    case CREATE_CSS:
+      newState.css = action.css;
+      break;
+    default:
+      return state;
+  }
+  return newState;
+}
