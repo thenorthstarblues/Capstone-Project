@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import rootReducer from './reducers/rootReducer'
+import createLogger from 'redux-logger'
+import thunkMiddleware from 'redux-thunk'
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(
+    applyMiddleware(
+      createLogger({collapsed: true}),
+      thunkMiddleware,
+    )
+  )
+)
+=======
   import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './reducers/rootReducer';
 
@@ -16,5 +33,6 @@ const store = createStore(rootReducer, composeEnhancers(
 ))
 
 
+>>>>>>> master
 
 export default store;

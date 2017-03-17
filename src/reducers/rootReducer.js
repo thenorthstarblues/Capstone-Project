@@ -1,4 +1,11 @@
 import {combineReducers} from 'redux';
+<<<<<<< HEAD
+import boxesReducer from './boxes';
+
+export default combineReducers({
+  boxes: boxesReducer,
+})
+=======
 import {routerReducer} from 'react-router-redux';
 import {siblingReducer} from './siblingReducer.js';
 //for when/if we add more combineReducers do it here
@@ -36,3 +43,4 @@ const reducer = (state= initialState, action) => {
 
 
 export default rootReducer;
+>>>>>>> master
