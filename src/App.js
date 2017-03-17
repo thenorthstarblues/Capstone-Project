@@ -62,7 +62,7 @@ class App extends Component {
 
 	render(){
 		const boxes = this.props.boxes;
-		const boxIds = this.props.boxIds;-
+		const boxIds = this.props.boxIds;
 
 		return (
 
