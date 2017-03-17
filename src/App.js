@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
 	const ids = Object.keys(state.boxes);
 	return {
 		boxes: state.boxes,
+		html: state.html,
 		boxIds: ids,
 		nextBoxId: Number(ids[ids.length - 1]) + 1,
 	}
@@ -67,7 +68,9 @@ class App extends Component {
 		<div className="App">
         	<SplitPane split="vertical" defaultSize={200} primary="first">
 	        	<div>
-	          		<Code />
+								<Code htmlString={'//HTML\n\n'+this.props.html.html}/>
+            		<Code htmlString={this.props.html.css} />
+								
 	        	</div>
 	        	<div>
 					<div className="App col-lg-12">
