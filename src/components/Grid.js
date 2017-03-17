@@ -6,20 +6,9 @@ import interact from 'interact.js';
 class Grid extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      x: this.props.x,
-      y: this.props.y,
-      id: this.props.id,
-      wide: this.props.w,
-      high: this.props.h,
-      parent: [],
-      children: [],
-      class: '', // for later updates/alterations
-      tag: this.props.type, // likewise, for four generators
-    }
     this.onMove=this.onMove.bind(this);
-    this.ondrop=this.ondrop.bind(this);
-    this.onleave=this.onleave.bind(this);
+    this.onDrop=this.onDrop.bind(this);
+    this.onLeave=this.onLeave.bind(this);
     this.restrict=this.restrict.bind(this);
   }
 
@@ -27,7 +16,7 @@ class Grid extends Component {
     interact(ReactDOM.findDOMNode(this))
       .draggable({
         onmove: this.onMove,
-        snap: { // this then will snap to a 10 x 10 grid location... see example to make sure there is a consistent origin
+        snap: {
           targets: [interact.createSnapGrid({ x: 10, y: 10 })],
           range: Infinity,
           relativePoints: [ { x: 0, y: 0 } ]
@@ -38,10 +27,10 @@ class Grid extends Component {
           endOnly: true
         },
       })
-      .resizable({ // need to improve this logic
+      .resizable({
         preserveAspectRatio: false,
         edges: { left: true, right: true, bottom: true, top: true },
-        snap: { // this then will snap to a 10 x 10 grid location... see example to make sure there is a consistent origin
+        snap: {
           targets: [interact.createSnapGrid({ x: 10, y: 10 })],
           range: Infinity,
           relativePoints: [ { x: 0, y: 0 } ]
@@ -53,92 +42,53 @@ class Grid extends Component {
         },
       })
       .on('resizemove', (event) => {
-        //const target = event.target;
-        const x = this.state.x;
-        const y = this.state.y;
+        const x = this.props.x;
+        const y = this.props.y;
 
-        console.log('move variables:', x, y, event);
-
-        this.setState({
+        this.props.setBox({
+          id: this.props.id,
           x: x + event.deltaRect.left,
           y: y + event.deltaRect.top,
-          // x: x,
-          // y: y,
-          high: event.rect.height,
-          wide: event.rect.width,
+          height: event.rect.height,
+          width: event.rect.width,
+          children: this.props.children,
+          parent: this.props.parent,
         })
 
       })
       .dropzone({
-        // only accept elements matching this CSS selector
-        accept: '.yes-drop',
-        // Require a 75% element overlap for a drop to be possible
-        overlap: 1,
-
-        // listen for drop related events:
-
-        ondropactivate: function (event) {
-          // add active dropzone feedback
-          event.target.classList.add('drop-active');
-        },
-        ondragenter: function (event) {
-          var draggableElement = event.relatedTarget,
-              dropzoneElement = event.target;
-
-          // feedback the possibility of a drop
-          dropzoneElement.classList.add('drop-target');
-          draggableElement.classList.add('can-drop');
-          draggableElement.textContent = 'Dragged in';
-        },
-        ondragleave: this.onleave, //dragged out... remove child here
-        ondrop: this.ondrop, //stopped moving, child added to list
-        ondropdeactivate: function (event) {
-          // remove active dropzone feedback
-          event.target.classList.remove('drop-active');
-          event.target.classList.remove('drop-target');
-        }
-      });
-
+        ondrop: this.onDrop,
+        ondragleave: this.onLeave,
+      })
   }
 
-  //anything where you need both event relationships and access to local state... needs to be out here and bound to state.
+  onMove = (e) => {
+    this.props.setBox({
+          id: this.props.id,
+          x: this.props.x + e.dx,
+          y: this.props.y + e.dy,
+          height: this.props.height,
+          width: this.props.width,
+          children: this.props.children,
+          parent: this.props.parent,
+        });
+  }
 
-  onMove=((e)=>{
+  onDrop = (e) => {
+    console.log(e.relatedTarget.id + ' became the child of ' + e.target.id);
+    this.props.setParent(e.target.id, e.relatedTarget.id);
+    this.props.addChild(e.target.id, e.relatedTarget.id);
+  }
 
-    this.setState({
-      x: this.state.x + e.dx,
-      y: this.state.y + e.dy,
-    });
-  });
+  onLeave = (e) => {
+    console.log(e.relatedTarget.id + ' is no longer the child of ' + e.target.id);
+    this.props.removeParent(e.relatedTarget.id);
+    this.props.removeChild(e.target.id, e.relatedTarget.id);
+  }
 
-  ondrop=((e)=>{ // adds child ditto to dispatch
-    e.relatedTarget.textContent = 'Dropped';
-
-    var newChild =this.state.children.concat(e.relatedTarget.id);
-    this.setState({children: newChild});
-    //child is easy... based on listening structure ... parent will be rough...
-  })
-
-  onleave=((e)=> { //will have a dispatch action later...
-    var children = this.state.children;
-    var childLocation = this.state.children.indexOf(e.relatedTarget.id);
-    if (childLocation){ //will have a dispatch action later...
-      children[childLocation]= null;
-    };
-
-    this.setState({children: children}); //not longer fucking with this! moving onto size issues.
-
-    console.log('leave:', e);
-          e.target.classList.remove('drop-target');
-          e.relatedTarget.classList.remove('can-drop');
-          e.relatedTarget.textContent = 'Dragged out';
-
-  })
-
-  restrict=((e)=> { //not yet working
-    console.log(this.state.parent);
+  restrict=((e)=> {
     return {
-          restriction: this.state.parent,
+          restriction: this.props.parent,
           elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
           endOnly: true
         };
@@ -146,19 +96,16 @@ class Grid extends Component {
 
 
   render() {
-
-    //different types as different components
     let typeClass;
-    switch(this.state.tag){
+    switch(this.props.tag){
       case('div'): typeClass = 'basicBox'; break;
       case('h1'): typeClass = 'basicH1'; break;
       case('img'): typeClass = 'basicImg'; break;
       default: typeClass = 'basicBox'; break;
     }
 
-
     return (
-      <rect className={`dropzone yes-drop ${typeClass}`} id={this.state.id} height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="2px" ry="2px" />
+      <rect className={`dropzone yes-drop ${typeClass}`} id={this.props.id} height={this.props.height} width={this.props.width} x={this.props.x} y={this.props.y} rx="2px" ry="2px" />
     )
   }
 }

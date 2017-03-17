@@ -1,36 +1,11 @@
 import {combineReducers} from 'redux';
-import {routerReducer} from 'react-router-redux';
-//for when/if we add more combineReducers do it here
+//import {routerReducer} from 'react-router-redux';
 
-const initialState = {
-  main: {}
-};
-//dont forget to set state types!
+import boxesReducer from './boxes';
+//import {siblingReducer} from './siblingReducer.js';
 
-
-const reducer = (state= initialState, action) => {
-
-  const newState = Object.assign({}, state);
-
-  switch(action.type){
-    case 'test':
-     newState.main = action.payload;
-       break;
-
-    default:
-      return state;
-  }
-
-  return newState;
-}
-
-
-
-
- const rootReducer = combineReducers({
-  main: reducer,
-  router: routerReducer
+export default combineReducers({
+  boxes: boxesReducer,
+  //sibling: siblingReducer,
+  //router: routerReducer,
 });
-
-
-export default rootReducer;

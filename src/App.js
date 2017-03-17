@@ -1,44 +1,113 @@
-
 import React, { Component } from 'react';
-import './App.css';
-import InteractionTests from './components/interactionTests.js';
+import ReactDOM from 'react-dom';
+import interact from 'interact.js';
+import Grid from './components/Grid';
+import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
+
 import {connect} from 'react-redux';
 import CodeModal from './codemirror_modal';
 import {codetest} from './Codemirror';
 import SplitPane from 'react-split-pane';
 import Code from './Codemirror';
+import './App.css';
+
+const mapStateToProps = (state) => {
+	const ids = Object.keys(state.boxes);
+	return {
+		boxes: state.boxes,
+		boxIds: ids,
+		nextBoxId: Number(ids[ids.length - 1]) + 1,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		setBox(box){
+			dispatch(setBox(box))
+		},
+		addBox(boxId){
+			dispatch(addBox(boxId))
+		},
+		removeBox(boxId){
+			dispatch(removeBox(boxId))
+		},
+		setParent(parentId, childId){
+			dispatch(setParent(parentId, childId))
+		},
+		addChild(parentId, childId){
+			dispatch(addChild(parentId, childId))
+		},
+		removeParent(childId){
+			dispatch(removeParent(childId))
+		},
+		removeChild(parentId, childId){
+			dispatch(removeChild(parentId, childId))
+		}
+	}
+}
+
 
 class App extends Component {
+	constructor(props){
+		super(props);
+		this.boxAdder = this.boxAdder.bind(this);
+	}
 
-render = ()=>{
-  return(
-      <div className="App">
-        <SplitPane split="vertical" defaultSize={200} primary="first">
-        <div className='code-div'>
-          <Code />
-        </div>
-        <div>
-          <div className="App col-lg-12">
-            <InteractionTests />
-          </div>
-          <CodeModal />
-         </div>
-      </SplitPane>
-      </div>
-    )
+	boxAdder(){
+		const id = Number(this.props.nextBoxId);
+		this.props.addBox(id);
+	}
+
+	render= (() => {
+		const boxes = this.props.boxes;
+		const boxIds = this.props.boxIds;
+
+		return (
+		<div className="App">
+        	<SplitPane split="vertical" defaultSize={200} primary="first">
+	        	<div>
+	          		<Code />
+	        	</div>
+	        	<div>
+					<div className="App col-lg-12">
+						<div>
+							<div id="grid-snap" className="col-lg-8">
+								<svg id="drawHere" width="900px" height="600px" onClick={this.add}>
+								{
+									boxIds.map(box => (
+										<Grid key={box}
+													setBox={this.props.setBox}
+													removeBox={this.props.removeBox}
+													setParent={this.props.setParent}
+													addChild={this.props.addChild}
+													removeParent={removeParent}
+													removeChild={removeChild}
+													id={box}
+													x={boxes[box].x}
+													y = {boxes[box].y}
+													height={boxes[box].height}
+													width={boxes[box].width}
+													children={boxes[box].children}
+													parent={boxes[box].parent}
+													/>
+									))
+								}
+								</svg>
+							</div>
+							<div id="sidebar" className="col-lg-4">
+								<button
+								className={"btn btn-primary btn-lg"}
+								onClick={this.boxAdder}
+								>Add New Box</button>
+							</div>
+						</div>
+					</div>
+					<CodeModal />
+				</div>
+			</SplitPane>
+		</div>
+	    )
+	});
 }
 
-}
-
-export default connect(mstp,mdtp)(App);
-
-
-
-const mstp = (state) =>{
-  return {}
-
-}
-
-const mdtp = (dispatch) => {
-  return {}
-}
+export default connect(mapStateToProps, mapDispatchToProps)(App);
