@@ -85,6 +85,11 @@
 
 }
 
+.basicErase{
+  fill: none;
+  stroke: none;
+}
+
 .custom-modal {
   width: 90%;
   height: 90%;

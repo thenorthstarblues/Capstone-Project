@@ -16,6 +16,7 @@
     "pg-native": "^1.10.0",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.8",
+    "react-codemirror": "^0.3.0",
     "react-dom": "^15.4.2",
     "react-drag-and-drop": "^2.3.0",
     "react-redux": "^5.0.3",

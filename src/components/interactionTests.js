@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import ReactDOM from 'react-dom';
 //import interact from 'interact.js';
-import Grid from './Grid.js';
+import Grid from './GridTesting.js';
 
 class InteractionTest extends Component {
   constructor(props) {

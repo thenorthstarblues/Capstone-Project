@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
+import {siblingReducer} from './siblingReducer.js';
 //for when/if we add more combineReducers do it here
 
-const initialState = {
+const initialState = { // probably rework. . .
   main: {}
 };
 //dont forget to set state types!
@@ -29,7 +30,8 @@ const reducer = (state= initialState, action) => {
 
  const rootReducer = combineReducers({
   main: reducer,
-  router: routerReducer
+  router: routerReducer,
+
 });
 
 

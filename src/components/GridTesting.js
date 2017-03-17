@@ -14,12 +14,13 @@ class Grid extends Component {
       high: this.props.h,
       parent: [],
       children: [],
+      class: '', // for later updates/alterations
       tag: this.props.type, // likewise, for four generators
     }
     this.onMove=this.onMove.bind(this);
     this.ondrop=this.ondrop.bind(this);
     this.onleave=this.onleave.bind(this);
-    this.restrict=this.restrict.bind(this);
+    //this.visualDelete=this.visualDelete.bind(this);
   }
 
   componentDidMount() {
@@ -31,12 +32,11 @@ class Grid extends Component {
           range: Infinity,
           relativePoints: [ { x: 0, y: 0 } ]
         },
-        restrict: this.restrict,//bind to local and get parent from state NOT WORKING!!!!!
-        // restrict: { //so how to lock elements to their parents... without knowing their parents
-        //   restriction: ReactDOM.findDOMNode(this).parentNode,
-        //   elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-        //   endOnly: true
-        // },
+        restrict: {
+          restriction: ReactDOM.findDOMNode(this).parentNode,
+          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+          endOnly: true
+        },
       })
       .resizable({ // need to improve this logic
         preserveAspectRatio: false,
@@ -45,6 +45,11 @@ class Grid extends Component {
           targets: [interact.createSnapGrid({ x: 10, y: 10 })],
           range: Infinity,
           relativePoints: [ { x: 0, y: 0 } ]
+        },
+        restrict: {
+          restriction: ReactDOM.findDOMNode(this).parentNode,
+          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+          endOnly: true
         },
       })
       .on('resizemove', (event) => {
@@ -62,7 +67,14 @@ class Grid extends Component {
           high: event.rect.height,
           wide: event.rect.width,
         })
-
+      })
+      .on('doubletap', (event)=>{ //testing only
+            this.setState({x:0});
+            this.setState({y:0});
+            this.setState({wide:0});
+            this.setState({high:0});
+            this.setState({id:''});
+            this.setState({tag: 'none'});
       })
       .dropzone({
         // only accept elements matching this CSS selector
@@ -99,7 +111,6 @@ class Grid extends Component {
   //anything where you need both event relationships and access to local state... needs to be out here and bound to state.
 
   onMove=((e)=>{
-
     this.setState({
       x: this.state.x + e.dx,
       y: this.state.y + e.dy,
@@ -130,31 +141,22 @@ class Grid extends Component {
 
   })
 
-  restrict=((e)=> { //not yet working
-    console.log(this.state.parent);
-    return {
-          restriction: this.state.parent,
-          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-          endOnly: true
-        };
-  })
-
 
   render() {
 
+    //different types as different components
     let typeClass;
-    if (this.state.tag==='div'){typeClass = 'basicBox';};
-    if (this.state.tag==='h1'){typeClass = 'basicH1';};
-    if (this.state.tag==='img'){typeClass = 'basicImg';};
-
-    console.log(this.state.tag);
+    switch(this.state.tag){
+      case('div'): typeClass = 'basicBox'; break;
+      case('h1'): typeClass = 'basicH1'; break;
+      case('img'): typeClass = 'basicImg'; break;
+      case('none'): typeClass = 'basicErase'; break; //just testing
+      default: typeClass = 'basicBox'; break;
+    }
 
 
     return (
-      <g  id={this.state.id} className="dropzone yes-drop" >
-        <rect className="borderGen" height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="3px" ry="3px" />
-        <rect className={`dropzone yes-drop ${typeClass}`} id={this.state.id} height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="3px" ry="3px" />
-      </g>
+      <rect className={`dropzone yes-drop ${typeClass}`} id={this.state.id} height={this.state.high} width={this.state.wide} x={this.state.x} y={this.state.y} rx="2px" ry="2px" data={this.state.child} />
     )
   }
 }
