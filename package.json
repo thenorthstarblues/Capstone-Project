@@ -10,6 +10,7 @@
     "express": "^4.15.2",
     "history": "^4.6.0",
     "interact.js": "1.2.8",
+    "js-beautify": "^1.6.11",
     "morgan": "^1.8.1",
     "pg": "^6.1.4",
     "pg-hstore": "^2.3.2",
@@ -24,6 +25,7 @@
     "react-router-redux": "^5.0.0-alpha.3",
     "react-split-pane": "^0.1.59",
     "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.0",
     "redux-logger": "^2.8.2",
     "redux-thunk": "^2.2.0",
     "sequelize": "^3.30.2"

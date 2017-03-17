@@ -12,10 +12,10 @@ import routes from './routes';
 import createBrowserHistory from 'history/createBrowserHistory';
 
 
- const history = createBrowserHistory()
+ const history = createBrowserHistory();
 
 
- render(
+ render (
    <Provider store={store}>
      <Router routes={routes} history={history}>
        <Route path='/' component={App} />
