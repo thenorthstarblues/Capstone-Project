@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 	return {
 		boxes: state.boxes,
 		boxIds: ids,
-		nextBoxId: Number(ids[ids.length - 1] + 1),
+		nextBoxId: Number(ids[ids.length - 1]) + 1,
 	}
 }
 

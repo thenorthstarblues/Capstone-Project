@@ -75,13 +75,13 @@ class Grid extends Component {
   }
 
   onDrop = (e) => {
-    alert(e.relatedTarget.id + ' became the child of ' + e.target.id);
+    console.log(e.relatedTarget.id + ' became the child of ' + e.target.id);
     this.props.setParent(e.target.id, e.relatedTarget.id);
     this.props.addChild(e.target.id, e.relatedTarget.id);
   }
 
   onLeave = (e) => {
-    alert(e.relatedTarget.id + ' is no longer the child of ' + e.target.id);
+    console.log(e.relatedTarget.id + ' is no longer the child of ' + e.target.id);
     this.props.removeParent(e.relatedTarget.id);
     this.props.removeChild(e.target.id, e.relatedTarget.id);
   }
