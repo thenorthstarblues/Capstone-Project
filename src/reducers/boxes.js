@@ -31,7 +31,7 @@ export const addBox = (id) => {
   return {
     type: ADD_BOX,
     box: {
-      id: id,
+      id: +id,
       x: 20,
       y: 20,
       width: 100,
@@ -104,7 +104,7 @@ const boxesReducer = (prevState = initialState, action) => {
       newState[action.childId].parent = null;
       break;
     case REMOVE_CHILD:
-      newState[action.parentId].children = newState[action.parentId].filter(elem => elem !== action.childId)
+      newState[action.parentId].children = newState[action.parentId].children.filter(elem => elem != action.childId);
     default:
       return prevState;
   }

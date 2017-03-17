@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 import Grid from './components/Grid';
+import TrashCan from './components/TrashCan';
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
 
 import {connect} from 'react-redux';
@@ -54,7 +55,7 @@ class App extends Component {
 	}
 
 	boxAdder(){
-		const id = Number(this.props.nextBoxId);
+		const id = +this.props.nextBoxId;
 		this.props.addBox(id);
 	}
 
@@ -80,8 +81,8 @@ class App extends Component {
 													removeBox={this.props.removeBox}
 													setParent={this.props.setParent}
 													addChild={this.props.addChild}
-													removeParent={removeParent}
-													removeChild={removeChild}
+													removeParent={this.props.removeParent}
+													removeChild={this.props.removeChild}
 													id={box}
 													x={boxes[box].x}
 													y = {boxes[box].y}
