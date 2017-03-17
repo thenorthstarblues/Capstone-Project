@@ -46,7 +46,7 @@ class Grid extends Component {
         const y = this.props.y;
 
         this.props.setBox({
-          id: this.props.id,
+          id: +this.props.id,
           x: x + event.deltaRect.left,
           y: y + event.deltaRect.top,
           height: event.rect.height,
@@ -54,7 +54,9 @@ class Grid extends Component {
           children: this.props.children,
           parent: this.props.parent,
         })
-
+      })
+      .on('resizeend', (event) => {
+        alert('resize ended');
       })
       .dropzone({
         ondrop: this.onDrop,
@@ -64,7 +66,7 @@ class Grid extends Component {
 
   onMove = (e) => {
     this.props.setBox({
-          id: this.props.id,
+          id: +this.props.id,
           x: this.props.x + e.dx,
           y: this.props.y + e.dy,
           height: this.props.height,
@@ -76,14 +78,14 @@ class Grid extends Component {
 
   onDrop = (e) => {
     console.log(e.relatedTarget.id + ' became the child of ' + e.target.id);
-    this.props.setParent(e.target.id, e.relatedTarget.id);
-    this.props.addChild(e.target.id, e.relatedTarget.id);
+    this.props.setParent(+e.target.id, +e.relatedTarget.id);
+    this.props.addChild(+e.target.id, +e.relatedTarget.id);
   }
 
   onLeave = (e) => {
     console.log(e.relatedTarget.id + ' is no longer the child of ' + e.target.id);
-    this.props.removeParent(e.relatedTarget.id);
-    this.props.removeChild(e.target.id, e.relatedTarget.id);
+    this.props.removeParent(+e.relatedTarget.id);
+    this.props.removeChild(+e.target.id, +e.relatedTarget.id);
   }
 
   restrict=((e)=> {
