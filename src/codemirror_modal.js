@@ -61,6 +61,9 @@ const CodeModal = React.createClass({
 
           </Modal.Body>
           <Modal.Footer>
+          <Button>
+          Download
+          </Button>
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>

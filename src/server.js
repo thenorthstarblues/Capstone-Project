@@ -1,5 +1,4 @@
 const express = require('express')
-<<<<<<< HEAD
 const path = require('path')
 const port = process.env.PORT || 3000
 const app = express()
@@ -13,7 +12,6 @@ app.get('/', function (req, res){
 
 app.listen(port)
 console.log("listening on port " + port)
-=======
  const path = require('path')
  const port = process.env.PORT || 3000
  const app = express()
@@ -27,4 +25,3 @@ console.log("listening on port " + port)
 
  app.listen(port)
  console.log("listening on port " + port)
->>>>>>> master
