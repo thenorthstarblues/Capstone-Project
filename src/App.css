@@ -140,3 +140,10 @@
     Resizer.disabled:hover {
       border-color: transparent;
     }
+
+
+.code-div {
+  height:100vh;
+}
+
+

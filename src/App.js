@@ -14,7 +14,7 @@ render = ()=>{
   return(
       <div className="App">
         <SplitPane split="vertical" defaultSize={200} primary="first">
-        <div>
+        <div className='code-div'>
           <Code />
         </div>
         <div>
