@@ -98,7 +98,9 @@ const boxesReducer = (prevState = initialState, action) => {
       newState[action.childId].parent = action.parentId;
       break;
     case ADD_CHILD:
-      newState[action.parentId].children.push(action.childId);
+      if(!newState[action.parentId].children.includes(action.childId)){
+        newState[action.parentId].children.push(action.childId);
+      }
       break;
     case REMOVE_PARENT:
       newState[action.childId].parent = null;
