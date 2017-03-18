@@ -1,0 +1,111 @@
+/* reference this and the bootstrap for the css creation */
+
+/* MOST OF FLEX GOES ON CONTAINER DIV */
+/* ------------ parent css ------------*/
+
+.flexRow {
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: row;
+   flex-direction: row;
+}
+
+.flexCol {
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: column;
+   flex-direction: column;
+}
+
+/* adjust row or col with these class="flexCol start" or class="flexRow start" */
+
+/* not incorporating flex-direction reversals, flex-wrap, flex-flow, or align-content (as it treats multi-row wraps)...
+the order we can set and detecting true wrap would be more math */
+
+.start { /* top or left */
+   -webkit-justify-content: flex-start;
+   justify-content: flex-start;
+}
+
+.end { /* bottom or right */
+   -webkit-justify-content: flex-end;
+   justify-content: flex-end;
+}
+
+.center {  /* center row */
+   -webkit-justify-content: center;
+   justify-content: center;
+}
+
+.centerAround {  /* equal buffers row */
+   -webkit-justify-content: space-around;
+   justify-content: space-around;
+}
+
+.centerBetween {  /* to edges, space between row */
+   -webkit-justify-content: space-between;
+   justify-content: space-between;
+}
+
+.startVert{ /* top or left */
+   -webkit-align-items: flex-start;
+   align-items: flex-start;
+}
+
+.endVert { /* bottom or right */
+   -webkit-align-items: flex-end;
+   align-items: flex-end;
+}
+
+.centerVert {  /* center row */
+   -webkit-align-items: center;
+   align-items: center;
+}
+
+.stretchVert {  /* top to bottom */
+   -webkit-align-items: stretch;
+   align-items: stretch;
+}
+
+.baselineVert {  /* around baseline */
+   -webkit-align-items: baseline;
+   align-items: baseline;
+}
+
+
+
+/* A BIT OF FLEX GOES ON THE OBJECT ITSELF */
+/* --------------- child css --------------- */
+
+/* I don't use these much - in terms of grow or shrink -
+and since we're setting child sizes, we won't need anything more than  */
+
+.startSelf{
+	-webkit-align-self: flex-start;
+	align-self:flex-start;
+}
+
+.endSelf{
+	-webkit-align-self: flex-end;
+	align-self:flex-end;
+}
+
+.centerSelf{
+	-webkit-align-self: center;
+	align-self:center;
+}
+
+.baseSelf{
+	-webkit-align-self: baseline;
+	align-self: baseline;
+}
+
+.stretchSelf{
+	-webkit-align-self: stretch;
+	align-self:stretch;
+}
+
+
+
+
+
