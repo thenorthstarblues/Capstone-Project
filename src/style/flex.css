@@ -1,5 +1,9 @@
 /* reference this and the bootstrap for the css creation */
 
+.p10 {
+   padding:10px;
+}
+
 /* MOST OF FLEX GOES ON CONTAINER DIV */
 /* ------------ parent css ------------*/
 
