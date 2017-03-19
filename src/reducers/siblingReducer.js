@@ -181,17 +181,35 @@ function childChecks(currGroupId, obj, childArr, posArr){ //positional heavy lif
         } else if (test.x >= posArr[0] && test.x+test.width <= posArr[1] && test.y >= posArr[2] && test.y +test.height <= posArr[3]){ //inside so add to group
           currGroupId.push(outKid);
           mods.push(outKid);
-          //need to check for alternate alignment here... div size by children, so should be able to set
+          //need to check for alternate alignment here...
 
         } else if (test.x >= posArr[0] && test.x+test.width <= posArr[1]) { //with column, but lower
-          console.log('column') //needs finessed to adjust new Div height
+          console.log('column')
           currGroupId.push(outKid);
           mods.push(outKid);
 
+          //reset new div bounds
+          if (test.y <= posArr[2]){ //higher than
+            posArr[2]=test.y;
+          } else if (test.y+test.height >= posArr[3]){ //lower than
+            posArr[3]=test.y+test.height;
+          }
+
+          //need to check for alternate alignment here...
+
         } else if (test.y >= posArr[2] && test.y +test.height <= posArr[3]) { //with row, but wider
-          console.log('row') //needs finessed  to adjust new Div width
+          console.log('row')
           currGroupId.push(outKid);
           mods.push(outKid);
+
+          //reset new div bounds
+          if (test.x <= posArr[0]){ //left of, reset
+            posArr[0]=test.x;
+          } else if (test.x+test.width >= posArr[1]){ //right of, reset
+            posArr[1]=test.x+test.width;
+          }
+
+          //need to check for alternate alignment here...
 
         } else { //no overlaps or half overlaps... worse case scenarios.
           console.log('damn', test.id) //how to work back from this...
@@ -230,7 +248,7 @@ function insertDiv(currGroup, obj, parentId, childArr, adds, currAlign){
       let kidArr = res[1]; //outside children
           posArr = res[0]; //new div bounds
           kids = res[2]; //children within bounds
-
+          x0=posArr[0]; x1=posArr[1];y0=posArr[2]; y1=posArr[3];
 
       //------------checking for children spacing, finer css quals------------
 
