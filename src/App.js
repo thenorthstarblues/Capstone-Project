@@ -58,7 +58,6 @@ class App extends Component {
 	}
 
 	boxAdder(e){
-
 		let tagType = e.target.attributes.value.value;
 		const id = +this.props.nextBoxId;
 
@@ -80,7 +79,7 @@ class App extends Component {
 						<div className="App">
 							<div>
 								<div id="grid-snap" className="col-lg-12">
-									<svg id="drawHere" width="1100px" height="650px">
+									<svg id="drawHere" width="1100px" height="620px">
 										{
 											boxIds.map(box => (
 												<Grid key={box}
@@ -97,6 +96,8 @@ class App extends Component {
 															width={boxes[box].width}
 															children={boxes[box].children}
 															parent={boxes[box].parent}
+															tag={boxes[box].tag}
+															css={boxes[box].css}
 															/>
 													))
 												}
@@ -107,10 +108,10 @@ class App extends Component {
 									</div>
 								<div className="button-box">
 									<CodeModal />
-									<button
+									{/*<button
 										className={"btn btn-primary btn-lg"}
 										onClick={this.boxAdder}
-										>Add New Box</button>
+										>Add New Box</button>*/}
 								</div>
 						</div>
 				</SplitPane>

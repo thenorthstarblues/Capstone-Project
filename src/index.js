@@ -11,7 +11,6 @@ import store from './store';
 import routes from './routes';
 import createBrowserHistory from 'history/createBrowserHistory';
 
-
  const history = createBrowserHistory();
 
 

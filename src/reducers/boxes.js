@@ -2,12 +2,12 @@ const initialState = {
   0: {
     id: 0,
     x: 0,
-    y: 30,
+    y: 10,
     width: 900,
     height: 600,
     children: [],
     parent: null,
-    tag: '',
+    tag: 'div',
     css: '',
   }
 };

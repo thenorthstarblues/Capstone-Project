@@ -53,6 +53,7 @@ class Grid extends Component {
           width: event.rect.width,
           children: this.props.children,
           parent: this.props.parent,
+          tag: this.props.tag,
         })
 
       })
@@ -71,6 +72,7 @@ class Grid extends Component {
           width: this.props.width,
           children: this.props.children,
           parent: this.props.parent,
+          tag: this.props.tag,
         });
   }
 
@@ -104,8 +106,14 @@ class Grid extends Component {
       default: typeClass = 'basicBox'; break;
     }
 
+    console.log(this.props.tag);
+
     return (
+
+
       <rect className={`dropzone yes-drop ${typeClass}`} id={this.props.id} height={this.props.height} width={this.props.width} x={this.props.x} y={this.props.y} rx="2px" ry="2px" />
+
+
     )
   }
 }
