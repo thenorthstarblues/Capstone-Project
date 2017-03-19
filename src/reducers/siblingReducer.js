@@ -81,53 +81,50 @@ function columnRowCheck(obj, parentId, childA, adds = 0){
     console.log('originals only: ', childArr);
 
   if (!childArr){
-    //no children, do nothing...in-line w/h set later?
+    //no children, do nothing, done
   } else if (childArr.length === 1){
-    //parent/child alignment/margins check...
     console.log('still need to check margins/assign classes');
 
   } else { //all longer children arrays... recursion below.
 
-  //START BY CHECKING POSITIONS
-  let setA=positions(obj,childArr); //get all those x/y points, #repeats, repeat indexes
-  //console.log(setA);
+  //START BY CHECKING POSITIONS-----------------------------------------------------------
+      let setA=positions(obj,childArr); //get all those x/y points, #repeats, repeat indexes
 
-  //where are the clusters forming?
-  let clusterSize = [setA.start[1],setA.center[1],setA.end[1], setA.tops[1],setA.middle[1],setA.bottoms[1]];
-  let clusterArr = [setA.start[2],setA.center[2],setA.end[2], setA.tops[2],setA.middle[2],setA.bottoms[2]]; //find largest groups and nest them
-  let clusterAlign = [css.start, css.center, css.end, css.top,css.middle,css.bottom];
+      //where are the clusters forming? spread arrays to check
+      let clusterSize = [setA.start[1],setA.center[1],setA.end[1], setA.tops[1],setA.middle[1],setA.bottoms[1]];
+      let clusterArr = [setA.start[2],setA.center[2],setA.end[2], setA.tops[2],setA.middle[2],setA.bottoms[2]];
+      let clusterAlign = [css.start, css.center, css.end, css.top,css.middle,css.bottom];
 
-  //pull out the largest array to make new div for alignment
-  let startGroupCnt = Math.max(...clusterSize); //largest cluster
-      //console.log('choosen ',startGroupCnt);
-  let currentAlign=clusterAlign[clusterSize.indexOf(+startGroupCnt)]; //its' alignment
-  let startGroup = clusterArr[clusterSize.indexOf(+startGroupCnt)]; //grab that group but this is the index of the current children array, not the whole list...
-  let currentChildren=childArr.map(child=>obj[child]);
+      //pull out the largest array to make new div for alignment
+      let startGroupCnt = Math.max(...clusterSize); //largest cluster
+      let currentAlign=clusterAlign[clusterSize.indexOf(+startGroupCnt)]; //its' alignment
+      let startGroup = clusterArr[clusterSize.indexOf(+startGroupCnt)]; //grab that group of child indexex
 
-  let currentGroup=startGroup.map(ind=>currentChildren[ind]);
-  //this is now the working group as objArray
-  //so we can resign things with currentGroup and currentAlign;
+      let currentChildren=childArr.map(child=>obj[child]);
+      let currentGroup=startGroup.map(ind=>currentChildren[ind]);
+      //this is now the working group as objArray
 
-  //TAKE LARGEST CLUSTER & ALIGNMENT INFO ...
-  if (currentGroup.length === childArr.length) { //same as starting children, no new Div
-    obj[parentId].css += currentAlign;
+      //TAKE LARGEST CLUSTER & ALIGNMENT INFO ...
+      if (currentGroup.length === childArr.length) { //same as starting children, no new Div
+          obj[parentId].css += currentAlign;
 
-  } else if  (currentGroup.length < childArr.length) { //subArr as cluster...give it a new Div
-    adds++ //adding a new div to hold this group
-    let remains = insertDiv(currentGroup, obj, parentId, childArr, adds, currentAlign);
-    //return newDiv obj and revised ChildArr....as arr[0] and arr[1];
-    console.log('new obj: ', remains[0]);
-    console.log(obj[parentId].children);
+      } else if  (currentGroup.length < childArr.length) { //subArr as cluster...give it a new Div
+          adds++;
 
-    if (remains[1].length>=1){
-      return columnRowCheck(test, 0, test[0].children, adds);
-    }//else done, return out of the object/child check... iterate to next object
+          let remains = insertDiv(currentGroup, obj, parentId, childArr, adds, currentAlign);
+            //returns newDiv obj and revised ChildArr....as arr[0] and arr[1];
+          console.log('new obj: ', remains[0]);
+          console.log(obj[parentId].children); //updated master obj
 
-  }
+          if (remains[1].length>=1){ //recurse here as long as subgroup exists
+            return columnRowCheck(test, 0, test[0].children, adds);
+          }
+
+      }// done
 
   }//out of recusion/initial keyed object... do nothing if in a forEach structure...
 
-}
+};
 
 function repeats(posArr){ //checking for multiples in positions
       let holdI={};
@@ -167,6 +164,51 @@ function positions(obj,childArr){ // literal positions, repeats, index within ch
   };
 }
 
+function childChecks(currGroupId, obj, childArr, posArr){ //positional heavy lifting
+
+   let kidArr=childArr.slice(); //clone for a few checks
+      currGroupId.forEach(kid=>{ //the children not choosen
+        kidArr.splice(kidArr.indexOf(kid),1);
+      })
+
+      let mods=[];
+      kidArr.forEach(outKid=> { //confirm no overlaps or entirely inside
+        let test=obj[outKid];
+
+        if (test.x+test.width < posArr[0] || test.x >posArr[1] || test.y+test.height < posArr[2] || test.y > posArr[3]){ //entirely outside do nothing;
+          console.log('outside');
+
+        } else if (test.x >= posArr[0] && test.x+test.width <= posArr[1] && test.y >= posArr[2] && test.y +test.height <= posArr[3]){ //inside so add to group
+          currGroupId.push(outKid);
+          mods.push(outKid);
+          //need to check for alternate alignment here... div size by children, so should be able to set
+
+        } else if (test.x >= posArr[0] && test.x+test.width <= posArr[1]) { //with column, but lower
+          console.log('column') //needs finessed to adjust new Div height
+          currGroupId.push(outKid);
+          mods.push(outKid);
+
+        } else if (test.y >= posArr[2] && test.y +test.height <= posArr[3]) { //with row, but wider
+          console.log('row') //needs finessed  to adjust new Div width
+          currGroupId.push(outKid);
+          mods.push(outKid);
+
+        } else { //no overlaps or half overlaps... worse case scenarios.
+          console.log('damn', test.id) //how to work back from this...
+        }
+
+      });
+
+      if (mods){
+        mods.forEach(mod=>{
+          kidArr.splice(kidArr.indexOf(mod),1);
+        })
+      }
+
+      return [posArr, kidArr, currGroupId];
+};
+
+
 function insertDiv(currGroup, obj, parentId, childArr, adds, currAlign){
 
       //grabIDs...useful later
@@ -180,48 +222,25 @@ function insertDiv(currGroup, obj, parentId, childArr, adds, currAlign){
       let x1= Math.max(...posit.end[0]);
       let y0= Math.min(...posit.tops[0]);
       let y1= Math.max(...posit.bottoms[0]);
+      let posArr=[x0,x1,y0,y1];
 
-      let kidArr=childArr.slice(); //clone for a few checks
+      //------------checking for non-edge children-------------------
+      let res=childChecks(kids, obj, childArr, posArr);
 
-      kids.forEach(kid=>{ //the children not choosen
-        kidArr.splice(kidArr.indexOf(kid),1);
-      })
+      let kidArr = res[1]; //outside children
+          posArr = res[0]; //new div bounds
+          kids = res[2]; //children within bounds
 
-      let mods=[];
-      kidArr.forEach(outKid=> { //confirm no overlaps or entirely inside
-        let test=obj[outKid];
 
-        if (test.x+test.width < x0 || test.x >x1 || test.y+test.height < y0 || test.y > y1){ //entirely outside do nothing;
-          console.log('outside');
+      //------------checking for children spacing, finer css quals------------
 
-        } else if (test.x >= x0 && test.x+test.width <= x1 && test.y >= y0 && test.y +test.height <= y1){ //inside so add to group
-          kids.push(outKid);
-          mods.push(outKid);//for later splice
-          //need to check for alternate alignment here
+          //argh the question of internal spacing.... be it between or literal margins
 
-        } else if (test.x >= x0 && test.x+test.width <= x1) { //with column, but lower
-          console.log('column') //needs finessed to adjust new Div height
-          kids.push(outKid);
-          mods.push(outKid);
+      //-------external alignment between new div and parents - ? padding, etc.
 
-        } else if (test.y >= y0 && test.y +test.height <= y1) { //with row, but wider
-          console.log('row') //needs finessed  to adjust new Div width
-          kids.push(outKid);
-          mods.push(outKid);
+          // argh the question of external spacing.... as above, just simplier 2 object check.
 
-        } else { //no overlaps
-          console.log('damn', test.id) //how to work back from this...
-        }
-
-      });
-
-      if (mods){
-        mods.forEach(mod=>{
-          kidArr.splice(kidArr.indexOf(mod),1);
-        })
-      }
-
-      //create new div
+      //------------------create new div--------------------------------------
       let divId='container'+adds;
       obj[divId] = { //all new container divs start with 'container'
         id: divId,
@@ -245,11 +264,13 @@ function insertDiv(currGroup, obj, parentId, childArr, adds, currAlign){
         obj[kid].parent = divId; //reset it's parent to the new div
       });
 
-    return [obj[divId], kidArr];
+    return [obj[divId], kidArr]; //new div as check, remaining list to search
 }
 
-
+//just testing
 columnRowCheck(test, 0, test[0].children, adds = 0);
+
+//just increment up 1 to iterate thru objects... make sure to return adds or hold at higher level.
 
 
 
