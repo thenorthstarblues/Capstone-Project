@@ -1,7 +1,88 @@
 /* reference this and the bootstrap for the css creation */
 
+/* --------------- utility spacing classes ------------------ */
+
+/* ---------- padding for parents ----------- */
 .p10 {
    padding:10px;
+}
+
+.p20 {
+   padding:20px;
+}
+
+.p30 {
+   padding:30px;
+}
+
+.p40 {
+   padding:40px;
+}
+
+.p50 {
+   padding:50px;
+}
+
+.p60 {
+   padding:60px;
+}
+
+.p70 {
+   padding:70px;
+}
+
+.p80 {
+   padding:80px;
+}
+
+.p90 {
+   padding:90px;
+}
+
+.p100 {
+   padding:100px;
+}
+
+/* ----margins for wildly placed children--- */
+
+.m10 {
+   margin:10px;
+}
+
+.m20 {
+   margin:20px;
+}
+
+.m30 {
+   margin:30px;
+}
+
+.m40 {
+   margin:40px;
+}
+
+.m50 {
+   margin:50px;
+}
+
+.m60 {
+   margin:60px;
+}
+
+.m70 {
+   margin:70px;
+}
+
+.m80 {
+   margin:80px;
+}
+
+.m90 {
+   margin:90px;
+}
+
+.m100 {
+   margin:100px;
 }
 
 /* MOST OF FLEX GOES ON CONTAINER DIV */
@@ -86,7 +167,7 @@ the order we can set and detecting true wrap would be more math */
 /* --------------- child css --------------- */
 
 /* I don't use these much - in terms of grow or shrink -
-and since we're setting child sizes, we won't need anything more than  */
+and since we're setting child sizes, we won't need anything more than their odd alignment */
 
 .startSelf{
 	-webkit-align-self: flex-start;
