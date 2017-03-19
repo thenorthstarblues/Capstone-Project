@@ -22,12 +22,14 @@
 /* not incorporating flex-direction reversals, flex-wrap, flex-flow, or align-content (as it treats multi-row wraps)...
 the order we can set and detecting true wrap would be more math */
 
-.start { /* top or left */
+/* JUSTIFY CONTENTS */
+
+.left { /* left for rows */
    -webkit-justify-content: flex-start;
    justify-content: flex-start;
 }
 
-.end { /* bottom or right */
+.right { /* right for rows */
    -webkit-justify-content: flex-end;
    justify-content: flex-end;
 }
@@ -47,22 +49,24 @@ the order we can set and detecting true wrap would be more math */
    justify-content: space-between;
 }
 
-.startVert{ /* top or left */
+/* ALIGN ITEMS */
+
+.startVert{ /* top for row, left for column */
    -webkit-align-items: flex-start;
    align-items: flex-start;
 }
 
-.endVert { /* bottom or right */
+.endVert { /* bottom for row, right for column */
    -webkit-align-items: flex-end;
    align-items: flex-end;
 }
 
-.centerVert {  /* center row */
+.centerVert {  /* center row vertically */
    -webkit-align-items: center;
    align-items: center;
 }
 
-.stretchVert {  /* top to bottom */
+.stretchVert {  /* fills space top to bottom */
    -webkit-align-items: stretch;
    align-items: stretch;
 }
