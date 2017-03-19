@@ -24,8 +24,8 @@ class TrashCan extends Component {
   render() {
     return (
       <g>
-          <rect x="910" y="350" width="190" height="200" rx="2px" ry="2px" className="basicBox" />
-          <text x="1000" y="400">TRASH ZONE</text>
+          <rect x="920" y="530" width="150" height="100" rx="2px" ry="2px" className="basicBox" />
+          <text x="920" y="520">Trash Zone</text>
       </g>
     )
   }

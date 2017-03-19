@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 import Grid from './components/Grid';
 import TrashCan from './components/TrashCan';
+import AddOptions from './components/AddOptions';
+import TextGrid from './components/TextComponents'; //testing conditonal rendering for tag types
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
 
 import {connect} from 'react-redux';
@@ -27,8 +29,8 @@ const mapDispatchToProps = (dispatch) => {
 		setBox(box){
 			dispatch(setBox(box))
 		},
-		addBox(boxId){
-			dispatch(addBox(boxId))
+		addBox(boxId,tag){
+			dispatch(addBox(boxId, tag))
 		},
 		removeBox(boxId){
 			dispatch(removeBox(boxId))
@@ -55,9 +57,12 @@ class App extends Component {
 		this.boxAdder = this.boxAdder.bind(this);
 	}
 
-	boxAdder(){
+	boxAdder(e){
+
+		let tagType = e.target.attributes.value.value;
 		const id = +this.props.nextBoxId;
-		this.props.addBox(id);
+
+		this.props.addBox(id, tagType);
 	}
 
 	render(){
@@ -95,6 +100,7 @@ class App extends Component {
 															/>
 													))
 												}
+												<AddOptions action={this.boxAdder} />
 												<TrashCan removeBox={this.props.removeBox} />
 											</svg>
 										</div>

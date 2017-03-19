@@ -7,6 +7,8 @@ const initialState = {
     height: 600,
     children: [],
     parent: null,
+    tag: '',
+    css: '',
   }
 };
 
@@ -15,8 +17,9 @@ const htmlState ={
   html: '//HTML',
   css:'//CSS'
 }
+
 //conversion functions
-import {getFormattedHtml, getCss} from '../previewCreator'
+//import {getFormattedHtml, getCss} from '../previewCreator'
 
 //constants
 const ADD_BOX = 'ADD_BOX'
@@ -43,19 +46,19 @@ const setCss = (css)=>{
   }
 }
 
-export const createCss = () =>{ //eventually pass something in
-  return dispatch => {
-    const cssString =getCss();
-    dispatch(setCss(cssString))
-  }
-}
+// export const createCss = () =>{ //eventually pass something in
+//   return dispatch => {
+//     const cssString =getCss();
+//     dispatch(setCss(cssString))
+//   }
+// }
 
-export const htmlCreator = (elements) =>{
-  return dispatch => {
-    const htmlString = getFormattedHtml(elements);
-    dispatch(setHtml(htmlString))
-  }
-}
+// export const htmlCreator = (elements) =>{
+//   return dispatch => {
+//     const htmlString = getFormattedHtml(elements);
+//     dispatch(setHtml(htmlString))
+//   }
+// }
 
 export const setBox = (box) => {
   return {
@@ -64,17 +67,19 @@ export const setBox = (box) => {
   }
 }
 
-export const addBox = (id) => {
+export const addBox = (id, tag) => {
   return {
     type: ADD_BOX,
     box: {
       id: +id,
       x: 30,
-      y: 30,
+      y: 40,
       width: 100,
       height: 100,
       children: [],
       parent: null,
+      tag: tag,
+      css: 'p10 ',
     }
   }
 }

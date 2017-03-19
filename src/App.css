@@ -89,6 +89,22 @@
   stroke: none;
 }
 
+.adds{
+  rx: 3;
+  ry: 3;
+  fill: #ffffff;
+  fill-opacity: .1;
+  stroke: #000000;
+}
+
+.adds:hover {
+  fill: #f6f6f6;
+  fill-opacity: 1;
+  box-shadow: 0 0 2 #000000;
+  stroke-width: 3;
+  stroke: #000000;
+}
+
 .custom-modal {
   width: 90%;
   height: 90%;
