@@ -70,6 +70,9 @@ class Grid extends Component {
           }
         })
       })
+      .actionChecker((action) => {
+        console.log(action.edges);
+      })
       .dropzone({
           ondrop: this.onDrop,
       })
