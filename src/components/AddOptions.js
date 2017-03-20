@@ -39,9 +39,8 @@ const ButtonSm = ({action, x, y, value, style, format})=> {
 const AddOptions = (({action})=> {
   //console.log(action);
   let yVal = 70;
-  let xVal = 930;
-  let xVal2 = 1010;
-  let xVal3 = 1090;
+  let xVal = 1100;
+  let xVal2 = 1180;
 
     return (
               <g> {/* this is just the dummy layout, buttons up here */}
