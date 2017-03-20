@@ -36,7 +36,7 @@ export const findSiblings = (objects => { // one giant object, with each id-obje
 
   return {
     type: SIB_RECOG,
-    objectsCss:boxObjs,
+    boxesCss:boxObjs,
   }
 
 });
@@ -47,8 +47,8 @@ export const findSiblings = (objects => { // one giant object, with each id-obje
 //const initialState = test; // just for initial testing
 
 const initialState = {
-  objects=[],
-  objectsCss=[],
+  boxes=[],
+  boxesCss=[],
 }
 
 //---------------------------action reducer---------------------------
@@ -58,7 +58,7 @@ const siblingReducer = (prevState = initialState, action) => {
 
   switch(action.type) {
     case SIB_RECOG:
-      nextState.objectsCss = action.objectsCss;
+      nextState.boxesCss = action.boxesCss;
       break;
 
     default:
@@ -88,18 +88,50 @@ const css={ //incorporate margins/padding later as string concat / string replac
   none: 'in-line',
 }
 
+let alignCol={
+  0: ['startSelf', 'start'],
+  1: ['centerSelf', 'start'],
+  2: ['endSelf', 'start'],
+  3: ['startSelf', 'start'],
+  4: ['startSelf', 'start'],
+  5: ['startSelf', 'start'],
+}
+
+let alignRow={ //for Row child placements/alignments
+  0: ['startSelf', 'left'],
+  1: ['startSelf', 'center'],
+  2: ['startSelf', 'right'],
+  3: ['startSelf', 'left'],
+  4: ['centerSelf', 'center'],
+  5: ['endSelf', 'right'],
+}
+
+let alignWrap={ //for boxes without specifications... Make a WARP ROW child placements/alignments
+  0: ['startSelf', 'flex wrap left'],
+  1: ['startSelf', 'flex wrap center'],
+  2: ['startSelf', 'flex wrap right'],
+  3: ['startSelf', 'flex wrap '],
+  4: ['centerSelf', 'flex wrap '],
+  5: ['endSelf', 'flex wrap '],
+}
+
 
 function columnRowCheck(obj, parentId, childA, adds = 0){
   // full obj list, 3, [2,5,7,8] as input, adds for iterating through new container ids
   let childArr=childA.filter(child=>typeof child === 'number');
-    console.log('originals only: ', childArr);
 
   if (!childArr){
     //simply set css to 'in-line';
-    obj[parentId].css = css.none;
-
+    obj[parentId].css = obj[parentId].css + css.none;
+    //no children, do nothing, done
   } else if (childArr.length === 1){
-    console.log('still need to check margins/assign classes');
+
+    //get left, center, right, top, middle, bottom
+    let [parentPos, childPos] = pairPositions(obj,parentId,childArr[0]);
+
+
+    console.log('testing ', parentId, parentId.css ,childArr[0], childArr[0].css);
+
 
   } else { //all longer children arrays... recursion below.
 
@@ -179,6 +211,37 @@ function positions(obj,childArr){ // literal positions, repeats, index within ch
     bottoms : [bottom,repeats(bottom)[0], repeats(bottom)[1]],
   };
 }
+
+function pairPositions(obj,parentId,childId){
+    let parentPos = [obj[parentId].x, obj[parentId].x+obj[parentId].width/2 ,obj[parentId].x+obj[parentId].width, obj[parentId].y, obj[parentId].y+obj[parentId].height/2, obj[parentId].y+obj[parentId].height];
+
+    let childPos = [obj[childId].x, obj[childId].x+obj[childId].width/2, obj[childId].x+obj[childId].width, obj[childId].y, obj[childId].y+obj[childId].height/2, obj[childId].y+obj[childId].height];
+
+    let diff = parentPos.map((pos,i)=>{
+      return childPos[i]-pos;
+    })
+
+    let space= Math.min(...diff);
+    let alignI = diff.indexOf(space);
+
+    let environ=obj[parentId].css;
+    if (environ.includes('flexCol')){ //starts as column
+      let vals= alignCol[alignI];
+
+    } else if (environ.includes('flexRow')){
+      let vals= alignRow[alignI];
+
+    } else { //nothing set yet
+
+    //what else can I check here ?????
+
+    }
+
+
+    return [parentPos, childPos];
+}
+
+
 
 function childChecks(currGroupId, obj, childArr, posArr){ //positional heavy lifting
 
