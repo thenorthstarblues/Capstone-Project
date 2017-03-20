@@ -1,14 +1,14 @@
 const initialState = {
   0: {
+    height: 600,
+    width: 900,
+    children: [],
     id: 0,
     x: 0,
-    y: 30,
-    width: 900,
-    height: 600,
-    children: [],
-    parent: null,
+    y: 0,
   }
 };
+
 const htmlState ={
   html: '//HTML',
   css:'//CSS'
@@ -41,7 +41,7 @@ const setCss = (css)=>{
   }
 }
 
-export const createCss = () =>{ //eventually pass something in 
+export const createCss = () =>{ //eventually pass something in
   return dispatch => {
     const cssString =getCss();
     dispatch(setCss(cssString))
@@ -118,7 +118,7 @@ export const removeChild = (parentId, childId) => {
 
 //reducer
 const boxesReducer = (prevState = initialState, action) => {
-  const newState = Object.assign({}, prevState)
+  const newState = Object.assign({}, prevState);
 
   switch (action.type){
     case SET_BOX:

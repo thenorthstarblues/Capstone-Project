@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 import Grid from './components/Grid';
 import TrashCan from './components/TrashCan';
+import Window from './components/Window';
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
 
 import {connect} from 'react-redux';
@@ -76,25 +77,34 @@ class App extends Component {
 							<div>
 								<div id="grid-snap" className="col-lg-12">
 									<svg id="drawHere" width="1100px" height="650px">
+										<Window
+											setParent={this.props.setParent}
+											addChild={this.props.addChild}
+											removeParent={this.props.removeParent}
+											removeChild={this.props.removeChild}
+											/>
 										{
-											boxIds.map(box => (
-												<Grid key={box}
-															setBox={this.props.setBox}
-															removeBox={this.props.removeBox}
-															setParent={this.props.setParent}
-															addChild={this.props.addChild}
-															removeParent={this.props.removeParent}
-															removeChild={this.props.removeChild}
-															id={box}
-															x={boxes[box].x}
-															y = {boxes[box].y}
-															height={boxes[box].height}
-															width={boxes[box].width}
-															children={boxes[box].children}
-															parent={boxes[box].parent}
-															/>
-													))
-												}
+											boxIds.slice(1).map(box => (
+												<Grid
+													key={box}
+													setBox={this.props.setBox}
+													removeBox={this.props.removeBox}
+													setParent={this.props.setParent}
+													addChild={this.props.addChild}
+													removeParent={this.props.removeParent}
+													removeChild={this.props.removeChild}
+													id={box}
+													x={boxes[box].x}
+													y = {boxes[box].y}
+													height={boxes[box].height}
+													width={boxes[box].width}
+													children={boxes[box].children}
+													parent={boxes[box].parent}
+													canMove={box.canMove}
+													/>
+													)
+											 	)
+											}
 												<TrashCan removeBox={this.props.removeBox} />
 											</svg>
 										</div>
