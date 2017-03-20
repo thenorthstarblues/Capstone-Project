@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 
-//group graphic formatting to be completed later... only paragraph works
-import { Paragraph, Ul, Table } from './Texts'; //for conditonal rendering
-import { H1, H2, H3, H4 } from './Headers';
-import { Div, Button, Alert } from './Basicformat';
 
 
 class Grid extends Component {
