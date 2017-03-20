@@ -2,12 +2,12 @@ import {html, css} from 'js-beautify';
 
 const getHtml = (dom, node =0) =>{
   let str = '';
-  const {children,id} = dom[node];
-  if(id === 'img'){
-    str += `\n<${id} src="IMG_NAME">\n`
+  const {children,tag} = dom[node];
+  if(tag === 'img'){
+    str += `\n<${tag} src="IMG_NAME">\n`
   }
   else{
-    str+= `<${id}>`
+    str+= `<${tag}>`
     children.sort((prev,child)=> {
       return dom[prev].x - dom[child].x;
     })
@@ -15,7 +15,7 @@ const getHtml = (dom, node =0) =>{
     children.forEach((child => {
       str+= getHtml(dom, child);
     }))
-    str+= `</${id}>`
+    str+= `</${tag}>`
   }
   return str
 }
