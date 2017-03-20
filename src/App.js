@@ -84,7 +84,7 @@ class App extends Component {
 					</div>
 				<div>
 					<div id="grid-snap" className="col-lg-12">
-						<svg id="drawHere" width="1400px" height="800px">
+						<svg id="drawHere" width="1500px" height="800px">
 							<Window
 								setParent={this.props.setParent}
 								addChild={this.props.addChild}
