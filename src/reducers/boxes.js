@@ -1,11 +1,11 @@
 const initialState = {
   0: {
+    height: 600,
+    width: 900,
+    children: [],
     id: 0,
     x: 0,
-    y: 10,
-    width: 900,
-    height: 600,
-    children: [],
+    y: 0,
     parent: null,
     tag: 'div',
     css: '',
@@ -124,7 +124,7 @@ export const removeChild = (parentId, childId) => {
 
 //reducer
 const boxesReducer = (prevState = initialState, action) => {
-  const newState = Object.assign({}, prevState)
+  const newState = Object.assign({}, prevState);
 
   switch (action.type){
     case SET_BOX:

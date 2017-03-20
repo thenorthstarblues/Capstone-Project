@@ -13,7 +13,6 @@ class Grid extends Component {
     super(props);
     this.onMove=this.onMove.bind(this);
     this.onDrop=this.onDrop.bind(this);
-    this.onLeave=this.onLeave.bind(this);
     this.restrict=this.restrict.bind(this);
   }
 
@@ -47,24 +46,25 @@ class Grid extends Component {
         },
       })
       .on('resizemove', (event) => {
-        const x = this.props.x;
-        const y = this.props.y;
-
-        this.props.setBox({
-          id: this.props.id,
-          x: x + event.deltaRect.left,
-          y: y + event.deltaRect.top,
-          height: event.rect.height,
-          width: event.rect.width,
-          children: this.props.children,
-          parent: this.props.parent,
-          tag: this.props.tag,
+          const x = this.props.x;
+          const y = this.props.y;
+          this.props.setBox({
+            id: this.props.id,
+            x: x + event.deltaRect.left,
+            y: y + event.deltaRect.top,
+            height: event.rect.height,
+            width: event.rect.width,
+            children: this.props.children,
+            parent: this.props.parent,
+            tag: this.props.tag,
         })
-
       })
       .dropzone({
-        ondrop: this.onDrop,
-        ondragleave: this.onLeave,
+          ondrop: this.onDrop,
+      })
+      .on('dragleave', (e) => {
+        this.props.removeParent(+e.relatedTarget.id);
+        this.props.removeChild(+e.target.id, +e.relatedTarget.id);
       })
   }
 
@@ -81,18 +81,12 @@ class Grid extends Component {
           parent: this.props.parent,
           tag: this.props.tag,
         });
-  }
+    }
 
   onDrop = (e) => {
     console.log(e.relatedTarget.id + ' became the child of ' + e.target.id);
     this.props.setParent(e.target.id, e.relatedTarget.id);
     this.props.addChild(e.target.id, e.relatedTarget.id);
-  }
-
-  onLeave = (e) => {
-    console.log(e.relatedTarget.id + ' is no longer the child of ' + e.target.id);
-    this.props.removeParent(e.relatedTarget.id);
-    this.props.removeChild(e.target.id, e.relatedTarget.id);
   }
 
   restrict=((e)=> {
