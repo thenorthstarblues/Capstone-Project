@@ -23,9 +23,10 @@ export const SIB_RECOG = 'SIB_RECOG';
 export const findSiblings = (objects => { // one giant object, with each id-object as held
 
   const boxObjs=Object.assign({}, objects); //clone and begin manipulation
+  let len=Object.keys(boxObjs);
 
   //add function below and include here...
-    for (let i=0; i<boxObjs.length; i++){
+    for (let i=0; i<len.length; i++){
 
         if (boxObjs[i]){ //originals are numbers, so will only iterate through originals
             columnRowCheck(boxObjs, i, boxObjs[i].children, adds = 0);
@@ -132,7 +133,7 @@ function columnRowCheck(obj, parentId, childA, adds = 0){
           console.log(obj[parentId].children); //updated master obj
 
           if (remains[1].length>=1){ //recurse here as long as subgroup exists
-            return columnRowCheck(test, 0, test[0].children, adds);
+            return columnRowCheck(obj, parentId, obj[parentId].children, adds);
           }
 
       }// done
