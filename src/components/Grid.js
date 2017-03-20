@@ -69,7 +69,7 @@ class Grid extends Component {
 
         boxIds.forEach(box => {
           if (boxes[box].x < right && boxes[box].x > left){
-            if (boxes[box].y < bottom && boxes[box].x > top){
+            if (boxes[box].y < bottom && boxes[box].y > top){
               this.props.removeChild(boxes[box].parent.id || 0, +box);
               this.props.removeParent(+box);
               this.props.setParent(+event.target.id, +box);
