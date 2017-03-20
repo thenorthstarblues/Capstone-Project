@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 import Grid from './components/Grid';
 import TrashCan from './components/TrashCan';
-import Window from './components/Window;
+import Window from './components/Window';
 import AddOptions from './components/AddOptions';
 
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
@@ -108,7 +108,7 @@ class App extends Component {
 													addChild={this.props.addChild}
 													removeParent={this.props.removeParent}
 													removeChild={this.props.removeChild}
-													id={box}
+													id={+box}
 													x={boxes[box].x}
 													y = {boxes[box].y}
 													height={boxes[box].height}
@@ -117,6 +117,8 @@ class App extends Component {
 													parent={boxes[box].parent}
                           tag={boxes[box].tag}
 													css={boxes[box].css}
+													boxIds={this.props.boxIds}
+													boxes={this.props.boxes}
 													/>
 													)
 											 	)
