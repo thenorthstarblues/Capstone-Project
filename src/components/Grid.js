@@ -24,21 +24,17 @@ class Grid extends Component {
           targets: [interact.createSnapGrid({ x: 10, y: 10 })],
         },
         restrict: {
-          restriction: {x: 60, y: 95, width: 890, height: 575},
+          restriction: {x: 60, y: 95, width: 1100, height: 700},
           elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
           endOnly: true
         },
       })
       .resizable({
         preserveAspectRatio: false,
+        invert: 'reposition',
         edges: { left: true, right: true, bottom: true, top: true },
         snap: {
           targets: [interact.createSnapGrid({ x: 10, y: 10 })],
-        },
-        restrict: {
-          restriction: ReactDOM.findDOMNode(this).parentNode,
-          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-          endOnly: true
         },
       })
       .on('resizemove', (event) => {
