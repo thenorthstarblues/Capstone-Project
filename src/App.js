@@ -60,7 +60,6 @@ class App extends Component {
 	boxAdder(e){
 		let tagType = e.target.attributes.value.value;
 		const id = +this.props.nextBoxId;
-
 		this.props.addBox(id, tagType);
 	}
 
@@ -71,64 +70,57 @@ class App extends Component {
 		return (
 
 			<div className="App">
-				<SplitPane split="vertical" defaultSize={200} primary="first">
-					<div>
-						<Code htmlString={'//HTML\n\n'+this.props.html.html}/>
-          				<Code htmlString={this.props.html.css} />
+				<div className="App">
+					<div className="button-box">
+						<button className="btn btn-default btn-sm" > Logo/Home Here </button>
+						<CodeModal />
+						<button className="btn btn-default btn-sm" > Live Preview </button>
+						<button className="btn btn-default btn-sm" > Starting Templates </button>
+						<button className="btn btn-default btn-sm" > Login/Logout </button>
+						<button className="btn btn-default btn-sm" > User Profile/Designs </button>
+						<button className="btn btn-default btn-sm" > Save/Share </button>
+						<button className="btn btn-default btn-sm" > Other </button>
 					</div>
-						<div className="App">
-								<div className="button-box">
-									<button className="btn btn-default btn-sm" > Logo/Home Here </button>
-									<CodeModal />
-									<button className="btn btn-default btn-sm" > Live Preview </button>
-									<button className="btn btn-default btn-sm" > Starting Templates </button>
-									<button className="btn btn-default btn-sm" > Login/Logout </button>
-									<button className="btn btn-default btn-sm" > User Profile/Designs </button>
-									<button className="btn btn-default btn-sm" > Save/Share </button>
-									<button className="btn btn-default btn-sm" > Other </button>
-								</div>
-							<div>
-								<div id="grid-snap" className="col-lg-12">
-
-									<svg id="drawHere" width="1100px" height="650px">
-										<Window
-											setParent={this.props.setParent}
-											addChild={this.props.addChild}
-											removeParent={this.props.removeParent}
-											removeChild={this.props.removeChild}
-											/>
-										{
-											boxIds.slice(1).map(box => (
-												<Grid
-													key={box}
-													setBox={this.props.setBox}
-													removeBox={this.props.removeBox}
-													setParent={this.props.setParent}
-													addChild={this.props.addChild}
-													removeParent={this.props.removeParent}
-													removeChild={this.props.removeChild}
-													id={+box}
-													x={boxes[box].x}
-													y = {boxes[box].y}
-													height={boxes[box].height}
-													width={boxes[box].width}
-													children={boxes[box].children}
-													parent={boxes[box].parent}
-                          tag={boxes[box].tag}
-													css={boxes[box].css}
-													boxIds={this.props.boxIds}
-													boxes={this.props.boxes}
-													/>
-													)
-											 	)
-											}
-												<AddOptions action={this.boxAdder} />
-												<TrashCan removeBox={this.props.removeBox} />
-											</svg>
-										</div>
-									</div>
+				<div>
+					<div id="grid-snap" className="col-lg-12">
+						<svg id="drawHere" width="1400px" height="800px">
+							<Window
+								setParent={this.props.setParent}
+								addChild={this.props.addChild}
+								removeParent={this.props.removeParent}
+								removeChild={this.props.removeChild}
+								/>
+							{
+								boxIds.slice(1).map(box => (
+									<Grid
+										key={box}
+										setBox={this.props.setBox}
+										removeBox={this.props.removeBox}
+										setParent={this.props.setParent}
+										addChild={this.props.addChild}
+										removeParent={this.props.removeParent}
+										removeChild={this.props.removeChild}
+										id={+box}
+										x={boxes[box].x}
+										y = {boxes[box].y}
+										height={boxes[box].height}
+										width={boxes[box].width}
+										children={boxes[box].children}
+										parent={boxes[box].parent}
+										tag={boxes[box].tag}
+										css={boxes[box].css}
+										boxIds={this.props.boxIds}
+										boxes={this.props.boxes}
+										/>
+										)
+									)
+								}
+								<AddOptions action={this.boxAdder} />
+								<TrashCan removeBox={this.props.removeBox} />
+							</svg>
 						</div>
-				</SplitPane>
+					</div>
+				</div>
 			</div>
 		)
 	}
