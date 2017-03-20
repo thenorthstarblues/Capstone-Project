@@ -72,6 +72,7 @@ const css={ //incorporate margins/padding later as string concat / string replac
   top:'flexRow startVert ',
   middle:'flexRow centerVert ',
   bottom:'flexRow endVert ',
+  none: 'in-line',
 }
 
 
@@ -81,7 +82,9 @@ function columnRowCheck(obj, parentId, childA, adds = 0){
     console.log('originals only: ', childArr);
 
   if (!childArr){
-    //no children, do nothing, done
+    //simply set css to 'in-line';
+    obj[parentId].css = css.none;
+
   } else if (childArr.length === 1){
     console.log('still need to check margins/assign classes');
 
@@ -259,7 +262,8 @@ function insertDiv(currGroup, obj, parentId, childArr, adds, currAlign){
           // argh the question of external spacing.... as above, just simplier 2 object check.
 
       //------------------create new div--------------------------------------
-      let divId='container'+adds;
+
+      let divId='Container'+parentId+'.'+adds;
       obj[divId] = { //all new container divs start with 'container'
         id: divId,
         height:y1-y0,
