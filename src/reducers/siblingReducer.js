@@ -1,6 +1,20 @@
 //testingOnly folder for some fake initial data;
 import {dummyData0, dummyData1} from './dummyLayoutData.js';
 
+//also, just testing;
+const test={
+  0:{ id:0, height:400, width:460, x:0, y:0, parent:null, children:[1,2,3,4,5,6,7,8,9], tag: 'div', css: 'p10 '},
+  1:{id:1, height:200, width:200, x:20, y: 20, parent:0,children:[],tag:'div',css:'p10 '},
+  2:{id:2, height:20, width:200, x:240, y:20, parent:0, children:[],tag:'div',css:'p10 '},
+  3:{id:3, height:20, width:160, x:240, y:60, parent:0, children:[],tag:'div',css:'p10 '},
+  4:{id:4, height:20, width:180, x:240, y:100, parent:0, children:[],tag:'div',css:'p10 '},
+  5:{id:5, height:20, width:80, x:300, y:120, parent:0, children:[],tag:'div',css:'p10 '},
+  6:{id:6, height:60, width:60, x:20, y:240, parent:0, children:[],tag:'div',css:'p10 '},
+  7:{id:7, height:60, width:60, x:100, y:240, parent:0, children:[],tag:'div',css:'p10 '},
+  8:{id:8, height:60, width:60, x:180, y:240, parent:0, children:[],tag:'div',css:'p10 '},
+  9:{id:9, height:60, width:60, x:260, y:240, parent:0, children:[],tag:'div',css:'p10 '},
+}
+
 
 export const SIB_RECOG = 'SIB_RECOG';
 
@@ -9,14 +23,20 @@ export const SIB_RECOG = 'SIB_RECOG';
 export const findSiblings = (objects => { // one giant object, with each id-object as held
 
   const boxObjs=Object.assign({}, objects); //clone and begin manipulation
+  let len=Object.keys(boxObjs);
 
   //add function below and include here...
+    for (let i=0; i<len.length; i++){
 
-	//the magic happens here!
+        if (boxObjs[i]){ //originals are numbers, so will only iterate through originals
+            columnRowCheck(boxObjs, i, boxObjs[i].children, adds = 0);
+        }
+    } //done with checks, can return or
+
 
   return {
     type: SIB_RECOG,
-    objects:boxes,
+    boxesCss:boxObjs,
   }
 
 });
@@ -24,7 +44,12 @@ export const findSiblings = (objects => { // one giant object, with each id-obje
 
 //-----------------------initial state ...stuffing state------------
 
-const initialState = dummyData0; // just for initial testing
+//const initialState = test; // just for initial testing
+
+const initialState = {
+  boxes=[],
+  boxesCss=[],
+}
 
 //---------------------------action reducer---------------------------
 
@@ -33,7 +58,7 @@ const siblingReducer = (prevState = initialState, action) => {
 
   switch(action.type) {
     case SIB_RECOG:
-      nextState.boxes = action.boxes;
+      nextState.boxesCss = action.boxesCss;
       break;
 
     default:
@@ -52,18 +77,6 @@ looping over it will be simple recursion */
 
 /////////////////////////////POSITION CHECKING//////////////////////////////////
 
-const test={
-  0:{ id:0, height:400, width:460, x:0, y:0, parent:null, children:[1,2,3,4,5,6,7,8,9], tag: 'div', css: 'p10 '},
-  1:{id:1, height:200, width:200, x:20, y: 20, parent:0,children:[],tag:'div',css:'p10 '},
-  2:{id:2, height:20, width:200, x:240, y:20, parent:0, children:[],tag:'div',css:'p10 '},
-  3:{id:3, height:20, width:160, x:240, y:60, parent:0, children:[],tag:'div',css:'p10 '},
-  4:{id:4, height:20, width:180, x:240, y:100, parent:0, children:[],tag:'div',css:'p10 '},
-  5:{id:5, height:20, width:80, x:300, y:120, parent:0, children:[],tag:'div',css:'p10 '},
-  6:{id:6, height:60, width:60, x:20, y:240, parent:0, children:[],tag:'div',css:'p10 '},
-  7:{id:7, height:60, width:60, x:100, y:240, parent:0, children:[],tag:'div',css:'p10 '},
-  8:{id:8, height:60, width:60, x:180, y:240, parent:0, children:[],tag:'div',css:'p10 '},
-  9:{id:9, height:60, width:60, x:260, y:240, parent:0, children:[],tag:'div',css:'p10 '},
-}
 
 const css={ //incorporate margins/padding later as string concat / string replace
   start:'flexCol startVert ',
@@ -75,18 +88,50 @@ const css={ //incorporate margins/padding later as string concat / string replac
   none: 'in-line',
 }
 
+let alignCol={
+  0: ['startSelf', 'start'],
+  1: ['centerSelf', 'start'],
+  2: ['endSelf', 'start'],
+  3: ['startSelf', 'start'],
+  4: ['startSelf', 'start'],
+  5: ['startSelf', 'start'],
+}
+
+let alignRow={ //for Row child placements/alignments
+  0: ['startSelf', 'left'],
+  1: ['startSelf', 'center'],
+  2: ['startSelf', 'right'],
+  3: ['startSelf', 'left'],
+  4: ['centerSelf', 'center'],
+  5: ['endSelf', 'right'],
+}
+
+let alignWrap={ //for boxes without specifications... Make a WARP ROW child placements/alignments
+  0: ['startSelf', 'flex wrap left'],
+  1: ['startSelf', 'flex wrap center'],
+  2: ['startSelf', 'flex wrap right'],
+  3: ['startSelf', 'flex wrap '],
+  4: ['centerSelf', 'flex wrap '],
+  5: ['endSelf', 'flex wrap '],
+}
+
 
 function columnRowCheck(obj, parentId, childA, adds = 0){
   // full obj list, 3, [2,5,7,8] as input, adds for iterating through new container ids
   let childArr=childA.filter(child=>typeof child === 'number');
-    console.log('originals only: ', childArr);
 
   if (!childArr){
     //simply set css to 'in-line';
-    obj[parentId].css = css.none;
-
+    obj[parentId].css = obj[parentId].css + css.none;
+    //no children, do nothing, done
   } else if (childArr.length === 1){
-    console.log('still need to check margins/assign classes');
+
+    //get left, center, right, top, middle, bottom
+    let [parentPos, childPos] = pairPositions(obj,parentId,childArr[0]);
+
+
+    console.log('testing ', parentId, parentId.css ,childArr[0], childArr[0].css);
+
 
   } else { //all longer children arrays... recursion below.
 
@@ -120,7 +165,7 @@ function columnRowCheck(obj, parentId, childA, adds = 0){
           console.log(obj[parentId].children); //updated master obj
 
           if (remains[1].length>=1){ //recurse here as long as subgroup exists
-            return columnRowCheck(test, 0, test[0].children, adds);
+            return columnRowCheck(obj, parentId, obj[parentId].children, adds);
           }
 
       }// done
@@ -166,6 +211,37 @@ function positions(obj,childArr){ // literal positions, repeats, index within ch
     bottoms : [bottom,repeats(bottom)[0], repeats(bottom)[1]],
   };
 }
+
+function pairPositions(obj,parentId,childId){
+    let parentPos = [obj[parentId].x, obj[parentId].x+obj[parentId].width/2 ,obj[parentId].x+obj[parentId].width, obj[parentId].y, obj[parentId].y+obj[parentId].height/2, obj[parentId].y+obj[parentId].height];
+
+    let childPos = [obj[childId].x, obj[childId].x+obj[childId].width/2, obj[childId].x+obj[childId].width, obj[childId].y, obj[childId].y+obj[childId].height/2, obj[childId].y+obj[childId].height];
+
+    let diff = parentPos.map((pos,i)=>{
+      return childPos[i]-pos;
+    })
+
+    let space= Math.min(...diff);
+    let alignI = diff.indexOf(space);
+
+    let environ=obj[parentId].css;
+    if (environ.includes('flexCol')){ //starts as column
+      let vals= alignCol[alignI];
+
+    } else if (environ.includes('flexRow')){
+      let vals= alignRow[alignI];
+
+    } else { //nothing set yet
+
+    //what else can I check here ?????
+
+    }
+
+
+    return [parentPos, childPos];
+}
+
+
 
 function childChecks(currGroupId, obj, childArr, posArr){ //positional heavy lifting
 
@@ -289,10 +365,10 @@ function insertDiv(currGroup, obj, parentId, childArr, adds, currAlign){
     return [obj[divId], kidArr]; //new div as check, remaining list to search
 }
 
-//just testing
-columnRowCheck(test, 0, test[0].children, adds = 0);
+//just testing - replit working model
+//columnRowCheck(test, 0, test[0].children, adds = 0);
 
-//just increment up 1 to iterate thru objects... make sure to return adds or hold at higher level.
+
 
 
 
