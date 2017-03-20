@@ -11,7 +11,7 @@ require('./configure')(app);
 
 
  app.use(morgan('dev'))
- app.use(express.static(path.resolve(__dirname, '../..', 'public')))
+ app.use(express.static(path.resolve(__dirname, '..', 'public')))
  app.get('/', function (req, res){
    res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
  })
