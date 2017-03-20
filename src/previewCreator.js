@@ -21,7 +21,7 @@ const getHtml = (dom, node =0) =>{
 }
 
 export const getFormattedHtml = dom => (
-  html(getHtml(dom))
+  html(getHtml(dom).replace(/\n\n/g,'\n'))
 )
 
 let str = '';
