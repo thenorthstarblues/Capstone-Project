@@ -13,7 +13,6 @@ class Grid extends Component {
     super(props);
     this.onMove=this.onMove.bind(this);
     this.onDrop=this.onDrop.bind(this);
-    this.onLeave=this.onLeave.bind(this);
     this.restrict=this.restrict.bind(this);
   }
 
@@ -49,7 +48,6 @@ class Grid extends Component {
       .on('resizemove', (event) => {
         const x = this.props.x;
         const y = this.props.y;
-
         this.props.setBox({
           id: this.props.id,
           x: x + event.deltaRect.left,
@@ -60,17 +58,36 @@ class Grid extends Component {
           parent: this.props.parent,
           tag: this.props.tag,
         })
+      })
+      .on('resizeend', (event) => {
+        const left = this.props.x;
+        const top = this.props.y;
+        const right = left + this.props.width;
+        const bottom = top + this.props.height;
+        const boxIds = this.props.boxIds;
+        const boxes = this.props.boxes;
 
+        boxIds.forEach(box => {
+          if (boxes[box].x < right && boxes[box].x > left){
+            if (boxes[box].y < bottom && boxes[box].x > top){
+              this.props.removeChild(boxes[box].parent.id || 0, +box);
+              this.props.removeParent(+box);
+              this.props.setParent(+event.target.id, +box);
+              this.props.addChild(+event.target.id, +box);
+            }
+          }
+        })
       })
       .dropzone({
-        ondrop: this.onDrop,
-        ondragleave: this.onLeave,
+          ondrop: this.onDrop,
+      })
+      .on('dragleave', (e) => {
+        this.props.removeParent(+e.relatedTarget.id);
+        this.props.removeChild(+e.target.id, +e.relatedTarget.id);
       })
   }
 
   onMove = (e) => {
-    console.log(e);
-
     this.props.setBox({
           id: this.props.id,
           x: this.props.x + e.dx,
@@ -81,18 +98,11 @@ class Grid extends Component {
           parent: this.props.parent,
           tag: this.props.tag,
         });
-  }
+    }
 
   onDrop = (e) => {
-    console.log(e.relatedTarget.id + ' became the child of ' + e.target.id);
-    this.props.setParent(e.target.id, e.relatedTarget.id);
-    this.props.addChild(e.target.id, e.relatedTarget.id);
-  }
-
-  onLeave = (e) => {
-    console.log(e.relatedTarget.id + ' is no longer the child of ' + e.target.id);
-    this.props.removeParent(e.relatedTarget.id);
-    this.props.removeChild(e.target.id, e.relatedTarget.id);
+    this.props.setParent(+e.target.id, +e.relatedTarget.id);
+    this.props.addChild(+e.target.id, +e.relatedTarget.id);
   }
 
   restrict=((e)=> {

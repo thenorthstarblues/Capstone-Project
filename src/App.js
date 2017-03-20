@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 import Grid from './components/Grid';
 import TrashCan from './components/TrashCan';
+import Window from './components/Window';
 import AddOptions from './components/AddOptions';
+
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
 
 import {connect} from 'react-redux';
@@ -85,36 +87,42 @@ class App extends Component {
 									<button className="btn btn-default btn-sm" > User Profile/Designs </button>
 									<button className="btn btn-default btn-sm" > Save/Share </button>
 									<button className="btn btn-default btn-sm" > Other </button>
-
-									{/*<button
-										className={"btn btn-primary btn-lg"}
-										onClick={this.boxAdder}
-										>Add New Box</button>*/}
 								</div>
 							<div>
 								<div id="grid-snap" className="col-lg-12">
-									<svg id="drawHere" width="1100px" height="620px"> {/* create store holder & map method that make svg height 20+ box:0's height... for auto-enlarging the page*/}
+
+									<svg id="drawHere" width="1100px" height="650px">
+										<Window
+											setParent={this.props.setParent}
+											addChild={this.props.addChild}
+											removeParent={this.props.removeParent}
+											removeChild={this.props.removeChild}
+											/>
 										{
-											boxIds.map(box => (
-												<Grid key={box}
-															setBox={this.props.setBox}
-															removeBox={this.props.removeBox}
-															setParent={this.props.setParent}
-															addChild={this.props.addChild}
-															removeParent={this.props.removeParent}
-															removeChild={this.props.removeChild}
-															id={box}
-															x={boxes[box].x}
-															y = {boxes[box].y}
-															height={boxes[box].height}
-															width={boxes[box].width}
-															children={boxes[box].children}
-															parent={boxes[box].parent}
-															tag={boxes[box].tag}
-															css={boxes[box].css}
-															/>
-													))
-												}
+											boxIds.slice(1).map(box => (
+												<Grid
+													key={box}
+													setBox={this.props.setBox}
+													removeBox={this.props.removeBox}
+													setParent={this.props.setParent}
+													addChild={this.props.addChild}
+													removeParent={this.props.removeParent}
+													removeChild={this.props.removeChild}
+													id={+box}
+													x={boxes[box].x}
+													y = {boxes[box].y}
+													height={boxes[box].height}
+													width={boxes[box].width}
+													children={boxes[box].children}
+													parent={boxes[box].parent}
+                          tag={boxes[box].tag}
+													css={boxes[box].css}
+													boxIds={this.props.boxIds}
+													boxes={this.props.boxes}
+													/>
+													)
+											 	)
+											}
 												<AddOptions action={this.boxAdder} />
 												<TrashCan removeBox={this.props.removeBox} />
 											</svg>
