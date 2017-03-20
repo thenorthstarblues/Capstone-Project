@@ -1,6 +1,20 @@
 //testingOnly folder for some fake initial data;
 import {dummyData0, dummyData1} from './dummyLayoutData.js';
 
+//also, just testing;
+const test={
+  0:{ id:0, height:400, width:460, x:0, y:0, parent:null, children:[1,2,3,4,5,6,7,8,9], tag: 'div', css: 'p10 '},
+  1:{id:1, height:200, width:200, x:20, y: 20, parent:0,children:[],tag:'div',css:'p10 '},
+  2:{id:2, height:20, width:200, x:240, y:20, parent:0, children:[],tag:'div',css:'p10 '},
+  3:{id:3, height:20, width:160, x:240, y:60, parent:0, children:[],tag:'div',css:'p10 '},
+  4:{id:4, height:20, width:180, x:240, y:100, parent:0, children:[],tag:'div',css:'p10 '},
+  5:{id:5, height:20, width:80, x:300, y:120, parent:0, children:[],tag:'div',css:'p10 '},
+  6:{id:6, height:60, width:60, x:20, y:240, parent:0, children:[],tag:'div',css:'p10 '},
+  7:{id:7, height:60, width:60, x:100, y:240, parent:0, children:[],tag:'div',css:'p10 '},
+  8:{id:8, height:60, width:60, x:180, y:240, parent:0, children:[],tag:'div',css:'p10 '},
+  9:{id:9, height:60, width:60, x:260, y:240, parent:0, children:[],tag:'div',css:'p10 '},
+}
+
 
 export const SIB_RECOG = 'SIB_RECOG';
 
@@ -11,12 +25,17 @@ export const findSiblings = (objects => { // one giant object, with each id-obje
   const boxObjs=Object.assign({}, objects); //clone and begin manipulation
 
   //add function below and include here...
+    for (let i=0; i<boxObjs.length; i++){
 
-	//the magic happens here!
+        if (boxObjs[i]){ //originals are numbers, so will only iterate through originals
+            columnRowCheck(boxObjs, i, boxObjs[i].children, adds = 0);
+        }
+    } //done with checks, can return or
+
 
   return {
     type: SIB_RECOG,
-    objects:boxes,
+    objectsCss:boxObjs,
   }
 
 });
@@ -24,7 +43,12 @@ export const findSiblings = (objects => { // one giant object, with each id-obje
 
 //-----------------------initial state ...stuffing state------------
 
-const initialState = dummyData0; // just for initial testing
+//const initialState = test; // just for initial testing
+
+const initialState = {
+  objects=[],
+  objectsCss=[],
+}
 
 //---------------------------action reducer---------------------------
 
@@ -33,7 +57,7 @@ const siblingReducer = (prevState = initialState, action) => {
 
   switch(action.type) {
     case SIB_RECOG:
-      nextState.boxes = action.boxes;
+      nextState.objectsCss = action.objectsCss;
       break;
 
     default:
@@ -52,18 +76,6 @@ looping over it will be simple recursion */
 
 /////////////////////////////POSITION CHECKING//////////////////////////////////
 
-const test={
-  0:{ id:0, height:400, width:460, x:0, y:0, parent:null, children:[1,2,3,4,5,6,7,8,9], tag: 'div', css: 'p10 '},
-  1:{id:1, height:200, width:200, x:20, y: 20, parent:0,children:[],tag:'div',css:'p10 '},
-  2:{id:2, height:20, width:200, x:240, y:20, parent:0, children:[],tag:'div',css:'p10 '},
-  3:{id:3, height:20, width:160, x:240, y:60, parent:0, children:[],tag:'div',css:'p10 '},
-  4:{id:4, height:20, width:180, x:240, y:100, parent:0, children:[],tag:'div',css:'p10 '},
-  5:{id:5, height:20, width:80, x:300, y:120, parent:0, children:[],tag:'div',css:'p10 '},
-  6:{id:6, height:60, width:60, x:20, y:240, parent:0, children:[],tag:'div',css:'p10 '},
-  7:{id:7, height:60, width:60, x:100, y:240, parent:0, children:[],tag:'div',css:'p10 '},
-  8:{id:8, height:60, width:60, x:180, y:240, parent:0, children:[],tag:'div',css:'p10 '},
-  9:{id:9, height:60, width:60, x:260, y:240, parent:0, children:[],tag:'div',css:'p10 '},
-}
 
 const css={ //incorporate margins/padding later as string concat / string replace
   start:'flexCol startVert ',
@@ -289,10 +301,10 @@ function insertDiv(currGroup, obj, parentId, childArr, adds, currAlign){
     return [obj[divId], kidArr]; //new div as check, remaining list to search
 }
 
-//just testing
-columnRowCheck(test, 0, test[0].children, adds = 0);
+//just testing - replit working model
+//columnRowCheck(test, 0, test[0].children, adds = 0);
 
-//just increment up 1 to iterate thru objects... make sure to return adds or hold at higher level.
+
 
 
 
