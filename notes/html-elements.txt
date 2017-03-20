@@ -1,0 +1,49 @@
+<head></head> (we make an auto fill w/ user info)
+
+<body></body> (we make an auto fill w/ user info)
+    <article></article> (?)
+    <aside></aside> (?)
+    
+<p></p> (easy - block sized w/ horizontal lines)
+
+<h1></h1> (set these with specific heights, resize only horizontal) - 36
+    <h2></h2> " 24
+    <h3></h3> " 21
+    <h4></h4> " 18
+    <h5></h5> " 14
+    
+<ul></ul> (we establish around the li)
+    <li></li> (like paragraph... simply divide by 16 to get # of li)
+
+<dl> descriptions
+  <dt>...</dt> term
+  <dd>...</dd> description ... just use h5/p?
+</dl>
+
+<table> tables 
+    <thead></thead> 
+        <tr></tr>
+    <tbody></tbody>
+        <tr></tr>
+</table>
+
+<img> tricky with non-closure (can we fake closure)
+    <canvas></canvas>
+    <svg></svg>
+    
+<video>
+    misc controls
+    
+<audio>
+    misc controls   
+     
+<button></button>
+
+<form>
+    option-select
+    option-radio
+    option-text-input
+    option-file-upload
+</form>
+
+<footer></footer>

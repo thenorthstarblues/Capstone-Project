@@ -11,6 +11,7 @@
     "express": "^4.15.2",
     "history": "^4.6.0",
     "interact.js": "1.2.8",
+    "js-beautify": "^1.6.11",
     "morgan": "^1.8.1",
     "pg": "^6.1.4",
     "pg-hstore": "^2.3.2",

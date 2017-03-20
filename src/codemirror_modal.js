@@ -3,6 +3,18 @@ import {Modal, Tooltip, Button, OverlayTrigger, Popover,} from 'react-bootstrap'
 import {connect} from 'react-redux';
 import Code from './Codemirror';
 import './App.css';
+import {htmlCreator,createCss} from './reducers/boxes'
+const mapStateToProps =(state) => ({
+  html: state.html,
+  elements: state.boxes
+})
+const mapDispatchToProps = dispatch => ({
+  submitHtml(elements){
+    dispatch(htmlCreator(elements))
+    dispatch(createCss()) //not sure what to pass in yet, default css
+  },
+});
+
 
 //TODO: convert modal to dumb component
 const CodeModal = React.createClass({
@@ -34,9 +46,11 @@ const CodeModal = React.createClass({
       <div>
 
         <Button
-          bsStyle="primary"
-          bsSize="large"
-          onClick={this.open}
+          bsStyle="default"
+          bsSize="sm"
+          onClick={()=>{
+            this.props.submitHtml(this.props.elements);
+          this.open()}}
         >
           Display Code
         </Button>
@@ -57,7 +71,8 @@ const CodeModal = React.createClass({
 
             <hr />
 
-            <Code />
+            <Code htmlString={'//HTML\n\n'+this.props.html.html}/>
+            <Code htmlString={this.props.html.css} />
 
           </Modal.Body>
           <Modal.Footer>
@@ -72,7 +87,7 @@ const CodeModal = React.createClass({
   }
 });
 
-export default connect()(CodeModal);
+export default connect(mapStateToProps,mapDispatchToProps)(CodeModal);
 
 
 

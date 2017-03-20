@@ -1,6 +1,23 @@
+/*!
+ *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+/* FONT PATH
+ * -------------------------- */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('./style/fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('./style/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('./style/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('./style/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('./style/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('./style/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 .App {
   text-align: center;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -46,14 +63,11 @@
   display: inline-block;
   min-width: 40px;
   padding: 2em 0.5em;
-
   color: #fff;
   background-color: #29e;
   border: solid 2px #fff;
-
   -webkit-transform: translate(0px, 0px);
           transform: translate(0px, 0px);
-
   transition: background-color 0.3s;
 }
 
@@ -90,11 +104,28 @@
   stroke: none;
 }
 
+.adds{
+  rx: 3;
+  ry: 3;
+  fill: #ffffff;
+  fill-opacity: .1;
+  stroke: #000000;
+}
+
+.adds:hover {
+  fill: #f6f6f6;
+  fill-opacity: 1;
+  box-shadow: 0 0 2 #000000;
+  stroke-width: 3;
+  stroke: #000000;
+}
+
 
 .custom-modal {
   width: 90%;
   height: 90%;
 }
+
 
 
     .Resizer {
@@ -152,4 +183,76 @@
   height:100vh;
 }
 
+
+
+.Resizer {
+    background: #000;
+    opacity: .2;
+    z-index: 1;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+}
+
+  .Resizer:hover {
+    -webkit-transition: all 2s ease;
+    transition: all 2s ease;
+}
+
+  .Resizer.horizontal {
+    height: 11px;
+    margin: -5px 0;
+    border-top: 5px solid rgba(255, 255, 255, 0);
+    border-bottom: 5px solid rgba(255, 255, 255, 0);
+    cursor: row-resize;
+    width: 100%;
+}
+
+.Resizer.horizontal:hover {
+    border-top: 5px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+.Resizer.vertical {
+    width: 11px;
+    margin: 0 -5px;
+    border-left: 5px solid rgba(255, 255, 255, 0);
+    border-right: 5px solid rgba(255, 255, 255, 0);
+    cursor: col-resize;
+}
+
+.Resizer.vertical:hover {
+    border-left: 5px solid rgba(0, 0, 0, 0.5);
+    border-right: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+Resizer.disabled {
+  cursor: not-allowed;
+}
+Resizer.disabled:hover {
+  border-color: transparent;
+}
+
+.button-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.SplitPane {
+  overflow: visible;
+}
+
+
+.icons {
+   font-family: 'Glyphicons Halflings';
+}
+
+.iconsH {
+   font-family: 'FontAwesome';
+}
 
