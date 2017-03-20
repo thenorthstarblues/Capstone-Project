@@ -6,13 +6,18 @@ const initialState = {
     id: 0,
     x: 0,
     y: 0,
+    parent: null,
+    tag: 'div',
+    css: '',
   }
 };
+
 
 const htmlState ={
   html: '//HTML',
   css:'//CSS'
 }
+
 //conversion functions
 import {getFormattedHtml, getCss} from '../previewCreator'
 
@@ -42,19 +47,18 @@ const setCss = (css)=>{
 }
 
 export const createCss = () =>{ //eventually pass something in
-  return dispatch => {
-    const cssString =getCss();
-    dispatch(setCss(cssString))
-  }
+   return dispatch => {
+     const cssString =getCss();
+     dispatch(setCss(cssString))
+   }
 }
 
 export const htmlCreator = (elements) =>{
-  return dispatch => {
-    const htmlString = getFormattedHtml(elements);
-    dispatch(setHtml(htmlString))
-  }
+   return dispatch => {
+     const htmlString = getFormattedHtml(elements);
+     dispatch(setHtml(htmlString))
+   }
 }
-
 
 export const setBox = (box) => {
   return {
@@ -63,17 +67,19 @@ export const setBox = (box) => {
   }
 }
 
-export const addBox = (id) => {
+export const addBox = (id, tag) => {
   return {
     type: ADD_BOX,
     box: {
       id: +id,
       x: 30,
-      y: 30,
+      y: 40,
       width: 100,
       height: 100,
       children: [],
       parent: null,
+      tag: tag,
+      css: 'p10 ',
     }
   }
 }
@@ -151,6 +157,7 @@ const boxesReducer = (prevState = initialState, action) => {
 }
 
 export default boxesReducer;
+
 
 
 export const htmlReducer = (state = htmlState, action)=>{

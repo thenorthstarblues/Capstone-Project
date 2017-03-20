@@ -11,7 +11,7 @@ const mapStateToProps =(state) => ({
 const mapDispatchToProps = dispatch => ({
   submitHtml(elements){
     dispatch(htmlCreator(elements))
-    dispatch(createCss()) //not sure what to pass in yet, default css 
+    dispatch(createCss()) //not sure what to pass in yet, default css
   },
 });
 
@@ -46,8 +46,8 @@ const CodeModal = React.createClass({
       <div>
 
         <Button
-          bsStyle="primary"
-          bsSize="large"
+          bsStyle="default"
+          bsSize="sm"
           onClick={()=>{
             this.props.submitHtml(this.props.elements);
           this.open()}}
