@@ -6,13 +6,14 @@ import TrashCan from './components/TrashCan';
 import Window from './components/Window';
 import AddOptions from './components/AddOptions';
 
+
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
 
 import {connect} from 'react-redux';
 import CodeModal from './components/codemirror_modal';
 import SplitPane from 'react-split-pane';
 import Code from './components/Codemirror';
-import './style/css/App.css';
+import './style/css/App.css'
 
 const mapStateToProps = (state) => {
 	const ids = Object.keys(state.boxes);
