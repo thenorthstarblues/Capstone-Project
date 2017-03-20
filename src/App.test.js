@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import TrashCan from './components/TrashCan';
 import AddOptions from './components/AddOptions';
-import Box from './components/Box'
-
+import Box from './components/Box';
+import Grid from './components/Grid';
+import Window from './components/Window';
 
 it('Renders TrashCan component', () => {
   const div = document.createElement('div');
@@ -24,13 +25,15 @@ it('renders Box', () => {
 });
 
 
-// it('renders without crashing', () => {
-//   const div = document.createElement('div');
-//   ReactDOM.render(<App />, div);
-// });
+
+it('Renders Grid without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<Grid />, div);
+});
 
 
-// it('renders without crashing', () => {
-//   const div = document.createElement('div');
-//   ReactDOM.render(<App />, div);
-// });
+it('Loads Window ', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<Window />, div);
+});
+
