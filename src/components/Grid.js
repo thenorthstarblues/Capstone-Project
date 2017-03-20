@@ -22,27 +22,19 @@ class Grid extends Component {
         onmove: this.onMove,
         snap: {
           targets: [interact.createSnapGrid({ x: 10, y: 10 })],
-          range: Infinity,
-          relativePoints: [ { x: 0, y: 0 } ]
         },
         restrict: {
-          restriction: ReactDOM.findDOMNode(this).parentNode,
+          restriction: {x: 60, y: 95, width: 1100, height: 700},
           elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
           endOnly: true
         },
       })
       .resizable({
         preserveAspectRatio: false,
+        invert: 'reposition',
         edges: { left: true, right: true, bottom: true, top: true },
         snap: {
           targets: [interact.createSnapGrid({ x: 10, y: 10 })],
-          range: Infinity,
-          relativePoints: [ { x: 0, y: 0 } ]
-        },
-        restrict: {
-          restriction: ReactDOM.findDOMNode(this).parentNode,
-          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-          endOnly: true
         },
       })
       .on('resizemove', (event) => {
@@ -88,6 +80,7 @@ class Grid extends Component {
   }
 
   onMove = (e) => {
+    console.log(e);
     this.props.setBox({
           id: this.props.id,
           x: this.props.x + e.dx,
