@@ -2,42 +2,79 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 
+const ButtonReg = ({action, x, y, value, style, format})=> {
+
+  return (
+        <g>
+          <rect x={x} y={y} width="70" height="30" value={value} data={style} className="adds" onClick={action} />
+          <text x={x+8} y={y+22} textAnchor="start" className="icons " >{format}</text>
+          <text x={x+32} y={y+20} textAnchor="start" className="small" >{value}</text>
+        </g>
+        )
+}
+
+const ButtonH = ({action, x, y, value, style, format})=> {
+
+  return (
+          <g>
+            <rect x={x} y={y} width="45" height="30" className="adds " onClick={action} value={value} data={style} />
+            <text x={x+8} y={y+22} textAnchor="start" className="iconsH " >{format}</text>
+            <text x={x+25} y={y+20} textAnchor="start" className="small" >{value}</text>
+          </g>
+        );
+}
+
+const ButtonSm = ({action, x, y, value, style, format})=> {
+
+  return (
+          <g>
+            <rect x={x} y={y} width="45" height="30" className="adds " onClick={action} value={value} data={style} />
+            <text x={x+8} y={y+22} textAnchor="start" className="icons " >{format}</text>
+            <text x={x+28} y={y+20} textAnchor="start" className="small" >{value}</text>
+          </g>
+        );
+}
+
 
 const AddOptions = (({action})=> {
   //console.log(action);
+  let yVal = 70;
+  let xVal = 930;
+  let xVal2 = 1010;
+  let xVal3 = 1090;
 
     return (
               <g> {/* this is just the dummy layout, buttons up here */}
-                <text x="920" y="40" textAnchor="start">Click to Add Elements</text>
-                <text x="920" y="60" textAnchor="start" className="small" >Div, Paragraph</text>
-                  <rect x="920" y="70" width="70" height="30" value="div" className="adds" onClick={action}/>
-                  <rect x="1000" y="70" width="70" height="30" value="p" className="adds" onClick={action}/>
-                <text x="920" y="115" textAnchor="start" className="small" >Headers: h1, H2, 3, h4</text>
-                  <rect x="920" y="120" width="70" height="15" value="h1" className="adds" onClick={action} />
-                  <rect x="1000" y="120" width="70" height="15" value="h2" className="adds" onClick={action} />
-                  <rect x="920" y="140" width="70" height="15" value="h3" className="adds" onClick={action} />
-                  <rect x="1000" y="140" width="70" height="15" value="h4" className="adds" onClick={action} />
-                <text x="920" y="165" textAnchor="start" className="small" >List, Table</text>
-                  <rect x="920" y="170" width="70" height="30"  value="ul" className="adds" onClick={action} />
-                  <rect x="1000" y="170" width="70" height="30" value="table" className="adds" onClick={action} />
-                <text x="920" y="215" textAnchor="start" className="small" >Image, Svg</text>
-                  <rect x="920" y="220" width="70" height="30" value="img" className="adds" onClick={action} />
-                  <rect x="1000" y="220" width="70" height="30" value="svg" className="adds" onClick={action} />
-                <text x="920" y="265" textAnchor="start" className="small" >Canvas, Video</text>
-                  <rect x="920" y="270" width="70" height="30" value="canvas" className="adds" onClick={action} />
-                  <rect x="1000" y="270" width="70" height="30" value="video" className="adds" onClick={action} />
-                <text x="920" y="315" textAnchor="start" className="small" >Button, Alert</text>
-                  <rect x="920" y="320" width="70" height="30" value="button" className="adds" onClick={action} />
-                  <rect x="1000" y="320" width="70" height="30" value="alert" className="adds" onClick={action} />
-                <text x="920" y="365" textAnchor="start" className="small" >Forms: Text, Options</text>
-                  <rect x="920" y="370" width="70" height="30" value="input" className="adds" onClick={action} />
-                  <rect x="1000" y="370" width="70" height="30" value="option" className="adds" onClick={action} />
-                <text x="920" y="415" textAnchor="start" className="small" >Forms: Uploads, Radios</text>
-                  <rect x="920" y="420" width="70" height="30" value="file" className="adds" onClick={action} />
-                  <rect x="1000" y="420" width="70" height="30" value="radio" className="adds" onClick={action} />
-                <text x="920" y="465" textAnchor="start" className="small" >Other Things</text>
-                  <rect x="920" y="470" width="70" height="30" value="" className="adds" onClick={action} />
-                  <rect x="1000" y="470" width="70" height="30" value="" className="adds" onClick={action} />
+                <text x={xVal} y="20" textAnchor="start">CLICK: to add element</text>
+                  <rect x={xVal} y="25" width="150" height="1" className="adds" />
+
+                  <ButtonReg x={xVal} y={yVal-25} value="div" action={action} style="" format="&#xe157;" />
+
+                    <ButtonSm x={xVal} y={yVal+15} value="p" style="text-left" format="&#xe052;" action={action} />
+                    <ButtonSm x={xVal+50} y={yVal+15} value="p" style="text-center" format="&#xe053;" action={action} />
+                    <ButtonSm x={xVal+100} y={yVal+15} value="p"  style="text-right" format="&#xe054;" action={action} />
+
+                    <ButtonH x={xVal} y={yVal+55} value="h1" style="" format="&#xf1dc;" action={action} />
+                    <ButtonH x={xVal+50} y={yVal+55} value="h2" style="" format="&#xf1dc;" action={action} />
+                    <ButtonH x={xVal+100} y={yVal+55} value="h3"  style="" format="&#xf1dc;" action={action} />
+                    <ButtonH x={xVal} y={yVal+95} value="h4" style="" format="&#xf1dc;" action={action} />
+                    <ButtonH x={xVal+50} y={yVal+95} value="h5" style="" format="&#xf1dc;" action={action} />
+
+                  <ButtonReg x={xVal} y={yVal+145} value="ul" format="&#xe012;" style="" action={action} />
+                  <ButtonReg x={xVal2} y={yVal+145} value="table" format="&#xe011;" style="" action={action} />
+                  <ButtonReg x={xVal} y={yVal+185} value="img" format="&#xe060;" style="" action={action} />
+                  <ButtonReg x={xVal2} y={yVal+185} value="button" format="&#xe130;" style="btn btn-default" action={action} />
+                  <ButtonReg x={xVal} y={yVal+225} value="audio" format="&#xe035;" style="" action={action} />
+                  <ButtonReg x={xVal2} y={yVal+225} value="video" format="&#xe059;" style="" action={action} />
+                  <ButtonReg x={xVal} y={yVal+265} value="link" format="&#xe144;" style="" action={action} />
+
+
+                <text x={xVal} y={yVal+320} textAnchor="start" className="small" >Forms</text>
+                  <ButtonReg x={xVal} y={yVal+325} value="text" format="&#xe065;" style="" action={action} />
+                  <ButtonReg x={xVal2} y={yVal+325} format="&#xe114;" style="" value="option" action={action} />
+                  <ButtonReg x={xVal} y={yVal+365} value="file" format="&#xe172;" style="" action={action} />
+                  <ButtonReg x={xVal2} y={yVal+365} value="radio" format="&#xe165;" style="" action={action} />
+
               </g>
     )
 

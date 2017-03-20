@@ -4,7 +4,6 @@ import interact from 'interact.js';
 import Grid from './components/Grid';
 import TrashCan from './components/TrashCan';
 import AddOptions from './components/AddOptions';
-import TextGrid from './components/TextComponents'; //testing conditonal rendering for tag types
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
 
 import {connect} from 'react-redux';
@@ -73,13 +72,28 @@ class App extends Component {
 			<div className="App">
 				<SplitPane split="vertical" defaultSize={200} primary="first">
 					<div>
-					<Code htmlString={'//HTML\n\n'+this.props.html.html}/>
-          <Code htmlString={this.props.html.css} />
+						<Code htmlString={'//HTML\n\n'+this.props.html.html}/>
+          				<Code htmlString={this.props.html.css} />
 					</div>
 						<div className="App">
+								<div className="button-box">
+									<button className="btn btn-default btn-sm" > Logo/Home Here </button>
+									<CodeModal />
+									<button className="btn btn-default btn-sm" > Live Preview </button>
+									<button className="btn btn-default btn-sm" > Starting Templates </button>
+									<button className="btn btn-default btn-sm" > Login/Logout </button>
+									<button className="btn btn-default btn-sm" > User Profile/Designs </button>
+									<button className="btn btn-default btn-sm" > Save/Share </button>
+									<button className="btn btn-default btn-sm" > Other </button>
+
+									{/*<button
+										className={"btn btn-primary btn-lg"}
+										onClick={this.boxAdder}
+										>Add New Box</button>*/}
+								</div>
 							<div>
 								<div id="grid-snap" className="col-lg-12">
-									<svg id="drawHere" width="1100px" height="620px">
+									<svg id="drawHere" width="1100px" height="620px"> {/* create store holder & map method that make svg height 20+ box:0's height... for auto-enlarging the page*/}
 										{
 											boxIds.map(box => (
 												<Grid key={box}
@@ -106,13 +120,6 @@ class App extends Component {
 											</svg>
 										</div>
 									</div>
-								<div className="button-box">
-									<CodeModal />
-									{/*<button
-										className={"btn btn-primary btn-lg"}
-										onClick={this.boxAdder}
-										>Add New Box</button>*/}
-								</div>
 						</div>
 				</SplitPane>
 			</div>

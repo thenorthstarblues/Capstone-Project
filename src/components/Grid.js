@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 
+//group graphic formatting to be completed later... only paragraph works
+import { Paragraph, Ul, Table } from './Texts'; //for conditonal rendering
+import { H1, H2, H3, H4 } from './Headers';
+import { Div, Button, Alert } from './Basicformat';
+
 
 class Grid extends Component {
   constructor(props) {
@@ -64,6 +69,8 @@ class Grid extends Component {
   }
 
   onMove = (e) => {
+    console.log(e);
+
     this.props.setBox({
           id: this.props.id,
           x: this.props.x + e.dx,
@@ -106,14 +113,9 @@ class Grid extends Component {
       default: typeClass = 'basicBox'; break;
     }
 
-    console.log(this.props.tag);
 
     return (
-
-
       <rect className={`dropzone yes-drop ${typeClass}`} id={this.props.id} height={this.props.height} width={this.props.width} x={this.props.x} y={this.props.y} rx="2px" ry="2px" />
-
-
     )
   }
 }

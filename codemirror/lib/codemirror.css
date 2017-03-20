@@ -91,7 +91,8 @@
 .CodeMirror-rulers {
   position: absolute;
   left: 0; right: 0; top: -50px; bottom: -20px;
-  overflow: hidden;
+  /* originally hidden */
+  overflow: scroll;
 }
 .CodeMirror-ruler {
   border-left: 1px solid #ccc;
@@ -151,7 +152,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 
 .CodeMirror {
   position: relative;
-  overflow: hidden;
+  /* originally hidden */
+  overflow: scroll;
   background: white;
 }
 
@@ -180,11 +182,13 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 }
 .CodeMirror-vscrollbar {
   right: 0; top: 0;
-  overflow-x: hidden;
+  /* originally hidden */
+  overflow-x: scroll;
   overflow-y: scroll;
 }
 .CodeMirror-hscrollbar {
   bottom: 0; left: 0;
+  /* originally hidden */
   overflow-y: hidden;
   overflow-x: scroll;
 }
@@ -290,7 +294,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   position: absolute;
   width: 100%;
   height: 0;
-  overflow: hidden;
+  /* originally hidden */
+  overflow: visible;
   visibility: hidden;
 }
 
