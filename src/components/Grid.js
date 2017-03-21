@@ -74,6 +74,36 @@ class Grid extends Component {
     return smallBox.y < bigBox.y || smallBox.y > (bigBox.y + bigBox.height)
   }
 
+  hasChildren = () => {
+    return !!this.props.children.length;
+  }
+
+  hasNewChildren = () => {
+    const allBoxes = this.props.boxes;
+    Object.keys(allBoxes).forEach(boxId => {
+      if (+boxId !== this.props.id){
+        if (this.isInsideOfXs(allBoxes[+boxId], this.props) && this.isInsideOfYs(allBoxes[+boxId]), this.props){
+          const prevParent = allBoxes[+boxId].parent ? allBoxes[+boxId].parent : 0;
+          this.removeParentChild(prevParent, +boxId);
+          this.addParentChild(this.props.id, +boxId);
+        }
+      }
+    })
+  }
+
+  lostChildren = () => {
+    const allBoxes = this.props.boxes;
+    if(this.hasChildren()){
+      this.props.children.forEach(boxId => {
+        if (+boxId !== this.props.id){
+          if (this.isOutsideOfXs(allBoxes[boxId], this.props) || this.isOutsideOfYs(allBoxes[+boxId], this.props)){
+            this.removeParentChild(this.props.id, boxId);
+          }
+        }
+      })
+    }
+  }
+
   updateBox = (updates) => {
     const newBox = Object.assign({
       id: +this.props.id,
@@ -90,29 +120,9 @@ class Grid extends Component {
     this.props.setBox(newBox);
   }
 
-  checkForChanges(event){
-    const allBoxes = this.props.boxes;
-    const currentBox = this.props.boxes[+event.target.id];
-
-    if(currentBox.children.length){
-      currentBox.children.forEach(boxId => {
-        if (boxId !== currentBox.id){
-          if (this.isOutsideOfXs(allBoxes[boxId], currentBox) || this.isOutsideOfYs(allBoxes[boxId], currentBox)){
-          this.removeParentChild(currentBox.id, boxId);
-          }
-        }
-      })
-    }
-
-    Object.keys(allBoxes).forEach(boxId => {
-      if (boxId !== currentBox.id){
-        if (this.isInsideOfXs(allBoxes[boxId], currentBox) && this.isInsideOfYs(allBoxes[boxId]), currentBox){
-          const prevParent = allBoxes[boxId].parent ? allBoxes[boxId].parent : 0;
-          this.removeParentChild(prevParent, boxId);
-          this.addParentChild(currentBox.id, boxId);
-          }
-        }
-      })
+  checkForChanges = () => {
+    this.lostChildren();
+    this.hasNewChildren();
   }
 
 
