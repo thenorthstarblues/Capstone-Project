@@ -3,6 +3,7 @@ import {Modal, Tooltip, Button, OverlayTrigger, Popover,} from 'react-bootstrap'
 import {connect} from 'react-redux';
 import Code from './Codemirror';
 import '../style/css/App.css';
+import {saveLayout} from '../reducers/boxes';
 import {htmlCreator,createCss} from '../reducers/boxes'
 const mapStateToProps =(state) => ({
   html: state.html,
@@ -13,6 +14,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(htmlCreator(elements))
     dispatch(createCss()) //not sure what to pass in yet, default css
   },
+  save(name,elements){
+    dispatch(saveLayout(name,elements))
+  }
 });
 
 
@@ -79,6 +83,7 @@ const CodeModal = React.createClass({
           <Button>
           Download
           </Button>
+          <Button onClick={()=> {this.props.save('test',this.props.elements)}}>SAVE </Button>
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>

@@ -21,8 +21,10 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req,res,next)=>{
-    layout.Create(req.body)
+    console.log()
+    layout.create(req.body)
     .then((s)=>{
-        res.json(s).status(201);
+        console.log(s)
+        res.json(s).status(200);
     })
 })

@@ -1,3 +1,4 @@
+import axios from 'axios'
 const initialState = {
   0: {
     height: 600,
@@ -122,6 +123,13 @@ export const removeChild = (parentId, childId) => {
   }
 }
 
+export const load = (newLayout) =>{
+  return {
+    type: LOAD_LAYOUT,
+    newLayout, //TODO: make this dispatch to load 
+  }
+}
+
 //reducer
 const boxesReducer = (prevState = initialState, action) => {
   const newState = Object.assign({}, prevState);
@@ -174,3 +182,62 @@ export const htmlReducer = (state = htmlState, action)=>{
   }
   return newState;
 }
+
+export const loadLayout = (id) => {
+  axios.get(`api/elements/layout/${id}`)
+  .then((elements)=> {
+    const data = elements.data;
+    let state = {}
+    data.forEach((element)=>{
+      const id = element.layId;
+      delete element.layId;
+      delete element.createdAt;
+      delete element.updatedAt;
+      delete element.layoutId;
+      element.id = id;
+      state[id] = element
+    })
+    dispatch(load(state))
+  })
+}
+export const saveLayout = (name,elements) => {
+  console.log(elements)
+  return (dispatch) => {
+  axios.post('api/layouts', {
+    name: name,
+    author: name,
+    })
+    .then((layout)=> {
+    console.log(layout.data.id)
+      const id = layout.data.id
+      console.log(id);
+      const makeelements =[];
+      const elementIdArr = Object.keys(elements);
+      for (var i = 0; i <elementIdArr.length; i++){
+        const elem = elements[i];
+        const layId = elem.id;
+        elem.children = elem.children.join(',')
+        delete elem.id;
+        const newElement = Object.assign({}, elem, {layId: layId, layoutId:id})
+        //console.log(newElement)
+        makeelements.push(axios.post('/api/elements', newElement))
+      }
+
+      Promise.all(makeelements).then(()=>{
+        const cssString2 =getCss();
+        dispatch(setCss(cssString2))
+        //dispatch(clearTable())
+
+      })
+      //api/block
+      //axios post for each block
+      //dispatch 
+    } )
+  }
+}
+
+/*
+load layout 
+axios . then 
+dispatch change state thingy 
+*/
