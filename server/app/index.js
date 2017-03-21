@@ -7,7 +7,7 @@ module.exports = app;
 
 require('./configure')(app);
 
-//app.use('/api', require('./routes'));
+app.use('/api', require('./routes'));
 
 
  app.use(morgan('dev'))
