@@ -72,9 +72,9 @@ export const addBox = (id, tag) => {
     type: ADD_BOX,
     box: {
       id: +id,
-      x: 1100,
+      x: 950,
       y: 100,
-      width: 150,
+      width: 100,
       height: 50,
       children: [],
       parent: null,

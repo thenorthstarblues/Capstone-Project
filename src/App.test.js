@@ -9,6 +9,7 @@ import Window from './components/Window';
 
 
 
+
 it('Renders TrashCan component', () => {
   const div = document.createElement('div');
   ReactDOM.render(<TrashCan />, div);
@@ -24,8 +25,6 @@ it('loads all Options', () => {
 it('renders Box', () => {
   const div = document.createElement('div');
   ReactDOM.render(<Box />, div);
-});
-
 
 
 it('Renders Grid without crashing', () => {

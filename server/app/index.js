@@ -7,13 +7,14 @@ module.exports = app;
 
 require('./configure')(app);
 
-//app.use('/api', require('./routes'));
+app.use('/api', require('./routes'));
 
 
  app.use(morgan('dev'))
- app.use(express.static(path.resolve(__dirname, '..', 'public')))
+ app.use(express.static(path.resolve(__dirname, '../../', 'build')))
  app.get('/', function (req, res){
-   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+   res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+
  })
 
 
