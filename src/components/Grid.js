@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 
-//group graphic formatting to be completed later... only paragraph works
-import { Paragraph, Ul, Table } from './Texts'; //for conditonal rendering
-import { H1, H2, H3, H4 } from './Headers';
-import { Div, Button, Alert } from './Basicformat';
 
 
 class Grid extends Component {
@@ -13,7 +9,6 @@ class Grid extends Component {
     super(props);
     this.onMove=this.onMove.bind(this);
     this.onDrop=this.onDrop.bind(this);
-    this.restrict=this.restrict.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +23,34 @@ class Grid extends Component {
           elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
           endOnly: true
         },
+      })
+      .on('dragend', (event) => {
+        const left = this.props.x;
+        const top = this.props.y;
+        const right = left + this.props.width;
+        const bottom = top + this.props.height;
+        const boxIds = this.props.boxIds;
+        const boxes = this.props.boxes;
+
+        boxIds.forEach(box => {
+          if (boxes[box].x < right && boxes[box].x > left){
+            if (boxes[box].y < bottom && boxes[box].y > top){
+                this.props.removeChild(boxes[box].parent === null ? 0 : boxes[box].parent.id, +box);
+                this.props.removeParent(+box);
+                this.props.setParent(+event.target.id, +box);
+                this.props.addChild(+event.target.id, +box);
+            }
+          }
+        })
+
+        this.props.children.forEach(box => {
+          if(boxes[box].x > right || boxes[box].x < left){
+            if(boxes[box].y > bottom || boxes[box].y < top){
+              this.props.removeChild(this.props.id, +box);
+              this.props.removeParent(+box);
+            }
+          }
+        })
       })
       .resizable({
         preserveAspectRatio: false,
@@ -62,16 +85,13 @@ class Grid extends Component {
         boxIds.forEach(box => {
           if (boxes[box].x < right && boxes[box].x > left){
             if (boxes[box].y < bottom && boxes[box].y > top){
-              this.props.removeChild(boxes[box].parent.id || 0, +box);
-              this.props.removeParent(+box);
-              this.props.setParent(+event.target.id, +box);
-              this.props.addChild(+event.target.id, +box);
+                this.props.removeChild(boxes[box].parent.id || 0, +box);
+                this.props.removeParent(+box);
+                this.props.setParent(+event.target.id, +box);
+                this.props.addChild(+event.target.id, +box);
             }
           }
         })
-      })
-      .actionChecker((action) => {
-        console.log(action.edges);
       })
       .dropzone({
           ondrop: this.onDrop,
@@ -83,32 +103,22 @@ class Grid extends Component {
   }
 
   onMove = (e) => {
-    console.log(e);
     this.props.setBox({
-          id: this.props.id,
-          x: this.props.x + e.dx,
-          y: this.props.y + e.dy,
-          height: this.props.height,
-          width: this.props.width,
-          children: this.props.children,
-          parent: this.props.parent,
-          tag: this.props.tag,
-        });
-    }
+      id: this.props.id,
+      x: this.props.x + e.dx,
+      y: this.props.y + e.dy,
+      height: this.props.height,
+      width: this.props.width,
+      children: this.props.children,
+      parent: this.props.parent,
+      tag: this.props.tag,
+    });
+  }
 
   onDrop = (e) => {
     this.props.setParent(+e.target.id, +e.relatedTarget.id);
     this.props.addChild(+e.target.id, +e.relatedTarget.id);
   }
-
-  restrict=((e)=> {
-    return {
-          restriction: this.props.parent,
-          elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-          endOnly: true
-        };
-  })
-
 
   render() {
     let typeClass;
