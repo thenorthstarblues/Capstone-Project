@@ -1,7 +1,10 @@
 const db = require('./db');
 const chalk = require('chalk');
 
-require('./models/saveFile');
+require('./models');
+
+
+
 
 var syncedDb = db.sync();
 
