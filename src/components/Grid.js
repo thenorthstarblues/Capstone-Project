@@ -2,123 +2,121 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 
-
+const snapGrid = { targets: [interact.createSnapGrid({ x: 10, y: 10 })], }
 
 class Grid extends Component {
-  constructor(props) {
-    super(props);
-    this.onMove=this.onMove.bind(this);
-    this.onDrop=this.onDrop.bind(this);
-  }
-
   componentDidMount() {
     interact(ReactDOM.findDOMNode(this))
       .draggable({
-        onmove: this.onMove,
-        snap: {
-          targets: [interact.createSnapGrid({ x: 10, y: 10 })],
+        onmove: (e) => {
+          this.updateBox({
+            x: this.props.x + e.dx,
+            y: this.props.y + e.dy
+          });
         },
+        snap: snapGrid,
         restrict: {
           restriction: {x: 60, y: 95, width: 1500, height: 700},
           elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-          endOnly: true
         },
       })
-      .on('dragend', (event) => {
-        const left = this.props.x;
-        const top = this.props.y;
-        const right = left + this.props.width;
-        const bottom = top + this.props.height;
-        const boxIds = this.props.boxIds;
-        const boxes = this.props.boxes;
-
-        boxIds.forEach(box => {
-          if (boxes[box].x < right && boxes[box].x > left){
-            if (boxes[box].y < bottom && boxes[box].y > top){
-                this.props.removeChild(boxes[box].parent === null ? 0 : boxes[box].parent.id, +box);
-                this.props.removeParent(+box);
-                this.props.setParent(+event.target.id, +box);
-                this.props.addChild(+event.target.id, +box);
-            }
-          }
-        })
-
-        this.props.children.forEach(box => {
-          if(boxes[box].x > right || boxes[box].x < left){
-            if(boxes[box].y > bottom || boxes[box].y < top){
-              this.props.removeChild(this.props.id, +box);
-              this.props.removeParent(+box);
-            }
-          }
-        })
+      .on('dragend', (e) => {
+        this.checkForChanges(e);
       })
       .resizable({
         preserveAspectRatio: false,
         invert: 'reposition',
         edges: { left: true, right: true, bottom: true, top: true },
-        snap: {
-          targets: [interact.createSnapGrid({ x: 10, y: 10 })],
-        },
+        snap: snapGrid,
       })
-      .on('resizemove', (event) => {
-        const x = this.props.x;
-        const y = this.props.y;
-        this.props.setBox({
-          id: this.props.id,
-          x: x + event.deltaRect.left,
-          y: y + event.deltaRect.top,
-          height: event.rect.height,
-          width: event.rect.width,
-          children: this.props.children,
-          parent: this.props.parent,
-          tag: this.props.tag,
+      .on('resizemove', (e) => {
+        this.updateBox({
+          x: this.props.x + e.deltaRect.left,
+          y: this.props.y + e.deltaRect.top,
+          height: e.rect.height,
+          width: e.rect.width,
         })
       })
-      .on('resizeend', (event) => {
-        const left = this.props.x;
-        const top = this.props.y;
-        const right = left + this.props.width;
-        const bottom = top + this.props.height;
-        const boxIds = this.props.boxIds;
-        const boxes = this.props.boxes;
-
-        boxIds.forEach(box => {
-          if (boxes[box].x < right && boxes[box].x > left){
-            if (boxes[box].y < bottom && boxes[box].y > top){
-                this.props.removeChild(boxes[box].parent.id || 0, +box);
-                this.props.removeParent(+box);
-                this.props.setParent(+event.target.id, +box);
-                this.props.addChild(+event.target.id, +box);
-            }
-          }
-        })
+      .on('resizeend', (e) => {
+        this.checkForChanges(e);
       })
-      .dropzone({
-          ondrop: this.onDrop,
-      })
-      .on('dragleave', (e) => {
-        this.props.removeParent(+e.relatedTarget.id);
-        this.props.removeChild(+e.target.id, +e.relatedTarget.id);
-      })
+      .dropzone(true);
   }
 
-  onMove = (e) => {
-    this.props.setBox({
-      id: this.props.id,
-      x: this.props.x + e.dx,
-      y: this.props.y + e.dy,
-      height: this.props.height,
+  removeParentChild = (parent, child) => {
+    this.props.removeParent(+child);
+    this.props.removeChild(+parent, +child);
+  }
+
+  addParentChild = (parent, child) => {
+    this.props.setParent(+child, +parent);
+    this.props.addChild(+child, +parent);
+  }
+
+  isInsideOfXs = (smallBox, bigBox) => {
+    console.log(smallBox, bigBox);
+    return smallBox.x >= bigBox.x && smallBox.x <= (bigBox.x + bigBox.width)
+  }
+
+  isInsideOfYs = (smallBox, bigBox) => {
+    console.log(smallBox, bigBox);
+    return smallBox.y >= bigBox.y && smallBox.y <= (bigBox.y + bigBox.height)
+  }
+
+  isOutsideOfXs = (smallBox, bigBox) => {
+    console.log('OUTSIDE OF XS: ', smallBox, bigBox);
+    return smallBox.x < bigBox.x || smallBox.x > (bigBox.x + bigBox.width)
+  }
+
+  isOutsideOfYs = (smallBox, bigBox) => {
+    console.log(smallBox, bigBox);
+    return smallBox.y < bigBox.y || smallBox.y > (bigBox.y + bigBox.height)
+  }
+
+  updateBox = (updates) => {
+    const newBox = Object.assign({
+      id: +this.props.id,
+      x: this.props.x,
+      y: this.props.y,
       width: this.props.width,
+      height: this.props.height,
       children: this.props.children,
       parent: this.props.parent,
       tag: this.props.tag,
-    });
+      css: this.props.css,
+    }, updates);
+
+    this.props.setBox(newBox);
   }
 
-  onDrop = (e) => {
-    this.props.setParent(+e.target.id, +e.relatedTarget.id);
-    this.props.addChild(+e.target.id, +e.relatedTarget.id);
+  checkForChanges(e){
+    const allBoxes = this.props.boxes;
+    const currentBox = this.props.boxes[this.props.id];
+
+    this.removeParentChild(currentBox.parent || null, currentBox.id);
+    this.addParentChild(e.target.id, currentBox.id);
+
+    if(currentBox.children.length){
+      currentBox.children.forEach(boxId => {
+        if (boxId != currentBox.id){
+          if (this.isOutsideOfXs(allBoxes[boxId], currentBox) || this.isOutsideOfYs(allBoxes, currentBox)){
+          this.removeParentChild(currentBox.id, boxId);
+        }
+        }
+      })
+    }
+
+    Object.keys(allBoxes).forEach(boxId => {
+      if (boxId && boxId != currentBox.id){
+        if (this.isInsideOfXs(allBoxes[boxId], currentBox) && this.isInsideOfYs(allBoxes[boxId]), currentBox){
+        const prevParent = allBoxes[boxId].parent ? allBoxes[boxId].parent.id : 0;
+        this.removeParentChild(prevParent, boxId);
+        this.addParentChild(currentBox.id, boxId);
+        }
+      }
+    })
   }
+
 
   render() {
     let typeClass;
@@ -129,9 +127,8 @@ class Grid extends Component {
       default: typeClass = 'basicBox'; break;
     }
 
-
     return (
-      <rect className={`dropzone yes-drop ${typeClass}`} id={this.props.id} height={this.props.height} width={this.props.width} x={this.props.x} y={this.props.y} rx="2px" ry="2px" />
+      <rect className={`dropzone yes-drop ${typeClass}`} id={+this.props.id} height={this.props.height} width={this.props.width} x={this.props.x} y={this.props.y} rx="2px" ry="2px" />
     )
   }
 }
