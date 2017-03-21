@@ -7,6 +7,8 @@ import Box from './components/Box';
 import Grid from './components/Grid';
 import Window from './components/Window';
 
+
+
 it('Renders TrashCan component', () => {
   const div = document.createElement('div');
   ReactDOM.render(<TrashCan />, div);
@@ -37,3 +39,7 @@ it('Loads Window ', () => {
   ReactDOM.render(<Window />, div);
 });
 
+it('', ()=> {
+  const div = document.createElement('div');
+  ReactDOM.render(,div)
+}) 
