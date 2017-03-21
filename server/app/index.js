@@ -3,7 +3,6 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var morgan = require('morgan');
-var router = require('./routes');
 module.exports = app;
 
 require('./configure')(app);
