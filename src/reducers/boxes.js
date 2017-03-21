@@ -19,7 +19,7 @@ const htmlState ={
 }
 
 //conversion functions
-import {getFormattedHtml, getCss} from '../previewCreator'
+import {getFormattedHtml, getCss} from '../components/previewCreator'
 
 //constants
 const ADD_BOX = 'ADD_BOX'
