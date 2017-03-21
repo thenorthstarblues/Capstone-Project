@@ -19,7 +19,7 @@ const htmlState ={
 }
 
 //conversion functions
-import {getFormattedHtml, getCss} from '../previewCreator'
+import {getFormattedHtml, getCss} from '../components/previewCreator'
 
 //constants
 const ADD_BOX = 'ADD_BOX'
@@ -72,10 +72,10 @@ export const addBox = (id, tag) => {
     type: ADD_BOX,
     box: {
       id: +id,
-      x: 30,
-      y: 40,
+      x: 950,
+      y: 100,
       width: 100,
-      height: 100,
+      height: 50,
       children: [],
       parent: null,
       tag: tag,

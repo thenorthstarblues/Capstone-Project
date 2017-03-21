@@ -2,8 +2,8 @@ import React from 'react';
 import {Modal, Tooltip, Button, OverlayTrigger, Popover,} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import Code from './Codemirror';
-import './App.css';
-import {htmlCreator,createCss} from './reducers/boxes'
+import '../style/css/App.css';
+import {htmlCreator,createCss} from '../reducers/boxes'
 const mapStateToProps =(state) => ({
   html: state.html,
   elements: state.boxes
