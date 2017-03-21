@@ -20,8 +20,8 @@ class Grid extends Component {
           elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
         },
       })
-      .on('dragend', (e) => {
-        this.checkForChanges(e);
+      .on('dragend', (event) => {
+        this.checkForChanges(event);
       })
       .resizable({
         preserveAspectRatio: false,
@@ -37,10 +37,15 @@ class Grid extends Component {
           width: e.rect.width,
         })
       })
-      .on('resizeend', (e) => {
-        this.checkForChanges(e);
+      .on('resizeend', (event) => {
+        this.checkForChanges(event);
       })
-      .dropzone(true);
+      .dropzone({
+        ondrop: (e) => {
+          this.props.removeParent(e.relatedTarget.id);
+          this.addParentChild(e.target.id, e.relatedTarget.id);
+        }
+      });
   }
 
   removeParentChild = (parent, child) => {
@@ -54,22 +59,18 @@ class Grid extends Component {
   }
 
   isInsideOfXs = (smallBox, bigBox) => {
-    console.log(smallBox, bigBox);
     return smallBox.x >= bigBox.x && smallBox.x <= (bigBox.x + bigBox.width)
   }
 
   isInsideOfYs = (smallBox, bigBox) => {
-    console.log(smallBox, bigBox);
     return smallBox.y >= bigBox.y && smallBox.y <= (bigBox.y + bigBox.height)
   }
 
   isOutsideOfXs = (smallBox, bigBox) => {
-    console.log('OUTSIDE OF XS: ', smallBox, bigBox);
     return smallBox.x < bigBox.x || smallBox.x > (bigBox.x + bigBox.width)
   }
 
   isOutsideOfYs = (smallBox, bigBox) => {
-    console.log(smallBox, bigBox);
     return smallBox.y < bigBox.y || smallBox.y > (bigBox.y + bigBox.height)
   }
 
@@ -89,32 +90,29 @@ class Grid extends Component {
     this.props.setBox(newBox);
   }
 
-  checkForChanges(e){
+  checkForChanges(event){
     const allBoxes = this.props.boxes;
-    const currentBox = this.props.boxes[this.props.id];
-
-    this.removeParentChild(currentBox.parent || null, currentBox.id);
-    this.addParentChild(e.target.id, currentBox.id);
+    const currentBox = this.props.boxes[+event.target.id];
 
     if(currentBox.children.length){
       currentBox.children.forEach(boxId => {
-        if (boxId != currentBox.id){
-          if (this.isOutsideOfXs(allBoxes[boxId], currentBox) || this.isOutsideOfYs(allBoxes, currentBox)){
+        if (boxId !== currentBox.id){
+          if (this.isOutsideOfXs(allBoxes[boxId], currentBox) || this.isOutsideOfYs(allBoxes[boxId], currentBox)){
           this.removeParentChild(currentBox.id, boxId);
-        }
+          }
         }
       })
     }
 
     Object.keys(allBoxes).forEach(boxId => {
-      if (boxId && boxId != currentBox.id){
+      if (boxId !== currentBox.id){
         if (this.isInsideOfXs(allBoxes[boxId], currentBox) && this.isInsideOfYs(allBoxes[boxId]), currentBox){
-        const prevParent = allBoxes[boxId].parent ? allBoxes[boxId].parent.id : 0;
-        this.removeParentChild(prevParent, boxId);
-        this.addParentChild(currentBox.id, boxId);
+          const prevParent = allBoxes[boxId].parent ? allBoxes[boxId].parent : 0;
+          this.removeParentChild(prevParent, boxId);
+          this.addParentChild(currentBox.id, boxId);
+          }
         }
-      }
-    })
+      })
   }
 
 

@@ -5,7 +5,17 @@ import interact from 'interact.js';
 class Window extends Component {
   componentDidMount() {
     interact(ReactDOM.findDOMNode(this))
-      .dropzone(true)
+      .dropzone({
+        ondrop: (e) => {
+          this.props.removeParent(e.relatedTarget.id);
+          this.addParentChild(e.target.id, e.relatedTarget.id);
+        }
+      })
+  }
+
+  addParentChild = (parent, child) => {
+    this.props.setParent(+parent, +child);
+    this.props.addChild(+parent, +child);
   }
 
   render() {
