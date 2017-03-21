@@ -13,7 +13,7 @@ module.exports = db.define('element',{
   children: {
     type: Sequelize.STRING,
   },
-  layoutId: {
+  layId: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
