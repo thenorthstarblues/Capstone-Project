@@ -1,3 +1,4 @@
+import axios from 'axios'
 const initialState = {
   0: {
     height: 500,
@@ -12,16 +13,7 @@ const initialState = {
   }
 };
 
-
-const htmlState ={
-  html: '//HTML',
-  css:'//CSS'
-}
-
-//conversion functions
-import {getFormattedHtml, getCss} from '../components/previewCreator'
-
-//constants
+const SAVE = 'SAVE'
 const ADD_BOX = 'ADD_BOX'
 const REMOVE_BOX = 'REMOVE_BOX'
 const SET_BOX = 'SET_BOX'
@@ -30,36 +22,8 @@ const ADD_CHILD = 'ADD_CHILD'
 const REMOVE_PARENT = 'REMOVE_PARENT'
 const REMOVE_CHILD = 'REMOVE_CHILD'
 const COPY_BOX = 'COPY_BOX'
-const CREATE_HTML = 'CREATE_HTML'
-const CREATE_CSS = 'CREATE_CSS'
+const LOAD_LAYOUT = 'LOAD_LAYOUT'
 
-//action creators
-const setHtml = (html)=>{
-  return {
-    type: CREATE_HTML,
-    html
-  }
-}
-const setCss = (css)=>{
-  return {
-    type:CREATE_CSS,
-    css
-  }
-}
-
-export const createCss = () =>{ //eventually pass something in
-   return dispatch => {
-     const cssString =getCss();
-     dispatch(setCss(cssString))
-   }
-}
-
-export const htmlCreator = (elements) =>{
-   return dispatch => {
-     const htmlString = getFormattedHtml(elements);
-     dispatch(setHtml(htmlString))
-   }
-}
 
 export const setBox = (box) => {
   return {
@@ -131,6 +95,20 @@ export const copyBox = (boxId, newBoxId) => {
   }
 }
 
+export const load = (newLayout) =>{
+  return {
+    type: LOAD_LAYOUT,
+    newLayout, //TODO: make this dispatch to load 
+  }
+}
+
+export const save = ()=>{
+  return {
+    type: SAVE
+
+  }
+}
+
 //reducer
 const boxesReducer = (prevState = initialState, action) => {
   const newState = Object.assign({}, prevState);
@@ -168,6 +146,10 @@ const boxesReducer = (prevState = initialState, action) => {
       })
       newState[action.newBoxId] = newBox;
       break;
+    case LOAD_LAYOUT:
+      return action.newLayout; // this might work
+    case SAVE:
+      return prevState;
     default:
       return prevState;
   }
@@ -176,19 +158,56 @@ const boxesReducer = (prevState = initialState, action) => {
 
 export default boxesReducer;
 
+export const loadLayout = (id) => {
+  return (dispatch) => {
+    axios.get(`api/elements/layout/${id}`)
+  .then((elements)=> {
+    const data = elements.data;
+    let newState = {}
+    data.forEach((element)=>{
+      const id = element.layId;
+      delete element.layId;
+      delete element.createdAt;
+      delete element.updatedAt;
+      delete element.layoutId;
+      element.id = id;
+      newState[id] = element;
+      let children = [];
+      if(element.children) {children = [...element.children.split(',')]}
+      const childrenArr = children.map(val=>{
+        return +val;
+      })
+      element.children= childrenArr;
+    })
+    dispatch(load(newState))
+  })}
+}
 
+export const saveLayout = (name, stateCopy) => {
+  return (dispatch) => {
+  axios.post('api/layouts', {
+    name: name,
+    author: name,
+    })
+    .then((layout)=> {
+      const id = layout.data.id
+      const makeelements =[]; //converting to array 
+      const elemClone = Object.assign({},stateCopy);
+      const elementIdArr = Object.keys(elemClone);
+      for (var i = 0; i <elementIdArr.length; i++){
+        const elem = elemClone[i];
+        const layId = elem.id;
+        elem.children = elem.children.join(',')
+        delete elem.id;
+        const newElement = Object.assign({}, elem, {layId: layId, layoutId:id})
+        makeelements.push(axios.post('/api/elements', newElement))
+      }
 
-export const htmlReducer = (state = htmlState, action)=>{
-  const newState = Object.assign({}, state);
-  switch(action.type){
-    case CREATE_HTML:
-      newState.html = action.html;
-      break;
-    case CREATE_CSS:
-      newState.css = action.css;
-      break;
-    default:
-      return state;
+      Promise.all(makeelements).then((result)=>{
+        
+      dispatch(loadLayout(id))
+
+      })
+    } )
   }
-  return newState;
 }

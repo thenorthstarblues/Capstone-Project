@@ -21,8 +21,8 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req,res,next)=>{
-    layout.Create(req.body)
+    layout.create(req.body)
     .then((s)=>{
-        res.json(s).status(201);
+        res.json(s).status(200);
     })
 })
