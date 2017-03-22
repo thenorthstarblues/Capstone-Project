@@ -7,8 +7,9 @@ const Patterns = (()=> {
 	//we should be able to dynamically update fonts, as added from google...
 	//simply to appear with our dummy text
 
-
+//This file is so hard to read. SO many config numbers thrown everywhere.
 	var repeats=[];
+	//???
 	for (let i=0; i<600/14; i++){
 		repeats.push(i);
 	}

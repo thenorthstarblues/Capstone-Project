@@ -55,7 +55,7 @@ const initialState = {
 
 const siblingReducer = (prevState = initialState, action) => {
   let nextState = Object.assign({}, prevState);
-
+  //immutability issues
   switch(action.type) {
     case SIB_RECOG:
       nextState.boxesCss = action.boxesCss;
@@ -115,7 +115,7 @@ let alignWrap={ //for boxes without specifications... Make a WARP ROW child plac
   5: ['endSelf', 'flex wrap '],
 }
 
-
+// This is so muchhh
 function columnRowCheck(obj, parentId, childA, adds = 0){
   // full obj list, 3, [2,5,7,8] as input, adds for iterating through new container ids
   let childArr=childA.filter(child=>typeof child === 'number');

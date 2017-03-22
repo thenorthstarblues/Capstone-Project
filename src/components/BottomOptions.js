@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 
+//massive copy paste?
 const ButtonReg = ({action, x, y, value, style, format})=> {
 
   return (

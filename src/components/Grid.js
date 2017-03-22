@@ -70,6 +70,7 @@ class Grid extends Component {
   render() {
     let typeClass;
     switch(this.props.tag){
+      //Maybe make this data driven and have some object that maps these tags to typeClasses?
       case('div'): typeClass = 'basicBox'; break;
       case('p'): typeClass = 'paragraph'; break;
       case('h1'): typeClass = 'headerH1'; break;
