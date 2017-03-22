@@ -44,7 +44,6 @@ const CodeModal = React.createClass({
   render() {
 
     const stateCopy = Object.assign({}, this.props.elements)
-   console.log(stateCopy)
     const popover = (
       <Popover id="modal-popover" title="popover">
         very popover. such engagement

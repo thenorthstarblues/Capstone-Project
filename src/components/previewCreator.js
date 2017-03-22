@@ -8,7 +8,6 @@ const getHtml = (dom, node =0) =>{
   }
   else{
     str+= `<${tag}>`
-    console.log(children)
     children.sort((prev,child)=> {
       return dom[prev].x - dom[child].x;
     })
