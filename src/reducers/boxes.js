@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   0: {
     height: 500,
     width: 950,

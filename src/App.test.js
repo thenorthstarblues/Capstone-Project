@@ -9,6 +9,7 @@ import Window from './components/Window';
 var elements = require('../server/db/models').element;
 var layouts = require('../server/db/models').layout;
 var app = require('../server/app');
+import boxesReducer, {initialState} from './reducers/boxes';
 
 
 it('Renders TrashCan component', () => {
@@ -41,11 +42,13 @@ it('Loads Window ', () => {
 });
 
 it('returns inital State', ()=> {
-
+  const box = {};
+  const stateTest= boxesReducer(initialState, box);
+  console.log(stateTest);
 });
 
 it('returns sibling reducer State', ()=> {
-
+  
 });
 
 it('returns boxes State', ()=> {
@@ -72,3 +75,4 @@ it('Can read layouts model from the Database', ()=>{
 it('starts the server', ()=>{
 
 })
+
