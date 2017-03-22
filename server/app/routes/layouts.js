@@ -21,10 +21,8 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req,res,next)=>{
-    console.log('hihi')
     layout.create(req.body)
     .then((s)=>{
-        console.log(s)
         res.json(s).status(200);
     })
 })

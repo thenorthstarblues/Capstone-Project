@@ -14,15 +14,16 @@ const initialState = {
 };
 
 
-const htmlState ={
+/*const htmlState ={
   html: '//HTML',
   css:'//CSS'
 }
 
 //conversion functions
 import {getFormattedHtml, getCss} from '../components/previewCreator'
-
+*/
 //constants
+const SAVE = 'SAVE'
 const ADD_BOX = 'ADD_BOX'
 const REMOVE_BOX = 'REMOVE_BOX'
 const SET_BOX = 'SET_BOX'
@@ -30,11 +31,11 @@ const SET_PARENT = 'SET_PARENT'
 const ADD_CHILD = 'ADD_CHILD'
 const REMOVE_PARENT = 'REMOVE_PARENT'
 const REMOVE_CHILD = 'REMOVE_CHILD'
-const CREATE_HTML = 'CREATE_HTML'
-const CREATE_CSS = 'CREATE_CSS'
+/*const CREATE_HTML = 'CREATE_HTML'
+const CREATE_CSS = 'CREATE_CSS'*/
 const LOAD_LAYOUT = 'LOAD_LAYOUT'
 //action creators
-const setHtml = (html)=>{
+/*const setHtml = (html)=>{
   return {
     type: CREATE_HTML,
     html
@@ -61,16 +62,11 @@ export const htmlCreator = (elements) =>{
      dispatch(setHtml(htmlString))
    }
 }
-
+*/
 export const setBox = (box) => {
   return {
     type: SET_BOX,
     box
-  }
-}
-const fake=() => {
-  return {
-    type: 'lala'
   }
 }
 
@@ -135,7 +131,11 @@ export const load = (newLayout) =>{
     newLayout, //TODO: make this dispatch to load 
   }
 }
-
+export const save = ()=>{
+  return {
+    type: SAVE
+  }
+}
 //reducer
 const boxesReducer = (prevState = initialState, action) => {
   const newState = Object.assign({}, prevState);
@@ -166,6 +166,8 @@ const boxesReducer = (prevState = initialState, action) => {
       break;
     case LOAD_LAYOUT:
       return action.newLayout; // this might work
+    case SAVE:
+      return prevState;
     default:
       return prevState;
   }
@@ -176,7 +178,7 @@ export default boxesReducer;
 
 
 
-export const htmlReducer = (state = htmlState, action)=>{
+/*export const htmlReducer = (state = htmlState, action)=>{
   const newState = Object.assign({}, state);
   switch(action.type){
     case CREATE_HTML:
@@ -189,15 +191,14 @@ export const htmlReducer = (state = htmlState, action)=>{
       return state;
   }
   return newState;
-}
+}*/
 
 export const loadLayout = (id) => {
-  
   return (dispatch) => {
     axios.get(`api/elements/layout/${id}`)
   .then((elements)=> {
     const data = elements.data;
-    let state = {}
+    let newState = {}
     data.forEach((element)=>{
       const id = element.layId;
       delete element.layId;
@@ -205,39 +206,30 @@ export const loadLayout = (id) => {
       delete element.updatedAt;
       delete element.layoutId;
       element.id = id;
-      state[id] = element;
-      console.log('yo',element.children)
+      newState[id] = element;
       let children = [];
       if(element.children) {children = [...element.children.split(',')]}
-      console.log('what is this', children)
       const childrenArr = children.map(val=>{
         return +val;
       })
-      //if (!childrenArr.length) 
-      //element.children=[...children]
-      console.log(childrenArr)
       element.children= childrenArr;
-      //turn children into an array
     })
-    dispatch(load(state))
+    dispatch(load(newState))
   })}
 }
-export const saveLayout = (name,elements) => {
-  console.log(elements)
+export const saveLayout = (name,stateCopy) => {
   return (dispatch) => {
   axios.post('api/layouts', {
     name: name,
     author: name,
     })
     .then((layout)=> {
-    console.log(layout.data.id)
       const id = layout.data.id
-      console.log(id);
-      const makeelements =[];
-      const elemClone = Object.assign({},elements);
+      const makeelements =[]; //converting to array 
+      const elemClone = Object.assign({},stateCopy);
       const elementIdArr = Object.keys(elemClone);
       for (var i = 0; i <elementIdArr.length; i++){
-        const elem = elements[i];
+        const elem = elemClone[i];
         const layId = elem.id;
         elem.children = elem.children.join(',')
         delete elem.id;

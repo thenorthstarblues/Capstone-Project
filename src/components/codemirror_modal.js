@@ -3,7 +3,8 @@ import {Modal, Tooltip, Button, OverlayTrigger, Popover,} from 'react-bootstrap'
 import {connect} from 'react-redux';
 import Code from './Codemirror';
 import '../style/css/App.css';
-import {htmlCreator,saveLayout, loadLayout,createCss} from '../reducers/boxes'
+import {saveLayout, loadLayout} from '../reducers/boxes';
+import {htmlCreator,createCss} from '../reducers/html'
 const mapStateToProps =(state) => ({
   html: state.html,
   elements: state.boxes
@@ -26,6 +27,8 @@ const mapDispatchToProps = dispatch => ({
 
 //TODO: convert modal to dumb component
 const CodeModal = React.createClass({
+  
+
   getInitialState() {
     return { showModal: false };
   },
@@ -39,7 +42,9 @@ const CodeModal = React.createClass({
   },
 
   render() {
-   
+
+    const stateCopy = Object.assign({}, this.props.elements)
+   console.log(stateCopy)
     const popover = (
       <Popover id="modal-popover" title="popover">
         very popover. such engagement
@@ -58,7 +63,7 @@ const CodeModal = React.createClass({
           bsSize="sm"
           onClick={()=>{
             
-            this.props.submitHtml(this.props.elements);
+            this.props.submitHtml(stateCopy);
           this.open()}}
         >
           Display Code
@@ -88,9 +93,10 @@ const CodeModal = React.createClass({
           <Button>
           Download
           </Button>
-             <Button onClick={()=> {
-             this.props.save('test',this.props.elements)
+          <Button onClick={()=> {
+             this.props.save('test',stateCopy)
             }}>SAVE </Button>
+             
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>
