@@ -29,6 +29,7 @@ const SET_PARENT = 'SET_PARENT'
 const ADD_CHILD = 'ADD_CHILD'
 const REMOVE_PARENT = 'REMOVE_PARENT'
 const REMOVE_CHILD = 'REMOVE_CHILD'
+const COPY_BOX = 'COPY_BOX'
 const CREATE_HTML = 'CREATE_HTML'
 const CREATE_CSS = 'CREATE_CSS'
 
@@ -65,6 +66,13 @@ export const setBox = (box) => {
     type: SET_BOX,
     box
   }
+}
+
+const newBoxTemplate = {
+  x: 960,
+  y: 100,
+  children: [],
+  parent: null,
 }
 
 export const addBox = (id, tag) => {
@@ -122,6 +130,14 @@ export const removeChild = (parentId, childId) => {
   }
 }
 
+export const copyBox = (boxId, newBoxId) => {
+  return {
+    type: COPY_BOX,
+    boxId,
+    newBoxId,
+  }
+}
+
 //reducer
 const boxesReducer = (prevState = initialState, action) => {
   const newState = Object.assign({}, prevState);
@@ -147,6 +163,17 @@ const boxesReducer = (prevState = initialState, action) => {
       break;
     case REMOVE_CHILD:
       newState[action.parentId].children = newState[action.parentId].children.filter(id => id != action.childId);
+      break;
+    case COPY_BOX:
+      const copyOfBox = Object.assign({}, newState[action.boxId])
+      const newBox = Object.assign(copyOfBox, {
+        id: action.newBoxId,
+        x: 960,
+        y: 100,
+        children: [],
+        parent: null,
+      })
+      newState[action.newBoxId] = newBox;
       break;
     default:
       return prevState;

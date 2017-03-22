@@ -8,8 +8,7 @@ import AddOptions from './components/AddOptions';
 import BottomOptions from './components/BottomOptions';
 import Patterns from './components/Patterns';
 
-
-import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
+import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from './reducers/boxes';
 
 import {connect} from 'react-redux';
 import CodeModal from './components/codemirror_modal';
@@ -49,6 +48,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		removeChild(parentId, childId){
 			dispatch(removeChild(parentId, childId))
+		},
+		copyBox(boxId, newBox){
+			dispatch(copyBox(boxId, newBox))
 		}
 	}
 }
@@ -64,6 +66,11 @@ class App extends Component {
 		let tagType = e.target.attributes.value.value;
 		const id = +this.props.nextBoxId;
 		this.props.addBox(id, tagType);
+	}
+
+	boxCopier = (boxToCopy) => {
+		const newBoxId = +this.props.nextBoxId;
+		this.props.copyBox(boxToCopy, newBoxId);
 	}
 
 	render(){
@@ -116,6 +123,7 @@ class App extends Component {
 										css={boxes[box].css}
 										boxIds={this.props.boxIds}
 										boxes={this.props.boxes}
+										boxCopier={this.boxCopier}
 										/>
 										)
 									)
