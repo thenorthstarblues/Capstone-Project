@@ -1,7 +1,7 @@
 const initialState = {
   0: {
-    height: 600,
-    width: 900,
+    height: 500,
+    width: 950,
     children: [],
     id: 0,
     x: 0,
@@ -72,7 +72,7 @@ export const addBox = (id, tag) => {
     type: ADD_BOX,
     box: {
       id: +id,
-      x: 950,
+      x: 960,
       y: 100,
       width: 100,
       height: 50,

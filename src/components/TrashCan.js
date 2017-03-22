@@ -24,8 +24,10 @@ class TrashCan extends Component {
   render() {
     return (
       <g>
-          <rect x="1100" y="510" width="150" height="100" rx="2px" ry="2px" className="basicBox" />
-          <text x="1100" y="500">DROP HERE: to remove</text>
+          <rect x="1100" y="480" width="150" height="110" rx="2px" ry="2px" strokeWidth="3" className="basicBox" />
+          <line x1="1100" y1="480" x2="1250" y2="590" strokeDasharray="3, 3" strokeWidth="1" stroke="black"/>
+          <line x1="1100" y1="590" x2="1250" y2="480" strokeDasharray="3, 3" strokeWidth="1" stroke="black"/>
+          <text x="1100" y="470">DROP HERE: to remove</text>
       </g>
     )
   }
