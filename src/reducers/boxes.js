@@ -234,27 +234,14 @@ export const saveLayout = (name,stateCopy) => {
         elem.children = elem.children.join(',')
         delete elem.id;
         const newElement = Object.assign({}, elem, {layId: layId, layoutId:id})
-        //console.log(newElement)
         makeelements.push(axios.post('/api/elements', newElement))
       }
 
       Promise.all(makeelements).then((result)=>{
         
       dispatch(loadLayout(id))
-        
-        //dispatch(setCss(cssString2))
-        //dispatch(clearTable())
 
       })
-      //api/block
-      //axios post for each block
-      //dispatch 
     } )
   }
 }
-
-/*
-load layout 
-axios . then 
-dispatch change state thingy 
-*/
