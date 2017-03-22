@@ -146,7 +146,7 @@ const boxesReducer = (prevState = initialState, action) => {
       newState[action.childId].parent = null;
       break;
     case REMOVE_CHILD:
-      newState[action.parentId].children = newState[action.parentId].children.filter(elem => elem !== action.childId);
+      newState[action.parentId].children = newState[action.parentId].children.filter(id => id != action.childId);
       break;
     default:
       return prevState;

@@ -7,15 +7,15 @@ class Window extends Component {
     interact(ReactDOM.findDOMNode(this))
       .dropzone({
         ondrop: (e) => {
-          this.props.removeParent(e.relatedTarget.id);
-          this.addParentChild(e.target.id, e.relatedTarget.id);
+          const smallBox = this.props.boxes[+e.relatedTarget.id];
+          if(smallBox.parent !== null) {
+            this.props.removeChild(smallBox.parent, smallBox.id);
+            this.props.removeParent(smallBox.id);
+          }
+          this.props.setParent(+e.target.id, smallBox.id);
+          this.props.addChild(+e.target.id, smallBox.id);
         }
       })
-  }
-
-  addParentChild = (parent, child) => {
-    this.props.setParent(+parent, +child);
-    this.props.addChild(+parent, +child);
   }
 
   render() {
