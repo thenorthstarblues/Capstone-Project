@@ -13,8 +13,18 @@ router.get('/:id', (req, res, next) => {
     })
 })
 
+router.get('/layout/:id', (req, res, next) => {
+    elements.findAll({
+        where: { layoutId: req.params.id}
+    })
+    .then((data)=>{
+        res.json(data).status(200)
+    })
+})
+
 router.post('/', (req,res,next)=>{
-    elements.Create(req.body)
+    console.log('elements', req.body)
+    elements.create(req.body)
     .then((s)=>{
         res.json(s).status(201);
     })

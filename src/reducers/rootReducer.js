@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
+
 import boxesReducer from './boxes';
 import htmlReducer from './html';
 //import {siblingReducer} from './siblingReducer.js';

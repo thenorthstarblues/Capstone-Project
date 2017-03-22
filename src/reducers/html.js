@@ -1,10 +1,11 @@
-import {getFormattedHtml, getCss} from '../components/previewCreator'
 
-const initialState ={
+const htmlState ={
   html: '//HTML',
-  css:'//CSS'
+  css:'//CSS',
 }
 
+//conversion functions
+import {getFormattedHtml, getCss} from '../components/previewCreator'
 const CREATE_HTML = 'CREATE_HTML'
 const CREATE_CSS = 'CREATE_CSS'
 
@@ -21,6 +22,7 @@ const setCss = (css)=>{
   }
 }
 
+
 export const createCss = () =>{
    return dispatch => {
      const cssString =getCss();
@@ -35,7 +37,8 @@ export const htmlCreator = (elements) =>{
    }
 }
 
-const htmlReducer = (state = initialState, action)=>{
+
+const htmlReducer = (state = htmlState, action)=>{
   const newState = Object.assign({}, state);
   switch(action.type){
     case CREATE_HTML:
