@@ -50,7 +50,6 @@ const CodeModal = React.createClass({
         wow.
       </Tooltip>
     );
-    console.log('stkhkjate',this.props.elements);
     return (
       <div>
 
@@ -64,10 +63,6 @@ const CodeModal = React.createClass({
         >
           Display Code
         </Button>
-        <Button onClick={()=> {
-             console.log('state',this.props.elements);
-             this.props.save('test',this.props.elements)
-            }}>SAVE </Button>
         <Modal dialogClassName="custom-modal" bsSize="large" show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>Code Output</Modal.Title>
@@ -93,7 +88,9 @@ const CodeModal = React.createClass({
           <Button>
           Download
           </Button>
-          
+             <Button onClick={()=> {
+             this.props.save('test',this.props.elements)
+            }}>SAVE </Button>
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>
