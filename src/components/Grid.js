@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 
-const snapGrid = { targets: [interact.createSnapGrid({ x: 10, y: 10 })], }
+const snapGrid = { targets: [interact.createSnapGrid({ x: 7, y: 7 })], }
 
 class Grid extends Component {
   componentDidMount() {
@@ -25,6 +25,7 @@ class Grid extends Component {
         invert: 'reposition',
         edges: { left: true, right: true, bottom: true, top: true },
         snap: snapGrid,
+
       })
       .on('resizemove', (e) => {
         this.updateBox({
@@ -67,8 +68,14 @@ class Grid extends Component {
     let typeClass;
     switch(this.props.tag){
       case('div'): typeClass = 'basicBox'; break;
-      case('h1'): typeClass = 'basicH1'; break;
-      case('img'): typeClass = 'basicImg'; break;
+      case('p'): typeClass = 'paragraph'; break;
+      case('h1'): typeClass = 'headerH1'; break;
+      case('h2'): typeClass = 'headerH2'; break;
+      case('h3'): typeClass = 'headerH3'; break;
+      case('h4'): typeClass = 'headerH4'; break;
+      case('h5'): typeClass = 'headerH5'; break;
+      case('ul'): typeClass = 'ului'; break;
+      case('img'): typeClass = 'img'; break;
       default: typeClass = 'basicBox'; break;
     }
 

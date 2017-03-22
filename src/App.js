@@ -5,6 +5,8 @@ import Grid from './components/Grid';
 import TrashCan from './components/TrashCan';
 import Window from './components/Window';
 import AddOptions from './components/AddOptions';
+import BottomOptions from './components/BottomOptions';
+import Patterns from './components/Patterns';
 
 
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
@@ -84,7 +86,8 @@ class App extends Component {
 					</div>
 				<div>
 					<div id="grid-snap" className="col-lg-12">
-						<svg id="drawHere" width="1500px" height="800px">
+						<svg id="drawHere" width="1350px" height="600px">
+							<Patterns />
 							<Window
 								setParent={this.props.setParent}
 								addChild={this.props.addChild}
@@ -118,6 +121,7 @@ class App extends Component {
 									)
 								}
 								<AddOptions action={this.boxAdder} />
+								<BottomOptions />
 								<TrashCan removeBox={this.props.removeBox} />
 							</svg>
 						</div>

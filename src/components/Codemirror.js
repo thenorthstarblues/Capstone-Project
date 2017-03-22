@@ -5,7 +5,7 @@ require('codemirror/mode/xml/xml');
 require('codemirror/mode/markdown/markdown');
 require('codemirror/lib/codemirror.css')
 
-  //this is real code
+ 
 const Code = (props) => {
 
   return (
@@ -18,5 +18,14 @@ const Code = (props) => {
   )
 }
 
+
+
+
+
+
+
+
+
 export default Code;
+
 
