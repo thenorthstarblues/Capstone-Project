@@ -451,28 +451,93 @@ function formatCheck(obj, parentId){
   if (obj[parentId].children && obj[parentId].children.length===1 ){
     //set margins on child
 
+    // fill out this case later!
+
   };
 
-  //---------------------------------all childen outside row/columns-------------------------
-  if (obj[parentId].id.toString().includes('contRow') ){ //reset conditional. . .
+  //-----------------------final check: all childen outside row/columns/divs?-------------------
+  if (obj[parentId].css === 'in-line ' ){ //reset conditional. . .
     //rows w/ raw objs... objects w/ in-line only and parents not equal to row or column
 
-  //set flex wrap on obj[parentId]... defaults to row
-  //on kids - find top margin as top/medium/bottom and reduce through L margin
+    var parent= obj[parentId].parent;
 
-  }
-
+        if (parent.toString().includes('contRow')){
 
 
+                  var kidsIds = obj[parent].children; // row then sort by x
+              kidsIds=kidsIds.sort((a,b) => { //verticals sorted
+                return obj[a].x - obj[b].x
+              });
 
+            console.log('setting item margings: ',[kidsIds] );
+            //IF PARENT IS A ROW
+            // do we ever have a column w/o row?
 
+            //simple iteration through the vertical to set L margins
+            var ind=1;
+            var left=obj[kidsIds[0]].x+obj[kidsIds[0]].width;
 
+            while (ind<kidsIds.length){ //for each obj/col... must correct the last row catch
+                console.log('setting margings: ',obj[kidsIds[ind]] );
 
-}
+                var right=obj[kidsIds[ind]].x;
+                var mL=(Math.floor((right-left)/10))*10; //adjust spacing later
+                //(mT<10)? mT=10 : mT=mT;
 
+                //L margin setting
+                obj[kidsIds[ind]].css = obj[kidsIds[ind]].css +' mL'+mL+' ';
 
+                // increment up w/ left & index
+                left=obj[kidsIds[ind]].x + obj[kidsIds[ind]].width;
+                ind++;
 
+            }
+        }
 
+        if (parent.toString().includes('contCol')){
 
+        var kidsIds = obj[parentId].children; // row then sort by y
+            kidsIds=kidsIds.sort((a,b) => { //horizons sorted
+              return obj[a].y - obj[b].y
+            });
 
-findSiblings(test);
+        var ind=0;
+        var above=obj[parentId].y;
+
+          while (ind<kidsIds.length){ //for each row... must correct the last row catch
+              console.log('setting Row margings: ',obj[kidsIds[ind]] );
+
+              var below=obj[kidsIds[ind]].y;
+              var mT=(Math.floor((below-above)/10))*10; //adjust spacing later
+              //(mT<10)? mT=10 : mT=mT;
+              //950x500, 1440x760 display at ratio...1.5 times spacing
+              //
+
+              var L = (obj[kidsIds[ind]].x-obj[parentId].x);
+              var R = (obj[parentId].x+obj[parentId].width) - (obj[kidsIds[ind]].x+obj[kidsIds[ind]].width);
+              var C = (obj[parentId].x+obj[parentId].width/2) - (obj[kidsIds[ind]].x+obj[kidsIds[ind]].width/2);
+
+              var align=''
+              if (!C || !L || !R){
+                if(!C){align=' selfCenter'};
+                if(!L){align=' selfStart'};
+                if(!R){align=' selfEnd'};
+              } else {
+                align = ' mL'+L+' ';
+              }
+
+              //T/R/L margin setting
+              obj[kidsIds[ind]].css = obj[kidsIds[ind]].css + 'mT'+mT+align;
+
+              // increment up w/ above & index
+              above=obj[kidsIds[ind]].y + obj[kidsIds[ind]].height;
+              ind++;
+
+          }
+
+        }
+
+      }
+
+  } //end of formatting check
+
