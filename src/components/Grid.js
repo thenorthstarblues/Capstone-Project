@@ -46,6 +46,9 @@ class Grid extends Component {
             this.props.addChild(+e.target.id, smallBox.id);
           }
       })
+      .on('doubletap', (e) => {
+        this.props.boxCopier(+e.target.id);
+      })
   }
 
   updateBox = (updates) => {
