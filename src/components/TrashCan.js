@@ -13,6 +13,7 @@ class TrashCan extends Component {
     interact(ReactDOM.findDOMNode(this))
       .dropzone({
         ondrop: this.onDrop,
+        overlap: 0.2,
       })
   }
 

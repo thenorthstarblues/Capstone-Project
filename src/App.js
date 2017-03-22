@@ -93,6 +93,7 @@ class App extends Component {
 								addChild={this.props.addChild}
 								removeParent={this.props.removeParent}
 								removeChild={this.props.removeChild}
+								boxes={this.props.boxes}
 								/>
 							{
 								boxIds.slice(1).map(box => (
