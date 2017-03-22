@@ -316,6 +316,14 @@ Resizer.disabled:hover {
   fill: url(#h5);
 }
 
+.img {
+  fill-opacity: 1;
+  stroke: #000000;
+  stroke-width: 1px;
+  stroke-opacity: .15;
+  fill: url(#img);
+}
+
 .ului {
   fill-opacity: 1;
   stroke: #000000;

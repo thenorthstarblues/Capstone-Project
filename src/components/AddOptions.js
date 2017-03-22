@@ -65,14 +65,13 @@ const AddOptions = (({action})=> {
                   <ButtonReg x={xVal2} y={yVal+185} value="button" format="&#xe130;" style="btn btn-default" action={action} />
                   <ButtonReg x={xVal} y={yVal+225} value="audio" format="&#xe035;" style="" action={action} />
                   <ButtonReg x={xVal2} y={yVal+225} value="video" format="&#xe059;" style="" action={action} />
-                  <ButtonReg x={xVal} y={yVal+265} value="link" format="&#xe144;" style="" action={action} />
 
 
-                <text x={xVal} y={yVal+320} textAnchor="start" className="small" >Forms</text>
-                  <ButtonReg x={xVal} y={yVal+325} value="text" format="&#xe065;" style="" action={action} />
-                  <ButtonReg x={xVal2} y={yVal+325} format="&#xe114;" style="" value="option" action={action} />
-                  <ButtonReg x={xVal} y={yVal+365} value="file" format="&#xe172;" style="" action={action} />
-                  <ButtonReg x={xVal2} y={yVal+365} value="radio" format="&#xe165;" style="" action={action} />
+                <text x={xVal} y={yVal+285} textAnchor="start" className="small" >Forms</text>
+                  <ButtonReg x={xVal} y={yVal+290} value="text" format="&#xe065;" style="" action={action} />
+                  <ButtonReg x={xVal2} y={yVal+290} format="&#xe114;" style="" value="option" action={action} />
+                  <ButtonReg x={xVal} y={yVal+330} value="file" format="&#xe172;" style="" action={action} />
+                  <ButtonReg x={xVal2} y={yVal+330} value="radio" format="&#xe165;" style="" action={action} />
 
               </g>
     )
