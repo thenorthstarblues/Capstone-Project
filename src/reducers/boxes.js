@@ -32,7 +32,7 @@ const REMOVE_PARENT = 'REMOVE_PARENT'
 const REMOVE_CHILD = 'REMOVE_CHILD'
 const CREATE_HTML = 'CREATE_HTML'
 const CREATE_CSS = 'CREATE_CSS'
-
+const LOAD_LAYOUT = 'LOAD_LAYOUT'
 //action creators
 const setHtml = (html)=>{
   return {
@@ -55,8 +55,9 @@ export const createCss = () =>{ //eventually pass something in
 }
 
 export const htmlCreator = (elements) =>{
+  const elemCopy = Object.assign({}, elements);
    return dispatch => {
-     const htmlString = getFormattedHtml(elements);
+     const htmlString = getFormattedHtml(elemCopy);
      dispatch(setHtml(htmlString))
    }
 }
@@ -65,6 +66,11 @@ export const setBox = (box) => {
   return {
     type: SET_BOX,
     box
+  }
+}
+const fake=() => {
+  return {
+    type: 'lala'
   }
 }
 
@@ -158,6 +164,8 @@ const boxesReducer = (prevState = initialState, action) => {
     case REMOVE_CHILD:
       newState[action.parentId].children = newState[action.parentId].children.filter(elem => elem !== action.childId);
       break;
+    case LOAD_LAYOUT:
+      return action.newLayout; // this might work
     default:
       return prevState;
   }
@@ -184,7 +192,9 @@ export const htmlReducer = (state = htmlState, action)=>{
 }
 
 export const loadLayout = (id) => {
-  axios.get(`api/elements/layout/${id}`)
+  
+  return (dispatch) => {
+    axios.get(`api/elements/layout/${id}`)
   .then((elements)=> {
     const data = elements.data;
     let state = {}
@@ -195,10 +205,22 @@ export const loadLayout = (id) => {
       delete element.updatedAt;
       delete element.layoutId;
       element.id = id;
-      state[id] = element
+      state[id] = element;
+      console.log('yo',element.children)
+      let children = [];
+      if(element.children) {children = [...element.children.split(',')]}
+      console.log('what is this', children)
+      const childrenArr = children.map(val=>{
+        return +val;
+      })
+      //if (!childrenArr.length) 
+      //element.children=[...children]
+      console.log(childrenArr)
+      element.children= childrenArr;
+      //turn children into an array
     })
     dispatch(load(state))
-  })
+  })}
 }
 export const saveLayout = (name,elements) => {
   console.log(elements)
@@ -212,7 +234,8 @@ export const saveLayout = (name,elements) => {
       const id = layout.data.id
       console.log(id);
       const makeelements =[];
-      const elementIdArr = Object.keys(elements);
+      const elemClone = Object.assign({},elements);
+      const elementIdArr = Object.keys(elemClone);
       for (var i = 0; i <elementIdArr.length; i++){
         const elem = elements[i];
         const layId = elem.id;
@@ -223,9 +246,11 @@ export const saveLayout = (name,elements) => {
         makeelements.push(axios.post('/api/elements', newElement))
       }
 
-      Promise.all(makeelements).then(()=>{
-        const cssString2 =getCss();
-        dispatch(setCss(cssString2))
+      Promise.all(makeelements).then((result)=>{
+        
+      dispatch(loadLayout(id))
+        
+        //dispatch(setCss(cssString2))
         //dispatch(clearTable())
 
       })

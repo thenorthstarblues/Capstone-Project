@@ -3,19 +3,23 @@ import {Modal, Tooltip, Button, OverlayTrigger, Popover,} from 'react-bootstrap'
 import {connect} from 'react-redux';
 import Code from './Codemirror';
 import '../style/css/App.css';
-import {saveLayout} from '../reducers/boxes';
-import {htmlCreator,createCss} from '../reducers/boxes'
+import {htmlCreator,saveLayout, loadLayout,createCss} from '../reducers/boxes'
 const mapStateToProps =(state) => ({
   html: state.html,
   elements: state.boxes
 })
+
+//TODO: dispatch doesnt work for save layout
 const mapDispatchToProps = dispatch => ({
   submitHtml(elements){
     dispatch(htmlCreator(elements))
-    dispatch(createCss()) //not sure what to pass in yet, default css
+    //dispatch(createCss()) //not sure what to pass in yet, default css
   },
-  save(name,elements){
+  save(name, elements){
     dispatch(saveLayout(name,elements))
+  },
+  load(id){
+    dispatch(loadLayout(id))
   }
 });
 
@@ -35,6 +39,7 @@ const CodeModal = React.createClass({
   },
 
   render() {
+   
     const popover = (
       <Popover id="modal-popover" title="popover">
         very popover. such engagement
@@ -45,7 +50,7 @@ const CodeModal = React.createClass({
         wow.
       </Tooltip>
     );
-
+    console.log('stkhkjate',this.props.elements);
     return (
       <div>
 
@@ -53,12 +58,16 @@ const CodeModal = React.createClass({
           bsStyle="default"
           bsSize="sm"
           onClick={()=>{
+            
             this.props.submitHtml(this.props.elements);
           this.open()}}
         >
           Display Code
         </Button>
-
+        <Button onClick={()=> {
+             console.log('state',this.props.elements);
+             this.props.save('test',this.props.elements)
+            }}>SAVE </Button>
         <Modal dialogClassName="custom-modal" bsSize="large" show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>Code Output</Modal.Title>
@@ -80,10 +89,11 @@ const CodeModal = React.createClass({
 
           </Modal.Body>
           <Modal.Footer>
+          <Button onClick={()=>{this.props.load(1)}}>Load </Button>
           <Button>
           Download
           </Button>
-          <Button onClick={()=> {this.props.save('test',this.props.elements)}}>SAVE </Button>
+          
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>
