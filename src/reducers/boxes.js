@@ -68,13 +68,6 @@ export const setBox = (box) => {
   }
 }
 
-const newBoxTemplate = {
-  x: 960,
-  y: 100,
-  children: [],
-  parent: null,
-}
-
 export const addBox = (id, tag) => {
   return {
     type: ADD_BOX,
