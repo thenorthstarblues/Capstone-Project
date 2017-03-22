@@ -11,7 +11,7 @@ var layouts = require('../server/db/models').layout;
 var app = require('../server/app');
 import boxesReducer, {initialState} from './reducers/boxes';
 import siblingReducer from './reducers/siblingReducer';
-import {siblingReducer as sib2} from './reducers/siblingReducer2';
+import sib2 from './reducers/siblingReducer2';
 
 
 it('Renders TrashCan component', () => {
@@ -54,7 +54,7 @@ it('returns sibling reducer State', ()=> {
     type: 'SIB_RECOG',
     boxesCss: ['testbox']
   };
-  const sibling= boxesReducer({
+  const sibling= siblingReducer({
     boxes:[],
     boxesCss:[]
 
@@ -64,7 +64,16 @@ it('returns sibling reducer State', ()=> {
 });
 
 it('returns Sib2 State', ()=> {
-  
+    const box = {
+    type: 'SIB_RECOG',
+    boxesCss: ['testbox']
+  };
+  const sibling = sib2({
+    boxes:[],
+    boxesCss:[]
+  },box)
+
+  console.log(sibling)
 });
 
 
@@ -85,6 +94,9 @@ it('Can read layouts model from the Database', ()=>{
 })
 
 it('starts the server', ()=>{
-
+  console.log('fire it up!')
 })
+
+
+
 
