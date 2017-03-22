@@ -105,7 +105,9 @@ const findSiblings = (test => { // one giant object, with each id-object as held
         }
     } //done with layer checks
 
+
   len=Object.keys(boxObjs);
+
 
     len.forEach((box)=>{ //to a forEach
         console.log('formatCheck', box);
@@ -139,7 +141,6 @@ function columnRowCheck(obj, parentId, childIdArr, largest={}, remainIdArr=[], d
     let childAreas = childIdArr.map(child => obj[child].width*obj[child].height );
     let bigKidI = childAreas.indexOf(Math.max(...childAreas));
         largest = obj[childIdArr[bigKidI]];
-
 
     if (!dir) { // row search on initial round
       //grab horizons
@@ -450,7 +451,6 @@ function formatCheck(obj, parentId){
       //---------------------------------all divs with a single child-------------------------
   if (obj[parentId].children && obj[parentId].children.length===1 ){
     //set margins on child
-
     // fill out this case later!
 
   };

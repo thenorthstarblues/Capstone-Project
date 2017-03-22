@@ -114,6 +114,7 @@ class Grid extends Component {
       case('h4'): typeClass = 'headerH4'; break;
       case('h5'): typeClass = 'headerH5'; break;
       case('ul'): typeClass = 'ului'; break;
+      case('img'): typeClass = 'img'; break;
       default: typeClass = 'basicBox'; break;
     }
 

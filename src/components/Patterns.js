@@ -55,6 +55,11 @@ const Patterns = (()=> {
 			      <text x="2" y="19" fontSize="12" textAnchor="start" fill="white" className="">H5 Header</text>
 			    </pattern>
 
+			    <pattern id="img" x="0" y="0" width="1" height="1" patternContentUnits="objectBoundingBox">
+			      <rect x="0" y="0" width="1" height="1" fill="#333333"/>
+			      <line x0="0" x1="1" y0="0" y1="1" stroke="#ffffff" />
+			    </pattern>
+
 
 			    <pattern id="ului" x="0" y="0" width="10" height="14" >
 			    	{repeats.map(ind=>{
