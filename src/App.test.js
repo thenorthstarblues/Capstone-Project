@@ -12,7 +12,7 @@ var app = require('../server/app');
 import boxesReducer, {initialState} from './reducers/boxes';
 import siblingReducer from './reducers/siblingReducer';
 import sib2 from './reducers/siblingReducer2';
-
+import htmlReducer from './reducers/html';
 
 it('Renders TrashCan component', () => {
   const div = document.createElement('div');
@@ -49,6 +49,7 @@ it('returns inital State', ()=> {
   console.log(stateTest);
 });
 
+
 it('returns sibling reducer State', ()=> {
   const box = {
     type: 'SIB_RECOG',
@@ -63,6 +64,7 @@ it('returns sibling reducer State', ()=> {
   
 });
 
+
 it('returns Sib2 State', ()=> {
     const box = {
     type: 'SIB_RECOG',
@@ -76,7 +78,9 @@ it('returns Sib2 State', ()=> {
   console.log(sibling)
 });
 
+it('Html Reducer works',()=>{
 
+})
 
 
 it('Can read elements model from the Database', ()=>{
