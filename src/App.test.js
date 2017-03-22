@@ -6,8 +6,9 @@ import AddOptions from './components/AddOptions';
 import Box from './components/Box';
 import Grid from './components/Grid';
 import Window from './components/Window';
-
-
+var elements = require('../server/db/models').element;
+var layouts = require('../server/db/models').layout;
+var app = require('../server/app');
 
 
 it('Renders TrashCan component', () => {
@@ -25,6 +26,7 @@ it('loads all Options', () => {
 it('renders Box', () => {
   const div = document.createElement('div');
   ReactDOM.render(<Box />, div);
+});
 
 
 it('Renders Grid without crashing', () => {
@@ -38,7 +40,35 @@ it('Loads Window ', () => {
   ReactDOM.render(<Window />, div);
 });
 
-it('', ()=> {
-  const div = document.createElement('div');
-  ReactDOM.render(,div)
-}) 
+it('returns inital State', ()=> {
+
+});
+
+it('returns sibling reducer State', ()=> {
+
+});
+
+it('returns boxes State', ()=> {
+  
+});
+
+
+
+
+it('Can read elements model from the Database', ()=>{
+  elements.findAll({})
+  .then((s)=>{
+    console.log(s)
+  })
+})
+
+it('Can read layouts model from the Database', ()=>{
+  layouts.findAll({})
+  .then((s)=>{
+    console.log(s)
+  })
+})
+
+it('starts the server', ()=>{
+
+})
