@@ -17,7 +17,7 @@ class Grid extends Component {
       .draggable({
         onmove: this.onMove,
         snap: {
-          targets: [interact.createSnapGrid({ x: 10, y: 10 })],
+          targets: [interact.createSnapGrid({ x: 7, y: 7 })],
         },
         restrict: {
           restriction: {x: 60, y: 95, width: 1500, height: 700},
@@ -30,7 +30,7 @@ class Grid extends Component {
         invert: 'reposition',
         edges: { left: true, right: true, bottom: true, top: true },
         snap: {
-          targets: [interact.createSnapGrid({ x: 10, y: 10 })],
+          targets: [interact.createSnapGrid({ x: 7, y: 7 })],
         },
       })
       .on('resizemove', (event) => {
@@ -107,8 +107,13 @@ class Grid extends Component {
     let typeClass;
     switch(this.props.tag){
       case('div'): typeClass = 'basicBox'; break;
-      case('h1'): typeClass = 'basicH1'; break;
-      case('img'): typeClass = 'basicImg'; break;
+      case('p'): typeClass = 'paragraph'; break;
+      case('h1'): typeClass = 'headerH1'; break;
+      case('h2'): typeClass = 'headerH2'; break;
+      case('h3'): typeClass = 'headerH3'; break;
+      case('h4'): typeClass = 'headerH4'; break;
+      case('h5'): typeClass = 'headerH5'; break;
+      case('ul'): typeClass = 'ului'; break;
       default: typeClass = 'basicBox'; break;
     }
 

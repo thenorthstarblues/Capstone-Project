@@ -27,7 +27,7 @@ class Window extends Component {
 
   render() {
     return (
-      <rect className={`dropzone yes-drop basicBox`} id={0} height='600px' width='900px' x={0} y={0} rx="2px" ry="2px" />
+      <rect className={`dropzone yes-drop pixelGrid`} id={0} height='500px' width='950px' x={1} y={1} rx="2px" ry="2px" />
     )
   }
 }
