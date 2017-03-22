@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import TrashCan from './components/TrashCan';
 import AddOptions from './components/AddOptions';
-import Box from './components/Box';
+import Patterns from './components/Patterns';
 import Grid from './components/Grid';
 import Window from './components/Window';
 var elements = require('../server/db/models').element;
 var layouts = require('../server/db/models').layout;
 var app = require('../server/app');
 import boxesReducer, {initialState} from './reducers/boxes';
+import siblingReducer from './reducers/siblingReducer';
+import {siblingReducer as sib2} from './reducers/siblingReducer2';
 
 
 it('Renders TrashCan component', () => {
@@ -24,9 +26,9 @@ it('loads all Options', () => {
 });
 
 
-it('renders Box', () => {
+it('renders Pattern', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Box />, div);
+  ReactDOM.render(<Patterns />, div);
 });
 
 
@@ -48,10 +50,20 @@ it('returns inital State', ()=> {
 });
 
 it('returns sibling reducer State', ()=> {
+  const box = {
+    type: 'SIB_RECOG',
+    boxesCss: ['testbox']
+  };
+  const sibling= boxesReducer({
+    boxes:[],
+    boxesCss:[]
+
+  }, box);
+  console.log(sibling);
   
 });
 
-it('returns boxes State', ()=> {
+it('returns Sib2 State', ()=> {
   
 });
 

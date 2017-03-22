@@ -35,8 +35,8 @@ const findSiblings = (test => { // one giant object, with each id-object as held
 //const initialState = test; // just for initial testing
 
 const initialState = {
-  boxes=[],
-  boxesCss=[],
+  boxes:[],
+  boxesCss:[],
 }
 
 //---------------------------action reducer---------------------------
@@ -91,36 +91,6 @@ const css={ //incorporate margins/padding later as string concat / string replac
   none: 'in-line ',
 }
 
-//this is the recursive bit:
-const findSiblings = (test => { // one giant object, with each id-object as held
-
-  const boxObjs=Object.assign({}, test); //clone and begin manipulation
-  let len=Object.keys(boxObjs);
-
-  //add function below and include here...
-    for (let i=0; i<len.length; i++){
-
-        if (boxObjs[i]){ //originals are numbers, so will only iterate through originals
-            columnRowCheck(boxObjs, i, boxObjs[i].children);
-        }
-    } //done with layer checks
-
-
-  len=Object.keys(boxObjs);
-
-
-    len.forEach((box)=>{ //to a forEach
-        console.log('formatCheck', box);
-        formatCheck(boxObjs,box); //array of all, id of current
-    });
-
-  //return boxObjs;
-    return {
-    type: SIB_RECOG,
-    boxesCss:boxObjs,
-  }
-
-});
 
 function columnRowCheck(obj, parentId, childIdArr, largest={}, remainIdArr=[], dir=0, row=0){
   // full obj list, 3, [2,5,7,8] as input, adds for iterating through new container ids
