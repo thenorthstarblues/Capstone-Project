@@ -1,5 +1,6 @@
 import axios from 'axios'
 const initialState = {
+  // why is there a 0 key?
   0: {
     height: 500,
     width: 950,
@@ -12,6 +13,8 @@ const initialState = {
     css: '',
   }
 };
+
+//This file is HUGE split it up
 
 const SAVE = 'SAVE'
 const ADD_BOX = 'ADD_BOX'
@@ -98,7 +101,7 @@ export const copyBox = (boxId, newBoxId) => {
 export const load = (newLayout) =>{
   return {
     type: LOAD_LAYOUT,
-    newLayout, //TODO: make this dispatch to load 
+    newLayout, //TODO: make this dispatch to load
   }
 }
 
@@ -112,7 +115,7 @@ export const save = ()=>{
 //reducer
 const boxesReducer = (prevState = initialState, action) => {
   const newState = Object.assign({}, prevState);
-
+  //I don't think any of these are immutable
   switch (action.type){
     case SET_BOX:
       newState[action.box.id] = action.box;
@@ -127,6 +130,7 @@ const boxesReducer = (prevState = initialState, action) => {
       newState[+action.childId].parent = action.parentId;
       break;
     case ADD_CHILD:
+    // use a newline please :)
         if(!newState[action.parentId].children.includes(action.childId)) newState[action.parentId].children.push(action.childId);
       break;
     case REMOVE_PARENT:
@@ -160,10 +164,12 @@ export default boxesReducer;
 
 export const loadLayout = (id) => {
   return (dispatch) => {
+    //Maybe not hard code this url?
     axios.get(`api/elements/layout/${id}`)
   .then((elements)=> {
     const data = elements.data;
     let newState = {}
+    //Not sure what we're doing
     data.forEach((element)=>{
       const id = element.layId;
       delete element.layId;
@@ -191,7 +197,7 @@ export const saveLayout = (name, stateCopy) => {
     })
     .then((layout)=> {
       const id = layout.data.id
-      const makeelements =[]; //converting to array 
+      const makeelements =[]; //converting to array
       const elemClone = Object.assign({},stateCopy);
       const elementIdArr = Object.keys(elemClone);
       for (var i = 0; i <elementIdArr.length; i++){
@@ -204,7 +210,7 @@ export const saveLayout = (name, stateCopy) => {
       }
 
       Promise.all(makeelements).then((result)=>{
-        
+
       dispatch(loadLayout(id))
 
       })

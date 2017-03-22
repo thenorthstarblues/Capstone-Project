@@ -1,6 +1,6 @@
 
 const htmlState ={
-  html: '//HTML',
+  html: '//HTML', //empty string instead? Tom's first law
   css:'//CSS',
 }
 
@@ -25,7 +25,7 @@ const setCss = (css)=>{
 
 export const createCss = () =>{
    return dispatch => {
-     const cssString =getCss();
+     const cssString = getCss();
      dispatch(setCss(cssString))
    }
 }

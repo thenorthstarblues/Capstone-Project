@@ -1,7 +1,7 @@
 const layout = require('./layout');
 const element = require('./element');
 
-element.belongsTo(layout);
+element.belongsTo(layout);  //belongsToMany?
 layout.hasMany(element);
 
 module.exports = {

@@ -2,7 +2,7 @@ import {html, css} from 'js-beautify';
 
 const getHtml = (dom, node =0) =>{
   let str = '';
-  const {children,tag} = dom[node];
+  const {children, tag} = dom[node];
   if(tag === 'img'){
     str += `\n<${tag} src="IMG_NAME">\n`
   }

@@ -9,6 +9,7 @@ const mapStateToProps =(state) => ({
   html: state.html,
   elements: state.boxes
 })
+//Pull out all the code that isn't yours. Please
 
 //TODO: dispatch doesnt work for save layout
 const mapDispatchToProps = dispatch => ({
@@ -27,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
 
 //TODO: convert modal to dumb component
 const CodeModal = React.createClass({
-  
+
 
   getInitialState() {
     return { showModal: false };
@@ -61,7 +62,7 @@ const CodeModal = React.createClass({
           bsStyle="default"
           bsSize="sm"
           onClick={()=>{
-            
+
             this.props.submitHtml(stateCopy);
           this.open()}}
         >
@@ -72,6 +73,7 @@ const CodeModal = React.createClass({
             <Modal.Title>Code Output</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+          {/* this looks like it's copy pasted. Do we need it? */}
             <h4>Here is your custom HTML!</h4>
             <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
 
@@ -88,6 +90,7 @@ const CodeModal = React.createClass({
 
           </Modal.Body>
           <Modal.Footer>
+          {/* load(1)?? */}
           <Button onClick={()=>{this.props.load(1)}}>Load </Button>
           <Button>
           Download
@@ -95,7 +98,7 @@ const CodeModal = React.createClass({
           <Button onClick={()=> {
              this.props.save('test',stateCopy)
             }}>SAVE </Button>
-             
+
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>

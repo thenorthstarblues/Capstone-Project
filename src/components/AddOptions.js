@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 
+// Good job extracting these all into components
 const ButtonReg = ({action, x, y, value, style, format})=> {
 
   return (
         <g>
           <rect x={x} y={y} width="70" height="30" value={value} data={style} className="adds" onClick={action} />
+          {/* magic number! */}
           <text x={x+8} y={y+22} textAnchor="start" className="icons " >{format}</text>
           <text x={x+32} y={y+20} textAnchor="start" className="small" >{value}</text>
         </g>
@@ -35,19 +37,19 @@ const ButtonSm = ({action, x, y, value, style, format})=> {
         );
 }
 
-
+//This should not be an SVG
 const AddOptions = (({action})=> {
   //console.log(action);
   let yVal = 70;
   let xVal = 1100;
-  let xVal2 = 1180;
+  let xVal2 = 1180;  //xval2???
 
     return (
               <g> {/* this is just the dummy layout, buttons up here */}
                 <text x={xVal} y="20" textAnchor="start">CLICK: to add element</text>
                   <rect x={xVal} y="25" width="150" height="1" className="adds" />
 
-                  <ButtonReg x={xVal} y={yVal-25} value="div" action={action} style="" format="&#xe157;" />
+                  <ButtonReg x={xVal} y={yVal-25} value="div" action={action} style="" format="&#xe157;" />{/* maybe label your unicode symbols somwhere in vars */}
 
                     <ButtonSm x={xVal} y={yVal+15} value="p" style="text-left" format="&#xe052;" action={action} />
                     <ButtonSm x={xVal+50} y={yVal+15} value="p" style="text-center" format="&#xe053;" action={action} />
