@@ -1,9 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App';
 import { Provider } from 'react-redux';
-import store from './store';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import App from './App';
+import store from './store';
 
 import './style/css/bootstrap.min.css';
 import './style/css/index.css';
