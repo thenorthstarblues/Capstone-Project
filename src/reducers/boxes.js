@@ -1,8 +1,8 @@
 import axios from 'axios'
 const initialState = {
   0: {
-    height: 600,
-    width: 900,
+    height: 500,
+    width: 950,
     children: [],
     id: 0,
     x: 0,
@@ -13,16 +13,6 @@ const initialState = {
   }
 };
 
-
-/*const htmlState ={
-  html: '//HTML',
-  css:'//CSS'
-}
-
-//conversion functions
-import {getFormattedHtml, getCss} from '../components/previewCreator'
-*/
-//constants
 const SAVE = 'SAVE'
 const ADD_BOX = 'ADD_BOX'
 const REMOVE_BOX = 'REMOVE_BOX'
@@ -31,38 +21,8 @@ const SET_PARENT = 'SET_PARENT'
 const ADD_CHILD = 'ADD_CHILD'
 const REMOVE_PARENT = 'REMOVE_PARENT'
 const REMOVE_CHILD = 'REMOVE_CHILD'
-/*const CREATE_HTML = 'CREATE_HTML'
-const CREATE_CSS = 'CREATE_CSS'*/
 const LOAD_LAYOUT = 'LOAD_LAYOUT'
-//action creators
-/*const setHtml = (html)=>{
-  return {
-    type: CREATE_HTML,
-    html
-  }
-}
-const setCss = (css)=>{
-  return {
-    type:CREATE_CSS,
-    css
-  }
-}
 
-export const createCss = () =>{ //eventually pass something in
-   return dispatch => {
-     const cssString =getCss();
-     dispatch(setCss(cssString))
-   }
-}
-
-export const htmlCreator = (elements) =>{
-  const elemCopy = Object.assign({}, elements);
-   return dispatch => {
-     const htmlString = getFormattedHtml(elemCopy);
-     dispatch(setHtml(htmlString))
-   }
-}
-*/
 export const setBox = (box) => {
   return {
     type: SET_BOX,
@@ -75,7 +35,7 @@ export const addBox = (id, tag) => {
     type: ADD_BOX,
     box: {
       id: +id,
-      x: 950,
+      x: 960,
       y: 100,
       width: 100,
       height: 50,
@@ -131,11 +91,13 @@ export const load = (newLayout) =>{
     newLayout, //TODO: make this dispatch to load 
   }
 }
+
 export const save = ()=>{
   return {
     type: SAVE
   }
 }
+
 //reducer
 const boxesReducer = (prevState = initialState, action) => {
   const newState = Object.assign({}, prevState);
@@ -154,15 +116,13 @@ const boxesReducer = (prevState = initialState, action) => {
       newState[+action.childId].parent = action.parentId;
       break;
     case ADD_CHILD:
-      if(!newState[action.parentId].children.includes(action.childId)){
-        newState[action.parentId].children.push(action.childId);
-      }
+        if(!newState[action.parentId].children.includes(action.childId)) newState[action.parentId].children.push(action.childId);
       break;
     case REMOVE_PARENT:
       newState[action.childId].parent = null;
       break;
     case REMOVE_CHILD:
-      newState[action.parentId].children = newState[action.parentId].children.filter(elem => elem !== action.childId);
+      newState[action.parentId].children = newState[action.parentId].children.filter(id => id != action.childId);
       break;
     case LOAD_LAYOUT:
       return action.newLayout; // this might work
@@ -175,23 +135,6 @@ const boxesReducer = (prevState = initialState, action) => {
 }
 
 export default boxesReducer;
-
-
-
-/*export const htmlReducer = (state = htmlState, action)=>{
-  const newState = Object.assign({}, state);
-  switch(action.type){
-    case CREATE_HTML:
-      newState.html = action.html;
-      break;
-    case CREATE_CSS:
-      newState.css = action.css;
-      break;
-    default:
-      return state;
-  }
-  return newState;
-}*/
 
 export const loadLayout = (id) => {
   return (dispatch) => {
@@ -217,7 +160,8 @@ export const loadLayout = (id) => {
     dispatch(load(newState))
   })}
 }
-export const saveLayout = (name,stateCopy) => {
+
+export const saveLayout = (name, stateCopy) => {
   return (dispatch) => {
   axios.post('api/layouts', {
     name: name,

@@ -1,3 +1,4 @@
+
 const htmlState ={
   html: '//HTML',
   css:'//CSS',
@@ -7,6 +8,7 @@ const htmlState ={
 import {getFormattedHtml, getCss} from '../components/previewCreator'
 const CREATE_HTML = 'CREATE_HTML'
 const CREATE_CSS = 'CREATE_CSS'
+
 const setHtml = (html)=>{
   return {
     type: CREATE_HTML,
@@ -20,7 +22,8 @@ const setCss = (css)=>{
   }
 }
 
-export const createCss = () =>{ //eventually pass something in
+
+export const createCss = () =>{
    return dispatch => {
      const cssString =getCss();
      dispatch(setCss(cssString))
@@ -28,13 +31,11 @@ export const createCss = () =>{ //eventually pass something in
 }
 
 export const htmlCreator = (elements) =>{
- // const elemCopy = Object.assign({}, elements);
    return dispatch => {
      const htmlString = getFormattedHtml(elements);
      dispatch(setHtml(htmlString))
    }
 }
-
 
 
 const htmlReducer = (state = htmlState, action)=>{

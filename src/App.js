@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import interact from 'interact.js';
 import Grid from './components/Grid';
 import TrashCan from './components/TrashCan';
 import Window from './components/Window';
 import AddOptions from './components/AddOptions';
-
-
+import BottomOptions from './components/BottomOptions';
+import Patterns from './components/Patterns';
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild } from './reducers/boxes';
 
 import {connect} from 'react-redux';
@@ -53,12 +52,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 class App extends Component {
-	constructor(props){
-		super(props);
-		this.boxAdder = this.boxAdder.bind(this);
-	}
-
-	boxAdder(e){
+	boxAdder = (e) => {
 		let tagType = e.target.attributes.value.value;
 		const id = +this.props.nextBoxId;
 		this.props.addBox(id, tagType);
@@ -69,7 +63,6 @@ class App extends Component {
 		const boxIds = this.props.boxIds;
 
 		return (
-
 			<div className="App">
 				<div className="App">
 					<div className="button-box">
@@ -84,12 +77,14 @@ class App extends Component {
 					</div>
 				<div>
 					<div id="grid-snap" className="col-lg-12">
-						<svg id="drawHere" width="1500px" height="800px">
+						<svg id="drawHere" width="1350px" height="600px">
+							<Patterns />
 							<Window
 								setParent={this.props.setParent}
 								addChild={this.props.addChild}
 								removeParent={this.props.removeParent}
 								removeChild={this.props.removeChild}
+								boxes={this.props.boxes}
 								/>
 							{
 								boxIds.slice(1).map(box => (
@@ -117,6 +112,7 @@ class App extends Component {
 									)
 								}
 								<AddOptions action={this.boxAdder} />
+								<BottomOptions />
 								<TrashCan removeBox={this.props.removeBox} />
 							</svg>
 						</div>
