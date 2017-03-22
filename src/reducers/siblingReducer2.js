@@ -1,32 +1,37 @@
 
 export const SIB_RECOG = 'SIB_RECOG';
 
-//this is the recursive bit:
-const findSiblings = (test => { // one giant object, with each id-object as held
-
-  const boxObjs=Object.assign({}, test); //clone and begin manipulation
-  let len=Object.keys(boxObjs);
-
-  //add function below and include here...
-    for (let i=0; i<len.length; i++){
-
-        if (boxObjs[i]){ //originals are numbers, so will only iterate through originals
-            columnRowCheck(boxObjs, i, boxObjs[i].children);
-        }
-    } //done with layer checks
-
-  len=Object.keys(boxObjs);
-
-    len.forEach((box)=>{ //to a forEach
-        console.log('formatCheck', box);
-        formatCheck(boxObjs,box); //array of all, id of current
-    });
-
-  //return boxObjs;
+const setSiblings = (boxObjs => { //simplified action creator...
     return {
     type: SIB_RECOG,
     boxesCss:boxObjs,
   }
+})
+
+//this is the recursive bit:
+export const findSiblings = (boxes => { // one giant object, with each id-object as held
+
+  return dispatch => {
+      const boxObjs=Object.assign({}, boxes); //clone and begin manipulation
+      var len=Object.keys(boxObjs);
+
+      //add function below and include here...
+        for (let i=0; i<len.length; i++){
+
+            if (boxObjs[len[i]]){ //originals are numbers, so will only iterate through originals
+                columnRowCheck(boxObjs, len[i], boxObjs[len[i]].children);
+            }
+        } //done with layer checks
+
+      // len=Object.keys(boxObjs);
+
+      //   len.forEach((box)=>{ //to a forEach
+      //       console.log('formatCheck', box);
+      //       formatCheck(boxObjs,box); //array of all, id of current
+      //   });
+
+      dispatch(setSiblings(boxObjs));
+   };
 
 });
 
@@ -35,8 +40,7 @@ const findSiblings = (test => { // one giant object, with each id-object as held
 //const initialState = test; // just for initial testing
 
 const initialState = {
-  boxes=[],
-  boxesCss=[],
+  boxesCss : {},
 }
 
 //---------------------------action reducer---------------------------
@@ -60,71 +64,41 @@ export default siblingReducer;
 
 //--------------------------REPL.IT FUNCTIONS---------------------------
 
-const test={
-  0:{ id:0, height:400, width:720, x:0, y:0, parent:null, children:[1,2,3,4,5,6,7,8,9,10,11,12,13, 14, 15, 16, 17], tag: 'div', css: ' '},
-  1:{id:1, height:200, width:200, x:20, y: 20, parent:0,children:[],tag:'div',css:' '},
-  2:{id:2, height:20, width:200, x:240, y:20, parent:0, children:[],tag:'div',css:' '},
-  3:{id:3, height:20, width:160, x:240, y:60, parent:0, children:[],tag:'div',css:' '},
-  4:{id:4, height:20, width:180, x:240, y:100, parent:0, children:[],tag:'div',css:' '},
-  5:{id:5, height:20, width:80, x:300, y:120, parent:0, children:[],tag:'div',css:' '},
-  10:{id:10, height:20, width:200, x:460, y:20, parent:0, children:[],tag:'div',css:' '},
-  11:{id:11, height:20, width:160, x:460, y:60, parent:0, children:[],tag:'div',css:' '},
-  12:{id:12, height:20, width:180, x:460, y:100, parent:0, children:[],tag:'div',css:' '},
-  13:{id:13, height:20, width:80, x:460, y:120, parent:0, children:[],tag:'div',css:' '},
-  6:{id:6, height:60, width:60, x:20, y:240, parent:0, children:[],tag:'div',css:' '},
-  7:{id:7, height:60, width:60, x:100, y:240, parent:0, children:[],tag:'div',css:' '},
-  8:{id:8, height:60, width:60, x:180, y:240, parent:0, children:[],tag:'div',css:' '},
-  9:{id:9, height:60, width:60, x:260, y:240, parent:0, children:[],tag:'div',css:' '},
-  14:{id:14, height:60, width:60, x:20, y:320, parent:0, children:[],tag:'div',css:' '},
-  15:{id:15, height:60, width:60, x:100, y:320, parent:0, children:[],tag:'div',css:' '},
-  16:{id:16, height:20, width:60, x:180, y:320, parent:0, children:[],tag:'div',css:' '},
-  17:{id:17, height:20, width:60, x:260, y:350, parent:0, children:[],tag:'div',css:' '},
-}
+// const test={
+//   0:{ id:0, height:400, width:720, x:0, y:0, parent:null, children:[1,2,3,4,5,6,7,8,9,10,11,12,13, 14, 15, 16, 17], tag: 'div', css: ' '},
+//   1:{id:1, height:200, width:200, x:20, y: 20, parent:0,children:[],tag:'div',css:' '},
+//   2:{id:2, height:20, width:200, x:240, y:20, parent:0, children:[],tag:'div',css:' '},
+//   3:{id:3, height:20, width:160, x:240, y:60, parent:0, children:[],tag:'div',css:' '},
+//   4:{id:4, height:20, width:180, x:240, y:100, parent:0, children:[],tag:'div',css:' '},
+//   5:{id:5, height:20, width:80, x:300, y:120, parent:0, children:[],tag:'div',css:' '},
+//   10:{id:10, height:20, width:200, x:460, y:20, parent:0, children:[],tag:'div',css:' '},
+//   11:{id:11, height:20, width:160, x:460, y:60, parent:0, children:[],tag:'div',css:' '},
+//   12:{id:12, height:20, width:180, x:460, y:100, parent:0, children:[],tag:'div',css:' '},
+//   13:{id:13, height:20, width:80, x:460, y:120, parent:0, children:[],tag:'div',css:' '},
+//   6:{id:6, height:60, width:60, x:20, y:240, parent:0, children:[],tag:'div',css:' '},
+//   7:{id:7, height:60, width:60, x:100, y:240, parent:0, children:[],tag:'div',css:' '},
+//   8:{id:8, height:60, width:60, x:180, y:240, parent:0, children:[],tag:'div',css:' '},
+//   9:{id:9, height:60, width:60, x:260, y:240, parent:0, children:[],tag:'div',css:' '},
+//   14:{id:14, height:60, width:60, x:20, y:320, parent:0, children:[],tag:'div',css:' '},
+//   15:{id:15, height:60, width:60, x:100, y:320, parent:0, children:[],tag:'div',css:' '},
+//   16:{id:16, height:20, width:60, x:180, y:320, parent:0, children:[],tag:'div',css:' '},
+//   17:{id:17, height:20, width:60, x:260, y:350, parent:0, children:[],tag:'div',css:' '},
+// }
 
 const css={ //incorporate margins/padding later as string concat / string replace
-  start:'flexCol startVert ',
-  center:'flexCol centerVert ',
-  end:'flexCol endVert ',
-  top:'flexRow startVert ',
-  middle:'flexRow centerVert ',
-  bottom:'flexRow endVert ',
+  // start:'flexCol startVert ',
+  // center:'flexCol centerVert ',
+  // end:'flexCol endVert ',
+  // top:'flexRow startVert ',
+  // middle:'flexRow centerVert ',
+  // bottom:'flexRow endVert ',
   none: 'in-line ',
 }
 
-//this is the recursive bit:
-const findSiblings = (test => { // one giant object, with each id-object as held
-
-  const boxObjs=Object.assign({}, test); //clone and begin manipulation
-  let len=Object.keys(boxObjs);
-
-  //add function below and include here...
-    for (let i=0; i<len.length; i++){
-
-        if (boxObjs[i]){ //originals are numbers, so will only iterate through originals
-            columnRowCheck(boxObjs, i, boxObjs[i].children);
-        }
-    } //done with layer checks
-
-
-  len=Object.keys(boxObjs);
-
-
-    len.forEach((box)=>{ //to a forEach
-        console.log('formatCheck', box);
-        formatCheck(boxObjs,box); //array of all, id of current
-    });
-
-  //return boxObjs;
-    return {
-    type: SIB_RECOG,
-    boxesCss:boxObjs,
-  }
-
-});
 
 function columnRowCheck(obj, parentId, childIdArr, largest={}, remainIdArr=[], dir=0, row=0){
   // full obj list, 3, [2,5,7,8] as input, adds for iterating through new container ids
-  console.log('iteration: ', parentId, dir, childIdArr, remainIdArr);
+  console.log('iteration: object key- ', parentId, 'it- ', dir, 'childrenIds-', childIdArr, 'unchecked-', remainIdArr);
 
   if (childIdArr.length===0){ // 0 children
     obj[parentId].css = css.none; //no padding here... specific object size
@@ -170,7 +144,7 @@ function columnRowCheck(obj, parentId, childIdArr, largest={}, remainIdArr=[], d
         return (obj[child].x>=x0 && (obj[child].x+obj[child].width)<=x1);
       })
 
-      var remains = childIdArr.filter(child => {
+      remains = childIdArr.filter(child => {
         return !(obj[child].x>=x0 && (obj[child].x+obj[child].width)<=x1);
       })
 
@@ -270,13 +244,13 @@ function formatCheck(obj, parentId){
     return elementId.toString().includes('contRow');
   }
 
-  function isCol(elementId){
-    return elementId.toString().includes('contCol');
-  }
+  // function isCol(elementId){
+  //   return elementId.toString().includes('contCol');
+  // }
 
 //basics for bootstrap/flex
-  if (parentId==='0'){
-    obj[parentId].css= obj[parentId].css + 'container-fluid ';
+  if (parentId ==='0'){
+    obj[parentId].css += 'container-fluid ';
   }
 
   //things w/o children, already tagged for 'in-line', catch things w/ one child at end
@@ -291,7 +265,7 @@ function formatCheck(obj, parentId){
         });
 
         //temp catch until the full row recognition works---------------------------------------
-        kidsIdsLost=kidsIds.filter(id=>{
+        var kidsIdsLost=kidsIds.filter(id=>{
           return !(id.toString().includes('contRow'));
         });
 
