@@ -8,6 +8,7 @@ import BottomOptions from './components/BottomOptions';
 import Patterns from './components/Patterns';
 
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from './reducers/boxes';
+//import { findSibling } from './reducers/siblngReducer2';
 
 
 import {connect} from 'react-redux';
@@ -20,6 +21,7 @@ const mapStateToProps = (state) => {
 	const ids = Object.keys(state.boxes);
 	return {
 		boxes: state.boxes,
+		boxesCss: state.sibling,
 		html: state.html,
 		boxIds: ids,
 		nextBoxId: Number(ids[ids.length - 1]) + 1,
