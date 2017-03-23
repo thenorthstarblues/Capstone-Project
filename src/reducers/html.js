@@ -5,7 +5,9 @@ const htmlState ={
 }
 
 //conversion functions
-import {getFormattedHtml, getCss} from '../components/previewCreator'
+import { getHtml, getFormattedHtml, getCss} from '../components/previewCreator'
+import { theCss } from './stockCss.js';
+
 const CREATE_HTML = 'CREATE_HTML'
 const CREATE_CSS = 'CREATE_CSS'
 
@@ -23,10 +25,13 @@ const setCss = (css)=>{
 }
 
 
-export const createCss = () =>{
+export const createCss = (elements) =>{
    return dispatch => {
-     const cssString =getCss();
-     dispatch(setCss(cssString))
+      const {css} = getHtml(elements);// where to plug in output of sibling stuff
+      const cssString = getCss(theCss,css);
+      console.log(cssString);
+
+     dispatch(setCss(cssString));
    }
 }
 

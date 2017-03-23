@@ -23,7 +23,9 @@ const SET_PARENT = 'SET_PARENT'
 const ADD_CHILD = 'ADD_CHILD'
 const REMOVE_PARENT = 'REMOVE_PARENT'
 const REMOVE_CHILD = 'REMOVE_CHILD'
+const COPY_BOX = 'COPY_BOX'
 const LOAD_LAYOUT = 'LOAD_LAYOUT'
+
 
 export const setBox = (box) => {
   return {
@@ -87,6 +89,14 @@ export const removeChild = (parentId, childId) => {
   }
 }
 
+export const copyBox = (boxId, newBoxId) => {
+  return {
+    type: COPY_BOX,
+    boxId,
+    newBoxId,
+  }
+}
+
 export const load = (newLayout) =>{
   return {
     type: LOAD_LAYOUT,
@@ -97,6 +107,7 @@ export const load = (newLayout) =>{
 export const save = ()=>{
   return {
     type: SAVE
+
   }
 }
 
@@ -125,6 +136,17 @@ const boxesReducer = (prevState = initialState, action) => {
       break;
     case REMOVE_CHILD:
       newState[action.parentId].children = newState[action.parentId].children.filter(id => id != action.childId);
+      break;
+    case COPY_BOX:
+      const copyOfBox = Object.assign({}, newState[action.boxId])
+      const newBox = Object.assign(copyOfBox, {
+        id: action.newBoxId,
+        x: 960,
+        y: 100,
+        children: [],
+        parent: null,
+      })
+      newState[action.newBoxId] = newBox;
       break;
     case LOAD_LAYOUT:
       return action.newLayout; // this might work
