@@ -32,3 +32,11 @@ router.post('/', (req,res,next)=>{
     })
     .catch(next)
 })
+
+router.put('/:id', (req,res,next)=> {
+    elements.update(req.body)
+    .then((s)=>{
+        res.json(s).status(203);
+    })
+    .catch(next)
+})
