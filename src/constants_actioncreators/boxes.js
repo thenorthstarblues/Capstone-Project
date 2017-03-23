@@ -17,12 +17,12 @@ export const setBox = box => ({
 export const addBox = (id, tag) => ({
   type: ADD_BOX,
   box: {
-    id: +id,
+    id,
     x: 960,
     y: 100,
     width: 100,
     height: 50,
-    children: Map(),
+    children: [],
     parent: null,
     tag,
     css: 'p10 ',

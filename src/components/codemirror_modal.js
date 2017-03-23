@@ -3,15 +3,15 @@ import {Modal, Tooltip, Button, OverlayTrigger, Popover,} from 'react-bootstrap'
 import {connect} from 'react-redux';
 import Code from './Codemirror';
 import '../style/css/App.css';
-import {saveLayout, loadLayout} from '../reducers/boxes';
+import {saveLayout, loadLayout} from '../constants_actioncreators/layout';
 // import { htmlCreator, createCss} from '../reducers/html';
-import { findSiblings } from '../reducers/siblingReducer';
+import { findSiblings } from '../reducers/siblings';
 
-const mapStateToProps =(state) => ({
-  html: state.html,
-  elements: state.boxes,
-  boxesCss: state.boxesCss,
-})
+const mapStateToProps = state => ({
+  html: state.get('html'),
+  elements: state.get('boxes').toJS(),
+  boxesCss: state.get('boxesCss').toJS(),
+});
 
 //TODO: dispatch doesnt work for save layout
 const mapDispatchToProps = dispatch => ({

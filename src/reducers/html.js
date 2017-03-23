@@ -1,56 +1,43 @@
+import Immutable from 'immutable';
+import { getFormattedHtml, getCss } from '../components/previewCreator';
 
-const htmlState ={
-  html: '//HTML',
-  css:'//CSS',
-}
+const initialState = Immutable.Map({
+  html: '',
+  css: '',
+});
 
-//conversion functions
-import {getFormattedHtml, getCss} from '../components/previewCreator'
-const CREATE_HTML = 'CREATE_HTML'
-const CREATE_CSS = 'CREATE_CSS'
+const CREATE_HTML = 'CREATE_HTML';
+const CREATE_CSS = 'CREATE_CSS';
 
-const setHtml = (html)=>{
-  return {
-    type: CREATE_HTML,
-    html
-  }
-}
-const setCss = (css)=>{
-  return {
-    type:CREATE_CSS,
-    css
-  }
-}
+const setHtml = html => ({
+  type: CREATE_HTML,
+  html,
+});
 
+const setCss = css => ({
+  type: CREATE_CSS,
+  css,
+});
 
-export const createCss = () =>{
-   return dispatch => {
-     const cssString =getCss();
-     dispatch(setCss(cssString))
-   }
-}
+export const createCss = () => (dispatch) => {
+  const cssString = getCss();
+  dispatch(setCss(cssString));
+};
 
-export const htmlCreator = (elements) =>{
-   return dispatch => {
-     const htmlString = getFormattedHtml(elements);
-     dispatch(setHtml(htmlString))
-   }
-}
+export const htmlCreator = elements => (dispatch) => {
+  const htmlString = getFormattedHtml(elements);
+  dispatch(setHtml(htmlString));
+};
 
-
-const htmlReducer = (state = htmlState, action)=>{
-  const newState = Object.assign({}, state);
-  switch(action.type){
+const htmlReducer = (prevState = initialState, action) => {
+  switch (action.type) {
     case CREATE_HTML:
-      newState.html = action.html;
-      break;
+      return prevState.set('html', action.html);
     case CREATE_CSS:
-      newState.css = action.css;
-      break;
+      return prevState.set('css', action.css);
     default:
-      return state;
+      return prevState;
   }
-  return newState;
-}
+};
 
 export default htmlReducer;
