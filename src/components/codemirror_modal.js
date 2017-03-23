@@ -5,28 +5,26 @@ import Code from './Codemirror';
 import '../style/css/App.css';
 import {saveLayout, loadLayout} from '../reducers/boxes';
 import { htmlCreator, createCss} from '../reducers/html';
-import { findSiblings } from '../reducers/siblingReducer2';
+import { findSiblings } from '../reducers/siblingReducer';
 
 const mapStateToProps =(state) => ({
   html: state.html,
-  //elements: state.boxes
-  boxes: state.boxes,
-  boxesCss: state.sibling.boxesCss,
+  elements: state.boxes,
+  boxesCss: state.boxesCss,
 })
 
 //TODO: dispatch doesnt work for save layout
 const mapDispatchToProps = dispatch => ({
-  findSiblings(boxes){
-    console.log('testing deep copy');
-    dispatch(findSiblings(boxes));
+  findSiblings(elements){
+    dispatch(findSiblings(elements)); // within the structure recognition.... then pass along html and css creation from objects
     //dispatch(createCss()) //not sure what to pass in yet, default css
   },
-  submitHtml(boxes){
-    dispatch(htmlCreator(boxes))
+  submitHtml(elements){
+    //dispatch(htmlCreator(elements))
     //dispatch(createCss()) //not sure what to pass in yet, default css
   },
-  save(name, boxes){
-    dispatch(saveLayout(name, boxes))
+  save(name, elements){
+    dispatch(saveLayout(name, elements))
   },
   load(id){
     dispatch(loadLayout(id))
@@ -52,7 +50,7 @@ const CodeModal = React.createClass({
 
   render() {
 
-    const stateCopy = Object.assign({}, this.props.boxes)
+    const stateCopy = Object.assign({}, this.props.elements)
     // const popover = (
     //   <Popover id="modal-popover" title="popover">
     //     very popover. such engagement
