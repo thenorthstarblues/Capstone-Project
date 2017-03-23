@@ -34,6 +34,10 @@ export const findSiblings = (boxes => { // one giant object, with each id-object
             formatCheck(boxObjs, box);
         });
 
+        len.forEach((box)=>{
+            cleanCss(boxObjs, box);
+        });
+
       //setSiblings, but also create html & css;
       dispatch(setSiblings(boxObjs));
       dispatch(htmlCreator(boxObjs));
