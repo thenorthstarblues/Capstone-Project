@@ -1,5 +1,7 @@
+
 import axios from 'axios'
 const initialState = {
+
   0: {
     height: 500,
     width: 950,
