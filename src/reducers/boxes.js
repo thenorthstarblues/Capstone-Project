@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { makeGroup, addPage, setCurrent } from './addPageReducer';
+
+
 const initialState = {
   0: {
     height: 500,
@@ -160,10 +163,10 @@ export const loadLayout = id => (dispatch) => {
   });
 };
 
-export const saveLayout = (name, stateCopy) => (dispatch) => {
+export const saveLayout = (stateCopy) => (dispatch) => {
   axios.post('api/layouts', {
-    name,
-    author: name,
+    name: 'layout',
+    author: 'me'
   })
     .then((layout) => {
       const id = layout.data.id;
@@ -181,6 +184,7 @@ export const saveLayout = (name, stateCopy) => (dispatch) => {
 
       Promise.all(makeelements).then((result) => {
         dispatch(loadLayout(id));
+        dispatch(setCurrent(id))
       });
     });
 };
@@ -191,11 +195,12 @@ export const saveGroup = (name, currentId) => (dispatch) => {
   })
     .then((group) => {
       const id = group.data.id;
+      dispatch(makeGroup(id));
       console.log(id, 'this is id');
       axios.put(`/api/layouts/${currentId}`, { groupId: id },
       )
       .then((s) => {
-        console.log('updated!');
+       dispatch(addPage(currentId));
       });
     });
 };

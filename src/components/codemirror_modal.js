@@ -1,37 +1,40 @@
 import React from 'react';
-import {Modal, Tooltip, Button, OverlayTrigger, Popover,} from 'react-bootstrap';
-import {connect} from 'react-redux';
+import { Modal, Tooltip, Button, OverlayTrigger, Popover  } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import Code from './Codemirror';
 import '../style/css/App.css';
 import { saveLayout, loadLayout } from '../reducers/boxes';
-import { htmlCreator,createCss } from '../reducers/html';
+import { htmlCreator, createCss } from '../reducers/html';
 import { findSiblings } from '../reducers/siblingReducer';
-const mapStateToProps =(state) => ({
+import { saveOrUpdate } from '../reducers/addPageReducer';
+
+
+const mapStateToProps = state => ({
   html: state.html,
   elements: state.boxes,
   boxesCss: state.boxesCss,
-})
+  currentId: state.pages.currentPage,
+});
 
-//TODO: dispatch doesnt work for save layout
+// TODO: dispatch doesnt work for save layout
 const mapDispatchToProps = dispatch => ({
-  findSiblings(elements){
+  findSiblings(elements) {
     dispatch(findSiblings(elements)); // within the structure recognition.... then pass along html and css creation from objects
-
   },
   // submitHtml(elements){
   //   //dispatch(htmlCreator(elements))
   //   //dispatch(createCss()) //not sure what to pass in yet, default css
   // },
-  save(name, elements){
-    dispatch(saveLayout(name, elements))
+  save(elements, id) {
+    dispatch(saveOrUpdate(elements, id));
   },
-  load(id){
-    dispatch(loadLayout(id))
-  }
+  load(id) {
+    dispatch(loadLayout(id));
+  },
 });
 
 
-//TODO: convert modal to dumb component
+// TODO: convert modal to dumb component
 const CodeModal = React.createClass({
 
 
@@ -48,8 +51,7 @@ const CodeModal = React.createClass({
   },
 
   render() {
-
-    const stateCopy = Object.assign({}, this.props.elements)
+    const stateCopy = Object.assign({}, this.props.elements);
     // const popover = (
     //   <Popover id="modal-popover" title="popover">
     //     very popover. such engagement
@@ -66,10 +68,10 @@ const CodeModal = React.createClass({
         <Button
           bsStyle="default"
           bsSize="sm"
-          onClick={()=>{
-
+          onClick={() => {
             this.props.findSiblings(stateCopy);
-          this.open()}}
+            this.open(); 
+}}
         >
           Display Code
         </Button>
@@ -78,43 +80,30 @@ const CodeModal = React.createClass({
             <Modal.Title>Code Output</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-<<<<<<< HEAD
-=======
-            {/*<h4>Here is your custom HTML!</h4>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
 
-            <h4>Popover in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={popover}><a href="#">popover</a></OverlayTrigger> here</p>
 
-            <h4>Tooltips in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={tooltip}><a href="#">tooltip</a></OverlayTrigger> here</p>
-
-            <hr />*/}
->>>>>>> 72bdd11fcb10baf56b6a0b96dd39e33535b68f48
-
-            <Code htmlString={'//HTML\n\n'+this.props.html.html}/>
+            <Code htmlString={`//HTML\n\n${this.props.html.html}`}  />
             <Code htmlString={this.props.html.css} />
 
           </Modal.Body>
           <Modal.Footer>
-          <Button onClick={()=>{this.props.load(1)}}>Load </Button>
-          <Button>
+            <Button onClick={() => { this.props.load(1) ;}}>Load </Button>
+            <Button>
           Download
           </Button>
-          <Button onClick={()=> {
-             this.props.save('test',stateCopy)
-            }}>SAVE </Button>
+            <Button
+            onClick={() => {
+            this.props.save(stateCopy, this.props.currentId);
+          }}
+          >SAVE </Button>
 
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>
     );
-  }
+  },
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(CodeModal);
-
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(CodeModal);
 

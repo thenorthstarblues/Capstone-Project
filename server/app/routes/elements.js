@@ -40,3 +40,12 @@ router.put('/:id', (req,res,next)=> {
     })
     .catch(next)
 })
+
+router.delete('/:id', (req, res, next)=> {
+    elements.destroy({where:{layoutId: req.params.id}})
+    .then((s)=>{
+        console.log('deleted')
+        res.send('deleted').status(204);
+    })
+    .catch(next)
+})
