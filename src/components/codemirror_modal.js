@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import Code from './Codemirror';
 import '../style/css/App.css';
 import {saveLayout, loadLayout} from '../reducers/boxes';
-import { htmlCreator, createCss} from '../reducers/html';
+// import { htmlCreator, createCss} from '../reducers/html';
 import { findSiblings } from '../reducers/siblingReducer';
 
 const mapStateToProps =(state) => ({
@@ -17,12 +17,12 @@ const mapStateToProps =(state) => ({
 const mapDispatchToProps = dispatch => ({
   findSiblings(elements){
     dispatch(findSiblings(elements)); // within the structure recognition.... then pass along html and css creation from objects
-    //dispatch(createCss()) //not sure what to pass in yet, default css
+
   },
-  submitHtml(elements){
-    //dispatch(htmlCreator(elements))
-    //dispatch(createCss()) //not sure what to pass in yet, default css
-  },
+  // submitHtml(elements){
+  //   //dispatch(htmlCreator(elements))
+  //   //dispatch(createCss()) //not sure what to pass in yet, default css
+  // },
   save(name, elements){
     dispatch(saveLayout(name, elements))
   },

@@ -1,4 +1,4 @@
-import { columnRowCheck, css, divCreation } from './divRecognition.js';
+import { css, divCreation } from './divRecognition.js';
 
 
 //second css driven formatting
