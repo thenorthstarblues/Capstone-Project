@@ -5,19 +5,25 @@ import Code from './Codemirror';
 import '../style/css/App.css';
 import { saveLayout, loadLayout } from '../reducers/boxes';
 import { htmlCreator,createCss } from '../reducers/html';
+import { findSiblings } from '../reducers/siblingReducer';
 const mapStateToProps =(state) => ({
   html: state.html,
-  elements: state.boxes
+  elements: state.boxes,
+  boxesCss: state.boxesCss,
 })
 
 //TODO: dispatch doesnt work for save layout
 const mapDispatchToProps = dispatch => ({
-  submitHtml(elements){
-    dispatch(htmlCreator(elements))
-    //dispatch(createCss()) //not sure what to pass in yet, default css
+  findSiblings(elements){
+    dispatch(findSiblings(elements)); // within the structure recognition.... then pass along html and css creation from objects
+
   },
+  // submitHtml(elements){
+  //   //dispatch(htmlCreator(elements))
+  //   //dispatch(createCss()) //not sure what to pass in yet, default css
+  // },
   save(name, elements){
-    dispatch(saveLayout(name,elements))
+    dispatch(saveLayout(name, elements))
   },
   load(id){
     dispatch(loadLayout(id))
@@ -27,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
 
 //TODO: convert modal to dumb component
 const CodeModal = React.createClass({
-  
+
 
   getInitialState() {
     return { showModal: false };
@@ -44,16 +50,16 @@ const CodeModal = React.createClass({
   render() {
 
     const stateCopy = Object.assign({}, this.props.elements)
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    const tooltip = (
-      <Tooltip id="modal-tooltip">
-        wow.
-      </Tooltip>
-    );
+    // const popover = (
+    //   <Popover id="modal-popover" title="popover">
+    //     very popover. such engagement
+    //   </Popover>
+    // );
+    // const tooltip = (
+    //   <Tooltip id="modal-tooltip">
+    //     wow.
+    //   </Tooltip>
+    // );
     return (
       <div>
 
@@ -61,8 +67,8 @@ const CodeModal = React.createClass({
           bsStyle="default"
           bsSize="sm"
           onClick={()=>{
-            
-            this.props.submitHtml(stateCopy);
+
+            this.props.findSiblings(stateCopy);
           this.open()}}
         >
           Display Code
@@ -72,6 +78,19 @@ const CodeModal = React.createClass({
             <Modal.Title>Code Output</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+<<<<<<< HEAD
+=======
+            {/*<h4>Here is your custom HTML!</h4>
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+
+            <h4>Popover in a modal</h4>
+            <p>there is a <OverlayTrigger overlay={popover}><a href="#">popover</a></OverlayTrigger> here</p>
+
+            <h4>Tooltips in a modal</h4>
+            <p>there is a <OverlayTrigger overlay={tooltip}><a href="#">tooltip</a></OverlayTrigger> here</p>
+
+            <hr />*/}
+>>>>>>> 72bdd11fcb10baf56b6a0b96dd39e33535b68f48
 
             <Code htmlString={'//HTML\n\n'+this.props.html.html}/>
             <Code htmlString={this.props.html.css} />
@@ -85,7 +104,7 @@ const CodeModal = React.createClass({
           <Button onClick={()=> {
              this.props.save('test',stateCopy)
             }}>SAVE </Button>
-             
+
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>
