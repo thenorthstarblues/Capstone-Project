@@ -37,7 +37,7 @@ export const findSiblings = (boxes => { // one giant object, with each id-object
       //setSiblings, but also create html & css;
       dispatch(setSiblings(boxObjs));
       dispatch(htmlCreator(boxObjs));
-      dispatch(createCss()); // what goes in here, Ray ?
+      dispatch(createCss(boxObjs)); // what goes in here, Ray ?
    };
 
 });
