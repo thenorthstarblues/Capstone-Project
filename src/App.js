@@ -6,7 +6,7 @@ import Immutable from 'immutable';
 
 import Grid from './components/Grid';
 import TrashCan from './components/TrashCan';
-import Window from './components/Window.jsx';
+import Window from './components/Window';
 import AddOptions from './components/AddOptions';
 import BottomOptions from './components/BottomOptions';
 import Patterns from './components/Patterns';
