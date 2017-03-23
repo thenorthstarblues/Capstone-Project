@@ -47,8 +47,8 @@ export const findSiblings = (objects => { // one giant object, with each id-obje
 //const initialState = test; // just for initial testing
 
 const initialState = {
-  boxes=[],
-  boxesCss=[],
+  boxes:[],
+  boxesCss:[],
 }
 
 //---------------------------action reducer---------------------------

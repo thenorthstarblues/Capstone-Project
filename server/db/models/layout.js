@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const DataTypes = require('sequelize').DataTypes;
 const db = require('../db');
 
 module.exports = db.define('layout',{
@@ -8,7 +9,14 @@ module.exports = db.define('layout',{
   },
   author: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+  },
+  groupId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'groups',
+      key: 'id'
+    }
   }
 })
 

@@ -6,13 +6,14 @@ import Window from './components/Window';
 import AddOptions from './components/AddOptions';
 import BottomOptions from './components/BottomOptions';
 import Patterns from './components/Patterns';
+import bottomButtons from './components/pagesButton';
+import {saveGroup} from './reducers/boxes';
 
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from './reducers/boxes';
 
 
 import {connect} from 'react-redux';
 import CodeModal from './components/codemirror_modal';
-import SplitPane from 'react-split-pane';
 import Code from './components/Codemirror';
 import './style/css/App.css'
 
@@ -51,6 +52,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		copyBox(boxId, newBox){
 			dispatch(copyBox(boxId, newBox))
+		},
+		addGroup(name,currentId){
+			dispatch(saveGroup(name,currentId))
 		}
 	}
 }
@@ -83,7 +87,8 @@ class App extends Component {
 						<button className="btn btn-default btn-sm" > Login/Logout </button>
 						<button className="btn btn-default btn-sm" > User Profile/Designs </button>
 						<button className="btn btn-default btn-sm" > Save/Share </button>
-						<button className="btn btn-default btn-sm" > Other </button>
+						<button className="btn btn-default btn-sm" onClick={ ()=> this.props.addGroup('testName', 1)}> Other </button>
+						<bottomButtons />
 					</div>
 				<div>
 					<div id="grid-snap" className="col-lg-12">
@@ -125,10 +130,12 @@ class App extends Component {
 								<AddOptions action={this.boxAdder} />
 								<BottomOptions />
 								<TrashCan removeBox={this.props.removeBox} />
+								<bottomButtons/>
 							</svg>
 						</div>
 					</div>
 				</div>
+				<bottomButtons/>
 			</div>
 		)
 	}

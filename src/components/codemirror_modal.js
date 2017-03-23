@@ -3,8 +3,8 @@ import {Modal, Tooltip, Button, OverlayTrigger, Popover,} from 'react-bootstrap'
 import {connect} from 'react-redux';
 import Code from './Codemirror';
 import '../style/css/App.css';
-import {saveLayout, loadLayout} from '../reducers/boxes';
-import {htmlCreator,createCss} from '../reducers/html'
+import { saveLayout, loadLayout } from '../reducers/boxes';
+import { htmlCreator,createCss } from '../reducers/html';
 const mapStateToProps =(state) => ({
   html: state.html,
   elements: state.boxes
@@ -72,16 +72,6 @@ const CodeModal = React.createClass({
             <Modal.Title>Code Output</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Here is your custom HTML!</h4>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-
-            <h4>Popover in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={popover}><a href="#">popover</a></OverlayTrigger> here</p>
-
-            <h4>Tooltips in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={tooltip}><a href="#">tooltip</a></OverlayTrigger> here</p>
-
-            <hr />
 
             <Code htmlString={'//HTML\n\n'+this.props.html.html}/>
             <Code htmlString={this.props.html.css} />

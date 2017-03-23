@@ -35,8 +35,8 @@ const findSiblings = (test => { // one giant object, with each id-object as held
 //const initialState = test; // just for initial testing
 
 const initialState = {
-  boxes=[],
-  boxesCss=[],
+  boxes:[],
+  boxesCss:[],
 }
 
 //---------------------------action reducer---------------------------
