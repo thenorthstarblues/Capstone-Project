@@ -18,7 +18,6 @@ var startServer = function () {
 
 };
 
-
 startDb
 .then(createApplication)
 .then(startServer)
@@ -26,3 +25,4 @@ startDb
     console.error(chalk.red(err.stack));
     process.exit(1);
 });
+

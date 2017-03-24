@@ -11,6 +11,7 @@ router.get('/:id', (req, res, next) => {
     .then((data)=>{
         res.json(data).status(200);
     })
+    .catch(next)
 })
 
 router.get('/layout/:id', (req, res, next) => {
@@ -20,6 +21,7 @@ router.get('/layout/:id', (req, res, next) => {
     .then((data)=>{
         res.json(data).status(200)
     })
+    .catch(next)
 })
 
 router.post('/', (req,res,next)=>{
@@ -28,4 +30,13 @@ router.post('/', (req,res,next)=>{
     .then((s)=>{
         res.json(s).status(201);
     })
+    .catch(next)
+})
+
+router.put('/:id', (req,res,next)=> {
+    elements.update(req.body)
+    .then((s)=>{
+        res.json(s).status(203);
+    })
+    .catch(next)
 })

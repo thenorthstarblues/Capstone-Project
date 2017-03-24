@@ -176,6 +176,18 @@ export const formatCheck = ((obj, parentId)=>{
 
   export const cleanCss =((obj, parentId)=>{
 
+    let cssStrArr = obj[parentId].css.split(' ');
+    let unique={};
+    cssStrArr.forEach(str=>{
+      if (!unique[str.trim()] && str.trim()!=="" && str.trim()!=='mT0' && str.trim()!=='mL0' && str.trim()!=='mR0'){
+        unique[str.trim()] = true;
+      }
+    })
+
+    console.log(cssStrArr, unique);
+    let cssClasses=Object.keys(unique);
+    obj[parentId].css = cssClasses.join(' ');
+
     //this loop should just check for duplicates in css and getRid of all things with margin of 0;
   })
 
