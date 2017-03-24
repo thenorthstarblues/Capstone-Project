@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 //core actions
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from '../reducers/boxes';
 
+import Faketabs from './Faketabs';
+
 //all svg drawing things
 import Patterns from './Patterns';
 import Window from './Window';
@@ -58,7 +60,11 @@ const mapDispatchToProps = (dispatch) => {
 class DrawHere extends Component {
 	constructor(props){
 		super(props);
-		this.state= {}
+		this.state= {
+			activeLayoutId:'', //to pull up main pg contents / should be selected tab
+			groupIds:[], //all groupIds
+
+		}
 		this.boxAdder=this.boxAdder.bind(this);
 
 	}
@@ -79,22 +85,16 @@ class DrawHere extends Component {
 		const boxIds = this.props.boxIds;
 
 		return (
-		        <div>
-						{/* need to map to get current tabs */}
+		        <div> {/* need dispatches to trickle up and change state from tabs*/}
+		        	<Faketabs state={this.state} actions="add later"/>
 
-					  <ul className="nav nav-tabs" role="tablist">
-					    <li role="presentation" className="active bkoffwhite TrendHandMade"><a href="#group1" aria-controls="home" role="tab" data-toggle="tab">[Group1]</a></li>
-					    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Add+</a></li>
-					    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Add+</a></li>
-					    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Add+</a></li>
-					  </ul>
 
-					  	{/* need to map to get current tabs...instead this will be a filter of the main section */}
-					  <div className="tab-content ">
-					    <div role="tabpanel borders" className="tab-pane active " id="group1">
-					    	<div className="tabSpaceActive">
+					  <div className="offset15side">
+						  <div className="tab-content tab-pane active " id="link to tabs">
 								<div className=" row bkoffwhite borders">
 									<div id="grid-snap" className="svgHolder col-lg-10 bkoffwhite ">
+
+									{/* update svg id to redraw interior by id? group logic of interactions */}
 										<svg id="drawHere" width="1175px" height="555px" className="text-left">
 											<Patterns />
 												<rect x="0" y="0" width="950px" height="500px" fill="white" />
@@ -138,10 +138,7 @@ class DrawHere extends Component {
 								<FontColor />
 							</div> {/*out of main tabSpaceActive */}
 				    	</div>
-				  	</div> {/* out of main tab-content */}
-
-				</div>
-
+				  	</div>
 
 		        )
 	}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Navigation from './components/Navigations';
-import DrawHere from './components/DrawHere';
+import Navigation from './Navigations';
+import ViewGroups from './ViewGroups';
 
 
 // alternate actions for the dispatch structure
@@ -10,7 +10,7 @@ import DrawHere from './components/DrawHere';
 
 
 import {connect} from 'react-redux';
-import './style/css/App.css';
+import '../style/css/App.css'
 
 const mapStateToProps = (state) => {
 	const ids = Object.keys(state.boxes);
@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-class App extends Component {
+class Templates extends Component {
 	constructor(props){
 		super(props);
 		this.state= {}
@@ -56,8 +56,9 @@ class App extends Component {
 		return (
 			<div className="App bkgrey">
 				<div className="container-fluid ">
-					<Navigation page="editor"/>
-					<DrawHere />
+					<Navigation page="templates"/>
+				{/* rework once index is revised*/}
+					<ViewGroups />
 					{/*<Footer />*/}
 			</div>
 		</div>
@@ -65,4 +66,4 @@ class App extends Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(Templates);

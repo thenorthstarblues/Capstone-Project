@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
 
-const FontColor = (({action})=> {
-  //console.log(action);
+//add/use connect to dispatch eventually to state/css updates
+
+class FontColor extends Component{
+  constructor(props){
+    super(props);
+    this.state= {
+      colorsPicked:[], //to add to Css... need to make reducers/incorporate
+      headerFont:'',
+      paragraphFont:'',
+
+    }
+    //add actions/bind here
+
+  }
+
+    render(){
 
     return (
-            <div className="fontOptions bkoffwhite row flexRow spaceBetween border1">
+            <div className="fontOptions bkoffwhite row flexRow spaceAround border1 centerAround">
+                    <div >
+                          <p className="TrendHandMade closer">other options</p>
+                          <p className="small">to include in css classes</p>
+                    </div>
                     <div >
                       <form onChange="">
                         <select name="headers" className="bkwhite" >
@@ -41,15 +59,10 @@ const FontColor = (({action})=> {
                     <div className="colorBox">
                       box
                     </div>
-                    <div className="colorBox">
-                      box
-                    </div>
-                    <div className="colorBox">
-                      box
-                    </div>
               </div>
     )
+  }
 
-})
+}
 
 export default FontColor;

@@ -23,7 +23,7 @@ class TrashCan extends Component {
   }
 
   render() {
-    let x= 959, y= 320, width= 180, height= 180, x2= x+width, y2= y+height;
+    let x= 959, y= 320, width= 155, height= 180, x2= x+width, y2= y+height;
 
     return (
       <g>

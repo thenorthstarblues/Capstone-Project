@@ -143,7 +143,7 @@ const AddOptions = (({action})=> {
                 {buttonsForm.map(button=>{
 
                   return (
-                          <button className="btn btn-default m5w bshadsm" value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
+                          <button className="btn btn-default m5w " value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
                           )
                 })}
                 </div>
