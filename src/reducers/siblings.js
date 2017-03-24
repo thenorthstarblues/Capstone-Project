@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import { columnRowCheck } from './divRecognition';
-import { formatCheck } from './cssRecognition';
+import { formatCheck, cleanCss } from './cssRecognition';
 import { htmlCreator, createCss } from './html';
 
 
@@ -14,12 +14,10 @@ const setSiblings = boxObjs => ({
 });
 
 export const findSiblings = boxes => (dispatch) => {
-  const boxObjs = Object.assign({}, boxes); //clone and begin manipulation
+  const boxObjs = Object.assign({}, boxes);
   let len = Object.keys(boxObjs);
-
-  //check and group in new divs
   for (let i = 0; i < len.length; i++) {
-    if (boxObjs[len[i]]){ //originals are numbers, so will only iterate through original boxes
+    if (boxObjs[len[i]]) {
       columnRowCheck(boxObjs, len[i], boxObjs[len[i]].children);
     }
   }
@@ -27,10 +25,13 @@ export const findSiblings = boxes => (dispatch) => {
   len.forEach((box) => {
     formatCheck(boxObjs, box);
   });
-  //setSiblings, but also create html & css;
+
+  len.forEach((box) => {
+    cleanCss(boxObjs, box);
+  });
   dispatch(setSiblings(boxObjs));
   dispatch(htmlCreator(boxObjs));
-  dispatch(createCss()); // what goes in here, Ray ?
+  dispatch(createCss(boxObjs));
 };
 
 //---------------------------action reducer---------------------------
