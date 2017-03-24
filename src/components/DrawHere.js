@@ -73,11 +73,12 @@ class DrawHere extends Component {
 
 	}
 
-	boxAdder = (e => {
+	boxAdder = (e) => {
 		let tagType = e.target.attributes.value.value;
-		const id = +this.props.nextBoxId;
-		this.props.addBox(id, tagType);
-	})
+		const lastId = this.props.boxIds[this.props.boxIds.length - 1];
+		const newId = +lastId + 1;
+		this.props.addBox(newId, tagType);
+	}
 
 	boxCopier = (boxToCopy) => {
 		const newBoxId = +this.props.nextBoxId;
