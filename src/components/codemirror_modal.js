@@ -62,11 +62,11 @@ const CodeModal = React.createClass({
     //   </Tooltip>
     // );
     return (
-      <div>
+      <div className="flexWrap">
 
         <Button
           bsStyle="default"
-          bsSize="sm"
+          bsSize="small"
           onClick={()=>{
 
             this.props.findSiblings(stateCopy);

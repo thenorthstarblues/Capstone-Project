@@ -57,7 +57,7 @@ const Patterns = (()=> {
 
 			    <pattern id="img" x="0" y="0" width="1" height="1" patternContentUnits="objectBoundingBox">
 			      <rect x="0" y="0" width="1" height="1" fill="#333333"/>
-			      <line x0="0" x1="1" y0="0" y1="1" stroke="#ffffff" />
+			      <line x1="0" x2="1" y1="0" y2="1" stroke="#ffffff" />
 			    </pattern>
 
 

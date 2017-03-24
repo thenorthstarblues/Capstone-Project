@@ -38,7 +38,7 @@ export const addBox = (id, tag) => {
     box: {
       id: +id,
       x: 960,
-      y: 100,
+      y: 150,
       width: 100,
       height: 50,
       children: [],
@@ -98,7 +98,7 @@ export const copyBox = (boxId, newBoxId) => {
 export const load = (newLayout) =>{
   return {
     type: LOAD_LAYOUT,
-    newLayout, //TODO: make this dispatch to load 
+    newLayout, //TODO: make this dispatch to load
   }
 }
 
@@ -191,7 +191,7 @@ export const saveLayout = (name, stateCopy) => {
     })
     .then((layout)=> {
       const id = layout.data.id
-      const makeelements =[]; //converting to array 
+      const makeelements =[]; //converting to array
       const elemClone = Object.assign({},stateCopy);
       const elementIdArr = Object.keys(elemClone);
       for (var i = 0; i <elementIdArr.length; i++){
@@ -204,7 +204,7 @@ export const saveLayout = (name, stateCopy) => {
       }
 
       Promise.all(makeelements).then((result)=>{
-        
+
       dispatch(loadLayout(id))
 
       })

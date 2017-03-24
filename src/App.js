@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Navigation from './components/Navigations';
+import DrawHere from './components/DrawHere';
+
+import Patterns from './components/Patterns';
+import Window from './components/Window';
 import Grid from './components/Grid';
 import TrashCan from './components/TrashCan';
-import Window from './components/Window';
-import AddOptions from './components/AddOptions';
 import BottomOptions from './components/BottomOptions';
-import Patterns from './components/Patterns';
+import AddOptions from './components/AddOptions';
+import FontColor from './components/FontColor';
 
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from './reducers/boxes';
 //import { findSibling } from './reducers/siblngReducer2';
 
 
 import {connect} from 'react-redux';
-import CodeModal from './components/codemirror_modal';
-import SplitPane from 'react-split-pane';
-import Code from './components/Codemirror';
 import './style/css/App.css'
 
 const mapStateToProps = (state) => {
@@ -59,11 +60,18 @@ const mapDispatchToProps = (dispatch) => {
 
 
 class App extends Component {
-	boxAdder = (e) => {
+	constructor(props){
+		super(props);
+		this.state= {}
+		this.boxAdder=this.boxAdder.bind(this);
+
+	}
+
+	boxAdder = (e => {
 		let tagType = e.target.attributes.value.value;
 		const id = +this.props.nextBoxId;
 		this.props.addBox(id, tagType);
-	}
+	})
 
 	boxCopier = (boxToCopy) => {
 		const newBoxId = +this.props.nextBoxId;
@@ -75,63 +83,13 @@ class App extends Component {
 		const boxIds = this.props.boxIds;
 
 		return (
-			<div className="App">
-				<div className="App">
-					<div className="button-box">
-						<button className="btn btn-default btn-sm" > Logo/Home Here </button>
-						<CodeModal />
-						<button className="btn btn-default btn-sm" > Live Preview </button>
-						<button className="btn btn-default btn-sm" > Starting Templates </button>
-						<button className="btn btn-default btn-sm" > Login/Logout </button>
-						<button className="btn btn-default btn-sm" > User Profile/Designs </button>
-						<button className="btn btn-default btn-sm" > Save/Share </button>
-						<button className="btn btn-default btn-sm" > Other </button>
-					</div>
-				<div>
-					<div id="grid-snap" className="col-lg-12">
-						<svg id="drawHere" width="1350px" height="600px">
-							<Patterns />
-							<Window
-								setParent={this.props.setParent}
-								addChild={this.props.addChild}
-								removeParent={this.props.removeParent}
-								removeChild={this.props.removeChild}
-								boxes={this.props.boxes}
-								/>
-							{
-								boxIds.slice(1).map(box => (
-									<Grid
-										key={box}
-										setBox={this.props.setBox}
-										removeBox={this.props.removeBox}
-										setParent={this.props.setParent}
-										addChild={this.props.addChild}
-										removeParent={this.props.removeParent}
-										removeChild={this.props.removeChild}
-										id={+box}
-										x={boxes[box].x}
-										y = {boxes[box].y}
-										height={boxes[box].height}
-										width={boxes[box].width}
-										children={boxes[box].children}
-										parent={boxes[box].parent}
-										tag={boxes[box].tag}
-										css={boxes[box].css}
-										boxIds={this.props.boxIds}
-										boxes={this.props.boxes}
-										boxCopier={this.boxCopier}
-										/>
-										)
-									)
-								}
-								<AddOptions action={this.boxAdder} />
-								<BottomOptions />
-								<TrashCan removeBox={this.props.removeBox} />
-							</svg>
-						</div>
-					</div>
-				</div>
+			<div className="App bkgrey">
+				<div className="container-fluid ">
+					<Navigation />
+					<DrawHere />
+					{/*<Footer />*/}
 			</div>
+		</div>
 		)
 	}
 }
