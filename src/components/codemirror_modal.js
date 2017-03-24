@@ -1,19 +1,17 @@
 import React from 'react';
-import { Modal, Tooltip, Button, OverlayTrigger, Popover  } from 'react-bootstrap';
+import { Modal, Button  } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Code from './Codemirror';
 import '../style/css/App.css';
-import { saveLayout, loadLayout } from '../reducers/boxes';
+import { saveLayout, loadLayout } from '../constants_actioncreators/layout';
 import { htmlCreator, createCss } from '../reducers/html';
-import { findSiblings } from '../reducers/siblingReducer';
-import { saveOrUpdate } from '../reducers/addPageReducer';
-
+import { findSiblings } from '../reducers/siblings';
+import { saveOrUpdate } from '../constants_actioncreators/groups';
 
 const mapStateToProps = state => ({
-  html: state.html,
-  elements: state.boxes,
-  boxesCss: state.boxesCss,
-  currentId: state.pages.currentPage,
+  html: state.get('html'),
+  elements: state.get('boxes').toJS(),
+  boxesCss: state.get('boxesCss').toJS(),
 });
 
 // TODO: dispatch doesnt work for save layout

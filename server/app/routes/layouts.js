@@ -22,6 +22,7 @@ router.get('/', (req, res, next) => {
      .catch(next);
 });
 
+
 router.post('/', (req, res, next) => {
   layout.create(req.body)
     .then((s) => {
@@ -39,5 +40,4 @@ router.put('/:id', (req, res, next) => {
       res.json(s).status(203);
     })
     .catch(next);
-})
-;
+});
