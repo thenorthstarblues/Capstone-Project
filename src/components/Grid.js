@@ -43,7 +43,9 @@ class Grid extends Component {
               this.props.removeParent(smallBox.id);
             }
             this.props.setParent(+e.target.id, smallBox.id);
-            this.props.addChild(+e.target.id, smallBox.id);
+            if(!this.props.children.includes(smallBox.id)){
+              this.props.addChild(+e.target.id, smallBox.id);
+            }
           }
       })
       .on('doubletap', (e) => {

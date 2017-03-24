@@ -18,7 +18,6 @@ class TrashCan extends Component {
   }
 
   onDrop = (e) => {
-    console.log('box was dropped')
     this.props.removeBox(+e.relatedTarget.id);
   }
 

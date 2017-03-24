@@ -1,15 +1,21 @@
-import axios from 'axios'
-const initialState = {
-  0: {
+import axios from 'axios';
+import { makeGroup, addPage, setCurrent } from './addPageReducer';
+import Immutable from 'immutable';
+import { SET_BOX, ADD_BOX, REMOVE_BOX, SET_PARENT, ADD_CHILD, REMOVE_PARENT, REMOVE_CHILD, COPY_BOX } from '../constants_actioncreators/boxes';
+import { LOAD_LAYOUT, SAVE } from '../constants_actioncreators/layout';
+
+const initialState = Immutable.Map({
+  0: Immutable.Map({
     height: 500,
     width: 950,
-    children: [],
+    children: Immutable.List(),
     id: 0,
     x: 0,
     y: 0,
     parent: null,
     tag: 'div',
     css: '',
+<<<<<<< HEAD
   }
 };
 
@@ -101,63 +107,54 @@ export const load = (newLayout) =>{
     newLayout, //TODO: make this dispatch to load
   }
 }
+=======
+  }),
+});
+>>>>>>> de1b512020657b966c360119118738229497bdd5
 
-export const save = ()=>{
-  return {
-    type: SAVE
 
-  }
-}
-
-//reducer
 const boxesReducer = (prevState = initialState, action) => {
-  const newState = Object.assign({}, prevState);
-
-  switch (action.type){
+  switch (action.type) {
     case SET_BOX:
-      newState[action.box.id] = action.box;
-      break;
+      return prevState.set(action.box.id, Immutable.fromJS(action.box));
     case ADD_BOX:
-      newState[action.box.id] = action.box;
-      break;
+      return prevState.set(action.box.id, Immutable.fromJS(action.box));
     case REMOVE_BOX:
-      delete newState[action.boxId];
-      break;
+      return prevState.delete(action.boxId);
     case SET_PARENT:
-      newState[+action.childId].parent = action.parentId;
-      break;
+      return prevState.setIn([action.childId, 'parent'], action.parentId);
     case ADD_CHILD:
-        if(!newState[action.parentId].children.includes(action.childId)) newState[action.parentId].children.push(action.childId);
-      break;
+      return prevState.updateIn([action.parentId, 'children'], (childMap) => {
+        return childMap.push(action.childId);
+      });
     case REMOVE_PARENT:
-      newState[action.childId].parent = null;
-      break;
+      return prevState.setIn([action.childId, 'parent'], null);
     case REMOVE_CHILD:
-      newState[action.parentId].children = newState[action.parentId].children.filter(id => id != action.childId);
-      break;
+      return prevState.updateIn([action.parentId, 'children'], (childMap) => {
+        return childMap.filter(child => child !== action.childId);
+      });
     case COPY_BOX:
-      const copyOfBox = Object.assign({}, newState[action.boxId])
-      const newBox = Object.assign(copyOfBox, {
-        id: action.newBoxId,
-        x: 960,
-        y: 100,
-        children: [],
-        parent: null,
-      })
-      newState[action.newBoxId] = newBox;
-      break;
+      const newBox = prevState.get(action.boxId).withMutations((oldBox) => {
+        oldBox
+          .set('id', action.newBoxId)
+          .set('x', 960)
+          .set('y', 100)
+          .set('children', Immutable.List())
+          .set('parent', null);
+      });
+      return prevState.set(action.newBoxId, newBox);
     case LOAD_LAYOUT:
-      return action.newLayout; // this might work
+      return prevState.clear().merge(action.newLayout);
     case SAVE:
       return prevState;
     default:
       return prevState;
   }
-  return newState;
-}
+};
 
 export default boxesReducer;
 
+<<<<<<< HEAD
 export const loadLayout = (id) => {
   return (dispatch) => {
     axios.get(`api/elements/layout/${id}`)
@@ -211,3 +208,5 @@ export const saveLayout = (name, stateCopy) => {
     } )
   }
 }
+=======
+>>>>>>> de1b512020657b966c360119118738229497bdd5

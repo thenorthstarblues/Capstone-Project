@@ -23,7 +23,7 @@ const Patterns = (()=> {
 			    <pattern id="paragraph" x="0" y="0" width="12" height="12" >
 			    	{repeats.map(ind=>{
 			    		return (
-						    	<g>
+						    	<g key={ind} >
 						      		<rect x="0" y={ind*12} width="1000" height="7" fill="#d0d0d0" />
 						      		<rect x="0" y={ind*12+7} width="12" height="5" fill="white" />
 						      	</g>
@@ -57,14 +57,18 @@ const Patterns = (()=> {
 
 			    <pattern id="img" x="0" y="0" width="1" height="1" patternContentUnits="objectBoundingBox">
 			      <rect x="0" y="0" width="1" height="1" fill="#333333"/>
+<<<<<<< HEAD
 			      <line x1="0" x2="1" y1="0" y2="1" stroke="#ffffff" />
+=======
+			      <line  x1="1"  y1="1" stroke="#ffffff" />
+>>>>>>> de1b512020657b966c360119118738229497bdd5
 			    </pattern>
 
 
 			    <pattern id="ului" x="0" y="0" width="10" height="14" >
 			    	{repeats.map(ind=>{
 			    		return (
-						    	<g>
+						    	<g key={ind} >
 						      		<rect x="20" y={ind*14} width="1000" height="7" fill="lightgrey" />
 						      		<circle cx="10" cy={ind*14+4} r="3" fill="grey" />
 						      	</g>

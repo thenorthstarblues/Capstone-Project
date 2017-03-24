@@ -17,23 +17,28 @@ const Navigation=(({page})=>{
 	return (
 	        <div className="row col-lg-12 flexWrap p20w bkgrey">
 	        	<div className = "col-lg-6">
-	    			<button className="btn btn-default" > Logo Here </button>
+	    			<span className="TrendHMTitle" > Agile-Armature </span>
 	    			{templates &&
-						<button className="btn btn-default" > Templates </button>
+						<span className="menuL" > Templates <span className="glyphicon glyphicon-minus"></span></span>
+
 	    			}
-	    			<button className="btn btn-default" > Directions </button>
+	    			<span className="menuL" > Directions <span className="glyphicon glyphicon-minus"></span></span>
 	    			{user &&
-	    				<button className="btn btn-default" > User Page </button>
+	    				<span className="menuL" > User Page </span>
 	    			}
-	    			<button className="btn btn-default" > Login </button>
+	    			<span className="menuL" > Login </span>
 	    		</div>
 	    		<div className = "col-lg-6 flexWrap spaceBetween">
 
 						<CodeModal />
-						<button className="btn btn-default" > Preview Hierarchy </button>
-						<button className="btn btn-default" > Live Preview </button>
-						<button className="btn btn-default" > Download Code</button>
-						<button className="btn btn-default" > Save Layout</button>
+						<span className="glyphicon glyphicon-minus"></span>
+						<button className="btn btn-default btn-sm" type="button"> Preview Hierarchy   </button>
+						<span className="glyphicon glyphicon-minus"></span>
+						<button className="btn btn-default btn-sm" type="button"> Live Preview   </button>
+						<span className="glyphicon glyphicon-minus"></span>
+						<button className="btn btn-default btn-sm" type="button"> Download Code   </button>
+						<span className="glyphicon glyphicon-minus"></span>
+						<button className="btn btn-default btn-sm" type="button"> Save Layout   </button>
 
 
 				</div>

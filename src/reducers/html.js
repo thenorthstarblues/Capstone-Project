@@ -1,61 +1,45 @@
+import Immutable from 'immutable';
+import { getFormattedHtml, getCss, getHtml } from '../components/previewCreator';
+import { theCss } from './stockCss';
 
-const htmlState ={
-  html: '//HTML',
-  css:'//CSS',
-}
+const initialState = Immutable.Map({
+  html: '',
+  css: '',
+});
 
-//conversion functions
-import { getHtml, getFormattedHtml, getCss} from '../components/previewCreator'
-import { theCss } from './stockCss.js';
+const CREATE_HTML = 'CREATE_HTML';
+const CREATE_CSS = 'CREATE_CSS';
 
-const CREATE_HTML = 'CREATE_HTML'
-const CREATE_CSS = 'CREATE_CSS'
+const setHtml = html => ({
+  type: CREATE_HTML,
+  html,
+});
 
-const setHtml = (html)=>{
-  return {
-    type: CREATE_HTML,
-    html
-  }
-}
-const setCss = (css)=>{
-  return {
-    type:CREATE_CSS,
-    css
-  }
-}
+const setCss = css => ({
+  type: CREATE_CSS,
+  css,
+});
 
+export const createCss = elements => (dispatch) => {
+  const { css } = getHtml(elements);
+  const cssString = getCss(theCss, css);
+  dispatch(setCss(cssString));
+};
 
-export const createCss = (elements) =>{
-   return dispatch => {
-      const {css} = getHtml(elements);// where to plug in output of sibling stuff
-      const cssString = getCss(theCss,css);
-      console.log(cssString);
+export const htmlCreator = elements => (dispatch) => {
+  const htmlString = getFormattedHtml(elements);
+  dispatch(setHtml(htmlString));
+};
 
-     dispatch(setCss(cssString));
-   }
-}
-
-export const htmlCreator = (elements) =>{
-   return dispatch => {
-     const htmlString = getFormattedHtml(elements);
-     dispatch(setHtml(htmlString))
-   }
-}
-
-
-const htmlReducer = (state = htmlState, action)=>{
-  const newState = Object.assign({}, state);
-  switch(action.type){
+const htmlReducer = (prevState = initialState, action) => {
+  switch (action.type) {
     case CREATE_HTML:
-      newState.html = action.html;
-      break;
+      return prevState.set('html', Immutable.fromJS(action.html));
     case CREATE_CSS:
-      newState.css = action.css;
-      break;
+      return prevState.set('css', Immutable.fromJS(action.css));
     default:
-      return state;
+      return prevState;
   }
-  return newState;
-}
+};
 
 export default htmlReducer;
