@@ -20,9 +20,9 @@ import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChi
 import './style/css/App.css';
 
 const mapStateToProps = (state) => {
-	const ids = Object.keys(state.get('boxes').toJS())
+	const ids = Object.keys(state.get('boxes').toJS());
 	return {
-		boxes: state.get('boxes'),
+		boxes: state.get('boxes').toJS(),
 		boxesCss: state.get('sibling'),
 		html: state.get('html'),
 		boxIds: ids,
@@ -103,7 +103,7 @@ class App extends Component {
 								addChild={this.props.addChild}
 								removeParent={this.props.removeParent}
 								removeChild={this.props.removeChild}
-								boxes={this.props.boxes.toJS()}
+								boxes={this.props.boxes}
 								/>
 							{
 								boxIds.slice(1).map(box => (
@@ -116,16 +116,16 @@ class App extends Component {
 										removeParent={this.props.removeParent}
 										removeChild={this.props.removeChild}
 										id={box}
-										x={boxes.get(box).get('x')}
-										y = {boxes.get(box).get('y')}
-										height={boxes.get(box).get('height')}
-										width={boxes.get(box).get('width')}
-										children={boxes.get(box).get('children').toJS()}
-										parent={boxes.get(box).get('parent')}
-										tag={boxes.get(box).get('tag')}
-										css={boxes.get(box).get('css')}
+										x={boxes[box].x}
+										y = {boxes[box].y}
+										height={boxes[box].height}
+										width={boxes[box].width}
+										children={boxes[box].children}
+										parent={boxes[box].parent}
+										tag={boxes[box].tag}
+										css={boxes[box].css}
 										boxIds={boxIds}
-										boxes={this.props.boxes.toJS()}
+										boxes={this.props.boxes}
 										boxCopier={this.boxCopier}
 										/>
 										)

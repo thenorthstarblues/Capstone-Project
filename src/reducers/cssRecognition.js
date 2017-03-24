@@ -37,7 +37,6 @@ function setRowMargins(obj, parentId){
   var above=obj[parentId].y;
 
   while (ind<kidsIds.length && obj[kidsIds[ind]]){ //for each row... must correct the last row catch
-      console.log('setting Row margings: ',obj[kidsIds[ind]] );
 
       var below=obj[kidsIds[ind]].y;
       var mT = (Math.floor((below-above)/10))*10; //adjust spacing later
@@ -183,8 +182,6 @@ export const formatCheck = ((obj, parentId)=>{
         unique[str.trim()] = true;
       }
     })
-
-    console.log(cssStrArr, unique);
     let cssClasses=Object.keys(unique);
     obj[parentId].css = cssClasses.join(' ');
 

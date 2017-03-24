@@ -1,37 +1,24 @@
-import axios from 'axios';
-import {loadLayout, saveLayout} from './boxes';
+import Immutable from 'immutable';
 
-
-
-const initialState = {
+const initialState = Immutable.Map({
   group: 0,
-  pages: [],
+  pages: Immutable.List(),
   currentPage: 0,
-};
+});
 
-const pageReducer = (state = initialState, action) => {
-  const newState = Object.assign({}, state);
-
+const pageReducer = (prevState = initialState, action) => {
   switch (action.type) {
-      case 'MAKE_GROUP':
-        newState.group = action.group;
-        break;
-      case 'ADD_PAGE':
-        newState.pages = [...newState.pages, action.page];
-        break;
-      case "SET_CURRENT":
-        newState.currentPage = action.id;
-        break;
-      default:
-        return state;
-    }
-  return newState;
+    case 'MAKE_GROUP':
+      return prevState.set('group', action.group);
+    case 'ADD_PAGE':
+      return prevState.update('pages', (pagesList) => {
+        return pagesList.push(action.page);
+      });
+    case 'SET_CURRENT':
+      return prevState.set('currentPage', action.id);
+    default:
+      return prevState;
+  }
 };
 
 export default pageReducer;
-
-
-export const newPage = () => (dispatch) => {
-
-};
-

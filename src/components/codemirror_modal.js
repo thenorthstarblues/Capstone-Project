@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
   html: state.get('html').toJS(),
   elements: state.get('boxes').toJS(),
   boxesCss: state.get('boxesCss').toJS(),
+  currentId: state.get('pages').get('currentPage'),
 });
 
 
@@ -19,8 +20,8 @@ const mapDispatchToProps = dispatch => ({
   findSiblings(elements) {
     dispatch(findSiblings(elements));
   },
-  save(name, elements) {
-    dispatch(saveLayout(name, elements));
+  save(elements, id) {
+    dispatch(saveOrUpdate(elements, id));
   },
   load(id) {
     dispatch(loadLayout(id));

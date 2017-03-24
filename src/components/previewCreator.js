@@ -74,7 +74,6 @@ export const getCss = (theCss, classes) => { // classes will be our cssClasses
               return `margin-left:${values}px;`;
 
           }
-            console.log(cur);
             return theCss[cur];
 
 
