@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Immutable from 'immutable';
 import { makeGroup, addPage, setCurrent } from './groups';
 
 
@@ -12,14 +13,13 @@ export const load = (newLayout) => ({
 
 export const save = () => ({
     type: SAVE
-
   });
 
 export const loadLayout = id => (dispatch) => {
   axios.get(`api/elements/layout/${id}`)
   .then((elements) => {
     const data = elements.data;
-    const newState = {};
+    let newState = {};
     data.forEach((element) => {
       const id = element.layId;
       delete element.layId;
@@ -31,9 +31,11 @@ export const loadLayout = id => (dispatch) => {
       let children = [];
       if (element.children) { children = [...element.children.split(',')]; }
       const childrenArr = children.map(val => +val);
-      element.children = childrenArr;
+      element.children = Immutable.List(childrenArr);
+      newState[id] = Immutable.Map(element);
     });
-    dispatch(load(newState));
+    newState = Immutable.Map(newState);
+    dispatch(load(Immutable.fromJS(newState)));
   });
 };
 
@@ -70,7 +72,6 @@ export const saveGroup = (name, currentId) => (dispatch) => {
     .then((group) => {
       const id = group.data.id;
       dispatch(makeGroup(id));
-      console.log(id, 'this is id');
       axios.put(`/api/layouts/${currentId}`, { groupId: id },
       )
       .then((s) => {

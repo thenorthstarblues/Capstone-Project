@@ -14,14 +14,13 @@ const mdtp = (dispatch) => {
 class bottomButtons extends Component {
 
     render(){
-    console.log('loaded buttons')        
     return (
         <div>
             <Button onClick={ ()=> this.props.addGroup('testName', 1)} >add page</Button>
             <Button > page1</Button>
             <Button > page2</Button>
         </div>
-    
+
     )
     }
 }

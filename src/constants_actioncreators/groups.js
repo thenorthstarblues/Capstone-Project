@@ -1,4 +1,4 @@
-import {loadLayout, saveLayout} from './layout';
+import { loadLayout, saveLayout } from './layout';
 import axios from 'axios';
 
 export const makeGroup = group => ({
@@ -11,20 +11,20 @@ export const addPage = page => ({
   page,
 });
 
-export const setCurrent = (id) => ({
-    type: "SET_CURRENT",
-    id
+export const setCurrent = id => ({
+  type: 'SET_CURRENT',
+  id,
 });
 
 export const updatePage = (id, stateCopy) => (dispatch) => {
   axios.get(`api/layouts/${id}`)
     .then((layout) => {
-        axios.delete(`api/elements/${id}`)
-        .then((result)=>{
-      const makeelements = []; // converting to array
-      const elemClone = Object.assign({}, stateCopy);
-      const elementIdArr = Object.keys(elemClone);
-      for (let i = 0; i < elementIdArr.length; i++) {
+      axios.delete(`api/elements/${id}`)
+        .then((result) => {
+          const makeelements = []; // converting to array
+          const elemClone = Object.assign({}, stateCopy);
+          const elementIdArr = Object.keys(elemClone);
+          for (let i = 0; i < elementIdArr.length; i++) {
         const elem = elemClone[i];
         const layId = elem.id;
         elem.children = elem.children.join(',');
@@ -33,23 +33,17 @@ export const updatePage = (id, stateCopy) => (dispatch) => {
         makeelements.push(axios.post('/api/elements', newElement));
       }
 
-      Promise.all(makeelements).then((result) => {
-          console.log('')
+          Promise.all(makeelements).then((result) => {
         dispatch(loadLayout(id));
       });
-    })
+        });
     });
 };
 
 export const saveOrUpdate = (stateCopy, id) => (dispatch) => {
-    if(id !== 0){
-        console.log('update page', id)
-        dispatch(updatePage(id, stateCopy))
-    }
-    else{
-        console.log('save layout')
-         dispatch(saveLayout(stateCopy))
-          
-        }
-    
-}
+  if (id !== 0) {
+    dispatch(updatePage(id, stateCopy));
+  } else {
+    dispatch(saveLayout(stateCopy));
+  }
+};

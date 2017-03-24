@@ -50,7 +50,7 @@ const boxesReducer = (prevState = initialState, action) => {
       });
       return prevState.set(action.newBoxId, newBox);
     case LOAD_LAYOUT:
-      return action.newLayout; // this might work
+      return prevState.clear().merge(action.newLayout);
     case SAVE:
       return prevState;
     default:
