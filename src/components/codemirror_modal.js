@@ -46,21 +46,12 @@ const CodeModal = React.createClass({
   render() {
     const stateCopy = this.props.elements;
     return (
-<<<<<<< HEAD
       <div className="flexWrap">
 
         <Button
           bsStyle="default"
           bsSize="small"
           onClick={()=>{
-
-=======
-      <div>
-        <Button
-          bsStyle="default"
-          bsSize="sm"
-          onClick={() => {
->>>>>>> de1b512020657b966c360119118738229497bdd5
             this.props.findSiblings(stateCopy);
             this.open();
           }}
