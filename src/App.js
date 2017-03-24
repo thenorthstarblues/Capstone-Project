@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {connect} from 'react-redux';
+import SplitPane from 'react-split-pane';
+import Immutable from 'immutable';
+
 import Grid from './components/Grid';
 import TrashCan from './components/TrashCan';
 import Window from './components/Window';
 import AddOptions from './components/AddOptions';
 import BottomOptions from './components/BottomOptions';
 import Patterns from './components/Patterns';
-
-import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from './reducers/boxes';
-//import { findSibling } from './reducers/siblngReducer2';
-
-
-import {connect} from 'react-redux';
 import CodeModal from './components/codemirror_modal';
-import SplitPane from 'react-split-pane';
 import Code from './components/Codemirror';
-import './style/css/App.css'
+
+import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from './constants_actioncreators/boxes';
+
+import './style/css/App.css';
 
 const mapStateToProps = (state) => {
-	const ids = Object.keys(state.boxes);
+	const ids = Object.keys(state.get('boxes').toJS())
 	return {
-		boxes: state.boxes,
-		boxesCss: state.sibling,
-		html: state.html,
+		boxes: state.get('boxes'),
+		boxesCss: state.get('sibling'),
+		html: state.get('html'),
 		boxIds: ids,
-		nextBoxId: Number(ids[ids.length - 1]) + 1,
 	}
 }
 
@@ -33,7 +32,7 @@ const mapDispatchToProps = (dispatch) => {
 		setBox(box){
 			dispatch(setBox(box))
 		},
-		addBox(boxId,tag){
+		addBox(boxId, tag){
 			dispatch(addBox(boxId, tag))
 		},
 		removeBox(boxId){
@@ -61,18 +60,20 @@ const mapDispatchToProps = (dispatch) => {
 class App extends Component {
 	boxAdder = (e) => {
 		let tagType = e.target.attributes.value.value;
-		const id = +this.props.nextBoxId;
-		this.props.addBox(id, tagType);
+		const lastId = this.props.boxIds[this.props.boxIds.length - 1];
+		const newId = +lastId + 1;
+		this.props.addBox(newId, tagType);
 	}
 
 	boxCopier = (boxToCopy) => {
-		const newBoxId = +this.props.nextBoxId;
-		this.props.copyBox(boxToCopy, newBoxId);
+		const lastId = this.props.boxIds[this.props.boxIds.length - 1];
+		const newId = +lastId + 1;
+		this.props.copyBox(boxToCopy, newId);
 	}
 
 	render(){
 		const boxes = this.props.boxes;
-		const boxIds = this.props.boxIds;
+		const boxIds = this.props.boxIds.map(Number);
 
 		return (
 			<div className="App">
@@ -96,7 +97,7 @@ class App extends Component {
 								addChild={this.props.addChild}
 								removeParent={this.props.removeParent}
 								removeChild={this.props.removeChild}
-								boxes={this.props.boxes}
+								boxes={this.props.boxes.toJS()}
 								/>
 							{
 								boxIds.slice(1).map(box => (
@@ -108,17 +109,17 @@ class App extends Component {
 										addChild={this.props.addChild}
 										removeParent={this.props.removeParent}
 										removeChild={this.props.removeChild}
-										id={+box}
-										x={boxes[box].x}
-										y = {boxes[box].y}
-										height={boxes[box].height}
-										width={boxes[box].width}
-										children={boxes[box].children}
-										parent={boxes[box].parent}
-										tag={boxes[box].tag}
-										css={boxes[box].css}
-										boxIds={this.props.boxIds}
-										boxes={this.props.boxes}
+										id={box}
+										x={boxes.get(box).get('x')}
+										y = {boxes.get(box).get('y')}
+										height={boxes.get(box).get('height')}
+										width={boxes.get(box).get('width')}
+										children={boxes.get(box).get('children').toJS()}
+										parent={boxes.get(box).get('parent')}
+										tag={boxes.get(box).get('tag')}
+										css={boxes.get(box).get('css')}
+										boxIds={boxIds}
+										boxes={this.props.boxes.toJS()}
 										boxCopier={this.boxCopier}
 										/>
 										)
