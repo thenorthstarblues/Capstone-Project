@@ -630,13 +630,13 @@ Resizer.disabled:hover {
   stroke-opacity: 1;
 }
 
-.active: hover {
+.active:hover {
   stroke: #505050;
   stroke-width: 2px;
   stroke-opacity: 1;
 }
 
-.active: active {
+.active:active {
   stroke: #505050;
   stroke-width: 2px;
   stroke-opacity: 1;
