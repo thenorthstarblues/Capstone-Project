@@ -251,7 +251,6 @@ p,li,form {
   stroke: #000000;
   stroke-width: 1px;
   stroke-opacity: 1;
-
 }
 
 .basicErase{
@@ -293,63 +292,6 @@ p,li,form {
 
 
 
-    .Resizer {
-        background: #000;
-        opacity: .2;
-        z-index: 1;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        -moz-background-clip: padding;
-        -webkit-background-clip: padding;
-        background-clip: padding-box;
-    }
-
-     .Resizer:hover {
-        -webkit-transition: all 2s ease;
-        transition: all 2s ease;
-    }
-
-     .Resizer.horizontal {
-        height: 11px;
-        margin: -5px 0;
-        border-top: 5px solid rgba(255, 255, 255, 0);
-        border-bottom: 5px solid rgba(255, 255, 255, 0);
-        cursor: row-resize;
-        width: 100%;
-    }
-
-    .Resizer.horizontal:hover {
-        border-top: 5px solid rgba(0, 0, 0, 0.5);
-        border-bottom: 5px solid rgba(0, 0, 0, 0.5);
-    }
-
-    .Resizer.vertical {
-        width: 11px;
-        margin: 0 -5px;
-        border-left: 5px solid rgba(255, 255, 255, 0);
-        border-right: 5px solid rgba(255, 255, 255, 0);
-        cursor: col-resize;
-    }
-
-    .Resizer.vertical:hover {
-        border-left: 5px solid rgba(0, 0, 0, 0.5);
-        border-right: 5px solid rgba(0, 0, 0, 0.5);
-    }
-    Resizer.disabled {
-      cursor: not-allowed;
-    }
-    Resizer.disabled:hover {
-      border-color: transparent;
-    }
-
-
-.code-div {
-  height:100vh;
-}
-
-
-
 .Resizer {
     background: #000;
     opacity: .2;
@@ -362,12 +304,12 @@ p,li,form {
     background-clip: padding-box;
 }
 
-  .Resizer:hover {
+ .Resizer:hover {
     -webkit-transition: all 2s ease;
     transition: all 2s ease;
 }
 
-  .Resizer.horizontal {
+ .Resizer.horizontal {
     height: 11px;
     margin: -5px 0;
     border-top: 5px solid rgba(255, 255, 255, 0);
@@ -392,6 +334,61 @@ p,li,form {
 .Resizer.vertical:hover {
     border-left: 5px solid rgba(0, 0, 0, 0.5);
     border-right: 5px solid rgba(0, 0, 0, 0.5);
+}
+Resizer.disabled {
+  cursor: not-allowed;
+}
+Resizer.disabled:hover {
+  border-color: transparent;
+}
+
+
+.code-div {
+  height:100vh;
+}
+
+.Resizer {
+    background: #000;
+    opacity: .2;
+    z-index: 1;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+}
+
+.Resizer:hover {
+  -webkit-transition: all 2s ease;
+  transition: all 2s ease;
+}
+
+.Resizer.horizontal {
+  height: 11px;
+  margin: -5px 0;
+  border-top: 5px solid rgba(255, 255, 255, 0);
+  border-bottom: 5px solid rgba(255, 255, 255, 0);
+  cursor: row-resize;
+  width: 100%;
+}
+
+.Resizer.horizontal:hover {
+  border-top: 5px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+.Resizer.vertical {
+  width: 11px;
+  margin: 0 -5px;
+  border-left: 5px solid rgba(255, 255, 255, 0);
+  border-right: 5px solid rgba(255, 255, 255, 0);
+  cursor: col-resize;
+}
+
+.Resizer.vertical:hover {
+  border-left: 5px solid rgba(0, 0, 0, 0.5);
+  border-right: 5px solid rgba(0, 0, 0, 0.5);
 }
 
 Resizer.disabled {
@@ -429,9 +426,9 @@ Resizer.disabled:hover {
 }
 
 .addOptions {
-   display: flex;
-   flex-direction: column;
-   padding:10px;
+  display: flex;
+  flex-direction: column;
+  padding:10px;
 }
 
 .addOptionsInt {
@@ -439,9 +436,9 @@ Resizer.disabled:hover {
 }
 
 .viewFam {
-   display: flex;
-   flex-direction: column;
-   padding:10px;
+  display: flex;
+  flex-direction: column;
+  padding:10px;
 }
 
 .stretchSelf{
@@ -450,11 +447,11 @@ Resizer.disabled:hover {
 }
 
 .icons {
-   font-family: 'Glyphicons Halflings';
+  font-family: 'Glyphicons Halflings';
 }
 
 .iconsH {
-   font-family: 'FontAwesome';
+  font-family: 'FontAwesome';
 }
 
 .pixelGrid {
@@ -585,7 +582,7 @@ Resizer.disabled:hover {
 .activeBar {
   fill:#757575;
   height: 20px;
-  rx:2px ;
+  rx:2px;
   ry:2px;
   stroke-width:3px;
   stroke: #ffffff;
@@ -617,14 +614,12 @@ Resizer.disabled:hover {
 }
 
 .offset15side{
-    margin-left: 15px;
-    margin-right: 15px;
-
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .thumbSpace {
   margin: 10px;
-
 }
 
 .bkRect {

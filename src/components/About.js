@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Navigation from './Navigations';
 import ViewGroups from './ViewGroups';
+import Immutable from 'immutable';
+import {saveGroup} from '../constants_actioncreators/layout';
+import '../style/css/App.css';
 
 
 // alternate actions for the dispatch structure
@@ -13,14 +16,12 @@ import {connect} from 'react-redux';
 import '../style/css/App.css'
 
 const mapStateToProps = (state) => {
-	const ids = Object.keys(state.boxes);
+	const ids = Object.keys(state.get('boxes').toJS());
 	return {
-		boxes: state.boxes,
-		boxesCss: state.sibling,
-		html: state.html,
-		group: state.group,
+		boxes: state.get('boxes').toJS(),
+		boxesCss: state.get('sibling'),
+		html: state.get('html'),
 		boxIds: ids,
-		nextBoxId: Number(ids[ids.length - 1]) + 1,
 	}
 }
 
