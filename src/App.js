@@ -11,7 +11,7 @@ import AddOptions from './components/AddOptions';
 import BottomOptions from './components/BottomOptions';
 import Patterns from './components/Patterns';
 import bottomButtons from './components/pagesButton';
-import {saveGroup} from './reducers/boxes';
+import {saveGroup} from './constants_actioncreators/layout';
 import CodeModal from './components/codemirror_modal';
 import Code from './components/Codemirror';
 
