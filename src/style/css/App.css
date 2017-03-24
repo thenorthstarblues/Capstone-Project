@@ -4,6 +4,97 @@
  */
 /* FONT PATH
  * -------------------------- */
+ /**
+ * @license
+ * MyFonts Webfont Build ID 3364105, 2017-03-23T21:24:40-0400
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: TrendHMSlab-Five_Italic by Latinotype
+ * URL: http://www.myfonts.com/fonts/latinotype/trend-hand-made/slab-five-italic/
+ * Copyright: Copyright (c) 2013 by Daniel Hernandez &amp; Paula nazal. All rights reserved.
+ *
+ * Webfont: TrendHMSlab-Five by Latinotype
+ * URL: http://www.myfonts.com/fonts/latinotype/trend-hand-made/slab-five/
+ * Copyright: Copyright (c) 2012 by Daniel Hernandez &amp; Paula nazal. All rights reserved.
+ *
+ * Webfont: TrendHMSlab-One by Latinotype
+ * URL: http://www.myfonts.com/fonts/latinotype/trend-hand-made/slab-one/
+ * Copyright: Copyright (c) 2012 by Daniel Hernandez &amp; Paula nazal. All rights reserved.
+ *
+ * Webfont: TrendHMSlab-One_Italic by Latinotype
+ * URL: http://www.myfonts.com/fonts/latinotype/trend-hand-made/slab-one-italic/
+ * Copyright: Copyright (c) 2012 by Daniel Hernandez &amp; Paula nazal. All rights reserved.
+ *
+ * Webfont: Trenda-ExtraLight by Latinotype
+ * URL: http://www.myfonts.com/fonts/latinotype/trenda/extra-light/
+ * Copyright: Copyright &#x00A9; 2016 by Daniel Hernandez &amp; Paula Nazal. All rights reserved.
+ *
+ * Webfont: Trenda-ExtraLightIt by Latinotype
+ * URL: http://www.myfonts.com/fonts/latinotype/trenda/extra-light-italic/
+ * Copyright: Copyright &#x00A9; 2016 by Daniel Hernandez &amp; Paula Nazal. All rights reserved.
+ *
+ * Webfont: Trenda-Regular by Latinotype
+ * URL: http://www.myfonts.com/fonts/latinotype/trenda/regular/
+ * Copyright: Copyright &#x00A9; 2016 by Daniel Hernandez &amp; Paula Nazal. All rights reserved.
+ *
+ * Webfont: Trenda-RegularIt by Latinotype
+ * URL: http://www.myfonts.com/fonts/latinotype/trenda/regular-italic/
+ * Copyright: Copyright &#x00A9; 2016 by Daniel Hernandez &amp; Paula Nazal. All rights reserved.
+ *
+ * Webfont: Trenda-Semibold by Latinotype
+ * URL: http://www.myfonts.com/fonts/latinotype/trenda/semibold/
+ * Copyright: Copyright &#x00A9; 2016 by Daniel Hernandez &amp; Paula Nazal. All rights reserved.
+ *
+ * Webfont: Trenda-SemiboldIt by Latinotype
+ * URL: http://www.myfonts.com/fonts/latinotype/trenda/semibold-italic/
+ * Copyright: Copyright &#x00A9; 2016 by Daniel Hernandez &amp; Paula Nazal. All rights reserved.
+ *
+ *
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=3364105
+ * Licensed pageviews: 10,000
+ *
+ * © 2017 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/335509");
+
+
+@font-face {font-family: 'TrendHandMade';font-weight: bold;font-style: italic;src: url('../fonts/335509_0_0.eot');src: url('../fonts/335509_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_0_0.woff2') format('woff2'),url('../fonts/335509_0_0.woff') format('woff'),url('../fonts/335509_0_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'TrendHandMade';font-weight: bold;font-style: normal;src: url('../fonts/335509_1_0.eot');src: url('../fonts/335509_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_1_0.woff2') format('woff2'),url('../fonts/335509_1_0.woff') format('woff'),url('../fonts/335509_1_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'TrendHandMade';font-weight: normal;font-style: normal;src: url('../fonts/335509_2_0.eot');src: url('../fonts/335509_2_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_2_0.woff2') format('woff2'),url('../fonts/335509_2_0.woff') format('woff'),url('../fonts/335509_2_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'TrendHandMade';font-weight: normal;font-style: italic;src: url('../fonts/335509_3_0.eot');src: url('../fonts/335509_3_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_3_0.woff2') format('woff2'),url('../fonts/335509_3_0.woff') format('woff'),url('../fonts/335509_3_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda-ExtraLight';src: url('../fonts/335509_4_0.eot');src: url('../fonts/335509_4_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_4_0.woff2') format('woff2'),url('../fonts/335509_4_0.woff') format('woff'),url('../fonts/335509_4_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda-ExtraLightIt';src: url('../fonts/335509_5_0.eot');src: url('../fonts/335509_5_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_5_0.woff2') format('woff2'),url('../fonts/335509_5_0.woff') format('woff'),url('../fonts/335509_5_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda';font-weight: normal;font-style: normal;src: url('../fonts/335509_6_0.eot');src: url('../fonts/335509_6_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_6_0.woff2') format('woff2'),url('../fonts/335509_6_0.woff') format('woff'),url('../fonts/335509_6_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda';font-weight: normal;font-style: italic;src: url('../fonts/335509_7_0.eot');src: url('../fonts/335509_7_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_7_0.woff2') format('woff2'),url('../fonts/335509_7_0.woff') format('woff'),url('../fonts/335509_7_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda';font-weight: bold;font-style: normal;src: url('../fonts/335509_8_0.eot');src: url('../fonts/335509_8_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_8_0.woff2') format('woff2'),url('../fonts/335509_8_0.woff') format('woff'),url('../fonts/335509_8_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda';font-weight: bold;font-style: italic;src: url('../fonts/335509_9_0.eot');src: url('../fonts/335509_9_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_9_0.woff2') format('woff2'),url('../fonts/335509_9_0.woff') format('woff'),url('../fonts/335509_9_0.ttf') format('truetype');}
+
 @font-face {
   font-family: 'FontAwesome';
   src: url('../fonts/fontawesome-webfont.eot?v=4.7.0');
@@ -12,33 +103,89 @@
   font-style: normal;
 }
 
+.TrendHandMade {
+  font-family: 'TrendHandMade';
+  font-weight: normal;
+  color: #000000;
+}
+
+.TrendHMTitle {
+  font-family: 'TrendHandMade';
+  font-weight: bold;
+  color: #000000;
+  font-size: 2.5em;
+  margin-bottom: 0px;
+}
+
+.menuL {
+  font-family: 'Trenda';
+  font-weight: bold;
+  color: #000000;
+  font-size: 1em;
+  margin-top: 0px;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'TrendHandMade';
+  font-weight: bold;
+  color: #000000;
+}
+
+p,li,form {
+  font-family: 'Trenda';
+  font-weight: normal;
+  color: #333333;
+}
+
+.btn {
+  font-family: 'Trenda';
+  font-weight: normal;
+}
+
+.bkgrey {
+  background-color: #dddddd;
+}
+
+.bkwhite {
+  background-color: #ffffff;
+}
+
+.bkoffwhite {
+  background-color: #f0f0f0;
+}
 
 .App {
-  text-align: center;
+  /*text-align: center;*/
   padding: 20px;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+}
+
+.flexWrap{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.flexRow{
+  display: flex;
+  flex-direction: row;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.spaceBetween {  /* to edges, space between row */
+   -webkit-justify-content: space-between;
+   justify-content: space-between;
 }
 
-.App-intro {
-  font-size: large;
+.left { /* left for rows */
+   -webkit-justify-content: flex-start;
+   justify-content: flex-start;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+
+.centerAround {  /* equal buffers row */
+   -webkit-justify-content: space-around;
+   justify-content: space-around;
 }
 
 .dropzone {
@@ -84,6 +231,14 @@
   stroke-opacity: 1;
 }
 
+.basicBoxBk{
+  fill: #ffffff;
+  fill-opacity: .5;
+  stroke: #000000;
+  stroke-width: 2px;
+  stroke-opacity: 1;
+}
+
 .basicH1{
   fill: #3d3d3d;
   fill-opacity: 0.75;
@@ -124,6 +279,16 @@
 .custom-modal {
   width: 90%;
   height: 90%;
+}
+
+
+.m5w{
+  margin:5px 5px 5px 0px;
+  min-width: 50px;
+}
+
+.p20w{
+  padding: 5px 20px 15px;
 }
 
 
@@ -247,6 +412,42 @@ Resizer.disabled:hover {
   overflow: visible;
 }
 
+.mainDrawing {
+  margin:0px 0px;
+}
+
+.svgHolder {
+  width: 1195px;
+  height: 575px;
+  padding:10px;
+}
+
+.svgHolder2 {
+  width: 1100px;
+  height: 625px;
+  padding:10px;
+}
+
+.addOptions {
+   display: flex;
+   flex-direction: column;
+   padding:10px;
+}
+
+.addOptionsInt {
+  height: 555px;
+}
+
+.viewFam {
+   display: flex;
+   flex-direction: column;
+   padding:10px;
+}
+
+.stretchSelf{
+  -webkit-align-self: stretch;
+  align-self:stretch;
+}
 
 .icons {
    font-family: 'Glyphicons Halflings';
@@ -257,7 +458,7 @@ Resizer.disabled:hover {
 }
 
 .pixelGrid {
-  fill-opacity: .15;
+  fill-opacity: .25;
   stroke: #000000;
   stroke-width: 2px;
   stroke-opacity: 1;
@@ -331,3 +532,150 @@ Resizer.disabled:hover {
   stroke-opacity: .15;
   fill: url(#ului);
 }
+
+.closer{
+  margin:0px;
+}
+
+.sm{
+  font-size:.75em;
+}
+
+.cornerR5{
+  border-radius: 5px;
+}
+
+
+.borders {
+  box-shadow: 0 0 2px #888888;
+}
+
+.bshadsm {
+  box-shadow: 0 0 1px #ededed;
+  border: solid 1px black;
+}
+
+.border1 {
+  background-color: #fafafa;
+  margin-top: 5px;
+  padding: 5px 0px 10px 10px;
+  border: solid 1px black;
+  border-radius: 3px;
+  box-shadow: 0 0 2px #888888;
+}
+
+.fontOptions {
+  padding: 10px 0px 0px 0px;
+
+}
+
+.inactiveBar {
+  fill:#d3d3d3;
+  height: 20px;
+  rx:2px ;
+  ry:2px;
+  stroke-width:3px;
+  stroke: #ffffff;
+}
+
+.inactiveBar:hover {
+  fill:#757575;
+}
+
+.activeBar {
+  fill:#757575;
+  height: 20px;
+  rx:2px ;
+  ry:2px;
+  stroke-width:3px;
+  stroke: #ffffff;
+}
+
+.textBar {
+  font-family: 'Trenda-ExtraLight';
+  font-weight: normal;
+  font-size: .75em;
+  fill: white;
+}
+
+.Trenda {
+  text-anchor: start;
+  font-family: 'Trenda';
+  font-weight: normal;
+}
+
+.TrendaActive {
+  text-anchor: start;
+  font-family: 'Trenda';
+  font-weight: bold;
+}
+
+.verticalGuides {
+  stroke-width: 2px;
+  stroke: lightblue;
+
+}
+
+.offset15side{
+    margin-left: 15px;
+    margin-right: 15px;
+
+}
+
+.thumbSpace {
+  margin: 10px;
+
+}
+
+.bkRect {
+  fill: #ffffff;
+  fill-opacity: .5;
+  stroke: #000000;
+  stroke-width: 4px;
+  stroke-opacity: 1;
+}
+
+.active:hover {
+  stroke: #505050;
+  stroke-width: 2px;
+  stroke-opacity: 1;
+}
+
+.active:active {
+  stroke: #505050;
+  stroke-width: 2px;
+  stroke-opacity: 1;
+}
+
+.activeRect {
+  fill: #ffffff;
+  fill-opacity: .1;
+}
+
+.sideThumbs {
+  height: 400px;
+  overflow: scroll;
+}
+
+.mainThumbs {
+  height: 535px;
+  overflow: scroll;
+}
+
+.thumbnailMargLarge {
+  margin: 20px 40px;
+}
+
+.fakeTab {
+  height: 36px;
+  padding-top: 6px;
+  border: none;
+  margin-right: 4px;
+  margin-top: 4px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.other {
+  color: #fafafa;
+}
+

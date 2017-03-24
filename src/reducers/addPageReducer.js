@@ -11,9 +11,7 @@ const pageReducer = (prevState = initialState, action) => {
     case 'MAKE_GROUP':
       return prevState.set('group', action.group);
     case 'ADD_PAGE':
-      return prevState.update('pages', (pagesList) => {
-        return pagesList.push(action.page);
-      });
+      return prevState.update('pages', (pagesList) => pagesList.push(action.page));
     case 'SET_CURRENT':
       return prevState.set('currentPage', action.id);
     default:
