@@ -42,7 +42,7 @@ class App extends Component {
 		const lastId = this.props.boxIds[this.props.boxIds.length - 1];
 		const newId = +lastId + 1;
 		this.props.addBox(newId, tagType);
-	}
+	})
 
 	boxCopier = (boxToCopy) => {
 		const lastId = this.props.boxIds[this.props.boxIds.length - 1];

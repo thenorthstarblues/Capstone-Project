@@ -1,9 +1,7 @@
 //background functionality
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-
-//core actions
-import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from '../reducers/boxes';
+import Immutable from 'immutable';
 
 import Faketabs from './Faketabs';
 
@@ -15,15 +13,21 @@ import TrashCan from './TrashCan';
 import BottomOptions from './BottomOptions';
 import AddOptions from './AddOptions';
 import FontColor from './FontColor';
+import {saveGroup} from '../constants_actioncreators/layout';
+import CodeModal from './codemirror_modal';
+import Code from './Codemirror';
+
+import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from '../constants_actioncreators/boxes';
+
+import '../style/css/App.css';
 
 const mapStateToProps = (state) => {
-	const ids = Object.keys(state.boxes);
+	const ids = Object.keys(state.get('boxes').toJS());
 	return {
-		boxes: state.boxes,
-		boxesCss: state.sibling,
-		html: state.html,
+		boxes: state.get('boxes').toJS(),
+		boxesCss: state.get('sibling'),
+		html: state.get('html'),
 		boxIds: ids,
-		nextBoxId: Number(ids[ids.length - 1]) + 1,
 	}
 }
 

@@ -3,29 +3,33 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 //core actions
-import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from '../reducers/boxes';
+import Immutable from 'immutable';
 
 import Faketabs from './Faketabs';
 
 //all svg drawing things
-import Patterns from './Patterns';
+import {saveGroup} from '../constants_actioncreators/layout';
+import CodeModal from './codemirror_modal';
+import Code from './Codemirror';
+
+import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from '../constants_actioncreators/boxes';
+
+import '../style/css/App.css';
+
+//all svg drawing things
 import FamilyThumbnails from './FamilyThumbnails';
-import Grid from './Grid';
-import TrashCan from './TrashCan';
-import BottomOptions from './BottomOptions';
 import FamilyScroll from './FamilyScroll';
 import FontColor from './FontColor';
 
 const mapStateToProps = (state) => {
-	const ids = Object.keys(state.boxes);
+	const ids = Object.keys(state.get('boxes').toJS());
 	return {
-		boxes: state.boxes,
-		boxesCss: state.sibling,
+		boxes: state.get('boxes').toJS(),
+		boxesCss: state.get('sibling'),
 		html: state.html,
 		group: state.group, // layer names and conventions
 		allgroups: state.layouts,
 		boxIds: ids,
-		nextBoxId: Number(ids[ids.length - 1]) + 1,
 	}
 }
 
