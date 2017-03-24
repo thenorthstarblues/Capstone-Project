@@ -19,7 +19,7 @@ import './style/css/index.css';
    <Provider store={store}>
      <Router>
 	     <div>
-	       <Route path='/' component={App} />
+	       <Route exact path='/' component={App} />
 	       <Route path='/templates' component={Templates} />
 	       <Route path='/about' component={About} /> {/* //about tabs should hold intro, directions, usecases */}
 	       <Route path='/profile/:user' component={User} /> {/* //about tabs should hold user's templates (created), user's templates (favorites), sidebar contact info/media preferences, other?
