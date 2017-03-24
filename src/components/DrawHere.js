@@ -95,7 +95,7 @@ class DrawHere extends Component {
 
 
 					  <div className="offset15side">
-						  <div className="tab-content tab-pane active " id="link to tabs">
+						  <div className="" id="link to content">
 								<div className=" row bkoffwhite borders">
 									<div id="grid-snap" className="svgHolder col-lg-10 bkoffwhite ">
 

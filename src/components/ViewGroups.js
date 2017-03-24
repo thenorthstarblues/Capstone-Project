@@ -80,7 +80,7 @@ class ViewGroups extends Component {
 
 		        	</div>
 			        <div className="offset15side">
-						  <div className="tab-content tab-pane active " id="link to tabs">
+						  <div className="" id="link to content">
 									<div className=" row bkoffwhite borders">
 										<div id="grid-snap" className="svgHolder2 col-lg-9 bkoffwhite ">
 											<FamilyThumbnails action="" />
