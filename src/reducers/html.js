@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
-import { getFormattedHtml, getCss } from '../components/previewCreator';
+import { getFormattedHtml, getCss, getHtml } from '../components/previewCreator';
+import { theCss } from './stockCss';
 
 const initialState = Immutable.Map({
   html: '',
@@ -19,8 +20,9 @@ const setCss = css => ({
   css,
 });
 
-export const createCss = () => (dispatch) => {
-  const cssString = getCss();
+export const createCss = elements => (dispatch) => {
+  const { css } = getHtml(elements);
+  const cssString = getCss(theCss, css);
   dispatch(setCss(cssString));
 };
 
@@ -32,9 +34,9 @@ export const htmlCreator = elements => (dispatch) => {
 const htmlReducer = (prevState = initialState, action) => {
   switch (action.type) {
     case CREATE_HTML:
-      return prevState.set('html', action.html);
+      return prevState.set('html', Immutable.fromJS(action.html));
     case CREATE_CSS:
-      return prevState.set('css', action.css);
+      return prevState.set('css', Immutable.fromJS(action.css));
     default:
       return prevState;
   }
