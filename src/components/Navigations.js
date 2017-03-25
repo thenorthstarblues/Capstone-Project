@@ -17,7 +17,7 @@ const Navigation=(({page})=>{
 	return (
 	        <div className="row col-lg-12 flexWrap p20w bkgrey">
 	        	<div className = "col-lg-6">
-	    			<span className="TrendHMTitle" > Agile-Armature </span>
+	    			<span className="TrendHMTitle" ><img src="/AAlogo.svg" /> Agile-Armature </span>
 	    			{templates &&
 						<span className="menuL" > Templates <span className="glyphicon glyphicon-minus"></span></span>
 
