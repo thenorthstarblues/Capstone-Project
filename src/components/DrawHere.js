@@ -24,15 +24,15 @@ import '../style/css/App.css';
 
 const mapStateToProps = (state) => {
 	const ids = Object.keys(state.get('boxes').toJS());
-	const idsPreview = Object.keys(state.get('sibling'));
+	const idsCss = Object.keys(state.get('boxesCss').toJS());
 
 	return {
 		boxes: state.get('boxes').toJS(),
-		boxesCss: state.get('sibling'),
+		boxesCss: state.get('boxesCss').toJS(),
 		html: state.get('html'),
 		boxIds: ids,
-		boxPrvIds: idsPreview,
-		preview: state.get('preview'),
+		boxIdsCss: idsCss,
+		preview: state.get('preview').toJS().preview,
 	}
 }
 
@@ -61,7 +61,7 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		copyBox(boxId, newBox){
 			dispatch(copyBox(boxId, newBox))
-		}
+		},
 	}
 }
 
@@ -69,9 +69,6 @@ const mapDispatchToProps = (dispatch) => {
 class DrawHere extends Component {
 	constructor(props){
 		super(props);
-		this.state= {
-			preview: this.props.preview,
-		}
 		this.boxAdder=this.boxAdder.bind(this);
 
 	}
@@ -93,9 +90,10 @@ class DrawHere extends Component {
 		let boxes = this.props.boxes;
 		let boxIds = this.props.boxIds;
 
-		if (this.state.preview){
+		if (this.props.preview===true){
 			boxes = this.props.boxesCss;
-			boxIds = this.props.boxPrvIds;
+			boxIds = this.props.boxIdsCss;
+
 		};
 
 		return (

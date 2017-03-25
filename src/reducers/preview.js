@@ -1,9 +1,9 @@
 import Immutable from 'immutable';
-import {findSiblings} from './siblings';
+import {previewSiblings} from './siblings';
 
-const initialState = {
+export const initialState = Immutable.Map({
   preview: false,
-};
+});
 
 export const ON_PREVIEW = 'ON_PREVIEW';
 
@@ -13,7 +13,7 @@ const setPreview = (bool) => ({
 });
 
 export const showPreview = (boxes) => (dispatch) => {
-  dispatch(findSiblings(boxes));
+  dispatch(previewSiblings(boxes));
   dispatch(setPreview(true));
 };
 
@@ -23,18 +23,15 @@ export const hidePreview = () => (dispatch) => {
 
 //---------------------------action reducer---------------------------
 const previewReducer = (prevState = initialState, action) => {
-  let newState=Object.assign({}, prevState);
 
   switch (action.type) {
     case ON_PREVIEW:
-      newState.preview=action.preview;
-      break;
+      return prevState.set('preview', action.preview);
 
     default:
       return prevState;
   }
 
-  return newState;
 };
 
 export default previewReducer;
