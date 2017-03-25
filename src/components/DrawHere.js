@@ -24,11 +24,15 @@ import '../style/css/App.css';
 
 const mapStateToProps = (state) => {
 	const ids = Object.keys(state.get('boxes').toJS());
+	const idsPreview = Object.keys(state.get('sibling'));
+
 	return {
 		boxes: state.get('boxes').toJS(),
 		boxesCss: state.get('sibling'),
 		html: state.get('html'),
 		boxIds: ids,
+		boxPrvIds: idsPreview,
+		preview: state.get('preview'),
 	}
 }
 
@@ -66,9 +70,7 @@ class DrawHere extends Component {
 	constructor(props){
 		super(props);
 		this.state= {
-			activeLayoutId:'', //to pull up main pg contents / should be selected tab
-			groupIds:[], //all groupIds
-
+			preview: this.props.preview,
 		}
 		this.boxAdder=this.boxAdder.bind(this);
 
@@ -87,8 +89,14 @@ class DrawHere extends Component {
 	}
 
 	render(){
-		const boxes = this.props.boxes;
-		const boxIds = this.props.boxIds;
+
+		let boxes = this.props.boxes;
+		let boxIds = this.props.boxIds;
+
+		if (this.state.preview){
+			boxes = this.props.boxesCss;
+			boxIds = this.props.boxPrvIds;
+		};
 
 		return (
 		        <div> {/* need dispatches to trickle up and change state from tabs*/}

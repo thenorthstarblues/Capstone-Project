@@ -635,13 +635,13 @@ Resizer.disabled:hover {
   stroke-opacity: 1;
 }
 
-.active:hover {
+.activeRect:hover {
   stroke: #505050;
   stroke-width: 2px;
   stroke-opacity: 1;
 }
 
-.active:active {
+.activeRect:active {
   stroke: #505050;
   stroke-width: 2px;
   stroke-opacity: 1;
@@ -695,4 +695,10 @@ Resizer.disabled:hover {
   fill: #e6e6e6;
   stroke-width:2px;
   stroke: #adadad;
+}
+
+.hierarchyDiv{
+  stroke-width:3px;
+  stroke: #00bfff;
+  stroke-dasharray: 3px;
 }
