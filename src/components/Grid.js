@@ -70,24 +70,31 @@ class Grid extends Component {
   }
 
   render() {
-    let typeClass;
-    switch(this.props.tag){
-      case('div'): typeClass = 'basicBox'; break;
-      case('p'): typeClass = 'paragraph'; break;
-      case('h1'): typeClass = 'headerH1'; break;
-      case('h2'): typeClass = 'headerH2'; break;
-      case('h3'): typeClass = 'headerH3'; break;
-      case('h4'): typeClass = 'headerH4'; break;
-      case('h5'): typeClass = 'headerH5'; break;
-      case('ul'): typeClass = 'ului'; break;
-      case('img'): typeClass = 'img'; break;
-      default: typeClass = 'basicBox'; break;
-    }
 
     return (
-      <rect className={`dropzone yes-drop ${typeClass}`} id={+this.props.id} height={this.props.height} width={this.props.width} x={this.props.x} y={this.props.y} rx="2px" ry="2px" />
+      <rect className={`dropzone yes-drop ${typeClass[this.props.tag]}`} id={+this.props.id} height={this.props.height} width={this.props.width} x={this.props.x} y={this.props.y} rx="2px" ry="2px" />
     )
   }
 }
 
 export default Grid;
+
+
+const typeClass={
+    div: 'basicBox',
+    p: 'paragraph',
+    h1: 'headerH1',
+    h2: 'headerH2',
+    h3: 'headerH3',
+    h4: 'headerH4',
+    h5: 'headerH5',
+    ul: 'ului',
+    img: 'img',
+    video: 'video',
+    audio: 'audio',
+    button: 'buttn',
+    text: 'textForm',
+    radio: 'radioForm',
+    file: 'fileForm',
+    options: 'optionsForm',
+}

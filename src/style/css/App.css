@@ -679,3 +679,20 @@ Resizer.disabled:hover {
   color: #fafafa;
 }
 
+
+.colorBox{
+  width: 20px;
+  height: 20px;
+}
+
+.clearBtn{
+  fill: white;
+  stroke-width:2px;
+  stroke: black;
+}
+
+.clearBtn:hover{
+  fill: #e6e6e6;
+  stroke-width:2px;
+  stroke: #adadad;
+}

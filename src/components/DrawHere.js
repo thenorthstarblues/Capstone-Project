@@ -10,6 +10,7 @@ import Patterns from './Patterns';
 import Window from './Window';
 import Grid from './Grid';
 import TrashCan from './TrashCan';
+import ClearAll from './ClearAll';
 import BottomOptions from './BottomOptions';
 import AddOptions from './AddOptions';
 import FontColor from './FontColor';
@@ -133,6 +134,7 @@ class DrawHere extends Component {
 														)
 													}
 												<TrashCan removeBox={this.props.removeBox} />
+												<ClearAll />
 												<BottomOptions />
 											</svg>
 										</div>

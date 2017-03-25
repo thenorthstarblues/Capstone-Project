@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { makeGroup, addPage, setCurrent } from './addPageReducer';
 import Immutable from 'immutable';
-import { SET_BOX, ADD_BOX, REMOVE_BOX, SET_PARENT, ADD_CHILD, REMOVE_PARENT, REMOVE_CHILD, COPY_BOX } from '../constants_actioncreators/boxes';
+import { SET_BOX, ADD_BOX, REMOVE_BOX, SET_PARENT, ADD_CHILD, REMOVE_PARENT, REMOVE_CHILD, COPY_BOX, CLEAR_ALL } from '../constants_actioncreators/boxes';
 import { LOAD_LAYOUT, SAVE } from '../constants_actioncreators/layout';
 
-const initialState = Immutable.Map({
+export const initialState = Immutable.Map({
   0: Immutable.Map({
     height: 500,
     width: 950,
@@ -53,6 +53,8 @@ const boxesReducer = (prevState = initialState, action) => {
       return prevState.clear().merge(action.newLayout);
     case SAVE:
       return prevState;
+    case CLEAR_ALL:
+      return initialState;
     default:
       return prevState;
   }

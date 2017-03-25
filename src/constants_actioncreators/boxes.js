@@ -6,6 +6,7 @@ export const ADD_CHILD = 'ADD_CHILD';
 export const REMOVE_PARENT = 'REMOVE_PARENT';
 export const REMOVE_CHILD = 'REMOVE_CHILD';
 export const COPY_BOX = 'COPY_BOX';
+export const CLEAR_ALL = 'CLEAR_ALL';
 
 
 export const setBox = box => ({
@@ -64,4 +65,8 @@ export const copyBox = (boxId, newBoxId) => ({
   type: COPY_BOX,
   boxId,
   newBoxId,
+});
+
+export const clearAll = () => ({
+  type: CLEAR_ALL,
 });

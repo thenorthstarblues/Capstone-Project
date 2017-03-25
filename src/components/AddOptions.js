@@ -23,27 +23,27 @@ let buttons= [
   },
   {
     val: 'h1',
-    icon: 'glyphicon glyphicon-plus',
+    icon: 'glyphicon glyphicon-header',
     style: '',
   },
   {
     val: 'h2',
-    icon: 'glyphicon glyphicon-align-left',
+    icon: 'glyphicon glyphicon-header',
     style: '',
   },
   {
     val: 'h3',
-    icon: 'glyphicon glyphicon-align-center',
+    icon: 'glyphicon glyphicon-header',
     style: '',
   },
   {
     val: 'h4',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-header',
     style: '',
   },
   {
     val: 'h5',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-header',
     style: '',
   },
   {
@@ -63,17 +63,17 @@ let buttons= [
   },
   {
     val: 'video',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-facetime-video',
     style: '',
   },
   {
     val: 'audio',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-headphones',
     style: '',
   },
   {
     val: 'button',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-hand-down',
     style: '',
   },
 ];
@@ -86,17 +86,17 @@ const buttonsForm= [
   },
   {
     val: 'radio',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-record',
     style: 'text-right',
   },
   {
-    val: 'audio',
-    icon: 'glyphicon glyphicon-align-right',
+    val: 'file',
+    icon: 'glyphicon glyphicon-floppy-disk',
     style: 'text-right',
   },
   {
-    val: 'audio',
-    icon: 'glyphicon glyphicon-align-right',
+    val: 'options',
+    icon: 'glyphicon glyphicon-chevron-down',
     style: 'text-right',
   },
 

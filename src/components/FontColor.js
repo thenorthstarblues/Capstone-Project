@@ -1,19 +1,57 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+//core actions
+import Immutable from 'immutable';
 
-//add/use connect to dispatch eventually to state/css updates
+const mapStateToProps = (state) => { // just need general directions to create css at start of file, in advance of additional categories
+  return {
+    boxes: state.get('boxes').toJS(),
+    boxesCss: state.get('sibling'),
+    html: state.get('css'),
+  }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  }
+}
+
 
 class FontColor extends Component{
   constructor(props){
     super(props);
     this.state= {
-      colorsPicked:[], //to add to Css... need to make reducers/incorporate
+      colorsPicked:[],
       headerFont:'',
       paragraphFont:'',
 
     }
-    //add actions/bind here
+    this.pickColor=this.pickColor.bind(this);
+    this.pickHeader=this.pickHeader.bind(this);
+    this.pickParagraph=this.pickParagraph.bind(this);
 
   }
+
+  pickColor=((e)=>{
+    // add in the js color picker here for the final workflow- npm install
+    console.log(e.target);
+
+  })
+
+  pickHeader=((e)=>{
+    // add in the js color picker here for the final workflow- npm install
+    console.log(e.target);
+
+  })
+
+  pickParagraph=((e)=>{
+    // add in the js color picker here for the final workflow- npm install
+    console.log(e.target);
+
+  })
+
 
     render(){
 
@@ -41,28 +79,22 @@ class FontColor extends Component{
                     </div>
                     <div >
                       <form onChange="">
-                        <button className="btn btn-default">choose up to 6 pallet colors</button>
+                        <button className="btn btn-default btn-sm" onClick="" >pick pallet color</button>
                       </form>
                     </div>
-                    <div className="colorBox">
-                      box
-                    </div>
-                    <div className="colorBox">
-                      box
-                    </div>
-                    <div className="colorBox">
-                      box
-                    </div>
-                    <div className="colorBox">
-                      box
-                    </div>
-                    <div className="colorBox">
-                      box
-                    </div>
+                    {/*this.colorsPicks.map((color, i)=>{
+                      if (i < 6) { // this should be in hex format from the picker.
+                        return (
+                                <div className="colorBox" style={`background-color: ${color}`}>
+                                  {color}
+                                </div>
+                              );
+                      }
+                    })*/}
               </div>
     )
   }
 
 }
 
-export default FontColor;
+export default connect(mapStateToProps, mapDispatchToProps)(FontColor);
