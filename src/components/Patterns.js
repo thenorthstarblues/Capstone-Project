@@ -24,25 +24,25 @@ for (let i=0; i<600/14; i++){
 // those with logic of bounding box
 const patternBoundingBox={
 	img: {
-		fill: 'none',
-		stroke: "#00bfff",
+		fill: '#636363',
+		stroke: "#ffffff",
 		repeat: 1,
-		interior: ['rect', 'line', 'line'],
 	},
 	video: {
-		fill: 'none',
-		stroke: "#00bfff",
+		fill: '#636363',
+		stroke: "#ffffff",
 		repeat: 1,
-		interior: ['rect', 'line', 'line'],
 		icon: <span className="glyphicon glyphicon-play-circle"></span>,
 	},
 
 }
 
 // those with logic of default noMapping - i.e. set sizes
-// headers
-// button, audio bar,
-// options, radio buttons, file, form lines
+// headers - easy
+// button - unique
+// audio bar - unique
+// radio buttons -
+// options, file, form lines - variants
 const defaultNoRepeat=[
 	{
 		id: 'h1',
@@ -104,7 +104,7 @@ const defaultNoRepeat=[
 
 // those with logic of default noMapping and line repeats
 // paragraphs, ul, tables,
-const defaultRepeat=[
+const defaultRepeat=[ //new real effeciency gain
 	{
 		id:'paragraph',
 		repeat: em1,
@@ -123,8 +123,17 @@ const defaultRepeat=[
 		fill: "#d0d0d0",
 		fillc: "grey",
 	},
-
-
+	{
+		id:'table',
+		repeat: em1,
+		y: em1*1.33,
+		x: em1*2,
+		xc: em1,
+		r: 3,
+		height: em1*.7,
+		fill: "#d0d0d0",
+		fillc: "grey",
+	},
 
 ];
 
@@ -158,6 +167,16 @@ const Patterns = (()=> {
 						    		        )
 						    		})}
 						    </pattern>)
+			    	} else if (pat.id.includes('table')){
+			    	return (<pattern key={pat.id} id={pat.id} x="0" y="0" width={pat.repeat} height={pat.repeat} >
+						    	{repeats.map(ind=>{
+						    		return (<g key={ind} >
+						    		        <rect x={pat.x} y={ind * pat.y} width={wMax} height={pat.height} fill={pat.fill} />
+						    		        <circle cx={pat.xc}  cy={ind * pat.y+pat.height/2} r={pat.r} fill={pat.fillc} />
+									      	</g>
+						    		        )
+						    		})}
+						    </pattern>)
 			    	}
 			    	})
 				}
@@ -168,6 +187,22 @@ const Patterns = (()=> {
 						    <pattern key={pat.id} id={pat.id} x="0" y="0" width={pat.repeat} height={pat.repeat} >
 						      <rect x="0" y={pat.offset} width={wMax} height={pat.barH} fill={pat.fill} stroke={pat.stroke} />
 						      <text x="2" y={pat.barH+5} fontSize={pat.barH-2} textAnchor="start" fill={pat.tfill} className={pat.fontFam}>{pat.id} header</text>
+						    </pattern>
+				    	)
+			    	} else {
+
+			    	}
+
+			    })
+				}
+				{patternBoundingBox.map(pat => {
+			    	if (pat.hasOwnProperty('icon')){ //movie or other
+				    	return (
+						    <pattern key={pat.id} id={pat.id} x="0" y="0" width={pat.repeat} height={pat.repeat}  >
+						      <rect x="0" y="0" width={pat.repeat} height={pat.repeat} fill={pat.fill} />
+						      <line x1="0" y1="0" x2={pat.repeat} y2={pat.repeat} stroke={pat.stroke} fill="none" />
+						      <line x2="0" y2="0" x1={pat.repeat} y1={pat.repeat} stroke={pat.stroke} fill="none" />
+						      <img />
 						    </pattern>
 				    	)
 			    	} else {
