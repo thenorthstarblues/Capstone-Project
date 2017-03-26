@@ -23,27 +23,27 @@ let buttons= [
   },
   {
     val: 'h1',
-    icon: 'glyphicon glyphicon-plus',
+    icon: 'glyphicon glyphicon-header',
     style: '',
   },
   {
     val: 'h2',
-    icon: 'glyphicon glyphicon-align-left',
+    icon: 'glyphicon glyphicon-header',
     style: '',
   },
   {
     val: 'h3',
-    icon: 'glyphicon glyphicon-align-center',
+    icon: 'glyphicon glyphicon-header',
     style: '',
   },
   {
     val: 'h4',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-header',
     style: '',
   },
   {
     val: 'h5',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-header',
     style: '',
   },
   {
@@ -63,17 +63,17 @@ let buttons= [
   },
   {
     val: 'video',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-facetime-video',
     style: '',
   },
   {
     val: 'audio',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-headphones',
     style: '',
   },
   {
     val: 'button',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-hand-down',
     style: '',
   },
 ];
@@ -86,17 +86,17 @@ const buttonsForm= [
   },
   {
     val: 'radio',
-    icon: 'glyphicon glyphicon-align-right',
+    icon: 'glyphicon glyphicon-record',
     style: 'text-right',
   },
   {
-    val: 'audio',
-    icon: 'glyphicon glyphicon-align-right',
+    val: 'file',
+    icon: 'glyphicon glyphicon-floppy-disk',
     style: 'text-right',
   },
   {
-    val: 'audio',
-    icon: 'glyphicon glyphicon-align-right',
+    val: 'options',
+    icon: 'glyphicon glyphicon-chevron-down',
     style: 'text-right',
   },
 
@@ -120,10 +120,10 @@ const AddOptions = (({action})=> {
                 </div>
                 <div className="border1">
                 <p className="closer"><span className="TrendHandMade">CLICK:</span> add to armature</p>
-                {buttons.map(button=>{
+                {buttons.map((button, i)=>{
                   if (button.val==='div' || button.val==='h5'|| button.val==='button'){
                     return (
-                          <span>
+                          <span key={button.val+i} >
                           <button className="btn btn-default m5w bshadsm" value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
                           <br/>
                           </span>
@@ -132,7 +132,7 @@ const AddOptions = (({action})=> {
                   } else {
 
                   return (
-                          <button className="btn btn-default m5w bshadsm" value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
+                          <button  key={button.val+i} className="btn btn-default m5w bshadsm" value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
                           )
                   }
 
@@ -140,10 +140,10 @@ const AddOptions = (({action})=> {
 
                 <p className="closer small TrendHandMade">form types</p>
 
-                {buttonsForm.map(button=>{
+                {buttonsForm.map((button,i)=>{
 
                   return (
-                          <button className="btn btn-default m5w " value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
+                          <button key={button.val+i} className="btn btn-default m5w " value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
                           )
                 })}
                 </div>

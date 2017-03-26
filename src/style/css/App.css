@@ -679,3 +679,13 @@ Resizer.disabled:hover {
   color: #fafafa;
 }
 
+
+.colorBox{
+  width: 20px;
+  height: 20px;
+}
+
+.clearBtn{
+  margin-left:20%;
+  width: 80%;
+}

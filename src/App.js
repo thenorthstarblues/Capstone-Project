@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Navigation from './components/Navigations';
 import DrawHere from './components/DrawHere';
 import Immutable from 'immutable';

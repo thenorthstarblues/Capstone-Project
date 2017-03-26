@@ -7,6 +7,32 @@ const Patterns = (()=> {
 	//we should be able to dynamically update fonts, as added from google...
 	//simply to appear with our dummy text
 
+	// question of organization structure- the useSpaceOnUse and the generic series
+//objectBoudnignBox
+
+
+//update the icons while setting up this miscellaneous stuff
+
+//ALL WHITE BACKGROUNDS TO CONTRAST WITH THE GRID BACKGROUND
+
+/*
+pixel grid background - darker series for the overall effect
+paragraph
+h1,h2,h3,h4,h5
+ul (with il),
+table (with verticals),
+image video audio
+button
+forms: text, radio, file, options  (implied submit button)
+
+options/text/file as single type
+
+radio as lateral breaks, akin to tables, same structure as audio playlist-line - fixed horizon
+
+image/video similar
+
+*/
+
 
 	var repeats=[];
 	for (let i=0; i<600/14; i++){
