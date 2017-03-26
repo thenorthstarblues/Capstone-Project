@@ -82,8 +82,8 @@ class DrawHere extends Component {
 
 	boxCopier = (boxToCopy) => {
 		const lastId = this.props.boxIds[this.props.boxIds.length - 1];
- 		const newBoxId = +lastId + 1;
-  		this.props.copyBox(boxToCopy, newBoxId);
+		const newBoxId = +lastId + 1;
+		this.props.copyBox(boxToCopy, newBoxId);
 	}
 
 	render(){
