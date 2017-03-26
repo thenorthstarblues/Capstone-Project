@@ -133,7 +133,10 @@ class DrawHere extends Component {
 															)
 														)
 													}
-												<TrashCan removeBox={this.props.removeBox} />
+												<TrashCan
+												removeBox={this.props.removeBox}
+												removeChild={this.props.removeChild}
+												boxes={boxes} />
 												<BottomOptions />
 											</svg>
 										</div>
