@@ -54,7 +54,8 @@ const boxesReducer = (prevState = initialState, action) => {
     case SAVE:
       return prevState;
     case CLEAR_ALL:
-      return initialState;
+      //return initialState;
+      return prevState.clear().merge(initialState);
     default:
       return prevState;
   }

@@ -10,7 +10,6 @@ import Patterns from './Patterns';
 import Window from './Window';
 import Grid from './Grid';
 import TrashCan from './TrashCan';
-import ClearAll from './ClearAll';
 import BottomOptions from './BottomOptions';
 import AddOptions from './AddOptions';
 import FontColor from './FontColor';
@@ -82,7 +81,8 @@ class DrawHere extends Component {
 	}
 
 	boxCopier = (boxToCopy) => {
-		const newBoxId = +this.props.nextBoxId;
+		const lastId = this.props.boxIds[this.props.boxIds.length - 1];
+		const newBoxId = +lastId + 1;
 		this.props.copyBox(boxToCopy, newBoxId);
 	}
 
@@ -133,8 +133,10 @@ class DrawHere extends Component {
 															)
 														)
 													}
-												<TrashCan removeBox={this.props.removeBox} />
-												<ClearAll />
+												<TrashCan
+												removeBox={this.props.removeBox}
+												removeChild={this.props.removeChild}
+												boxes={boxes} />
 												<BottomOptions />
 											</svg>
 										</div>

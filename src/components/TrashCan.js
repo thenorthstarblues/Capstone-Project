@@ -18,11 +18,13 @@ class TrashCan extends Component {
   }
 
   onDrop = (e) => {
-    this.props.removeBox(+e.relatedTarget.id);
+    const deletedBoxId = +e.relatedTarget.id;
+    this.props.removeChild(this.props.boxes[deletedBoxId].parent, deletedBoxId)
+    this.props.removeBox(deletedBoxId);
   }
 
   render() {
-    let x= 959, y= 300, width= 155, height= 155, x2= x+width, y2= y+height;
+    let x= 959, y= 345, width= 155, height= 155, x2= x+width, y2= y+height;
 
     return (
       <g>
