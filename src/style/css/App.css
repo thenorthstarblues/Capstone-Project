@@ -686,15 +686,8 @@ Resizer.disabled:hover {
 }
 
 .clearBtn{
-  fill: white;
-  stroke-width:2px;
-  stroke: black;
-}
-
-.clearBtn:hover{
-  fill: #e6e6e6;
-  stroke-width:2px;
-  stroke: #adadad;
+  margin-left:20%;
+  width: 80%;
 }
 
 .hierarchyDiv{

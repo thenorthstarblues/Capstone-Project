@@ -120,10 +120,10 @@ const AddOptions = (({action})=> {
                 </div>
                 <div className="border1">
                 <p className="closer"><span className="TrendHandMade">CLICK:</span> add to armature</p>
-                {buttons.map(button=>{
+                {buttons.map((button, i)=>{
                   if (button.val==='div' || button.val==='h5'|| button.val==='button'){
                     return (
-                          <span>
+                          <span key={button.val+i} >
                           <button className="btn btn-default m5w bshadsm" value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
                           <br/>
                           </span>
@@ -132,7 +132,7 @@ const AddOptions = (({action})=> {
                   } else {
 
                   return (
-                          <button className="btn btn-default m5w bshadsm" value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
+                          <button  key={button.val+i} className="btn btn-default m5w bshadsm" value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
                           )
                   }
 
@@ -140,10 +140,10 @@ const AddOptions = (({action})=> {
 
                 <p className="closer small TrendHandMade">form types</p>
 
-                {buttonsForm.map(button=>{
+                {buttonsForm.map((button,i)=>{
 
                   return (
-                          <button className="btn btn-default m5w " value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
+                          <button key={button.val+i} className="btn btn-default m5w " value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>
                           )
                 })}
                 </div>
