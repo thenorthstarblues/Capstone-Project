@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 //core actions
 import Immutable from 'immutable';
 
+import { clearAll } from '../constants_actioncreators/boxes';
+
+
 const mapStateToProps = (state) => { // just need general directions to create css at start of file, in advance of additional categories
   return {
     boxes: state.get('boxes').toJS(),
@@ -14,9 +17,12 @@ const mapStateToProps = (state) => { // just need general directions to create c
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    clearAll(){
+      dispatch(clearAll())
+    },
   }
 }
+
 
 
 class FontColor extends Component{
@@ -56,12 +62,13 @@ class FontColor extends Component{
     render(){
 
     return (
-            <div className="fontOptions bkoffwhite row flexRow spaceAround border1 centerAround">
-                    <div >
+            <div className="fontOptions bkoffwhite row border1">
+              <div className="col-lg-10 row">
+                    <div className="col-lg-2">
                           <p className="TrendHandMade closer">other options</p>
                           <p className="small">to include in css classes</p>
                     </div>
-                    <div >
+                    <div className="col-lg-3">
                       <form onChange="">
                         <select name="headers" className="bkwhite" >
                             <option value="volvo">google header font options</option>
@@ -69,7 +76,7 @@ class FontColor extends Component{
                           <p className="small">sample</p>
                       </form>
                     </div>
-                    <div >
+                    <div className="col-lg-3">
                       <form onChange="">
                         <select name="paragraphs" className="bkwhite" >
                             <option value="volvo">google paragraph font options</option>
@@ -77,11 +84,12 @@ class FontColor extends Component{
                           <p className="small">sample</p>
                       </form>
                     </div>
-                    <div >
+                    <div className="col-lg-2">
                       <form onChange="">
                         <button className="btn btn-default btn-sm" onClick="" >pick pallet color</button>
                       </form>
                     </div>
+                    <div className="col-lg-3">
                     {/*this.colorsPicks.map((color, i)=>{
                       if (i < 6) { // this should be in hex format from the picker.
                         return (
@@ -91,6 +99,13 @@ class FontColor extends Component{
                               );
                       }
                     })*/}
+                    </div>
+                  </div>
+                  <div className="col-lg-2 block-center text-center">
+
+                    <button className="btn btn-default btn-sm clearBtn" onClick={this.props.clearAll} ><span className="TrendHandMade closer">clear layout</span></button>
+
+                  </div>
               </div>
     )
   }
