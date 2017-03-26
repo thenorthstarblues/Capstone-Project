@@ -130,12 +130,7 @@ export const columnRowCheck = ((obj, parentId, childIdArr, largest={}, remainIdA
 
   objId.forEach(id=>{
     let sl2=obj[id].children.indexOf(id.toString());
-    console.log('initial check', id, obj[id].children);
-
     if (sl2!==-1){obj[id].children.splice(sl2,1); }
   });
-
-
-  console.log('final object', obj);
 
 });

@@ -91,15 +91,13 @@ class Grid extends Component {
   render() {
 
     // should only effect the preview coloring
-    // let newClass='norm'; //leave undefined for no effect
-    // if (this.props.tag && this.props.id){
-    //   newClass='hierarchyDiv';
-    //   console.log(this.props);
-
-    // }
+    let newClass='norm'; //leave undefined for no effect
+    if (this.props.id && this.props.id>100){
+      newClass='hierarchyDiv';
+    }
 
     return (
-      <rect className={`dropzone yes-drop ${typeClass[this.props.tag]}`} id={+this.props.id} height={this.props.height} width={this.props.width} x={this.props.x} y={this.props.y} rx="2px" ry="2px" />
+      <rect className={`dropzone yes-drop ${typeClass[this.props.tag]} ${newClass}`} id={+this.props.id} height={this.props.height} width={this.props.width} x={this.props.x} y={this.props.y} rx="2px" ry="2px" />
     )
   }
 }

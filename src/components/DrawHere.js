@@ -81,8 +81,9 @@ class DrawHere extends Component {
 	}
 
 	boxCopier = (boxToCopy) => {
-		const newBoxId = +this.props.nextBoxId;
-		this.props.copyBox(boxToCopy, newBoxId);
+		const lastId = this.props.boxIds[this.props.boxIds.length - 1];
+ 		const newBoxId = +lastId + 1;
+  		this.props.copyBox(boxToCopy, newBoxId);
 	}
 
 	render(){
@@ -140,7 +141,6 @@ class DrawHere extends Component {
 														)
 													}
 												<TrashCan removeBox={this.props.removeBox} />
-												<ClearAll />
 												<BottomOptions />
 											</svg>
 										</div>

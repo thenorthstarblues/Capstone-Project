@@ -698,7 +698,8 @@ Resizer.disabled:hover {
 }
 
 .hierarchyDiv{
-  stroke-width:3px;
+  stroke-width:2px;
   stroke: #00bfff;
-  stroke-dasharray: 3px;
+  stroke-dasharray: 4px;
+  mix-blend-mode: multiply;
 }
