@@ -86,7 +86,7 @@ export const columnRowCheck = ((obj, parentId, childIdArr, largest={}, remainIdA
   } else { // 2 or more children, recursion here
 
     // all children, find largest
-    let childAreas = childIdArr.map(child => obj[child].width*obj[child].height );
+    let childAreas = childIdArr.map(child => obj[child].width*obj[child].height);
     let bigKidI = childAreas.indexOf(Math.max(...childAreas));
         largest = obj[childIdArr[bigKidI]];
 
