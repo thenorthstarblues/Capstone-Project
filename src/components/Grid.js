@@ -4,6 +4,25 @@ import interact from 'interact.js';
 
 const snapGrid = { targets: [interact.createSnapGrid({ x: 7, y: 7 })], }
 
+const typeClass={
+    div: 'basicBox',
+    p: 'paragraph',
+    h1: 'headerH1',
+    h2: 'headerH2',
+    h3: 'headerH3',
+    h4: 'headerH4',
+    h5: 'headerH5',
+    ul: 'ului',
+    img: 'img',
+    video: 'video',
+    audio: 'audio',
+    button: 'buttn',
+    text: 'textForm',
+    radio: 'radioForm',
+    file: 'fileForm',
+    options: 'optionsForm',
+}
+
 class Grid extends Component {
   componentDidMount() {
     interact(ReactDOM.findDOMNode(this))
@@ -71,8 +90,14 @@ class Grid extends Component {
 
   render() {
 
+    // should only effect the preview coloring
+    let newClass='norm'; //leave undefined for no effect
+    if (this.props.id && this.props.id>100){
+      newClass='hierarchyDiv';
+    }
+
     return (
-      <rect className={`dropzone yes-drop ${typeClass[this.props.tag]}`} id={+this.props.id} height={this.props.height} width={this.props.width} x={this.props.x} y={this.props.y} rx="2px" ry="2px" />
+      <rect className={`dropzone yes-drop ${typeClass[this.props.tag]} ${newClass}`} id={+this.props.id} height={this.props.height} width={this.props.width} x={this.props.x} y={this.props.y} rx="2px" ry="2px" />
     )
   }
 }
@@ -80,21 +105,3 @@ class Grid extends Component {
 export default Grid;
 
 
-const typeClass={
-    div: 'basicBox',
-    p: 'paragraph',
-    h1: 'headerH1',
-    h2: 'headerH2',
-    h3: 'headerH3',
-    h4: 'headerH4',
-    h5: 'headerH5',
-    ul: 'ului',
-    img: 'img',
-    video: 'video',
-    audio: 'audio',
-    button: 'buttn',
-    text: 'textForm',
-    radio: 'radioForm',
-    file: 'fileForm',
-    options: 'optionsForm',
-}
