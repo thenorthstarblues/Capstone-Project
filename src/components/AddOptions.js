@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-let buttons= [
+const buttons = [
   {
     val: 'div',
     icon: 'glyphicon glyphicon-unchecked',
@@ -78,7 +78,7 @@ let buttons= [
   },
 ];
 
-const buttonsForm= [
+const buttonsForm = [
   {
     val: 'text',
     icon: 'glyphicon glyphicon-edit',
@@ -101,13 +101,13 @@ const buttonsForm= [
   },
 
 
-]
+];
 
 
-const AddOptions = (({action})=> {
+const AddOptions = (({ action }) =>
   //console.log(action);
 
-    return (
+     (
               <div className="addOptionsInt">
                 <div className="border1">
                   <p className="closer"><span className="TrendHandMade">GROUP:</span> create & iterate</p>
@@ -148,8 +148,10 @@ const AddOptions = (({action})=> {
                 })}
                 </div>
             </div>
-    )
+    ));
 
-})
+AddOptions.propTypes = {
+  action: React.PropTypes.func.isRequired,
+};
 
 export default AddOptions;
