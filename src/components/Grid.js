@@ -92,8 +92,10 @@ class Grid extends Component {
 
     // should only effect the preview coloring
     // let newClass='norm'; //leave undefined for no effect
-    // if (this.props.tag === 'div' && (this.props.id===NaN || this.props.id.includes('cont'))){
+    // if (this.props.tag && this.props.id){
     //   newClass='hierarchyDiv';
+    //   console.log(this.props);
+
     // }
 
     return (
