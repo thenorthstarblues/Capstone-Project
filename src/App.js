@@ -5,6 +5,7 @@ import Immutable from 'immutable';
 import {connect} from 'react-redux';
 import {saveGroup} from './constants_actioncreators/layout';
 import './style/css/App.css';
+import './style/css/Pattern.css';
 
 import { setBox, addBox, removeBox, setParent, addChild, removeParent, removeChild, copyBox } from './constants_actioncreators/boxes';
 

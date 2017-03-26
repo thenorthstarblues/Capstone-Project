@@ -2,7 +2,190 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import interact from 'interact.js';
 
+//---------------------------VISUAL AIDES-------------------------------
+
+// key sizes converted for svg
+var px20=14;
+var em1=10.6;
+var wMax=950; //max width
+var mSm=em1/2;
+var mLg=em1;
+
+// to generate multi-line patterns
+var repeats=[];
+for (let i=0; i<600/14; i++){
+	repeats.push(i);
+}
+
+//---------------------------CORE TYPES-------------------------------
+
+//repeated patterns
+
+// those with logic of bounding box
+const patternBoundingBox={
+	img: {
+		fill: 'none',
+		stroke: "#00bfff",
+		repeat: 1,
+		interior: ['rect', 'line', 'line'],
+	},
+	video: {
+		fill: 'none',
+		stroke: "#00bfff",
+		repeat: 1,
+		interior: ['rect', 'line', 'line'],
+		icon: <span className="glyphicon glyphicon-play-circle"></span>,
+	},
+
+}
+
+// those with logic of default noMapping - i.e. set sizes
+// headers
+// button, audio bar,
+// options, radio buttons, file, form lines
+const defaultNoRepeat=[
+	{
+		id: 'h1',
+		fill: 'grey',
+		tfill: 'white',
+		stroke: 'none',
+		repeat: 1,
+		barH: 24, //text height=-2, text offset=+5
+		offset: 7,
+		interior: ['rect', 'text'],
+		fontFam: 'Trenda', // to be reset by other options
+	},
+	{
+		id: 'h2',
+		fill: 'grey',
+		tfill: 'white',
+		stroke: 'none',
+		repeat: 1,
+		barH: 21, //text height=-2, text offset=+5
+		offset: 7,
+		interior: ['rect', 'text'],
+		fontFam: 'Trenda', // to be reset by other options
+	},
+	{
+		id: 'h3',
+		fill: 'grey',
+		tfill: 'white',
+		stroke: 'none',
+		repeat: 1,
+		barH: 18,
+		offset: 7,
+		interior: ['rect', 'text'],
+		fontFam: 'Trenda', // to be reset by other options
+	},
+	{
+		id: 'h4',
+		fill: 'grey',
+		tfill: 'white',
+		stroke: 'none',
+		repeat: 1,
+		barH: 14,
+		offset: 7,
+		interior: ['rect', 'text'],
+		fontFam: 'Trenda', // to be reset by other options
+	},
+	{
+		id: 'h5',
+		fill: 'grey',
+		tfill: 'white',
+		stroke: 'none',
+		repeat: 1,
+		barH: 12,
+		offset: 7,
+		interior: ['rect', 'text'],
+		fontFam: 'Trenda', // to be reset by other options
+	},
+
+];
+
+// those with logic of default noMapping and line repeats
+// paragraphs, ul, tables,
+const defaultRepeat=[
+	{
+		id:'paragraph',
+		repeat: em1,
+		y: em1*1.33,
+		height: em1*.7,
+		fill: "#d0d0d0"
+	},
+	{
+		id:'ului',
+		repeat: em1,
+		y: em1*1.33,
+		x: em1*2,
+		xc: em1,
+		r: 3,
+		height: em1*.7,
+		fill: "#d0d0d0",
+		fillc: "grey",
+	},
+
+
+
+];
+
+
+
 const Patterns = (()=> {
+
+    return (
+            <defs>
+            	<pattern id="pixelGrid" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+			      <rect x="0" y="0" width="14" height="14" fill="none" stroke="#00bfff" />
+			    </pattern>
+
+			    {defaultRepeat.map(pat => {
+			    	if (pat.id.includes('paragraph')){ //all headers
+				    	return (<pattern key={pat.id} id={pat.id} x="0" y="0" width={pat.repeat} height={pat.repeat} >
+						    	{repeats.map(ind=>{
+						    		return (<g key={ind} >
+						    		        <rect x="0" y={ind * pat.y} width={wMax} height={pat.height} fill={pat.fill} />
+									      	</g>
+						    		        )
+						    		})}
+						    </pattern>)
+			    	} else if (pat.id.includes('ului')){
+			    	return (<pattern key={pat.id} id={pat.id} x="0" y="0" width={pat.repeat} height={pat.repeat} >
+						    	{repeats.map(ind=>{
+						    		return (<g key={ind} >
+						    		        <rect x={pat.x} y={ind * pat.y} width={wMax} height={pat.height} fill={pat.fill} />
+						    		        <circle cx={pat.xc}  cy={ind * pat.y+pat.height/2} r={pat.r} fill={pat.fillc} />
+									      	</g>
+						    		        )
+						    		})}
+						    </pattern>)
+			    	}
+			    	})
+				}
+
+			    {defaultNoRepeat.map(pat => {
+			    	if (pat.id.includes('h')){ //all headers
+				    	return (
+						    <pattern key={pat.id} id={pat.id} x="0" y="0" width={pat.repeat} height={pat.repeat} >
+						      <rect x="0" y={pat.offset} width={wMax} height={pat.barH} fill={pat.fill} stroke={pat.stroke} />
+						      <text x="2" y={pat.barH+5} fontSize={pat.barH-2} textAnchor="start" fill={pat.tfill} className={pat.fontFam}>{pat.id} header</text>
+						    </pattern>
+				    	)
+			    	} else {
+
+			    	}
+
+			    })
+				}
+
+
+
+  			</defs>
+
+    )
+
+})
+
+export default Patterns;
 
 	//we should be able to dynamically update fonts, as added from google...
 	//simply to appear with our dummy text
@@ -30,81 +213,4 @@ options/text/file as single type
 radio as lateral breaks, akin to tables, same structure as audio playlist-line - fixed horizon
 
 image/video similar
-
 */
-
-
-	var repeats=[];
-	for (let i=0; i<600/14; i++){
-		repeats.push(i);
-	}
-
-    return (
-            <defs>
-            	<pattern id="pixelGrid" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
-			      <rect x="0" y="0" width="14" height="14" fill="none" stroke="lightblue" />
-			    </pattern>
-
-
-			    <pattern id="paragraph" x="0" y="0" width="12" height="12" >
-			    	{repeats.map(ind=>{
-			    		return (
-						    	<g key={ind} >
-						      		<rect x="0" y={ind*12} width="1000" height="7" fill="#d0d0d0" />
-						      		<rect x="0" y={ind*12+7} width="12" height="5" fill="white" />
-						      	</g>
-
-			    		        )
-			    		})
-			    	}
-			    </pattern>
-
-
-			    <pattern id="h1" x="0" y="0" width="1" height="1" >
-			      <rect x="0" y="7" width="950" height="24" fill="grey"/>
-			      <text x="2" y="28" fontSize="22" textAnchor="start" fill="white" className="">H1 Header</text>
-			    </pattern>
-			    <pattern id="h2" x="0" y="0" width="1" height="1" >
-			      <rect x="0" y="7" width="950" height="21" fill="grey"/>
-			      <text x="2" y="26" fontSize="18" textAnchor="start" fill="white" className="">H2 Header</text>
-			    </pattern>
-			    <pattern id="h3" x="0" y="0" width="1" height="1" >
-			      <rect x="0" y="7" width="950" height="18" fill="grey"/>
-			      <text x="2" y="23" fontSize="16" textAnchor="start" fill="white" className="">H3 Header</text>
-			    </pattern>
-			    <pattern id="h4" x="0" y="0" width="1" height="1" >
-			      <rect x="0" y="7" width="950" height="16" fill="grey"/>
-			      <text x="2" y="21" fontSize="14" textAnchor="start" fill="white" className="">H4 Header</text>
-			    </pattern>
-			    <pattern id="h5" x="0" y="0" width="1" height="1" >
-			      <rect x="0" y="7" width="950" height="14" fill="grey"/>
-			      <text x="2" y="19" fontSize="12" textAnchor="start" fill="white" className="">H5 Header</text>
-			    </pattern>
-
-			    <pattern id="img" x="0" y="0" width="1" height="1" patternContentUnits="objectBoundingBox">
-			      <rect x="0" y="0" width="1" height="1" fill="#333333"/>
-			      <line x1="0" x2="1" y1="0" y2="1" stroke="#ffffff" />
-
-			    </pattern>
-
-
-			    <pattern id="ului" x="0" y="0" width="10" height="14" >
-			    	{repeats.map(ind=>{
-			    		return (
-						    	<g key={ind} >
-						      		<rect x="20" y={ind*14} width="1000" height="7" fill="lightgrey" />
-						      		<circle cx="10" cy={ind*14+4} r="3" fill="grey" />
-						      	</g>
-
-			    		        )
-			    		})
-			    	}
-			    </pattern>
-
-  			</defs>
-
-    )
-
-})
-
-export default Patterns;
