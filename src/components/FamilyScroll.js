@@ -116,7 +116,7 @@ const FamilyScroll = (({groups, action, clickAdd})=> {
                   <form onClick="">
                     <input></input>
                     <br/>
-                    <button className="btn btn-default btn-sm m5w bshadsm" type="submit" ><span className="glyphicon glyphicon-search"></span>  search</button>
+                    <button className="btn btn-default btn-sm m5w bshadsm" type="submit" onSubmit={(e)=> console.log(e.target.value)} ><span className="glyphicon glyphicon-search"></span>  search</button>
                   </form>
                 </div>
                 <div className="border1">
