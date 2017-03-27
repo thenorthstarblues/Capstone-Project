@@ -80,14 +80,6 @@ export const saveOrUpdate = (stateCopy, id) => (dispatch) => {
 };
 
 
-// export const pageChange = (elements, currentId, pageNo) => (dispatch)=> {
-//    saveOrUpdate(elements, currentId)
-//    .then((s)=>{
-//      dispatch(loadLayout(pageNo))
-//    })
-//    .then(setCurrent(pageNo))
-// }
-
 export const pageChange = (stateCopy, id, pageNo) => (dispatch) => {
   axios.get(`api/layouts/${id}`)
     .then((layout) => {
