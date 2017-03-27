@@ -6,21 +6,22 @@ const snapGrid = { targets: [interact.createSnapGrid({ x: 7, y: 7 })], }
 
 const typeClass={
     div: 'basicBox',
-    p: 'paragraph',
-    h1: 'headerH1',
-    h2: 'headerH2',
-    h3: 'headerH3',
-    h4: 'headerH4',
-    h5: 'headerH5',
-    ul: 'ului',
-    img: 'img',
-    video: 'video',
-    audio: 'audio',
-    button: 'buttn',
-    text: 'textForm',
-    radio: 'radioForm',
-    file: 'fileForm',
-    options: 'optionsForm',
+    p: 'paragraph svgP',
+    h1: 'headerH1 svgP',
+    h2: 'headerH2 svgP',
+    h3: 'headerH3 svgP',
+    h4: 'headerH4 svgP',
+    h5: 'headerH5 svgP',
+    ul: 'ului svgP',
+    table: 'table1 svgP',
+    img: 'img svgP',
+    video: 'video svgP',
+    audio: 'audio svgP',
+    button: 'buttn svgP',
+    text: 'textForm svgP',
+    radio: 'radioForm svgP',
+    file: 'fileForm svgP',
+    options: 'optionsForm svgP',
 }
 
 class Grid extends Component {
@@ -103,5 +104,4 @@ class Grid extends Component {
 }
 
 export default Grid;
-
 

@@ -279,6 +279,15 @@ and since we're setting child sizes, we won't need anything more than their odd 
 }
 
 
+/* PREVIEW VISUALIZATION AIDES */
+/* --------------- preview stuff css --------------- */
 
+.pborder {
+   border: solid 1px ;
+}
+
+.pbkground {
+   background-color: #f6f6f6;
+}
 
 
