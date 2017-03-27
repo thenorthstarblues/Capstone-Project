@@ -37,11 +37,11 @@ export const divCreation = ((obj, parentId, largest, idRow, dir, row)=> {
       let cssDir='';
 
       if (!dir){ //during row checking
-        rowId=100+newdir;
+        rowId=1000+(50*parentId)+newdir;
         cssDir='flexRow ';
 
       } else {//column defs
-        rowId=200+newdir;
+        rowId=2000+(50*parentId)+newdir;
         cssDir='flexCol';
       }
 

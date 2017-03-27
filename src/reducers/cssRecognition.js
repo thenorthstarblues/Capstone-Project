@@ -19,7 +19,7 @@ function setRowMargins(obj, parentId){
 
     //temp catch until the full row recognition works---------------------
     var kidsIdsLost=kidsIds.filter(id=>{
-      return !(id>200);
+      return !(id>2000);
     });
 
     if (kidsIdsLost.length >0){
@@ -113,7 +113,7 @@ function setChildColMargins(obj, parentId){
 export const formatCheck = ((obj, parentId)=>{
   // utility functions to recognize Rows & Columns
   function isRow(elementId){
-    return elementId>100 && elementId<200;
+    return elementId>1000 && elementId<2000;
   }
   //basics for bootstrap/flex
   if (parentId ==='0'){
@@ -127,11 +127,11 @@ export const formatCheck = ((obj, parentId)=>{
     };
   //--------------------all rows or all divs with kids as columns---------------------------------
     //if (obj[parentId].children && obj[parentId].children.some(isCol)){
-    if (parentId>100 && parentId<200){
+    if (parentId>1000 && parentId<2000){
       setColMargins(obj, parentId);
   };
   //---------------------------------all columns to format child margins-------------------------
-  if (obj[parentId].id>200){ //all divs that are columns, to set kid margins
+  if (obj[parentId].id>2000){ //all divs that are columns, to set kid margins
 
     if (obj[parentId].parent === '0'){ //columns w/o row wrapper, set top margin
       var top = obj['0'].y;
