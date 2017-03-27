@@ -21,6 +21,21 @@ function setRowMargins(obj, parentId){
 
     var kidsIds = horizonAxisSort(obj, parentId, 'y');
 
+    //temp catch until the full row recognition works---------------------
+    var kidsIdsLost=kidsIds.filter(id=>{
+      return !(id>2000);
+    });
+
+    if (kidsIdsLost.length >0){
+      var exRows = Object.keys(obj).filter(key => key.includes('contRow'));
+      var lastRow = Math.max(...exRows.map(name=> Number(name.replace('contRow_', ''))));
+      var largest={};
+      largest.height=Math.min(...kidsIdsLost.map(id=>obj[id].y))+Math.max(...kidsIdsLost.map(id=>obj[id].y+obj[id].height));
+      if (lastRow=== '-infinity'){lastRow=0};
+      divCreation(obj, parentId, largest, kidsIdsLost, 0, lastRow); //don't need returns
+    }
+    //temp catch above until the full row recognition works---------------------------------------
+
   //simple iteration through the horizons to match the margins at the top
   var ind=0;
   var above=obj[parentId].y;
@@ -37,7 +52,7 @@ function setRowMargins(obj, parentId){
       //     obj[kidsIds[ind]].css += ' mT'+mT+' mL'+mL+' ';
       // } else {
       //T/R/L margin setting
-        obj[kidsIds[ind]].css += 'flexRow mT'+mT+' mL'+mL+' ';
+        obj[kidsIds[ind]].css += ' mT'+mT+' mL'+mL+' ';
         //obj[kidsIds[ind]].css += ' mT'+mT+' mL'+mL+' mR'+mR+' ';
       //}
 
@@ -64,8 +79,6 @@ function setColMargins(obj, parentId){
 
   var above=obj[parentId].y;
 
-  obj[parentId].css += 'flexRow ';
-
   while (ind<kidsIds.length){ //for each obj/col... must correct the last row catch
 
       var right=obj[kidsIds[ind]].x;
@@ -73,7 +86,7 @@ function setColMargins(obj, parentId){
       var below=obj[kidsIds[ind]].y;
       var mT = Math.abs((Math.floor((below-above)/10))*10);
       console.log('trying to check column top margins:', mT);
-      obj[kidsIds[ind]].css += 'flexCol mL'+mL+ ' mT'+mT+' '; //L margin setting
+      obj[kidsIds[ind]].css = obj[kidsIds[ind]].css +' mL'+mL+ ' mT'+mT+' '; //L margin setting
       // increment up w/ left & index
       left=obj[kidsIds[ind]].x + obj[kidsIds[ind]].width;
       ind++;
@@ -133,23 +146,20 @@ export const formatCheck = ((obj, parentId)=>{
   //conditionals for setting formats
   //---------------------------------all divs with kids as rows-----------------------------------
     if (obj[parentId].children && obj[parentId].children.some(isRow)){ //sets row margins
-      console.log('catch as row:', obj[parentId].children);
       setRowMargins(obj, parentId);
     };
   //--------------------all rows or all divs with kids as columns---------------------------------
     //if (obj[parentId].children && obj[parentId].children.some(isCol)){
     if (parentId>1000 && parentId<50000){
-      console.log('catch as row2:', parentId);
       setColMargins(obj, parentId);
   };
   //---------------------------------all columns to format child margins-------------------------
-  if (parentId>50000){ //all divs that are columns, to set kid margins
-    console.log('catch as column:', parentId);
+  if (obj[parentId].id>50000){ //all divs that are columns, to set kid margins
 
     if (obj[parentId].parent === '0'){ //columns w/o row wrapper, set top margin
       var top = obj['0'].y;
       var mT=(Math.floor((obj[parentId].y-top)/10))*10;//for math readjustment later.
-      obj[parentId].css += 'flexCol mT'+mT+' ';
+      obj[parentId].css += ' mT'+mT+' ';
     }
 
     setChildColMargins(obj, parentId);

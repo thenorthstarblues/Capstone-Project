@@ -91,7 +91,7 @@ export const columnRowCheck = ((obj, parentId, childIdArr, largest={}, remainIdA
     let bigKidI = childAreas.indexOf(Math.max(...childAreas));
         largest = obj[childIdArr[bigKidI]];
 
-    if (!dir) { // row search on initial round
+    if (dir%20===0) { // row search on initial round
       var idRow = createIdRowIdCol(largest, 'y', 'height', obj, childIdArr, remainIdArr);
     } else { // column search from within rows
       var idCol = createIdRowIdCol(largest, 'x', 'width', obj, childIdArr, remainIdArr);
@@ -124,7 +124,8 @@ export const columnRowCheck = ((obj, parentId, childIdArr, largest={}, remainIdA
       if (idCol.length>0){
         columnRowCheck(obj, parentId, idCol, largest, remainIdArr, newdir, row);
       } else {
-        columnRowCheck(obj, 0, remainIdArr[0], largest, [], 0, row);
+        var dirNew=Math.floor(newdir/20)+20;
+        columnRowCheck(obj, 0, remainIdArr[0], largest, [], dirNew, row);
       }
     }
 
