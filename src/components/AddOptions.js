@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { saveGroup } from '../constants_actioncreators/layout';
 
 const buttons = [
   {
@@ -113,7 +114,7 @@ const AddOptions = (({ action }) =>
                   <p className="closer"><span className="TrendHandMade">GROUP:</span> create & iterate</p>
                   <form onClick="">
                     <input ></input>
-                    <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-ok"></span>  new</button>
+                    <button className="btn btn-default btn-sm m5w bshadsm" value="" type="button" onClick={()=> {saveGroup('test', 44)} }><span className="glyphicon glyphicon-ok"></span>  new</button>
                     <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-plus"></span>  var</button>
                     <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-minus"></span>  var</button>
                   </form>

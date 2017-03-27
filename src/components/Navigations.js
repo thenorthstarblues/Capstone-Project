@@ -2,6 +2,10 @@ import CodeModal from './codemirror_modal';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {connect} from 'react-redux'; 
+
+import {saveOrUpdate} from '../constants_actioncreators/groups'
+
 
 const Navigation=(({page})=>{
 
@@ -38,7 +42,7 @@ const Navigation=(({page})=>{
 						<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm" type="button"> Download Code   </button>
 						<span className="glyphicon glyphicon-minus"></span>
-						<button className="btn btn-default btn-sm" type="button"> Save Layout   </button>
+						<button className="btn btn-default btn-sm" type="button" onClick={()=> {saveOrUpdate()}}> Save Layout   </button>
 
 
 				</div>
