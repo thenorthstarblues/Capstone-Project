@@ -1,6 +1,7 @@
-import { loadLayout, saveLayout } from './layout';
 import axios from 'axios';
-import Immutable from 'immutable'
+import Immutable from 'immutable';
+import { loadLayout, saveLayout } from './layout';
+
 export const makeGroup = group => ({
   type: 'MAKE_GROUP',
   group,
@@ -30,11 +31,12 @@ export const setPages = pages => ({
   pages,
 });
 
-export const getTemplates =()=> (dispatch)=>{
+export const getTemplates = () => (dispatch) => {
   axios.get('/api/group').then((groups) => {
-    console.log(groups.data)
-    const groupId = groups.data.map(group => group.id);
-    dispatch(setGroups(groupId));
+    const groupArray = groups.data.map((group) => {
+      return { id: group.id, name: group.name };
+    });
+    dispatch(setGroups(groupArray));
   });
 };
 
