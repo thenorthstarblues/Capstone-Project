@@ -76,7 +76,6 @@ class Navigation extends Component{
 	    			<Link to="/"><span className="TrendHMTitle"><img src="/AAlogo.svg" /> Agile-Armature </span></Link>
 	    			{templates &&
 						<Link to="/templates"><span className="menuL" > Templates <span className="glyphicon glyphicon-minus"></span></span></Link>
-
 	    			}
 	    			{directions &&
 	    			<Link to="/directions"><span className="menuL" > Directions <span className="glyphicon glyphicon-minus"></span></span></Link>

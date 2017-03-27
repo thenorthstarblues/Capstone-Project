@@ -78,7 +78,7 @@ let buttons= [
   },
 ];
 
-export const SvgThumb = (({scale, actions, classThis, value, vers})=>{
+export const SvgThumb = (({scale, actions, classThis,value, vers})=>{
   //whatelse will we want to pass in for the transform
   //interactive links on the transparent layer, atop the scaled svg
 
@@ -106,9 +106,7 @@ export const SvgThumb = (({scale, actions, classThis, value, vers})=>{
 
 
 
-const FamilyScroll = (({action})=> {
-  //console.log(action);
-
+const FamilyScroll = (({groups, action, clickAdd})=> {
     return (
               <div className="addOptionsInt">
                 <div className="border1">
@@ -116,15 +114,18 @@ const FamilyScroll = (({action})=> {
                   <form onClick="">
                     <input></input>
                     <br/>
-                    <button className="btn btn-default btn-sm m5w bshadsm" type="submit" ><span className="glyphicon glyphicon-search"></span>  search</button>
+                    <button className="btn btn-default btn-sm m5w bshadsm" type="submit" onSubmit={(e)=> console.log(e.target.value)} ><span className="glyphicon glyphicon-search"></span>  search</button>
                   </form>
                 </div>
                 <div className="border1">
                 <p className="closer"><span className="TrendHandMade">CLICK GROUP:</span> to view & select children</p>
                 <div className="sideThumbs">
-                  {buttons.map(button=>{ //later this should link to the state and the dispatch calls to sort/select
+                  {groups.map(button=>{ //later this should link to the state and the dispatch calls to sort/select
+                    console.log('our id',button);
                     return (
-                      <SvgThumb scale="" actions="" classThis="" value="" vers="small" />
+                      <div onClick={()=>clickAdd(button)}>
+                      <SvgThumb scale="" actions="" classThis="" value="" vers="small"  />
+                      </div>
                             )
                   })}
                 </div>
