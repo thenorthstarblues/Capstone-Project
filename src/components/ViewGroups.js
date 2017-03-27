@@ -36,9 +36,11 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
 	return {
-		loadSelected(id,groupId){ //pass in group id too
+		loadSelected(id){ //pass in group id too
+			console.log('id');
 			dispatch(loadLayout(id))// eventually id passed in
 			dispatch(setCurrent(id))//
+
 			//dispatch set pages or something,
 		},
 		loadLayouts(id){

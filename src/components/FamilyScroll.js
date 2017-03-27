@@ -121,7 +121,7 @@ const FamilyScroll = (({groups, action, clickAdd})=> {
                 <p className="closer"><span className="TrendHandMade">CLICK GROUP:</span> to view & select children</p>
                 <div className="sideThumbs">
                   {groups.map(button=>{ //later this should link to the state and the dispatch calls to sort/select
-                    console.log(button);
+                    console.log('our id'button);
                     return (
                       <div onClick={()=>clickAdd(button)}>
                       <SvgThumb scale="" actions="" classThis="" value="" vers="small"  />

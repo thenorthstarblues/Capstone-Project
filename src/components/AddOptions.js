@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import { saveGroup } from '../constants_actioncreators/layout';
+import GroupForm from './groupForm';
 const buttons = [
   {
     val: 'div',
@@ -111,12 +112,7 @@ const AddOptions = (({ action }) =>
               <div className="addOptionsInt">
                 <div className="border1">
                   <p className="closer"><span className="TrendHandMade">GROUP:</span> create & iterate</p>
-                  <form onClick="">
-                    <input ></input>
-                    <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-ok"></span>  new</button>
-                    <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-plus"></span>  var</button>
-                    <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-minus"></span>  var</button>
-                  </form>
+                 <GroupForm />
                 </div>
                 <div className="border1">
                 <p className="closer"><span className="TrendHandMade">CLICK:</span> add to armature</p>
