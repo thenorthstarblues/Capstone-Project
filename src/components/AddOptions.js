@@ -106,7 +106,6 @@ const buttonsForm = [
 
 
 const AddOptions = (({ action }) =>
-  //console.log(action);
 
      (
               <div className="addOptionsInt">

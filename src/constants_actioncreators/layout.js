@@ -99,6 +99,6 @@ export const addToGroup = (stateCopy, groupId, currentId) => (dispatch) => {
         const newElement = Object.assign({}, elem, { layId, layoutId: id });
         makeelements.push(axios.post('/api/elements', newElement));
       }
-      dispatch(addPage(currentId));
+      dispatch(addPage(id));
     });
 };
