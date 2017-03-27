@@ -78,7 +78,7 @@ let buttons= [
   },
 ];
 
-export const SvgThumb = (({scale, actions, classThis, value, vers})=>{
+export const SvgThumb = (({scale, actions, classThis,value, vers})=>{
   //whatelse will we want to pass in for the transform
   //interactive links on the transparent layer, atop the scaled svg
 
@@ -106,8 +106,8 @@ export const SvgThumb = (({scale, actions, classThis, value, vers})=>{
 
 
 
-const FamilyScroll = (({groups, action})=> {
-  //console.log(action);
+const FamilyScroll = (({groups, action, clickAdd})=> {
+  console.log(groups);
 
     return (
               <div className="addOptionsInt">
@@ -123,8 +123,11 @@ const FamilyScroll = (({groups, action})=> {
                 <p className="closer"><span className="TrendHandMade">CLICK GROUP:</span> to view & select children</p>
                 <div className="sideThumbs">
                   {groups.map(button=>{ //later this should link to the state and the dispatch calls to sort/select
+                    console.log(button);
                     return (
-                      <SvgThumb scale="" actions="" classThis="" value="" vers="small" />
+                      <div onClick={()=>clickAdd(button)}>
+                      <SvgThumb scale="" actions="" classThis="" value="" vers="small"  />
+                      </div>
                             )
                   })}
                 </div>

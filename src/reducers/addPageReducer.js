@@ -17,6 +17,8 @@ const pageReducer = (prevState = initialState, action) => {
       return prevState.set('currentPage', action.id);
     case 'SET_GROUPS':
       return prevState.set('groups', action.groups);
+    case 'SET_PAGES':
+      return prevState.set('pages', action.pages);
     default:
       return prevState;
   }

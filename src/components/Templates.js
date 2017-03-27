@@ -18,14 +18,13 @@ const mapStateToProps = (state) => {
 		boxesCss: state.get('sibling'),
 		html: state.get('html'),
 		boxIds: ids,
-		groups: state.get('pages').get('groups'),
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 	onTemplateEnter(){
-		dispatch(getTemplates)
+		dispatch(getTemplates())
 		}
 	}
 }
@@ -60,7 +59,7 @@ class Templates extends Component {
 }*/
 	componentDidMount(){
 		console.log('mounted')
-	this.props.onTemplateEnter()
+		this.props.onTemplateEnter()
 	}
 	render(){
 		const boxes = this.props.boxes;

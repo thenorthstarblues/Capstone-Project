@@ -9,6 +9,7 @@ import Faketabs from './Faketabs';
 
 //all svg drawing things
 import {saveGroup,loadLayout} from '../constants_actioncreators/layout';
+import {setCurrent,getLayouts, makeGroup} from '../constants_actioncreators/groups'
 import CodeModal from './codemirror_modal';
 import Code from './Codemirror';
 
@@ -33,12 +34,22 @@ const mapStateToProps = (state) => {
 		boxIds: ids,
 	}
 }
-
 const mapDispatchToProps = (dispatch) => {
 	return {
-		loadSelected(id){
-			dispatch(loadLayout(1))
+		loadSelected(id,groupId){ //pass in group id too
+			dispatch(loadLayout(id))// eventually id passed in
+			dispatch(setCurrent(id))//
+			//dispatch set pages or something,
+		},
+		createGroup(){
+			dispatch(saveGroup('blah',1))
+		},
+		loadLayouts(id){
+			console.log('group id',id)
+			dispatch(getLayouts(id))
+			dispatch(makeGroup(id))
 		}
+		
 		//clearly the load all templates and group calls go here
 	}
 }
@@ -75,12 +86,12 @@ class ViewGroups extends Component {
 
 		//presume we want local form events and click searches to
 		// be stored on this combined state
-
+		console.log('the groups',this.props.groups)
 
 		return (
 		        <div>
-		        	<div className="bkgrey"> {/* need dispatches to trickle up and change state from tabs*/}
-		        	<Faketabs state={this.state} actions="add later"/>
+		        	<div onClick={()=>{console.log('hi');this.props.createGroup()}} className="bkgrey"> {/* need dispatches to trickle up and change state from tabs*/}
+		        	<Faketabs  state={this.state} actions="add later"/>
 
 		        	</div>
 			        <div className="offset15side">
@@ -90,7 +101,7 @@ class ViewGroups extends Component {
 											<FamilyThumbnails groups = {this.props.pages} clickHandle= {this.props.loadSelected} action="" />
 										</div>
 										<div className="viewFam col-lg-3 bkoffwhite">
-											<FamilyScroll groups = {this.props.groups} action="" />
+											<FamilyScroll groups = {this.props.groups} action="" clickAdd={this.props.loadLayouts} />
 										</div>
 
 									</div> {/*out of main tabSpaceActive */}

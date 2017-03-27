@@ -41,9 +41,9 @@ const FamilyThumbnails= (({clickHandle, groups,action})=> {
                 <div className="border1">
                 <p className="closer"><span className="TrendHandMade">CLICK THUMBNAILS TO EDIT:</span> load templates into editing tabs</p>
                 <div className="mainThumbs flexWrap left">
-                  {buttons.map(button=>{ //later this should link to the state and the dispatch calls to sort/select
+                  {groups.map(button=>{ //later this should link to the state and the dispatch calls to sort/select
                     return (<Link to="/">
-                              <div onClick = {()=> clickHandle()}className="thumbnailMargLarge">
+                              <div onClick = {()=> clickHandle(button)}className="thumbnailMargLarge">
                                 <SvgThumb scale="" actions="" classThis="" value="1" vers="large" />
                               </div>
                             </Link>
