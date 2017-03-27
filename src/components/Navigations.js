@@ -101,7 +101,7 @@ class Navigation extends Component{
 							<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm" type="button"> Download Code   </button>
 						<span className="glyphicon glyphicon-minus"></span>
-						<button className="btn btn-default btn-sm" type="button" onClick={()=> {props.save(props.boxes, props.currentId)}}> Save Layout</button>
+						<button className="btn btn-default btn-sm" type="button" onClick={()=> {this.props.save(this.props.boxes, this.props.currentId)}}> Save Layout</button>
 
 
 				</div>
