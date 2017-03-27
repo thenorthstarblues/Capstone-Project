@@ -34,7 +34,7 @@ let buttons= [
 
 
 const FamilyThumbnails= (({clickHandle, groups,action})=> {
-  //console.log(action);
+  console.log('the groups',groups);
 
     return (
               <div className="addOptionsInt">

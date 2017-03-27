@@ -1,6 +1,6 @@
 import { loadLayout, saveLayout } from './layout';
 import axios from 'axios';
-
+import Immutable from 'immutable'
 export const makeGroup = group => ({
   type: 'MAKE_GROUP',
   group,
@@ -43,7 +43,7 @@ export const getLayouts = (id) => (dispatch) => {
     .then((layouts) => {
       const layoutsArr = layouts.data.map((layout)=>layout.id);
       console.log(layoutsArr);
-      dispatch(setPages(layoutsArr)); //this is only because for some reason it is back an object
+      dispatch(setPages(Immutable.fromJS(layoutsArr))); //this is only because for some reason it is back an object
     });
 };
 export const updatePage = (id, stateCopy) => (dispatch) => {

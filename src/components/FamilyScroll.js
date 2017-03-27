@@ -107,8 +107,6 @@ export const SvgThumb = (({scale, actions, classThis,value, vers})=>{
 
 
 const FamilyScroll = (({groups, action, clickAdd})=> {
-  console.log(groups);
-
     return (
               <div className="addOptionsInt">
                 <div className="border1">
