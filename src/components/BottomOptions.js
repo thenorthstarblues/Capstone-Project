@@ -72,7 +72,7 @@ class BottomOptions extends Component {
               <g> {/* this is just the dummy layout*/}
                 {bars.map((bar, i)=>{
                   return (
-                          <g>
+                          <g key={bar+i}>
                           <rect x={bar[0]} y="510" width={bar[1]} value={i} onClick={this.setFocus} className={`bshadsm ${this.isActive(i)}`} />
 
                           </g>
@@ -80,7 +80,7 @@ class BottomOptions extends Component {
                 })}
                 {bars.map((bar, i)=>{
                   return (
-                          <g>
+                          <g key={bar+i}>
                           <text x={bar[0]+5} y="523" textAnchor="start" className="textBar" >{bar[2]}</text>
                           <text x={bar[0]+bar[1]-5} y="523" textAnchor="end" className="textBar" >{bar[2]}</text>
                           </g>
@@ -90,7 +90,7 @@ class BottomOptions extends Component {
                   bars.map((bar, i)=>{
                     if (this.state.verticals===i){
                     return (
-                            <g>
+                            <g key={bar+i}>
                             <line x1={bar[0]} y1="2" x2={bar[0]} y2="499" className="verticalGuides" />
                             <line x1={bar[0]+bar[1]} y1="2" x2={bar[0]+bar[1]} y2="499" className="verticalGuides"  />
 
@@ -102,7 +102,7 @@ class BottomOptions extends Component {
                   column.map((bar, i)=>{
 
                     return (
-                            <g>
+                            <g key={bar+i}>
                             <line x1={bar[0]} y1="2" x2={bar[0]} y2="499" className="verticalGuides" strokeOpacity="0.5"/>
                             <line x1={bar[0]+bar[1]} y1="2" x2={bar[0]+bar[1]} y2="499" className="verticalGuides" strokeOpacity="0.5" />
 
