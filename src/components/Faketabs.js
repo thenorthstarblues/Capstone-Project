@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {}
 
 const Faketabs = (({state, action})=> {
   //console.log(action);
@@ -8,7 +9,7 @@ const Faketabs = (({state, action})=> {
     return (
               <div>
                 <button className="fakeTab active bkoffwhite TrendHandMade borders">group1</button>
-                <button className="fakeTab TrendHandMade other borders"> other options</button>
+                <button className="fakeTab TrendHandMade other borders"> Add Page +</button>
                 <button className="fakeTab TrendHandMade other borders">other options</button>
                 <button className="fakeTab TrendHandMade other borders">other options</button>
               </div>
