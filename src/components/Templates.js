@@ -8,14 +8,12 @@ import { getTemplates, setCurrent, makeGroup, getLayouts } from '../constants_ac
 import { loadLayout } from '../constants_actioncreators/layout';
 import '../style/css/App.css';
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) => ({
     boxes: state.get('boxes').toJS(),
     pages: state.get('pages').get('pages'),
     groups: state.get('pages').get('groups'),
     currentGroup: state.get('pages').get('group'),
-  };
-};
+});
 
 const mapDispatchToProps = dispatch => ({
   onTemplateEnter() {
@@ -32,33 +30,30 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Templates extends Component {
-	constructor(props){
-		super(props);
-		this.state= {}
-	}
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-	componentDidMount(){
-		this.props.onTemplateEnter()
-	}
+  componentDidMount() {
+    this.props.onTemplateEnter();
+  }
 
-	render(){
-		const boxes = this.props.boxes;
-		const boxIds = this.props.boxIds;
-
-		return (
-			<div className="App bkgrey">
-				<div className="container-fluid ">
-					<Navigation page="templates"/>
-					<ViewGroups
-						pages={this.props.pages}
-						groups={this.props.groups}
-						loadSelected={this.props.loadSelected}
-						loadLayouts={this.props.loadLayouts}
-						/>
-			</div>
-		</div>
-		)
-	}
+  render() {
+    return (
+      <div className="App bkgrey">
+        <div className="container-fluid ">
+          <Navigation page="templates" />
+          <ViewGroups
+            pages={this.props.pages}
+            groups={this.props.groups}
+            loadSelected={this.props.loadSelected}
+            loadLayouts={this.props.loadLayouts}
+          />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Templates);

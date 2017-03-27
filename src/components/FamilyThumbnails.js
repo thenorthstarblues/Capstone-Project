@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SvgThumb } from './FamilyScroll';
+import { SvgThumb } from './SvgThumb';
 
 
 const FamilyThumbnails = (({ pages, loadSelected }) => (
@@ -15,7 +15,10 @@ const FamilyThumbnails = (({ pages, loadSelected }) => (
             pages && pages.map(page => (
               <Link to="/">
                 <div className="thumbnailMargLarge">
-                  <SvgThumb vers="large" />
+                  <SvgThumb
+                    vers="large"
+                    pageNum={page}
+                  />
                 </div>
               </Link>
               ),
