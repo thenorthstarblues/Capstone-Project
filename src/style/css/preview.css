@@ -43,46 +43,130 @@
    padding:100px;
 }
 
-/* ----margins for wildly placed children--- */
+/* ----margin-tops for wildly placed children--- */
 
-.m10 {
-   margin:10px;
+.mL10 {
+   margin-left:10px;
 }
 
-.m20 {
-   margin:20px;
+.mL20 {
+   margin-left:20px;
 }
 
-.m30 {
-   margin:30px;
+.mL30 {
+   margin-left:30px;
 }
 
-.m40 {
-   margin:40px;
+.mL40 {
+   margin-left:40px;
 }
 
-.m50 {
-   margin:50px;
+.mL50 {
+   margin-left:50px;
 }
 
-.m60 {
-   margin:60px;
+.mL60 {
+   margin-left:60px;
 }
 
-.m70 {
-   margin:70px;
+.mL70 {
+   margin-left:70px;
 }
 
-.m80 {
-   margin:80px;
+.mL80 {
+   margin-left:80px;
 }
 
-.m90 {
-   margin:90px;
+.mL90 {
+   margin-left:90px;
 }
 
-.m100 {
-   margin:100px;
+.mL100 {
+   margin-left-top:100px;
+}
+
+/*--- left margins--*/
+
+.mT10 {
+   margin-top:10px;
+}
+
+.mT20 {
+   margin-top:20px;
+}
+
+.mT30 {
+   margin-top:30px;
+}
+
+.mT40 {
+   margin-top:40px;
+}
+
+.mT50 {
+   margin-top:50px;
+}
+
+.mT60 {
+   margin-top:60px;
+}
+
+.mT70 {
+   margin-top:70px;
+}
+
+.mT80 {
+   margin-top:80px;
+}
+
+.mT90 {
+   margin-top:90px;
+}
+
+.mT100 {
+   margin-top:100px;
+}
+
+/*--margin right--*/
+
+.mR10 {
+   margin-right:10px;
+}
+
+.mR20 {
+   margin-right:20px;
+}
+
+.mR30 {
+   margin-right:30px;
+}
+
+.mR40 {
+   margin-right:40px;
+}
+
+.mR50 {
+   margin-right:50px;
+}
+
+.mR60 {
+   margin-right:60px;
+}
+
+.mR70 {
+   margin-right:70px;
+}
+
+.mR80 {
+   margin-right:80px;
+}
+
+.mR90 {
+   margin-right:90px;
+}
+
+.mR100 {
+   margin-right:100px;
 }
 
 /* MOST OF FLEX GOES ON CONTAINER DIV */
@@ -195,6 +279,15 @@ and since we're setting child sizes, we won't need anything more than their odd 
 }
 
 
+/* PREVIEW VISUALIZATION AIDES */
+/* --------------- preview stuff css --------------- */
 
+.pborder {
+   border: solid 1px ;
+}
+
+.pbkground {
+   background-color: #f6f6f6;
+}
 
 
