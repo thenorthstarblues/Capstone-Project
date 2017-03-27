@@ -1,3 +1,4 @@
+
 .svgP {
   fill-opacity: 1;
   stroke: #000000;
@@ -39,6 +40,14 @@
 
 .headerH5 {
   fill: url(#h5);
+}
+
+.img {
+  fill: url(#img);
+}
+
+.ului {
+  fill: url(#ului);
 }
 
 .img {

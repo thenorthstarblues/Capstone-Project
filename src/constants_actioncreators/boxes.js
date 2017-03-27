@@ -26,7 +26,7 @@ export const addBox = (id, tag) => ({
     children: [],
     parent: null,
     tag,
-    css: 'p10 ',
+    css: '',
   },
 });
 

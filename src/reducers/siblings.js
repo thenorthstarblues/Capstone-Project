@@ -1,10 +1,10 @@
 import Immutable from 'immutable';
 import { columnRowCheck } from './divRecognition';
 import { formatCheck, cleanCss } from './cssRecognition';
-import { htmlCreator, createCss } from './html';
+import { htmlCreator, createCss, htmlCreatorPreview } from './html';
 
 
-const initialState = Immutable.Map();
+export const initialState = Immutable.Map({ });
 
 export const SIB_RECOG = 'SIB_RECOG';
 
@@ -13,7 +13,7 @@ const setSiblings = boxObjs => ({
   boxesCss: boxObjs,
 });
 
-export const findSiblings = boxes => (dispatch) => {
+const boxRecog = (boxes => {
   const boxObjs = Object.assign({}, boxes);
   let len = Object.keys(boxObjs);
   for (let i = 0; i < len.length; i++) {
@@ -29,9 +29,32 @@ export const findSiblings = boxes => (dispatch) => {
   len.forEach((box) => {
     cleanCss(boxObjs, box);
   });
-  dispatch(setSiblings(boxObjs));
-  dispatch(htmlCreator(boxObjs));
-  dispatch(createCss(boxObjs));
+
+  return boxObjs;
+});
+
+export const findSiblings = boxes => (dispatch) => {
+  let boxObj=boxRecog(boxes);
+
+  dispatch(setSiblings(boxObj));
+  dispatch(htmlCreator(boxObj));
+  dispatch(createCss(boxObj));
+};
+
+export const previewSiblings = boxes => (dispatch) => {
+  let boxObj=boxRecog(boxes);
+
+  dispatch(setSiblings(boxObj));
+};
+
+export const previewLive = boxes => (dispatch) => { //so everything is in store
+  let boxObj=boxRecog(boxes);
+
+  dispatch(setSiblings(boxObj));
+  dispatch(htmlCreator(boxObj));
+  dispatch(createCss(boxObj));
+  dispatch(htmlCreatorPreview(boxObj));
+
 };
 
 //---------------------------action reducer---------------------------
