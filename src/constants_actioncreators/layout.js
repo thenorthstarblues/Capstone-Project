@@ -6,14 +6,14 @@ import { makeGroup, addPage, setCurrent } from './groups';
 export const LOAD_LAYOUT = 'LOAD_LAYOUT';
 export const SAVE = 'SAVE';
 
-export const load = (newLayout) => ({
-    type: LOAD_LAYOUT,
-    newLayout, //TODO: make this dispatch to load
-  });
+export const load = newLayout => ({
+  type: LOAD_LAYOUT,
+  newLayout, //TODO: make this dispatch to load
+});
 
 export const save = () => ({
-    type: SAVE
-  });
+  type: SAVE,
+});
 
 export const loadLayout = id => (dispatch) => {
   axios.get(`api/elements/layout/${id}`)
@@ -77,5 +77,28 @@ export const saveGroup = (name, currentId) => (dispatch) => {
       .then((s) => {
         dispatch(addPage(currentId));
       });
+    });
+};
+
+export const addToGroup = (stateCopy, groupId, currentId) => (dispatch) => {
+  axios.post('api/layouts', {
+    name: 'layout',
+    author: 'me',
+    groupId: groupId
+  })
+    .then((layout) => {
+      const id = layout.data.id;
+      const makeelements = []; // converting to array
+      const elemClone = Object.assign({}, stateCopy);
+      const elementIdArr = Object.keys(elemClone);
+      for (let i = 0; i < elementIdArr.length; i++) {
+        const elem = elemClone[i];
+        const layId = elem.id;
+        elem.children = elem.children.join(',');
+        delete elem.id;
+        const newElement = Object.assign({}, elem, { layId, layoutId: id });
+        makeelements.push(axios.post('/api/elements', newElement));
+      }
+      dispatch(addPage(currentId));
     });
 };

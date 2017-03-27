@@ -2,12 +2,23 @@ import CodeModal from './codemirror_modal';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {connect} from 'react-redux'; 
+import { connect } from 'react-redux'; 
 
-import {saveOrUpdate} from '../constants_actioncreators/groups'
+import {saveOrUpdate} from '../constants_actioncreators/groups';
 
+const mstp = (state) => ({
+  elements: state.get('boxes').toJS(),
+  currentId: state.get('pages').get('currentPage'),
+  group: state.get('pages').get('group'),
+});
 
-const Navigation=(({page})=>{
+const mdtp = (dispatch) => ({
+	save(elements, id) {
+    dispatch(saveOrUpdate(elements, id));
+	}
+})
+
+const Navigation=(props,{page})=>{
 
 	//conditional rendering;
 	const user = false;
@@ -42,12 +53,12 @@ const Navigation=(({page})=>{
 						<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm" type="button"> Download Code   </button>
 						<span className="glyphicon glyphicon-minus"></span>
-						<button className="btn btn-default btn-sm" type="button" onClick={()=> {saveOrUpdate()}}> Save Layout   </button>
+						<button className="btn btn-default btn-sm" type="button" onClick={()=> {props.save(props.elements, props.currentId)}}> Save Layout</button>
 
 
 				</div>
 			</div>
 	)
-})
+}
 
-export default Navigation;
+export default connect(mstp, mdtp)(Navigation);
