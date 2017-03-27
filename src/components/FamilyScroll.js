@@ -106,7 +106,7 @@ SvgThumb.propTypes = {
 };
 
 
-const FamilyScroll = (({ groups }) => (
+const FamilyScroll = (({clickAdd, groups }) => (
     <div className="addOptionsInt">
       <div className="border1">
         <p className="closer">
@@ -130,7 +130,7 @@ const FamilyScroll = (({ groups }) => (
         <div className="sideThumbs">
           {
             groups && groups.map(group => (
-                <div key={group.id} onClick="">
+                <div key={group.id} onClick={()=> clickAdd(group.id)}>
                   <SvgThumb
                     groupName={group.name}
                     groupId={group.id}
