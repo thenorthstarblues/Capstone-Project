@@ -67,6 +67,7 @@ class CodeModal extends Component {
           </Modal.Header>
           <Modal.Body>
             <Code htmlString={`//HTML\n\n${this.props.html.html}`} />
+            <hr />
             <Code htmlString={this.props.html.css} />
           </Modal.Body>
           <Modal.Footer>
