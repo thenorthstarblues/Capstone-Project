@@ -27,7 +27,9 @@ export const loadLayout = id => (dispatch) => {
       delete element.updatedAt;
       delete element.layoutId;
       element.id = id;
-      newState[id] = element;
+      const parent = element.parent;
+      if (parent !== null){element.parent = parent.toString()}
+      //newState[id] = element;
       let children = [];
       if (element.children) { children = [...element.children.split(',')]; }
       const childrenArr = children.map(val => +val);
@@ -79,6 +81,7 @@ export const saveGroup = (name, currentId) => (dispatch) => {
       });
     });
 };
+
 
 export const addToGroup = (stateCopy, groupId, currentId) => (dispatch) => {
   axios.post('api/layouts', {

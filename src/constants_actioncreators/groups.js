@@ -1,6 +1,6 @@
 import { loadLayout, saveLayout } from './layout';
 import axios from 'axios';
-
+import Immutable from 'immutable'
 export const makeGroup = group => ({
   type: 'MAKE_GROUP',
   group,
@@ -16,6 +16,36 @@ export const setCurrent = id => ({
   id,
 });
 
+export const setGroups = groups => ({
+  type: 'SET_GROUPS',
+  groups,
+});
+
+export const addGroup = newGroup => ({
+  type: 'ADD_GROUP',
+  newGroup,
+});
+export const setPages = pages => ({
+  type: 'SET_PAGES',
+  pages,
+});
+
+export const getTemplates =()=> (dispatch)=>{
+  axios.get('/api/group').then((groups) => {
+    console.log(groups.data)
+    const groupId = groups.data.map(group => group.id);
+    dispatch(setGroups(groupId));
+  });
+};
+
+export const getLayouts = (id) => (dispatch) => {
+  axios.get(`api/layouts/group/${id}`)
+    .then((layouts) => {
+      const layoutsArr = layouts.data.map((layout)=>layout.id);
+      console.log('ourlayouts', layoutsArr);
+      dispatch(setPages(Immutable.fromJS(layoutsArr))); //this is only because for some reason it is back an object
+    });
+};
 export const updatePage = (id, stateCopy) => (dispatch) => {
   axios.get(`api/layouts/${id}`)
     .then((layout) => {

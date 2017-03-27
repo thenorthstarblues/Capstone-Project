@@ -1,6 +1,7 @@
 const express = require('express');
 const group = require('../../db/models').group;
 const router = require('express').Router();
+
 module.exports = router;
 
 
@@ -15,6 +16,7 @@ router.get('/:id', (req, res, next) => {
 })
 
 router.get('/', (req, res, next) => {
+    console.log('hey')
     group.findAll({})
     .then((data)=>{
         res.json(data).status(200);
