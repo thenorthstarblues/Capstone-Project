@@ -42,7 +42,6 @@ export const htmlCreator = elements => (dispatch) => {
 export const htmlCreatorPreview = elements => (dispatch) => {
   const htmlString = getFormattedHtml(elements);
   //insertion by innerHtml... no conversion, but need to add background color tags/lorem ipsum to fill in space for preview
-  //should this be a parallel function to avoid junk in the main html generator?
 
   dispatch(setHtmlPreview(htmlString))
 };
