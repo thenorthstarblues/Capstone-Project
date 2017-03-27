@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Code from './Codemirror';
 import '../style/css/App.css';
-import { saveLayout, loadLayout } from '../constants_actioncreators/layout';
-import { htmlCreator, createCss } from '../reducers/html';
+import { loadLayout } from '../constants_actioncreators/layout';
 import { findSiblings } from '../reducers/siblings';
 import { saveOrUpdate } from '../constants_actioncreators/groups';
 
@@ -29,19 +28,23 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-// TODO: convert modal to dumb component
-const CodeModal = React.createClass({
-  getInitialState() {
-    return { showModal: false };
-  },
+class CodeModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false,
+    };
+    this.open = this.open.bind(this);
+    this.close = this.close.bind(this);
+  }
 
   close() {
     this.setState({ showModal: false });
-  },
+  }
 
   open() {
     this.setState({ showModal: true });
-  },
+  }
 
   render() {
     const stateCopy = this.props.elements;
@@ -51,11 +54,10 @@ const CodeModal = React.createClass({
         <Button
           bsStyle="default"
           bsSize="small"
-          onClick={()=>{
+          onClick={() => {
             this.props.findSiblings(stateCopy);
             this.open();
           }}
-
         >
           Display Code
         </Button>
@@ -72,19 +74,27 @@ const CodeModal = React.createClass({
             <Button>
           Download
           </Button>
-
             <Button
               onClick={() => {
-              this.props.save(stateCopy, this.props.currentId);
-            }}
+                this.props.save(stateCopy, this.props.currentId);
+              }}
             >SAVE </Button>
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>
     );
-  },
-});
+  }
+}
+
+CodeModal.propTypes = {
+  elements: React.PropTypes.objectOf(React.PropTypes.object).isRequired,
+  findSiblings: React.PropTypes.func.isRequired,
+  save: React.PropTypes.func.isRequired,
+  currentId: React.PropTypes.number.isRequired,
+  load: React.PropTypes.func.isRequired,
+  html: React.PropTypes.string.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CodeModal);
 

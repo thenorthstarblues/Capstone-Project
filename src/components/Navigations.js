@@ -71,7 +71,6 @@ class Navigation extends Component{
 	    			<span className="menuL" > Login </span>
 	    		</div>
 	    		<div className="col-lg-6 flexWrap spaceBetween">
-
 						<CodeModal />
 							<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm" type="button" onClick={this.showHide}> Preview Hierarchy   </button>

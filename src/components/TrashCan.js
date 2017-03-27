@@ -19,7 +19,9 @@ class TrashCan extends Component {
 
   onDrop = (e) => {
     const deletedBoxId = +e.relatedTarget.id;
+    if (this.props.boxes[deletedBoxId].parent !== null){
     this.props.removeChild(this.props.boxes[deletedBoxId].parent, deletedBoxId)
+    }
     this.props.removeBox(deletedBoxId);
   }
 
