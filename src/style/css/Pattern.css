@@ -45,6 +45,14 @@
   fill: url(#img);
 }
 
+.ului {
+  fill: url(#ului);
+}
+
+.img {
+  fill: url(#img);
+}
+
 .video{
   fill: url(#video);
 }

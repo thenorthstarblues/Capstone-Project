@@ -18,7 +18,6 @@ export const initialState = Immutable.Map({
   }),
 });
 
-
 const boxesReducer = (prevState = initialState, action) => {
   switch (action.type) {
     case SET_BOX:

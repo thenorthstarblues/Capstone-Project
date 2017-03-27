@@ -613,3 +613,10 @@ Resizer.disabled:hover {
   margin-left:20%;
   width: 80%;
 }
+
+.hierarchyDiv{
+  stroke-width:3px;
+  stroke: #00bfff;
+  stroke-dasharray: 5px;
+  mix-blend-mode: multiply;
+}
