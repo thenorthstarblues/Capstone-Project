@@ -113,8 +113,12 @@ export const getHtmlPre = (dom, node = '0', cssClasses = {}) => {
   return { string: str, css: cssClasses };
 };
 
+//revise and consolidate these two routes
 
-
+export const getFormattedHtmlPre = ((dom) => {
+  let { string } = getHtmlPre(dom);
+  return html(string.replace(/\n\n/g, '\n'));
+});
 
 
 export const getFormattedHtml = ((dom) => {

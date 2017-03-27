@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import { getFormattedHtml, getCss, getHtml, head, end } from '../components/previewCreator';
+import { getFormattedHtml, getFormattedHtmlPre, getCss, getHtml, head, end } from '../components/previewCreator';
 import { theCss } from './stockCss';
 
 const initialState = Immutable.Map({
@@ -40,7 +40,7 @@ export const htmlCreator = elements => (dispatch) => {
 };
 
 export const htmlCreatorPreview = elements => (dispatch) => {
-  const htmlString = getFormattedHtml(elements);
+  const htmlString = getFormattedHtmlPre(elements);
   //insertion by innerHtml... no conversion, but need to add background color tags/lorem ipsum to fill in space for preview
 
   dispatch(setHtmlPreview(htmlString))
