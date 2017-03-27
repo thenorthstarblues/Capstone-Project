@@ -34,7 +34,7 @@ const Navigation=(({page})=>{
 	    		</div>
 	    		<div className = "col-lg-6 flexWrap spaceBetween">
 
-						<CodeModal />
+						{/*<CodeModal />*/}
 						<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm" type="button"> Preview Hierarchy   </button>
 						<span className="glyphicon glyphicon-minus"></span>
