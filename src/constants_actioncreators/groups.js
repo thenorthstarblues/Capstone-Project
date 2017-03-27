@@ -78,3 +78,29 @@ export const saveOrUpdate = (stateCopy, id) => (dispatch) => {
     dispatch(saveLayout(stateCopy));
   }
 };
+
+
+export const pageChange = (stateCopy, id, pageNo) => (dispatch) => {
+  axios.get(`api/layouts/${id}`)
+    .then((layout) => {
+      axios.delete(`api/elements/${id}`)
+        .then((result) => {
+          const makeelements = []; // converting to array
+          const elemClone = Object.assign({}, stateCopy);
+          const elementIdArr = Object.keys(elemClone);
+          for (let i = 0; i < elementIdArr.length; i++) {
+        const elem = elemClone[i];
+        const layId = elem.id;
+        elem.children = elem.children.join(',');
+        delete elem.id;
+        const newElement = Object.assign({}, elem, { layId, layoutId: id });
+        makeelements.push(axios.post('/api/elements', newElement));
+      }
+
+          Promise.all(makeelements).then((result) => {
+        dispatch(loadLayout(pageNo));
+        dispatch(setCurrent(pageNo))
+      });
+        });
+    });
+};
