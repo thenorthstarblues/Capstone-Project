@@ -4,6 +4,7 @@ import Navigation from './Navigations';
 import ViewGroups from './ViewGroups';
 import Immutable from 'immutable';
 import {connect} from 'react-redux';
+import {getTemplates} from '../constants_actioncreators/groups'
 import {saveGroup} from '../constants_actioncreators/layout';
 import '../style/css/App.css';
 
@@ -17,11 +18,15 @@ const mapStateToProps = (state) => {
 		boxesCss: state.get('sibling'),
 		html: state.get('html'),
 		boxIds: ids,
+		groups: state.get('pages').get('groups'),
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+	onTemplateEnter(){
+		dispatch(getTemplates)
+		}
 	}
 }
 
@@ -33,7 +38,7 @@ class Templates extends Component {
 		this.boxAdder=this.boxAdder.bind(this);
 
 	}
-
+	
 	boxAdder = (e => {
 		let tagType = e.target.attributes.value.value;
 		const id = +this.props.nextBoxId;
@@ -44,7 +49,19 @@ class Templates extends Component {
 		const newBoxId = +this.props.nextBoxId;
 		this.props.copyBox(boxToCopy, newBoxId);
 	}
-
+	/*
+	const onTemplateEnter = (store) => {
+  console.log('ayo');
+  axios.get('/api/group').then((groups) => {
+    console.log('all groups', groups);
+    const groupId = groups.data.map(group => group.id);
+    store.dispatch(setGroups(groupId));
+  });
+}*/
+	componentDidMount(){
+		console.log('mounted')
+	this.props.onTemplateEnter()
+	}
 	render(){
 		const boxes = this.props.boxes;
 		const boxIds = this.props.boxIds;
@@ -53,6 +70,7 @@ class Templates extends Component {
 			<div className="App bkgrey">
 				<div className="container-fluid ">
 					<Navigation page="templates"/>
+					
 				{/* rework once index is revised*/}
 					<ViewGroups />
 					{/*<Footer />*/}
@@ -62,4 +80,4 @@ class Templates extends Component {
 	}
 }
 
-export default connect(mapStateToProps, null)(Templates);
+export default connect(mapStateToProps, mapDispatchToProps)(Templates);

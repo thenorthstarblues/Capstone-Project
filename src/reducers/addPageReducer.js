@@ -4,6 +4,7 @@ const initialState = Immutable.Map({
   group: 0,
   pages: Immutable.List(),
   currentPage: 0,
+  groups: Immutable.List(),
 });
 
 const pageReducer = (prevState = initialState, action) => {
@@ -14,6 +15,8 @@ const pageReducer = (prevState = initialState, action) => {
       return prevState.update('pages', (pagesList) => pagesList.push(action.page));
     case 'SET_CURRENT':
       return prevState.set('currentPage', action.id);
+    case 'SET_GROUPS':
+      return prevState.set('groups', action.groups);
     default:
       return prevState;
   }

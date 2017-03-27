@@ -106,7 +106,7 @@ export const SvgThumb = (({scale, actions, classThis, value, vers})=>{
 
 
 
-const FamilyScroll = (({action})=> {
+const FamilyScroll = (({groups, action})=> {
   //console.log(action);
 
     return (
@@ -122,7 +122,7 @@ const FamilyScroll = (({action})=> {
                 <div className="border1">
                 <p className="closer"><span className="TrendHandMade">CLICK GROUP:</span> to view & select children</p>
                 <div className="sideThumbs">
-                  {buttons.map(button=>{ //later this should link to the state and the dispatch calls to sort/select
+                  {groups.map(button=>{ //later this should link to the state and the dispatch calls to sort/select
                     return (
                       <SvgThumb scale="" actions="" classThis="" value="" vers="small" />
                             )

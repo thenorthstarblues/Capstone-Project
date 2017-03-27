@@ -8,7 +8,7 @@ import Immutable from 'immutable';
 import Faketabs from './Faketabs';
 
 //all svg drawing things
-import {saveGroup} from '../constants_actioncreators/layout';
+import {saveGroup,loadLayout} from '../constants_actioncreators/layout';
 import CodeModal from './codemirror_modal';
 import Code from './Codemirror';
 
@@ -27,14 +27,18 @@ const mapStateToProps = (state) => {
 		boxes: state.get('boxes').toJS(),
 		boxesCss: state.get('sibling'),
 		html: state.html,
-		group: state.group, // layer names and conventions
-		allgroups: state.layouts,
+		pages: state.get('pages').get('pages'),
+		groups: state.get('pages').get('groups'), // layer names and conventions
+	//	allgroups: state.layouts,
 		boxIds: ids,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+		loadSelected(id){
+			dispatch(loadLayout(1))
+		}
 		//clearly the load all templates and group calls go here
 	}
 }
@@ -55,7 +59,7 @@ class ViewGroups extends Component {
 
 	selectFamily = (e => {
 		let id = e.target.attributes.value.value;
-
+		console.log(id)
 		//a dispatch that goes to the actions to get templates from database
 		//this.props.showFamily(id);
 	})
@@ -83,10 +87,10 @@ class ViewGroups extends Component {
 						  <div className="" id="">
 									<div className=" row bkoffwhite borders">
 										<div id="grid-snap" className="svgHolder2 col-lg-9 bkoffwhite ">
-											<FamilyThumbnails action="" />
+											<FamilyThumbnails groups = {this.props.pages} clickHandle= {this.props.loadSelected} action="" />
 										</div>
 										<div className="viewFam col-lg-3 bkoffwhite">
-											<FamilyScroll action="" />
+											<FamilyScroll groups = {this.props.groups} action="" />
 										</div>
 
 									</div> {/*out of main tabSpaceActive */}

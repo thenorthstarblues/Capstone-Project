@@ -16,6 +16,18 @@ export const setCurrent = id => ({
   id,
 });
 
+export const setGroups = groups => ({
+  type: 'SET_GROUPS',
+  groups,
+});
+export const getTemplates = (dispatch)=>{
+  console.log('ayo');
+  axios.get('/api/group').then((groups) => {
+    console.log('all groups', groups);
+    const groupId = groups.data.map(group => group.id);
+    dispatch(setGroups(groupId));
+  });
+};
 export const updatePage = (id, stateCopy) => (dispatch) => {
   axios.get(`api/layouts/${id}`)
     .then((layout) => {

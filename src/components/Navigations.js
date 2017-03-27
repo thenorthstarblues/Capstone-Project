@@ -2,7 +2,7 @@ import CodeModal from './codemirror_modal';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
+import { Link } from 'react-router-dom';
 const Navigation=(({page})=>{
 
 	//conditional rendering;
@@ -19,8 +19,7 @@ const Navigation=(({page})=>{
 	        	<div className = "col-lg-6">
 	    			<span className="TrendHMTitle" ><img src="/AAlogo.svg" /> Agile-Armature </span>
 	    			{templates &&
-						<span className="menuL" > Templates <span className="glyphicon glyphicon-minus"></span></span>
-
+						<Link to="/templates"><span className="menuL" > Templates <span className="glyphicon glyphicon-minus"></span></span></Link>
 	    			}
 	    			<span className="menuL" > Directions <span className="glyphicon glyphicon-minus"></span></span>
 	    			{user &&

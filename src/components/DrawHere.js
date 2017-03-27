@@ -56,6 +56,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		copyBox(boxId, newBox){
 			dispatch(copyBox(boxId, newBox))
+		},
+		addGroup(name,currentId){
+			dispatch(saveGroup(name,currentId))
 		}
 	}
 }

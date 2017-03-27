@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {SvgThumb} from './FamilyScroll';
+import { SvgThumb } from './FamilyScroll';
+import { Link } from 'react-router-dom';
 
 let buttons= [
   {
@@ -32,7 +33,7 @@ let buttons= [
 
 
 
-const FamilyThumbnails= (({action})=> {
+const FamilyThumbnails= (({clickHandle, groups,action})=> {
   //console.log(action);
 
     return (
@@ -41,10 +42,11 @@ const FamilyThumbnails= (({action})=> {
                 <p className="closer"><span className="TrendHandMade">CLICK THUMBNAILS TO EDIT:</span> load templates into editing tabs</p>
                 <div className="mainThumbs flexWrap left">
                   {buttons.map(button=>{ //later this should link to the state and the dispatch calls to sort/select
-                    return (
-                            <div className="thumbnailMargLarge">
-                              <SvgThumb scale="" actions="" classThis="" value="" vers="large" />
-                            </div>
+                    return (<Link to="/">
+                              <div onClick = {()=> clickHandle()}className="thumbnailMargLarge">
+                                <SvgThumb scale="" actions="" classThis="" value="1" vers="large" />
+                              </div>
+                            </Link>
                             )
                   })}
                 </div>
