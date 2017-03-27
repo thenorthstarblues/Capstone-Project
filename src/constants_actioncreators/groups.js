@@ -40,12 +40,11 @@ export const getTemplates = () => (dispatch) => {
   });
 };
 
-export const getLayouts = (id) => (dispatch) => {
+export const getLayouts = id => (dispatch) => {
   axios.get(`api/layouts/group/${id}`)
     .then((layouts) => {
-      const layoutsArr = layouts.data.map((layout)=>layout.id);
-      console.log('ourlayouts', layoutsArr);
-      dispatch(setPages(Immutable.fromJS(layoutsArr))); //this is only because for some reason it is back an object
+      const layoutsArr = layouts.data.map(layout => layout.id);
+      dispatch(setPages(Immutable.fromJS(layoutsArr)));
     });
 };
 export const updatePage = (id, stateCopy) => (dispatch) => {
