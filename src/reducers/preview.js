@@ -27,7 +27,6 @@ const previewReducer = (prevState = initialState, action) => {
   switch (action.type) {
     case ON_PREVIEW:
       return prevState.set('preview', action.preview);
-
     default:
       return prevState;
   }

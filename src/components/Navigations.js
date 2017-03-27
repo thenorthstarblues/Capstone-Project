@@ -2,10 +2,11 @@ import CodeModal from './codemirror_modal';
 import {connect} from 'react-redux';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import Immutable from 'immutable';
 
 import {showPreview, hidePreview } from '../reducers/preview';
+import { previewLive } from '../reducers/siblings';
 
 const mapStateToProps = (state) => {
 	return {
@@ -22,6 +23,9 @@ const mapDispatchToProps = (dispatch) => {
 		hidePreview(){
 			dispatch(hidePreview())
 		},
+		previewLive(boxes){
+			dispatch(previewLive(boxes))
+		},
 	}
 }
 
@@ -30,18 +34,26 @@ class Navigation extends Component{
 	constructor(props){
 		super(props);
 		this.showHide=this.showHide.bind(this);
+		this.getPreview=this.getPreview.bind(this);
 	};
 
 	showHide = (e) => {
 		e.preventDefault();
 		let previewCur = this.props.preview;
-		console.log(previewCur);
+
 		if (previewCur===true){
 			console.log('true, need to set to false');
 			this.props.hidePreview();
 		} else {
 			this.props.showPreview(this.props.boxes);
 		}
+	}
+
+	getPreview = (e) =>{
+		this.props.previewLive(this.props.boxes);
+		console.log('check store for html-jsx and css', history, this.props);
+		//<Redirect to="/preview" push={true} />;
+		//history.pushState('/preview', []);
 	}
 
 	render(){
@@ -53,6 +65,7 @@ class Navigation extends Component{
 		const templates = page !== 'templates';
 		const directions = page !== 'directions';
 		const editor = page !== 'editor';
+		const preview = page !== 'preview';
 
 	return(
 	        <div className="row col-lg-12 flexWrap p20w bkgrey">
@@ -76,7 +89,13 @@ class Navigation extends Component{
 							<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm" type="button" onClick={this.showHide}> Preview Hierarchy   </button>
 							<span className="glyphicon glyphicon-minus"></span>
-						<button className="btn btn-default btn-sm" type="button"> Live Preview   </button>
+						{preview &&
+							<Link to="/preview"><button className="btn btn-default btn-sm" type="button" onClick={this.getPreview}> Live Preview  </button></Link>
+						}
+						{editor &&
+							<Link to="/"><button className="btn btn-default btn-sm" type="button" onClick=""> Return to Editing  </button></Link>
+						}
+
 							<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm" type="button"> Download Code   </button>
 							<span className="glyphicon glyphicon-minus"></span>

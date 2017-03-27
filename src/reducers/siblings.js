@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import { columnRowCheck } from './divRecognition';
 import { formatCheck, cleanCss } from './cssRecognition';
-import { htmlCreator, createCss } from './html';
+import { htmlCreator, createCss, htmlCreatorPreview } from './html';
 
 
 export const initialState = Immutable.Map({ });
@@ -45,6 +45,15 @@ export const previewSiblings = boxes => (dispatch) => {
   let boxObj=boxRecog(boxes);
 
   dispatch(setSiblings(boxObj));
+};
+
+export const previewLive = boxes => (dispatch) => { //so everything is in store
+  let boxObj=boxRecog(boxes);
+
+  dispatch(setSiblings(boxObj));
+  dispatch(htmlCreator(boxObj));
+  dispatch(createCss(boxObj));
+  dispatch(htmlCreatorPreview(boxObj));
 };
 
 //---------------------------action reducer---------------------------

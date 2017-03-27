@@ -1,18 +1,25 @@
 import Immutable from 'immutable';
-import { getFormattedHtml, getCss, getHtml } from '../components/previewCreator';
+import { getFormattedHtml, getCss, getHtml, head, end } from '../components/previewCreator';
 import { theCss } from './stockCss';
 
 const initialState = Immutable.Map({
   html: '',
   css: '',
+  htmlPreview: '',
 });
 
+const CREATE_HTML_PREVIEW = 'CREATE_HTML_PREVIEW';
 const CREATE_HTML = 'CREATE_HTML';
 const CREATE_CSS = 'CREATE_CSS';
 
 const setHtml = html => ({
   type: CREATE_HTML,
   html,
+});
+
+const setHtmlPreview = htmlPreview => ({
+  type: CREATE_HTML_PREVIEW,
+  htmlPreview,
 });
 
 const setCss = css => ({
@@ -28,11 +35,22 @@ export const createCss = elements => (dispatch) => {
 
 export const htmlCreator = elements => (dispatch) => {
   const htmlString = getFormattedHtml(elements);
-  dispatch(setHtml(htmlString));
+  const fullHtml=head+htmlString+end;
+  dispatch(setHtml(fullHtml));
+};
+
+export const htmlCreatorPreview = elements => (dispatch) => {
+  const htmlString = getFormattedHtml(elements);
+  //insertion by innerHtml... no conversion, but need to add background color tags/lorem ipsum to fill in space for preview
+  //should this be a parallel function to avoid junk in the main html generator?
+
+  dispatch(setHtmlPreview(htmlString))
 };
 
 const htmlReducer = (prevState = initialState, action) => {
   switch (action.type) {
+    case CREATE_HTML_PREVIEW:
+      return prevState.set('htmlPreview', Immutable.fromJS(action.htmlPreview));
     case CREATE_HTML:
       return prevState.set('html', Immutable.fromJS(action.html));
     case CREATE_CSS:

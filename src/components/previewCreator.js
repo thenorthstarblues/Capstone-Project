@@ -1,6 +1,22 @@
 import { html, css } from 'js-beautify';
 import { theCss } from '../reducers/stockCss';
 
+
+export const head = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <title>Your Agile Armature Output</title>
+    <link href="REPLACE WITH YOUR GENERATED CSS STYLE SHEET" rel="stylesheet" type="text/css">
+  </head>
+<body>\n`;
+
+export const end = `\n</body>
+<!--any additional script references-->
+</html>`;
+
 export const getHtml = (dom, node = '0', cssClasses = {}) => {
   let str = '';
   const { children, tag, css, id, width, height } = dom[node];
