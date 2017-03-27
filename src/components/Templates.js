@@ -58,9 +58,7 @@ class Templates extends Component {
   });
 }*/
 	componentDidMount(){
-		console.log('mounted')
 		this.props.onTemplateEnter()
-		//similar for profile maybe 
 	}
 	render(){
 		const boxes = this.props.boxes;

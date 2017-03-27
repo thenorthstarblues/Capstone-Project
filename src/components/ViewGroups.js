@@ -41,9 +41,6 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(setCurrent(id))//
 			//dispatch set pages or something,
 		},
-		createGroup(){
-			dispatch(saveGroup('blah',1))
-		},
 		loadLayouts(id){
 			console.log('group id',id)
 			dispatch(getLayouts(id))
@@ -86,11 +83,10 @@ class ViewGroups extends Component {
 
 		//presume we want local form events and click searches to
 		// be stored on this combined state
-		console.log('the groups',this.props.groups)
 
 		return (
 		        <div>
-		        	<div onClick={()=>{console.log('hi');this.props.createGroup()}} className="bkgrey"> {/* need dispatches to trickle up and change state from tabs*/}
+		        	<div className="bkgrey"> {/* need dispatches to trickle up and change state from tabs*/}
 		        	<Faketabs  state={this.state} actions="add later"/>
 
 		        	</div>

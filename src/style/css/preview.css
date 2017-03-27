@@ -1,0 +1,293 @@
+/* reference this and the bootstrap for the css creation */
+
+/* --------------- utility spacing classes ------------------ */
+
+/* ---------- padding for parents ----------- */
+.p10 {
+   padding:10px;
+}
+
+.p20 {
+   padding:20px;
+}
+
+.p30 {
+   padding:30px;
+}
+
+.p40 {
+   padding:40px;
+}
+
+.p50 {
+   padding:50px;
+}
+
+.p60 {
+   padding:60px;
+}
+
+.p70 {
+   padding:70px;
+}
+
+.p80 {
+   padding:80px;
+}
+
+.p90 {
+   padding:90px;
+}
+
+.p100 {
+   padding:100px;
+}
+
+/* ----margin-tops for wildly placed children--- */
+
+.mL10 {
+   margin-left:10px;
+}
+
+.mL20 {
+   margin-left:20px;
+}
+
+.mL30 {
+   margin-left:30px;
+}
+
+.mL40 {
+   margin-left:40px;
+}
+
+.mL50 {
+   margin-left:50px;
+}
+
+.mL60 {
+   margin-left:60px;
+}
+
+.mL70 {
+   margin-left:70px;
+}
+
+.mL80 {
+   margin-left:80px;
+}
+
+.mL90 {
+   margin-left:90px;
+}
+
+.mL100 {
+   margin-left-top:100px;
+}
+
+/*--- left margins--*/
+
+.mT10 {
+   margin-top:10px;
+}
+
+.mT20 {
+   margin-top:20px;
+}
+
+.mT30 {
+   margin-top:30px;
+}
+
+.mT40 {
+   margin-top:40px;
+}
+
+.mT50 {
+   margin-top:50px;
+}
+
+.mT60 {
+   margin-top:60px;
+}
+
+.mT70 {
+   margin-top:70px;
+}
+
+.mT80 {
+   margin-top:80px;
+}
+
+.mT90 {
+   margin-top:90px;
+}
+
+.mT100 {
+   margin-top:100px;
+}
+
+/*--margin right--*/
+
+.mR10 {
+   margin-right:10px;
+}
+
+.mR20 {
+   margin-right:20px;
+}
+
+.mR30 {
+   margin-right:30px;
+}
+
+.mR40 {
+   margin-right:40px;
+}
+
+.mR50 {
+   margin-right:50px;
+}
+
+.mR60 {
+   margin-right:60px;
+}
+
+.mR70 {
+   margin-right:70px;
+}
+
+.mR80 {
+   margin-right:80px;
+}
+
+.mR90 {
+   margin-right:90px;
+}
+
+.mR100 {
+   margin-right:100px;
+}
+
+/* MOST OF FLEX GOES ON CONTAINER DIV */
+/* ------------ parent css ------------*/
+
+.flexRow {
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: row;
+   flex-direction: row;
+}
+
+.flexCol {
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: column;
+   flex-direction: column;
+}
+
+/* adjust row or col with these class="flexCol start" or class="flexRow start" */
+
+/* not incorporating flex-direction reversals, flex-wrap, flex-flow, or align-content (as it treats multi-row wraps)...
+the order we can set and detecting true wrap would be more math */
+
+/* JUSTIFY CONTENTS */
+
+.left { /* left for rows */
+   -webkit-justify-content: flex-start;
+   justify-content: flex-start;
+}
+
+.right { /* right for rows */
+   -webkit-justify-content: flex-end;
+   justify-content: flex-end;
+}
+
+.center {  /* center row */
+   -webkit-justify-content: center;
+   justify-content: center;
+}
+
+.centerAround {  /* equal buffers row */
+   -webkit-justify-content: space-around;
+   justify-content: space-around;
+}
+
+.centerBetween {  /* to edges, space between row */
+   -webkit-justify-content: space-between;
+   justify-content: space-between;
+}
+
+/* ALIGN ITEMS */
+
+.startVert{ /* top for row, left for column */
+   -webkit-align-items: flex-start;
+   align-items: flex-start;
+}
+
+.endVert { /* bottom for row, right for column */
+   -webkit-align-items: flex-end;
+   align-items: flex-end;
+}
+
+.centerVert {  /* center row vertically */
+   -webkit-align-items: center;
+   align-items: center;
+}
+
+.stretchVert {  /* fills space top to bottom */
+   -webkit-align-items: stretch;
+   align-items: stretch;
+}
+
+.baselineVert {  /* around baseline */
+   -webkit-align-items: baseline;
+   align-items: baseline;
+}
+
+
+
+/* A BIT OF FLEX GOES ON THE OBJECT ITSELF */
+/* --------------- child css --------------- */
+
+/* I don't use these much - in terms of grow or shrink -
+and since we're setting child sizes, we won't need anything more than their odd alignment */
+
+.startSelf{
+	-webkit-align-self: flex-start;
+	align-self:flex-start;
+}
+
+.endSelf{
+	-webkit-align-self: flex-end;
+	align-self:flex-end;
+}
+
+.centerSelf{
+	-webkit-align-self: center;
+	align-self:center;
+}
+
+.baseSelf{
+	-webkit-align-self: baseline;
+	align-self: baseline;
+}
+
+.stretchSelf{
+	-webkit-align-self: stretch;
+	align-self:stretch;
+}
+
+
+/* PREVIEW VISUALIZATION AIDES */
+/* --------------- preview stuff css --------------- */
+
+.pborder {
+   border: solid 1px ;
+}
+
+.pbkground {
+   background-color: #f6f6f6;
+}
+
+

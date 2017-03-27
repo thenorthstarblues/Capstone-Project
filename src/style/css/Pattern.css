@@ -1,0 +1,91 @@
+
+.svgP {
+  fill-opacity: 1;
+  stroke: #000000;
+  stroke-width: 1px;
+  stroke-opacity: .15;
+}
+
+.pixelGrid {
+  fill-opacity: .25;
+  stroke: #000000;
+  stroke-width: 2px;
+  stroke-opacity: 1;
+  fill: url(#pixelGrid);
+}
+
+.paragraph {
+  fill: url(#paragraph);
+}
+
+.headerText{
+  fill: #ffffff;
+}
+
+.headerH1 {
+  fill: url(#h1);
+}
+
+.headerH2 {
+  fill: url(#h2);
+}
+
+.headerH3 {
+  fill: url(#h3);
+}
+
+.headerH4 {
+  fill: url(#h4);
+}
+
+.headerH5 {
+  fill: url(#h5);
+}
+
+.img {
+  fill: url(#img);
+}
+
+.ului {
+  fill: url(#ului);
+}
+
+.img {
+  fill: url(#img);
+}
+
+.video{
+  fill: url(#video);
+}
+
+.audio{
+  fill: url(#audio);
+}
+
+.ului {
+  fill: url(#ului);
+}
+
+.table1 {
+  fill: url(#table);
+}
+
+.buttn {
+  fill: url(#button);
+}
+
+.fileForm{
+  fill: url(#fileForm);
+}
+
+.radioForm{
+  fill: url(#radioForm);
+}
+
+.optionsForm{
+  fill: url(#optionsForm);
+}
+
+.textForm{
+  fill: url(#textForm);
+}

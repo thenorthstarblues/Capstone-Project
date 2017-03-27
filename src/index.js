@@ -7,12 +7,15 @@ import App from './App';
 import Templates from './components/Templates';
 import About from './components/About';
 import User from './components/User';
+import Preview from './components/Preview';
 
 import store from './store';
 import './style/css/bootstrap.min.css';
 import './style/css/index.css';
-import { setGroups } from './constants_actioncreators/groups';
 // provide full routes later
+import './style/css/App.css';
+import './style/css/preview.css';
+
 
 render(
    <Provider store={store}>
@@ -22,6 +25,7 @@ render(
   <Route path="/templates" component={Templates} />
   <Route path="/about" component={About} /> {/* //about tabs should hold intro, directions, usecases */}
   <Route path="/profile/:user" component={User} /> {/* //about tabs should hold user's templates (created), user's templates (favorites), sidebar contact info/media preferences, other?
+
 	       <Route path='/live' component={Live} /> //only holds the page preview w/ the top nav bar
 	   		*/}
 	     </div>
