@@ -2,11 +2,13 @@ import CodeModal from './codemirror_modal';
 import {connect} from 'react-redux';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Link, BrowserRouter as Router, Redirect } from 'react-router-dom';
+
+import { previewLive } from '../reducers/siblings';
+import { Link } from 'react-router-dom';
 import Immutable from 'immutable';
 
 import {showPreview, hidePreview } from '../reducers/preview';
-import { previewLive } from '../reducers/siblings';
+
 
 const mapStateToProps = (state) => {
 	return {
@@ -67,6 +69,7 @@ class Navigation extends Component{
 		const editor = page !== 'editor';
 		const preview = page !== 'preview';
 
+
 	return(
 	        <div className="row col-lg-12 flexWrap p20w bkgrey">
 	        	<div className="col-lg-6">
@@ -84,7 +87,6 @@ class Navigation extends Component{
 	    			<span className="menuL" > Login </span>
 	    		</div>
 	    		<div className="col-lg-6 flexWrap spaceBetween">
-
 						<CodeModal />
 							<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm" type="button" onClick={this.showHide}> Preview Hierarchy   </button>

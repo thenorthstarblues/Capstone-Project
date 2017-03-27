@@ -54,6 +54,7 @@ export const previewLive = boxes => (dispatch) => { //so everything is in store
   dispatch(htmlCreator(boxObj));
   dispatch(createCss(boxObj));
   dispatch(htmlCreatorPreview(boxObj));
+
 };
 
 //---------------------------action reducer---------------------------
