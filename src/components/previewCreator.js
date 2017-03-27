@@ -103,7 +103,7 @@ export const getHtmlPre = (dom, node = '0', cssClasses = {}) => {
     children.sort((prev, child) => dom[prev].x - dom[child].x);
 
     children.forEach(((kidId) => {
-      let { string } = getHtml(dom, kidId, cssClasses);
+      let { string } = getHtmlPre(dom, kidId, cssClasses);
       str += string;
     }));
 

@@ -284,7 +284,6 @@ and since we're setting child sizes, we won't need anything more than their odd 
 
 .pborder {
    border: solid 1px ;
-   background-color: #fafafa;
 }
 
 .pbkground {
