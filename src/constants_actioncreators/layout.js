@@ -105,3 +105,4 @@ export const addToGroup = (stateCopy, groupId, currentId) => (dispatch) => {
       dispatch(addPage(id));
     });
 };
+

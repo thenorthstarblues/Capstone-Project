@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addPage, saveOrUpdate, setCurrent } from '../constants_actioncreators/groups';
+import { addPage, pageChange } from '../constants_actioncreators/groups';
 import {addToGroup, loadLayout} from '../constants_actioncreators/layout';
 import {connect} from 'react-redux';
 
@@ -17,10 +17,7 @@ const mapDTP = (dispatch) => ({
     dispatch(addToGroup(stateCopy, groupId, currentId))
   },
   changePage(elements, currentId, pageNo){
-    console.log()
-    dispatch(saveOrUpdate(elements, currentId));
-    dispatch(loadLayout(pageNo));
-    dispatch(setCurrent(pageNo));
+    dispatch(pageChange(elements,currentId, pageNo))
   }
 
 })
