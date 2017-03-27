@@ -16,9 +16,6 @@ const mapDTP = (dispatch) => ({
   }
 })
 const PageTabs = (props) => {
-  //console.log(action);
-  console.log(props, 'here props')
-
   //later form will be a map that responds to state and actions
 
     return (

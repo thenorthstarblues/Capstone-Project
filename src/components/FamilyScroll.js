@@ -1,82 +1,4 @@
-import React, { Component } from 'react';
-
-const buttons = [
-  {
-    val: 'div',
-    icon: 'glyphicon glyphicon-unchecked',
-    style: '',
-  },
-  {
-    val: 'p',
-    icon: 'glyphicon glyphicon-align-left',
-    style: 'text-left',
-  },
-  {
-    val: 'p',
-    icon: 'glyphicon glyphicon-align-center',
-    style: 'text-center',
-  },
-  {
-    val: 'p',
-    icon: 'glyphicon glyphicon-align-right',
-    style: 'text-right',
-  },
-  {
-    val: 'h1',
-    icon: 'glyphicon glyphicon-plus',
-    style: '',
-  },
-  {
-    val: 'h2',
-    icon: 'glyphicon glyphicon-align-left',
-    style: '',
-  },
-  {
-    val: 'h3',
-    icon: 'glyphicon glyphicon-align-center',
-    style: '',
-  },
-  {
-    val: 'h4',
-    icon: 'glyphicon glyphicon-align-right',
-    style: '',
-  },
-  {
-    val: 'h5',
-    icon: 'glyphicon glyphicon-align-right',
-    style: '',
-  },
-  {
-    val: 'ul',
-    icon: 'glyphicon glyphicon-th-list',
-    style: '',
-  },
-  {
-    val: 'table',
-    icon: 'glyphicon glyphicon-th',
-    style: '',
-  },
-  {
-    val: 'img',
-    icon: 'glyphicon glyphicon-picture',
-    style: '',
-  },
-  {
-    val: 'video',
-    icon: 'glyphicon glyphicon-align-right',
-    style: '',
-  },
-  {
-    val: 'audio',
-    icon: 'glyphicon glyphicon-align-right',
-    style: '',
-  },
-  {
-    val: 'button',
-    icon: 'glyphicon glyphicon-align-right',
-    style: '',
-  },
-];
+import React from 'react';
 
 export const SvgThumb = (({ groupName, groupId, vers }) => {
   let width = 190;
@@ -106,7 +28,7 @@ SvgThumb.propTypes = {
 };
 
 
-const FamilyScroll = (({ groups }) => (
+const FamilyScroll = (({ groups, loadLayouts }) => (
     <div className="addOptionsInt">
       <div className="border1">
         <p className="closer">
@@ -118,7 +40,7 @@ const FamilyScroll = (({ groups }) => (
           <br />
           <button className="btn btn-default btn-sm m5w bshadsm" type="submit" >
             <span className="glyphicon glyphicon-search" />
-            search
+              search
           </button>
         </form>
       </div>
@@ -130,13 +52,13 @@ const FamilyScroll = (({ groups }) => (
         <div className="sideThumbs">
           {
             groups && groups.map(group => (
-                <div key={group.id} onClick="">
-                  <SvgThumb
-                    groupName={group.name}
-                    groupId={group.id}
-                    vers="small"
-                  />
-                </div>
+              <div key={group.id} onClick="">
+                <SvgThumb
+                  groupName={group.name}
+                  groupId={group.id}
+                  vers="small"
+                />
+              </div>
               ),
             )
           }
@@ -150,7 +72,7 @@ const FamilyScroll = (({ groups }) => (
   ));
 
 FamilyScroll.propTypes = {
-  groups: React.PropTypes.arrayOf(React.PropTypes.object),
-}
+  groups: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+};
 
 export default FamilyScroll;
