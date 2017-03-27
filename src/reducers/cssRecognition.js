@@ -1,5 +1,8 @@
 import { css, divCreation } from './divRecognition.js';
 
+// set everything to Math.floor(dimension/950)*100 and then use 100vw as our unit
+
+
 
 //second css driven formatting
 
@@ -12,6 +15,7 @@ function horizonAxisSort(obj, parentId, y){
 }
 
 //consolidate margin math later... to streamline while loops
+//
 
 function setRowMargins(obj, parentId){
 
@@ -41,9 +45,16 @@ function setRowMargins(obj, parentId){
       var below=obj[kidsIds[ind]].y;
       var mT = (Math.floor((below-above)/10))*10; //adjust spacing later
       var mL = (Math.floor((obj[kidsIds[ind]].x-obj[parentId].x)/10))*10;
+      var mR = (Math.floor(((obj[parentId].x+obj[parentId].width)-(obj[kidsIds[ind]].x+obj[kidsIds[ind]].width))/10))*10;
+      //check and rework this on the full sample....
 
+      // if (obj[parentId].parent==='0'){
+      //     obj[kidsIds[ind]].css += ' mT'+mT+' mL'+mL+' ';
+      // } else {
       //T/R/L margin setting
-      obj[kidsIds[ind]].css += ' mT'+mT+' mL'+mL+' ';
+        obj[kidsIds[ind]].css += ' mT'+mT+' mL'+mL+' ';
+        //obj[kidsIds[ind]].css += ' mT'+mT+' mL'+mL+' mR'+mR+' ';
+      //}
 
       // increment up w/ above & index
       above=obj[kidsIds[ind]].y + obj[kidsIds[ind]].height;
@@ -58,12 +69,24 @@ function setColMargins(obj, parentId){
 //simple iteration through the vertical to set L margins
   var ind=1;
   var left=obj[kidsIds[0]].x+obj[kidsIds[0]].width;
+  // var above=obj[obj[parentId].parent].y;
+  // var below=obj[parentId].y;
+  // var mT= Math.floor((below-above)/10)*10;
+
+  // console.log('trying to check column top margins:', mT);
+
+  // obj[parentId].css= obj[parentId].css + ' mT'+mT+' ';
+
+  var above=obj[parentId].y;
 
   while (ind<kidsIds.length){ //for each obj/col... must correct the last row catch
 
       var right=obj[kidsIds[ind]].x;
       var mL=(Math.floor((right-left)/10))*10; //adjust spacing later
-      obj[kidsIds[ind]].css = obj[kidsIds[ind]].css +' mL'+mL+' '; //L margin setting
+      var below=obj[kidsIds[ind]].y;
+      var mT = Math.abs((Math.floor((below-above)/10))*10);
+      console.log('trying to check column top margins:', mT);
+      obj[kidsIds[ind]].css = obj[kidsIds[ind]].css +' mL'+mL+ ' mT'+mT+' '; //L margin setting
       // increment up w/ left & index
       left=obj[kidsIds[ind]].x + obj[kidsIds[ind]].width;
       ind++;
@@ -113,12 +136,12 @@ function setChildColMargins(obj, parentId){
 export const formatCheck = ((obj, parentId)=>{
   // utility functions to recognize Rows & Columns
   function isRow(elementId){
-    return elementId>1000 && elementId<2000;
+    return elementId>1000 && elementId<50000;
   }
   //basics for bootstrap/flex
-  if (parentId ==='0'){
-    obj[parentId].css += css.cont ;
-  }
+  // if (parentId ==='0'){
+  //   obj[parentId].css += css.cont ;
+  // }
 
   //conditionals for setting formats
   //---------------------------------all divs with kids as rows-----------------------------------
@@ -127,11 +150,11 @@ export const formatCheck = ((obj, parentId)=>{
     };
   //--------------------all rows or all divs with kids as columns---------------------------------
     //if (obj[parentId].children && obj[parentId].children.some(isCol)){
-    if (parentId>1000 && parentId<2000){
+    if (parentId>1000 && parentId<50000){
       setColMargins(obj, parentId);
   };
   //---------------------------------all columns to format child margins-------------------------
-  if (obj[parentId].id>2000){ //all divs that are columns, to set kid margins
+  if (obj[parentId].id>50000){ //all divs that are columns, to set kid margins
 
     if (obj[parentId].parent === '0'){ //columns w/o row wrapper, set top margin
       var top = obj['0'].y;

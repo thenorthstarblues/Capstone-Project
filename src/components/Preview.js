@@ -47,12 +47,11 @@ class User extends Component {
 				<div className="App bkgrey">
 					<div className="container-fluid ">
 						<Navigation page="preview" />
-						<div>
-						</div>
+
 					</div>
 				</div>
-				<div>
-				<div dangerouslySetInnerHTML={{ __html: this.props.html.htmlPreview }} />
+				<div className="ratioContainer">
+				<div className="ratioContainer" dangerouslySetInnerHTML={{ __html: this.props.html.htmlPreview }} />
 				</div>
 			</div>
 		)

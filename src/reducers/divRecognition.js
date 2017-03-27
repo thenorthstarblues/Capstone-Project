@@ -78,6 +78,7 @@ export const divCreation = ((obj, parentId, largest, idRow, dir, row)=> {
 
 //--------------------------RECURSIVE COMPONENT GROUPING-----------------------------------
 export const columnRowCheck = ((obj, parentId, childIdArr, largest={}, remainIdArr=[], dir=0, row=0)=>{
+  console.log('obj: ', obj, 'parent: ', parentId, 'childAr: ', childIdArr, 'remain: ', remainIdArr);
 
   if (childIdArr.length===0){
     obj[parentId].css = css.none;
@@ -95,6 +96,9 @@ export const columnRowCheck = ((obj, parentId, childIdArr, largest={}, remainIdA
     } else { // column search from within rows
       var idCol = createIdRowIdCol(largest, 'x', 'width', obj, childIdArr, remainIdArr);
     }
+
+// I really want to add that column check if row only holds itself... commit first with id changes
+
 
 //------------------row div creation---------------------------
     if (idRow && idRow.length>1){ // largest + sibling

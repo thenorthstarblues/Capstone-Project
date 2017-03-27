@@ -33,19 +33,11 @@ export const getHtml = (dom, node = '0', cssClasses = {}) => {
   });
 
   if (tag === 'img') {
-    if (!css.includes('in-line')) {
-      str += `\n<${tag} src="IMG_NAME"  class="${css}">\n`;
-    } else if (css.includes('in-line')) {
       var nCss = css.replace(/in-line/g, '');
       str += `\n<${tag} src="IMG_NAME"  class="${nCss}" style=" width:${width}px; height:${height}px ;" >\n`;
-    }
   }  else {
-    if (!css.includes('in-line')) {
-      str += `<${tag} class="${css}">`;
-    } else {
       var nCss = css.replace(/in-line/g, '');
       str += `<${tag} class="${nCss}" style=" width:${width}px ; height:${height}px ;" >`;
-    }
 
     children.sort((prev, child) => dom[prev].x - dom[child].x);
 
@@ -77,16 +69,9 @@ export const getHtmlPre = (dom, node = '0', cssClasses = {}) => {
   });
 
   if (tag === 'img') {
-    if (!css.includes('in-line')) {
-      str += `\n<${tag} src="IMG_NAME"  class="pborder ${css}">\n`;
-    } else if (css.includes('in-line')) {
       var nCss = css.replace(/in-line/g, '');
       str += `\n<${tag} src="IMG_NAME"  class="pborder ${nCss}" style=" width:${width}px; height:${height}px ;" >\n`;
-    }
   }  else {
-    if (!css.includes('in-line')) {
-      str += `<${tag} class="pborder ${css}">`;
-    } else {
       var nCss = css.replace(/in-line/g, '');
       //all additions and alterations go here-
       if (tag==='p'){
@@ -98,7 +83,6 @@ export const getHtmlPre = (dom, node = '0', cssClasses = {}) => {
       } else {
       str += `<${tag} class="pborder ${nCss}" style=" width:${width}px ; height:${height}px ;" >`;
       }
-    }
 
     children.sort((prev, child) => dom[prev].x - dom[child].x);
 

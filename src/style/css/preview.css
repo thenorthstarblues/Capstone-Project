@@ -290,4 +290,14 @@ and since we're setting child sizes, we won't need anything more than their odd 
    background-color: #f6f6f6;
 }
 
+.container-fluid {
+   padding-left: 0px;
+   padding-right:0px;
+}
 
+
+.ratioContainer {
+   width: 100vw;
+   height: 53vw;
+   border: solid 1px black;
+}
