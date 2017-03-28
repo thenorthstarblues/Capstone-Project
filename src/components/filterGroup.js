@@ -20,13 +20,11 @@ const FilterForm = (props) => {
 
 
 const mapStateToProps = (state) => {
-  const groups = state.get('pages').get('groups');
+  const groups = state.get('pages').get('groups').toJS();
   const layouts = state.get('pages').get('pages');
-  console.log(state);
-  console.log(groups);
   return {
-    groups: groups,
-    layouts: layouts,
+    groups,
+    layouts,
   };
 };
 
