@@ -82,20 +82,25 @@ export const saveGroup = (name, currentId, elements) => (dispatch) => {
       })
     }
     else {
-      dispatch(addToGroup(elements, id))
+      dispatch(addToGroup(elements, id,true))
+      
     }
     });
 };
 
 
-export const addToGroup = (stateCopy, groupId) => (dispatch) => {
+export const addToGroup = (stateCopy, groupId,base) => (dispatch) => {
   axios.post('api/layouts', {
     name: 'layout',
     author: 'me',
     groupId: groupId
   })
     .then((layout) => {
+      
       const id = layout.data.id;
+      if(base){
+        dispatch(setCurrent(id))
+      }
       const makeelements = []; // converting to array
       const elemClone = Object.assign({}, stateCopy);
       const elementIdArr = Object.keys(elemClone);
