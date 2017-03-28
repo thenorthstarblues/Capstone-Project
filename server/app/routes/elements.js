@@ -25,7 +25,7 @@ router.get('/layout/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  console.log('elements', req.body);
+
   elements.create(req.body)
     .then((s) => {
       res.json(s).status(201);
@@ -44,7 +44,7 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   elements.destroy({ where: { layoutId: req.params.id } })
     .then((s) => {
-      console.log('deleted');
+
       res.send('deleted').status(204);
     })
     .catch(next);

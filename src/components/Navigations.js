@@ -1,36 +1,36 @@
-import CodeModal from './codemirror_modal';
+
 import {connect} from 'react-redux';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
-import { previewLive } from '../reducers/siblings';
 import { Link } from 'react-router-dom';
 import Immutable from 'immutable';
 
 import {showPreview, hidePreview } from '../reducers/preview';
+import {saveOrUpdate} from '../constants_actioncreators/groups';
+import CodeModal from './codemirror_modal';
+import { previewLive } from '../reducers/siblings';
 
+const mapStateToProps = (state) => ({
+  boxes: state.get('boxes').toJS(),
+  currentId: state.get('pages').get('currentPage'),
+  group: state.get('pages').get('group'),
+  preview: state.get('preview').toJS().preview,
+});
 
-const mapStateToProps = (state) => {
-	return {
-		boxes: state.get('boxes').toJS(),
-		preview: state.get('preview').toJS().preview,
-	}
-}
-
-const mapDispatchToProps = (dispatch) => {
-	return {
-		showPreview(boxes){
-			dispatch(showPreview(boxes))
-		},
-		hidePreview(){
-			dispatch(hidePreview())
-		},
-		previewLive(boxes){
-			dispatch(previewLive(boxes))
-		},
-	}
-}
-
+const mapDispatchToProps = (dispatch) => ({
+	save(elements, id) {
+    dispatch(saveOrUpdate(elements, id));
+	},
+  showPreview(boxes){
+    dispatch(showPreview(boxes))
+  },
+  hidePreview(){
+    dispatch(hidePreview())
+  },
+  previewLive(boxes){
+    dispatch(previewLive(boxes))
+  },
+})
 
 class Navigation extends Component{
 	constructor(props){
@@ -76,7 +76,6 @@ class Navigation extends Component{
 	    			<Link to="/"><span className="TrendHMTitle"><img src="/AAlogo.svg" /> Agile-Armature </span></Link>
 	    			{templates &&
 						<Link to="/templates"><span className="menuL" > Templates <span className="glyphicon glyphicon-minus"></span></span></Link>
-
 	    			}
 	    			{directions &&
 	    			<Link to="/directions"><span className="menuL" > Directions <span className="glyphicon glyphicon-minus"></span></span></Link>
@@ -91,7 +90,7 @@ class Navigation extends Component{
 							<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm TrendHandMade closer" type="button"><span className="TrendHandMade closer">  Download Code   </span></button>
 							<span className="glyphicon glyphicon-minus"></span>
-						<button className="btn btn-default btn-sm" type="button"><span className="TrendHandMade closer"> Save Layout </span></button>
+						<button className="btn btn-default btn-sm" type="button" onClick={()=> {this.props.save(this.props.boxes, this.props.currentId)}}> Save Layout </button>
 
 
 				</div>

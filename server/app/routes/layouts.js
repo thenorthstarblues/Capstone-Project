@@ -22,6 +22,14 @@ router.get('/', (req, res, next) => {
      .catch(next);
 });
 
+router.get('/group/:id', (req, res, next) => {
+  layout.findAll({where: {groupId: req.params.id}})
+    .then((data) => {
+      res.json(data).status(200);
+    })
+     .catch(next);
+});
+
 
 router.post('/', (req, res, next) => {
   layout.create(req.body)
@@ -32,7 +40,6 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:id', (req, res, next) => {
-  console.log('***************************', req.body);
   layout.update(req.body,
     { where: { id: req.params.id },
     })
