@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { saveGroup } from '../constants_actioncreators/layout';
+import { saveOrUpdate } from '../constants_actioncreators/groups';
 
 const mstp = state => ({
   currentId: state.get('pages').get('currentPage'),
@@ -10,8 +11,9 @@ const mstp = state => ({
 });
 
 const mdtp = dispatch => ({
-  save(name, currentId) {
+  save(name, currentId, elements) {
     dispatch(saveGroup(name, currentId));
+    dispatch(saveOrUpdate(elements, currentId))
   },
 });
 
@@ -33,18 +35,22 @@ class GroupForm extends Component {
   }
 
   render() {
+    let show = this.props.group === 0;
     return (
+      <div>
+      { show &&
       <form name="groupName" onClick="">
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-          <button className="btn btn-default btn-sm m5w bshadsm" value="" type="button" onClick={(event) => {
-            console.log(this.state);
-            console.log(event);
-            console.log(this.props)
-            this.props.save(this.state.value, this.props.currentId)}}
-            ><span className="glyphicon glyphicon-ok" />  new</button>
-          <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-plus" />  var</button>
-          <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-minus" />  var</button>
-        </form>
+        <input type="text" value={this.state.value} onChange={this.handleChange} />
+        <button 
+        className="btn btn-default btn-sm m5w bshadsm" value="" type="button" onClick={(event) => {
+            this.props.save(this.state.value, this.props.currentId, this.props.elements);
+}}
+          ><span className="glyphicon glyphicon-ok" />  new</button>
+        <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-plus" />  var</button>
+        <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-minus" />  var</button>
+      </form>
+    }
+    </div>
     );
   }
 }
