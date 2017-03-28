@@ -28,6 +28,9 @@ const mapDispatchToProps = (dispatch) => {
     previewLive(boxes){
       dispatch(previewLive(boxes))
     },
+    clear(){
+      dispatch(clearAll())
+    }
   }
 }
 
@@ -126,7 +129,7 @@ class FontColor extends Component{
                   </div>
                   <div className="col-lg-2 block-center text-center">
 
-                    <button className="btn btn-default btn-sm clearBtn" onClick={this.props.clearAll} ><span className="TrendHandMade closer">clear layout</span></button>
+                    <button className="btn btn-default btn-sm clearBtn" onClick={() => this.props.clear()} ><span className="TrendHandMade closer">clear layout</span></button>
 
                   </div>
               </div>
