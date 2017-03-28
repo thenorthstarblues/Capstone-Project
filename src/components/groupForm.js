@@ -13,7 +13,7 @@ const mstp = state => ({
 const mdtp = dispatch => ({
   save(name, currentId, elements) {
     dispatch(saveGroup(name, currentId));
-    dispatch(saveOrUpdate(elements, currentId))
+    //dispatch(saveOrUpdate(elements, currentId))
   },
 });
 

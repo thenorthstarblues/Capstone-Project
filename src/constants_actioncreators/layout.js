@@ -67,30 +67,40 @@ export const saveLayout = stateCopy => (dispatch) => {
     });
 };
 
-export const saveGroup = (name, currentId) => (dispatch) => {
+export const saveGroup = (name, currentId, elements) => (dispatch) => {
   axios.post('/api/group', {
     name,
   })
     .then((group) => {
       const id = group.data.id;
       dispatch(makeGroup(id));
+      if(currentId !== 0){
       axios.put(`/api/layouts/${currentId}`, { groupId: id },
       )
       .then((s) => {
         dispatch(addPage(currentId));
-      });
+      })
+    }
+    else {
+      dispatch(addToGroup(elements, id,true))
+      
+    }
     });
 };
 
 
-export const addToGroup = (stateCopy, groupId, currentId) => (dispatch) => {
+export const addToGroup = (stateCopy, groupId,base) => (dispatch) => {
   axios.post('api/layouts', {
     name: 'layout',
     author: 'me',
     groupId: groupId
   })
     .then((layout) => {
+      
       const id = layout.data.id;
+      if(base){
+        dispatch(setCurrent(id))
+      }
       const makeelements = []; // converting to array
       const elemClone = Object.assign({}, stateCopy);
       const elementIdArr = Object.keys(elemClone);
