@@ -25,7 +25,9 @@ const boxesReducer = (prevState = initialState, action) => {
     case ADD_BOX:
       return prevState.set(action.box.id, Immutable.fromJS(action.box));
     case REMOVE_BOX:
-      return prevState.delete(action.boxId);
+      let deletePath;
+      prevState.get(action.boxId.toString())!==undefined ? (deletePath=action.boxId.toString()): (deletePath=action.boxId);
+      return prevState.delete(deletePath);
     case SET_PARENT:
       return prevState.setIn([action.childId, 'parent'], action.parentId);
     case ADD_CHILD:

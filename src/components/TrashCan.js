@@ -23,6 +23,7 @@ class TrashCan extends Component {
     this.props.removeChild(this.props.boxes[deletedBoxId].parent, deletedBoxId)
     }
     this.props.removeBox(deletedBoxId);
+    this.props.removeBox(deletedBoxId);
   }
 
   render() {
