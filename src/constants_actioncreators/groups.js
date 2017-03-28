@@ -40,7 +40,7 @@ export const getTemplates = () => (dispatch) => {
   });
 };
 
-export const getLayouts = id => (dispatch) => {
+export const getLayouts = (id) => (dispatch) => {
   axios.get(`api/layouts/group/${id}`)
     .then((layouts) => {
       const layoutsArr = layouts.data.map(layout => layout.id);
