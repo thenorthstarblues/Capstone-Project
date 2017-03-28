@@ -23,9 +23,20 @@ const mapDTP = dispatch => ({
 const PageTabs = (props) => {
   const pageArr = props.pages;
 
+  let background = 'tabActive';
+
   return (<div>
     <button className="fakeTab TrendHandMade other borders" onClick={() => { props.addGroup(props.elements, props.groupId, props.currentId); }}> Add Page +</button>
-    { pageArr.map((page, number) => (<button onClick={() => { props.changePage(props.elements, props.currentId, page); }}key={number} className="fakeTab active bkoffwhite TrendHandMade borders">Page {number+1}</button>)) }
+    { pageArr.map((page, number) => {
+      if (page ===props.currentId){
+        background = 'bkoffwhite';
+      }
+
+      return (
+      <button onClick={() => { props.changePage(props.elements, props.currentId, page); }}key={number} className={`fakeTab active ${background} TrendHandMade borders`}> Page {number+1}</button>
+      )
+      }
+    )}
   </div>
   );
 };

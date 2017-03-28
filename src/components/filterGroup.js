@@ -60,7 +60,7 @@ export default connect(mapStateToProps)(class extends Component {
           <span className="TrendHandMade">CLICK GROUP:</span>
           to view & select children
         </p>
-        <div className="">
+        <div >
         {
             filteredGroup && filteredGroup.map(group => (
                 <div key={group.id} onClick="">
