@@ -624,3 +624,8 @@ Resizer.disabled:hover {
 .m90 {
   margin-top:90px;
 }
+
+.tabAct {
+  color: #ffffff;
+  background-color: #757575;
+}
