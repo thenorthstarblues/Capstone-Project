@@ -577,7 +577,7 @@ Resizer.disabled:hover {
 }
 
 .sideThumbs {
-  height: 400px;
+  height: 485px;
   overflow: scroll;
 }
 
@@ -619,4 +619,8 @@ Resizer.disabled:hover {
   stroke: #00bfff;
   stroke-dasharray: 5px;
   mix-blend-mode: multiply;
+}
+
+.m90 {
+  margin-top:90px;
 }

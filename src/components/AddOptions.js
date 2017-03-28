@@ -116,7 +116,7 @@ const AddOptions = (({ action }) =>
                 <div className="border1">
                 <p className="closer"><span className="TrendHandMade">CLICK:</span> add to armature</p>
                 {buttons.map((button, i)=>{
-                  if (button.val==='div' || button.val==='h5'|| button.val==='button'){
+                  if ((button.val==='div' || button.val==='h5')|| button.val==='button'){
                     return (
                           <span key={button.val+i} >
                           <button className="btn btn-default m5w bshadsm" value={button.val} onClick={action} data={button.style}><span className={button.icon}></span>  {button.val}</button>

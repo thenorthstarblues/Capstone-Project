@@ -39,7 +39,7 @@ const FamilyThumbnails= (({clickHandle, groups,action})=> {
     return (
               <div className="addOptionsInt">
                 <div className="border1">
-                <p className="closer"><span className="TrendHandMade">CLICK THUMBNAILS TO EDIT:</span> load templates into editing tabs</p>
+                <p className="closer"><span className="TrendHandMade">CLICK THUMBNAILS TO EDIT:</span> load templates into editor</p>
                 <div className="mainThumbs flexWrap left">
                   {groups.map(button=>{ //later this should link to the state and the dispatch calls to sort/select
                     return (<Link to="/">
@@ -50,7 +50,7 @@ const FamilyThumbnails= (({clickHandle, groups,action})=> {
                             )
                   })}
                 </div>
-                <p className="closer"><span className="TrendHandMade">NUMBER OF VARIATIONS:</span> count of group elements loaded</p>
+                <p className="closer"><span className="TrendHandMade">GROUP VARIATIONS ABOVE</span></p>
                 </div>
             </div>
     )

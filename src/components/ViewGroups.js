@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(getLayouts(id))
 			dispatch(makeGroup(id))
 		}
-		
+
 		//clearly the load all templates and group calls go here
 	}
 }
@@ -89,12 +89,10 @@ class ViewGroups extends Component {
 		return (
 		        <div>
 		        	<div className="bkgrey"> {/* need dispatches to trickle up and change state from tabs*/}
-		        	<Faketabs  state={this.state} actions="add later"/>
-
 		        	</div>
 			        <div className="offset15side">
 						  <div className="" id="">
-									<div className=" row bkoffwhite borders">
+									<div className=" row bkoffwhite borders m90">
 										<div id="grid-snap" className="svgHolder2 col-lg-9 bkoffwhite ">
 											<FamilyThumbnails groups = {this.props.pages} clickHandle= {this.props.loadSelected} action="" />
 										</div>
