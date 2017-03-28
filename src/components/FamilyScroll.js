@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FilterGroup from './filterGroup';
 
 
 export const SvgThumb = (({ groupName, groupId, vers }) => {
@@ -36,14 +37,7 @@ const FamilyScroll = (({ groups }) => (
           <span className="TrendHandMade">SEARCH:</span>
            find group by name
         </p>
-        <form onClick="">
-          <input />
-          <br />
-          <button className="btn btn-default btn-sm m5w bshadsm" type="submit" >
-            <span className="glyphicon glyphicon-search" />
-            search
-          </button>
-        </form>
+        <FilterGroup />
       </div>
       <div className="border1">
         <p className="closer">
