@@ -92,7 +92,7 @@ class ViewGroups extends Component {
 		        	</div>
 			        <div className="offset15side">
 						  <div className="" id="">
-									<div className=" row bkoffwhite borders">
+									<div className=" row bkoffwhite borders m90">
 										<div id="grid-snap" className="svgHolder2 col-lg-9 bkoffwhite ">
 											<FamilyThumbnails groups = {this.props.pages} clickHandle= {this.props.loadSelected} action="" />
 										</div>

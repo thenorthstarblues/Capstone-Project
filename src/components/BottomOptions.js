@@ -114,7 +114,7 @@ class BottomOptions extends Component {
                 <text x="955" y="525" textAnchor="start" fontFamily="TrendHandMade" >MEDIA BREAK PTS</text>
                 <text x="10" y="550" textAnchor="start" fontFamily="TrendHandMade" >VISUAL GUIDES</text>
                   <text x="200" y="550" onClick={this.showCol} value="1" className={this.state.colStyle}>show columns</text>
-                  <text x="350" y="550" className="Trenda">show active offsets</text>
+                  {/* <text x="350" y="550" className="Trenda">show active offsets</text> */}
 
               </g>
     )
