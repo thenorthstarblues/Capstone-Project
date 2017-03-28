@@ -1,6 +1,62 @@
 /* reference this and the bootstrap for the css creation */
 
-/* --------------- utility spacing classes ------------------ */
+/* --------------- utility font classes ------------------ */
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/335509");
+
+
+@font-face {font-family: 'TrendHandMade';font-weight: bold;font-style: italic;src: url('../fonts/335509_0_0.eot');src: url('../fonts/335509_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_0_0.woff2') format('woff2'),url('../fonts/335509_0_0.woff') format('woff'),url('../fonts/335509_0_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'TrendHandMade';font-weight: bold;font-style: normal;src: url('../fonts/335509_1_0.eot');src: url('../fonts/335509_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_1_0.woff2') format('woff2'),url('../fonts/335509_1_0.woff') format('woff'),url('../fonts/335509_1_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'TrendHandMade';font-weight: normal;font-style: normal;src: url('../fonts/335509_2_0.eot');src: url('../fonts/335509_2_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_2_0.woff2') format('woff2'),url('../fonts/335509_2_0.woff') format('woff'),url('../fonts/335509_2_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'TrendHandMade';font-weight: normal;font-style: italic;src: url('../fonts/335509_3_0.eot');src: url('../fonts/335509_3_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_3_0.woff2') format('woff2'),url('../fonts/335509_3_0.woff') format('woff'),url('../fonts/335509_3_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda-ExtraLight';src: url('../fonts/335509_4_0.eot');src: url('../fonts/335509_4_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_4_0.woff2') format('woff2'),url('../fonts/335509_4_0.woff') format('woff'),url('../fonts/335509_4_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda-ExtraLightIt';src: url('../fonts/335509_5_0.eot');src: url('../fonts/335509_5_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_5_0.woff2') format('woff2'),url('../fonts/335509_5_0.woff') format('woff'),url('../fonts/335509_5_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda';font-weight: normal;font-style: normal;src: url('../fonts/335509_6_0.eot');src: url('../fonts/335509_6_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_6_0.woff2') format('woff2'),url('../fonts/335509_6_0.woff') format('woff'),url('../fonts/335509_6_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda';font-weight: normal;font-style: italic;src: url('../fonts/335509_7_0.eot');src: url('../fonts/335509_7_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_7_0.woff2') format('woff2'),url('../fonts/335509_7_0.woff') format('woff'),url('../fonts/335509_7_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda';font-weight: bold;font-style: normal;src: url('../fonts/335509_8_0.eot');src: url('../fonts/335509_8_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_8_0.woff2') format('woff2'),url('../fonts/335509_8_0.woff') format('woff'),url('../fonts/335509_8_0.ttf') format('truetype');}
+
+
+@font-face {font-family: 'Trenda';font-weight: bold;font-style: italic;src: url('../fonts/335509_9_0.eot');src: url('../fonts/335509_9_0.eot?#iefix') format('embedded-opentype'),url('../fonts/335509_9_0.woff2') format('woff2'),url('../fonts/335509_9_0.woff') format('woff'),url('../fonts/335509_9_0.ttf') format('truetype');}
+
+.TrendHandMade {
+  font-family: 'TrendHandMade';
+  font-weight: normal;
+  color: #000000;
+}
+
+.Trenda {
+  font-family: 'Trenda';
+  font-weight: normal;
+  color: #333333;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'TrendHandMade';
+  font-weight: normal;
+  color: #000000;
+}
+
+p,li,form, ul, table {
+  font-family: 'Trenda';
+  font-weight: normal;
+  color: #333333;
+}
 
 /* MOST OF FLEX GOES ON CONTAINER DIV */
 /* ------------ parent css ------------*/
@@ -131,4 +187,8 @@ and since we're setting child sizes, we won't need anything more than their odd 
 
 .invisDiv {
    border: dashed .25px lightgrey;
+}
+
+.disInlineFlex{
+   display: inline-flex;
 }

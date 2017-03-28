@@ -2,13 +2,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Immutable from 'immutable';
-import Navigation from './Navigations';
+import NavBack from './NavBack.js';
 
 import '../style/css/App.css';
 import '../style/css/preview.css';
 import '../style/css/marginsVW.css';
-
-
 
 
 const mapStateToProps = (state) => {
@@ -44,7 +42,7 @@ class User extends Component {
 		    <div>
 				<div className="App bkgrey">
 					<div className="container-fluid ">
-						<Navigation page="preview" />
+						<NavBack page="preview" />
 
 					</div>
 				</div>

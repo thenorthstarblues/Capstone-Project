@@ -55,7 +55,8 @@ function setColMargins(obj, parentId){
       var below=obj[kidsIds[ind]].y;
       var mT = Math.abs(Math.floor((below-above)/950*100));
 
-      obj[kidsIds[ind]].css += ' flexCol mL'+mL+ ' mT'+mT+' ';
+      //obj[kidsIds[ind]].css += ' flexCol mL'+mL+ ' mT'+mT+' ';
+      obj[kidsIds[ind]].css += ' mL'+mL+ ' mT'+mT+' ';
       // increment up w/ left & index
       left=obj[kidsIds[ind]].x + obj[kidsIds[ind]].width;
       ind++;
@@ -124,7 +125,8 @@ export const formatCheck = ((obj, parentId)=>{
     if (obj[parentId].parent === '0'){ //columns w/o row wrapper, set top margin
       var top = obj['0'].y;
       var mT=Math.floor((obj[parentId].y-top)/950*100);//for math readjustment later.
-      obj[parentId].css += ' flexCol mT'+mT+' ';
+      //obj[parentId].css += ' flexCol mT'+mT+' ';
+      obj[parentId].css += ' mT'+mT+' ';
     }
 
     setChildColMargins(obj, parentId);
@@ -143,7 +145,7 @@ export const formatCheck = ((obj, parentId)=>{
   //-----------------------final check: all childen outside row/columns/divs?-------------------
    if (obj[parentId].css === 'in-line ' && obj[parentId].children.length===0){ //reset conditional. . .
 
-      // haven't figure out if we hit this edge case!
+      obj[parentId].css += ' disInlineFlex';
     }
 
 

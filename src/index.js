@@ -15,6 +15,7 @@ import './style/css/bootstrap.min.css';
 import './style/css/index.css';
 import './style/css/App.css';
 import './style/css/preview.css';
+import './style/css/marginsVW.css';
 
 //provide full routes later
 

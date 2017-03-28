@@ -70,18 +70,28 @@ export const getHtmlPre = (dom, node = '0', cssClasses = {}) => {
 
   if (tag === 'img') {
       var nCss = css.replace(/in-line/g, '');
-      str += `\n<${tag} src="/cat.jpg"  class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >\n`;
+      str += `\n<${tag} src="/cat.jpg"  class=" ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >\n`;
   }  else {
       var nCss = css.replace(/in-line/g, '');
       //all additions and alterations go here-
       if (tag==='p'){
-          str += `<${tag} class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" > ${paraLorem}`;
-      } else if (tag.includes('h')){
-          str += `<${tag} class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" > ${lineLorem}`;
+          let lines=height/16;
+          let breadth=width/6;
+          let lorem=``
+          for (let i=0; i<lines; i++) {let ran=Math.floor(Math.random()*paraLorem.length); lorem += paraLorem[ran].slice(0,breadth)+`<br/>`;}
+          str += `<${tag} class=" ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" > ${lorem}`;
+      } else if (tag==='ul' || tag ==='table'){
+          let lines=height/16;
+          let breadth=width/10;
+          let lorem=``
+          for (let i=0; i<lines; i++) {let ran=Math.floor(Math.random()*paraLorem.length); lorem += `-- ` + paraLorem[ran].slice(0,breadth)+`<br/>`;}
+          str += `<${tag} class="Trenda ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" > ${lorem}`;
+      }else if (tag.includes('h')){
+          str += `<${tag} class=" ${nCss} TrendHandMade" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" > ${lineLorem}`;
       }else if (tag.includes('div') && id > 100){
-          str += `<${tag} class="pborder pbkground ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >`;
+          str += `<${tag} class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >`;
       } else {
-      str += `<${tag} class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >`;
+          str += `<${tag} class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >`;
       }
 
     children.sort((prev, child) => dom[prev].x - dom[child].x);

@@ -56,4 +56,5 @@ export const theCss={  /* potential object that has key value of what each class
   //other classes
 
   'invisDiv': 'border: none; background-color: none;',
+  'disInlineFlex' : 'display: inline-flex',
 }

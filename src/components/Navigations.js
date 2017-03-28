@@ -86,22 +86,12 @@ class Navigation extends Component{
 	    			}
 	    			<span className="menuL" > Login </span>
 	    		</div>
-	    		<div className="col-lg-6 flexWrap spaceBetween">
+	    		<div className="col-lg-5 col-lg-offset-1 flexWrap spaceBetween">
 						<CodeModal />
 							<span className="glyphicon glyphicon-minus"></span>
-						<button className="btn btn-default btn-sm" type="button" onClick={this.showHide}> Preview Hierarchy   </button>
+						<button className="btn btn-default btn-sm TrendHandMade closer" type="button"><span className="TrendHandMade closer">  Download Code   </span></button>
 							<span className="glyphicon glyphicon-minus"></span>
-						{preview &&
-							<Link to="/preview"><button className="btn btn-default btn-sm" type="button" onClick={this.getPreview}> Live Preview  </button></Link>
-						}
-						{editor &&
-							<Link to="/"><button className="btn btn-default btn-sm" type="button" onClick=""> Return to Editing  </button></Link>
-						}
-
-							<span className="glyphicon glyphicon-minus"></span>
-						<button className="btn btn-default btn-sm" type="button"> Download Code   </button>
-							<span className="glyphicon glyphicon-minus"></span>
-						<button className="btn btn-default btn-sm" type="button"> Save Layout   </button>
+						<button className="btn btn-default btn-sm" type="button"><span className="TrendHandMade closer"> Save Layout </span></button>
 
 
 				</div>
