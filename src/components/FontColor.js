@@ -1,24 +1,32 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 //core actions
-import Immutable from 'immutable';
 
 import { clearAll } from '../constants_actioncreators/boxes';
+import { previewLive } from '../reducers/siblings';
+import { Link } from 'react-router-dom';
+import Immutable from 'immutable';
+
+import {showPreview, hidePreview } from '../reducers/preview';
 
 
-const mapStateToProps = (state) => { // just need general directions to create css at start of file, in advance of additional categories
+const mapStateToProps = (state) => {
   return {
     boxes: state.get('boxes').toJS(),
-    boxesCss: state.get('sibling'),
-    html: state.get('css'),
+    preview: state.get('preview').toJS().preview,
   }
 }
 
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    clearAll(){
-      dispatch(clearAll())
+    showPreview(boxes){
+      dispatch(showPreview(boxes))
+    },
+    hidePreview(){
+      dispatch(hidePreview())
+    },
+    previewLive(boxes){
+      dispatch(previewLive(boxes))
     },
   }
 }
@@ -37,6 +45,8 @@ class FontColor extends Component{
     this.pickColor=this.pickColor.bind(this);
     this.pickHeader=this.pickHeader.bind(this);
     this.pickParagraph=this.pickParagraph.bind(this);
+    this.showHide=this.showHide.bind(this);
+    this.getPreview=this.getPreview.bind(this);
 
   }
 
@@ -57,6 +67,25 @@ class FontColor extends Component{
     console.log(e.target);
 
   })
+
+  showHide = (e) => {
+    e.preventDefault();
+    let previewCur = this.props.preview;
+
+    if (previewCur===true){
+      console.log('true, need to set to false');
+      this.props.hidePreview();
+    } else {
+      this.props.showPreview(this.props.boxes);
+    }
+  }
+
+  getPreview = (e) =>{
+    this.props.previewLive(this.props.boxes);
+    console.log('check store for html-jsx and css', history, this.props);
+    //<Redirect to="/preview" push={true} />;
+    //history.pushState('/preview', []);
+  }
 
 
     render(){
@@ -84,22 +113,16 @@ class FontColor extends Component{
                           <p className="small">sample</p>
                       </form>
                     </div>
-                    <div className="col-lg-2">
-                      <form onChange="">
-                        <button className="btn btn-default btn-sm" onClick="" >pick pallet color</button>
-                      </form>
-                    </div>
-                    <div className="col-lg-3">
-                    {/*this.colorsPicks.map((color, i)=>{
-                      if (i < 6) { // this should be in hex format from the picker.
-                        return (
-                                <div className="colorBox" style={`background-color: ${color}`}>
-                                  {color}
-                                </div>
-                              );
-                      }
-                    })*/}
-                    </div>
+                    <div className="col-lg-2 block-center text-center">
+
+                    <button className="btn btn-default btn-sm clearBtn" onClick={this.showHide} ><span className="TrendHandMade closer">hierarchies</span></button>
+
+                  </div>
+                    <div className="col-lg-2 block-center text-center">
+
+                    <button className="btn btn-default btn-sm clearBtn text-center" onClick={this.getPreview} ><Link to="/preview"><span className="TrendHandMade closer"> preview </span></Link> </button>
+
+                  </div>
                   </div>
                   <div className="col-lg-2 block-center text-center">
 

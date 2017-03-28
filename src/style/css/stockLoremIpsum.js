@@ -8,7 +8,7 @@ Nullam sapien velit, pharetra id est sed, tempus pharetra elit. Proin sagittis p
 
 Fusce fermentum velit ac ligula sagittis scelerisque. Mauris imperdiet est massa, ullamcorper congue turpis tincidunt ut. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur quis enim nec dui facilisis porta. Praesent maximus tortor non ex feugiat dictum. Suspendisse potenti. Donec sed pretium diam, vel porttitor nunc. Nunc quis lacus sit amet lorem porttitor egestas vel vel velit. Nam dapibus ante id mi dapibus congue a vel justo. Curabitur augue urna, pellentesque interdum semper sed, commodo et sem. Aliquam eget odio volutpat metus tincidunt mattis. Nam vulputate augue nec tempor lobortis. Ut mollis sagittis elit, ac ultricies lacus scelerisque vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit.`;
 
-export const paraLorem= `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac porttitor ipsum, vel luctus velit. Duis vel turpis sollicitudin, dictum orci vitae, ullamcorper sem. Aliquam hendrerit accumsan tempor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean at accumsan odio. Fusce fermentum est sed tortor consectetur, ut vehicula tortor tristique. Cras iaculis sed arcu quis lacinia. Fusce venenatis dapibus aliquet.`;
+export const paraLorem= [`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,`Phasellus ac porttitor ipsum, vel luctus velit.`,` Duis vel turpis sollicitudin, dictum orci vitae, ullamcorper sem. Aliquam hendrerit accumsan tempor.`,` Interdum et malesuada fames ac ante ipsum primis in faucibus.`,` Aenean at accumsan odio.`,` Fusce fermentum est sed tortor consectetur, ut vehicula tortor tristique.`,` Cras iaculis sed arcu quis lacinia. Fusce venenatis dapibus aliquet.`];
 
-export const lineLorem= `Lorem Ipsum Dolor Sit Amet`;
+export const lineLorem= `Lorem Ipsum`;
 

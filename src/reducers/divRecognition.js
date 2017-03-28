@@ -36,13 +36,17 @@ export const divCreation = ((obj, parentId, largest, idRow, dir, row)=> {
       let rowId='';
       let cssDir='';
 
-      if (!dir){ //during row checking
-        rowId=100+newdir;
-        cssDir='flexRow ';
+      if (dir%20===0){ //during row checking
+        rowId=1000+(50*parentId)+newdir;
+        //cssDir='flexRow ';
 
       } else {//column defs
-        rowId=200+newdir;
-        cssDir='flexCol';
+        if (dir===1 && parentId<1000){
+          rowId=2000+50000+newdir;
+        } else {
+          rowId=2000+(50*parentId)+newdir;
+        }
+        //cssDir='flexCol';
       }
 
         newRow = {
@@ -54,7 +58,7 @@ export const divCreation = ((obj, parentId, largest, idRow, dir, row)=> {
            parent: parentId,
            children: [],
            tag: 'div',
-           css: cssDir,
+           css: ' ',
          };
 
       obj[rowId]=newRow; //add new object to overall list
@@ -90,12 +94,18 @@ export const columnRowCheck = ((obj, parentId, childIdArr, largest={}, remainIdA
     let bigKidI = childAreas.indexOf(Math.max(...childAreas));
         largest = obj[childIdArr[bigKidI]];
 
-    if (!dir) { // row search on initial round
+    if (dir%20===0) { // row search on initial round
       var idRow = createIdRowIdCol(largest, 'y', 'height', obj, childIdArr, remainIdArr);
     } else { // column search from within rows
       var idCol = createIdRowIdCol(largest, 'x', 'width', obj, childIdArr, remainIdArr);
     }
 
+// I really want to add that column check if row only holds itself... commit first with id changes
+    if (idRow && idRow.length===1){
+
+      dir++;
+      var idCol = createIdRowIdCol(largest, 'x', 'width', obj, childIdArr, remainIdArr);
+    }
 //------------------row div creation---------------------------
     if (idRow && idRow.length>1){ // largest + sibling
 
@@ -120,7 +130,8 @@ export const columnRowCheck = ((obj, parentId, childIdArr, largest={}, remainIdA
       if (idCol.length>0){
         columnRowCheck(obj, parentId, idCol, largest, remainIdArr, newdir, row);
       } else {
-        columnRowCheck(obj, 0, remainIdArr[0], largest, [], 0, row);
+        var dirNew=Math.floor(newdir/20)+20;
+        columnRowCheck(obj, 0, remainIdArr[0], largest, [], dirNew, row);
       }
     }
 
