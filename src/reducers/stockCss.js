@@ -3,8 +3,6 @@
 
 export const theCss={  /* potential object that has key value of what each class name's property does */
 
-  'container-fluid': 'grab from bootstrap',
-
   'flexRow' : 'display: -webkit-flex;display: flex;-webkit-flex-direction: row; flex-direction: row;',
   'flexCol' : 'display: -webkit-flex;display: flex;-webkit-flex-direction: column;   flex-direction: column;',
   /* adjust row or col with these class="flexCol start" or class="flexRow start" */
@@ -54,4 +52,9 @@ export const theCss={  /* potential object that has key value of what each class
   'selfCenter': '-webkit-align-self: center;lign-self:center;',
   'selfBase': '-webkit-align-self: baseline; align-self: baseline;',
   'selfStretch' : '-webkit-align-self: stretch;align-self:stretch;',
+
+  //other classes
+
+  'invisDiv': 'border: none; background-color: none;',
+  'disInlineFlex' : 'display: inline-flex',
 }

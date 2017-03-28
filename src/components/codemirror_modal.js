@@ -58,9 +58,9 @@ class CodeModal extends Component {
             this.props.findSiblings(stateCopy);
             this.open();
           }}
-        >
+        ><span className="TrendHandMade closer">
           Display Code
-        </Button>
+        </span></Button>
         <Modal dialogClassName="custom-modal" bsSize="large" show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>Code Output</Modal.Title>

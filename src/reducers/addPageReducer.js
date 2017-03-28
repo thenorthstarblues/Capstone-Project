@@ -16,7 +16,7 @@ const pageReducer = (prevState = initialState, action) => {
     case 'SET_CURRENT':
       return prevState.set('currentPage', action.id);
     case 'SET_GROUPS':
-      return prevState.set('groups', action.groups);
+      return prevState.set('groups', Immutable.fromJS(action.groups));
     case 'SET_PAGES':
       return prevState.set('pages', action.pages);
     default:

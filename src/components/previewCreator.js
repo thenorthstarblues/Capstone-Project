@@ -33,19 +33,11 @@ export const getHtml = (dom, node = '0', cssClasses = {}) => {
   });
 
   if (tag === 'img') {
-    if (!css.includes('in-line')) {
-      str += `\n<${tag} src="IMG_NAME"  class="${css}">\n`;
-    } else if (css.includes('in-line')) {
       var nCss = css.replace(/in-line/g, '');
-      str += `\n<${tag} src="IMG_NAME"  class="${nCss}" style=" width:${width}px; height:${height}px ;" >\n`;
-    }
+      str += `\n<${tag} src="IMG_NAME"  class="${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >\n`;
   }  else {
-    if (!css.includes('in-line')) {
-      str += `<${tag} class="${css}">`;
-    } else {
       var nCss = css.replace(/in-line/g, '');
-      str += `<${tag} class="${nCss}" style=" width:${width}px ; height:${height}px ;" >`;
-    }
+      str += `<${tag} class="${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >`;
 
     children.sort((prev, child) => dom[prev].x - dom[child].x);
 
@@ -77,28 +69,30 @@ export const getHtmlPre = (dom, node = '0', cssClasses = {}) => {
   });
 
   if (tag === 'img') {
-    if (!css.includes('in-line')) {
-      str += `\n<${tag} src="IMG_NAME"  class="pborder ${css}">\n`;
-    } else if (css.includes('in-line')) {
       var nCss = css.replace(/in-line/g, '');
-      str += `\n<${tag} src="IMG_NAME"  class="pborder ${nCss}" style=" width:${width}px; height:${height}px ;" >\n`;
-    }
+      str += `\n<${tag} src="/cat.jpg"  class=" ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >\n`;
   }  else {
-    if (!css.includes('in-line')) {
-      str += `<${tag} class="pborder ${css}">`;
-    } else {
       var nCss = css.replace(/in-line/g, '');
       //all additions and alterations go here-
       if (tag==='p'){
-          str += `<${tag} class="pborder ${nCss}" style=" width:${width}px ; height:${height}px ;" > ${paraLorem}`;
-      } else if (tag.includes('h')){
-          str += `<${tag} class="pborder ${nCss}" style=" width:${width}px ; height:${height}px ;" > ${lineLorem}`;
+          let lines=height/16;
+          let breadth=width/6;
+          let lorem=``
+          for (let i=0; i<lines; i++) {let ran=Math.floor(Math.random()*paraLorem.length); lorem += paraLorem[ran].slice(0,breadth)+`<br/>`;}
+          str += `<${tag} class=" ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" > ${lorem}`;
+      } else if (tag==='ul' || tag ==='table'){
+          let lines=height/16;
+          let breadth=width/10;
+          let lorem=``
+          for (let i=0; i<lines; i++) {let ran=Math.floor(Math.random()*paraLorem.length); lorem += `-- ` + paraLorem[ran].slice(0,breadth)+`<br/>`;}
+          str += `<${tag} class="Trenda ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" > ${lorem}`;
+      }else if (tag.includes('h')){
+          str += `<${tag} class=" ${nCss} TrendHandMade" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" > ${lineLorem}`;
       }else if (tag.includes('div') && id > 100){
-          str += `<${tag} class="pborder pbkground ${nCss}" style=" width:${width}px ; height:${height}px ;" >`;
+          str += `<${tag} class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >`;
       } else {
-      str += `<${tag} class="pborder ${nCss}" style=" width:${width}px ; height:${height}px ;" >`;
+          str += `<${tag} class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >`;
       }
-    }
 
     children.sort((prev, child) => dom[prev].x - dom[child].x);
 
@@ -133,24 +127,17 @@ export const getCss = (theCss, classes) => { // classes will be our cssClasses
     const properties = props.map((cur)=>{
           cur=cur.trim();
 
-          if (cur.includes('mT')){
+          if (cur.includes('mT')){ //auto generate margins
             var values = cur.replace('mT','');
-              return `margin-top:${values}px;`;
+              return `margin-top:${values}vw;`;
           } else if (cur.includes('mL')){
             var values = +cur.replace('mL','');
-              return `margin-left:${values}px;`;
+              return `margin-left:${values}vw;`;
           } else if (cur.includes('mR')){
             var values = +cur.replace('mR','');
-              return `margin-left:${values}px;`;
-          } else if (cur.includes('m')){ // grab margin classes to create properties
-            var values = cur.replace('m','');
-              return `margin:${values}px;`;
-
-          } else if (cur.includes('p')){ // grab padding classes to create properties
-            var values = +cur.replace('p','');
-              return `margin-left:${values}px;`;
-
+              return `margin-left:${values}vw;`;
           }
+          //auto setting of sizes already done in css series
             return theCss[cur];
 
 
