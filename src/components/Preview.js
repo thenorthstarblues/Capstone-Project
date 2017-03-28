@@ -6,6 +6,7 @@ import Navigation from './Navigations';
 
 import '../style/css/App.css';
 import '../style/css/preview.css';
+import '../style/css/marginsVW.css';
 
 
 
@@ -41,18 +42,14 @@ class User extends Component {
 
 		return (
 		    <div>
-				<style>
-				{this.props.html.css}
-				</style>
 				<div className="App bkgrey">
 					<div className="container-fluid ">
 						<Navigation page="preview" />
-						<div>
-						</div>
+
 					</div>
 				</div>
-				<div>
-				<div dangerouslySetInnerHTML={{ __html: this.props.html.htmlPreview }} />
+				<div className="ratioContainer">
+				<div className="ratioContainer" dangerouslySetInnerHTML={{ __html: this.props.html.htmlPreview }} />
 				</div>
 			</div>
 		)

@@ -33,19 +33,11 @@ export const getHtml = (dom, node = '0', cssClasses = {}) => {
   });
 
   if (tag === 'img') {
-    if (!css.includes('in-line')) {
-      str += `\n<${tag} src="IMG_NAME"  class="${css}">\n`;
-    } else if (css.includes('in-line')) {
       var nCss = css.replace(/in-line/g, '');
-      str += `\n<${tag} src="IMG_NAME"  class="${nCss}" style=" width:${width}px; height:${height}px ;" >\n`;
-    }
+      str += `\n<${tag} src="IMG_NAME"  class="${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >\n`;
   }  else {
-    if (!css.includes('in-line')) {
-      str += `<${tag} class="${css}">`;
-    } else {
       var nCss = css.replace(/in-line/g, '');
-      str += `<${tag} class="${nCss}" style=" width:${width}px ; height:${height}px ;" >`;
-    }
+      str += `<${tag} class="${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >`;
 
     children.sort((prev, child) => dom[prev].x - dom[child].x);
 
@@ -77,28 +69,20 @@ export const getHtmlPre = (dom, node = '0', cssClasses = {}) => {
   });
 
   if (tag === 'img') {
-    if (!css.includes('in-line')) {
-      str += `\n<${tag} src="IMG_NAME"  class="pborder ${css}">\n`;
-    } else if (css.includes('in-line')) {
       var nCss = css.replace(/in-line/g, '');
-      str += `\n<${tag} src="IMG_NAME"  class="pborder ${nCss}" style=" width:${width}px; height:${height}px ;" >\n`;
-    }
+      str += `\n<${tag} src="IMG_NAME"  class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >\n`;
   }  else {
-    if (!css.includes('in-line')) {
-      str += `<${tag} class="pborder ${css}">`;
-    } else {
       var nCss = css.replace(/in-line/g, '');
       //all additions and alterations go here-
       if (tag==='p'){
-          str += `<${tag} class="pborder ${nCss}" style=" width:${width}px ; height:${height}px ;" > ${paraLorem}`;
+          str += `<${tag} class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" > ${paraLorem}`;
       } else if (tag.includes('h')){
-          str += `<${tag} class="pborder ${nCss}" style=" width:${width}px ; height:${height}px ;" > ${lineLorem}`;
+          str += `<${tag} class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" > ${lineLorem}`;
       }else if (tag.includes('div') && id > 100){
-          str += `<${tag} class="pborder pbkground ${nCss}" style=" width:${width}px ; height:${height}px ;" >`;
+          str += `<${tag} class="pborder pbkground ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >`;
       } else {
-      str += `<${tag} class="pborder ${nCss}" style=" width:${width}px ; height:${height}px ;" >`;
+      str += `<${tag} class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >`;
       }
-    }
 
     children.sort((prev, child) => dom[prev].x - dom[child].x);
 
