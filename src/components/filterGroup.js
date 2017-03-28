@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {SvgThumb} from './FamilyScroll'
-
+import {getLayouts} from '../constants_actioncreators/groups'
 const FilterForm = (props) => {
   const handleChange = props.handleChange;
   const inputValue = props.inputValue;
@@ -33,8 +33,15 @@ const mapStateToProps = (state) => {
     layouts,
   };
 };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    load(id) {
+      dispatch(getLayouts(id))
+    }
+  }
+}
 
-export default connect(mapStateToProps)(class extends Component {
+export default connect(mapStateToProps, mapDispatchToProps)(class extends Component {
   constructor(props) {
     super(props);
     this.state = { inputValue: '' };
@@ -63,7 +70,8 @@ export default connect(mapStateToProps)(class extends Component {
         <div >
         {
             filteredGroup && filteredGroup.map(group => (
-                <div key={group.id} onClick="">
+                <div key={group.id} onClick={()=>{
+                  console.log('hihihi'); this.props.load(group.id)}}>
                   <SvgThumb
                     groupName={group.name}
                     groupId={group.id}
