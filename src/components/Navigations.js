@@ -90,7 +90,7 @@ class Navigation extends Component{
 							<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm TrendHandMade closer" type="button"><span className="TrendHandMade closer">  Download Code   </span></button>
 							<span className="glyphicon glyphicon-minus"></span>
-						<button className="btn btn-default btn-sm" type="button" onClick={()=> {this.props.save(this.props.boxes, this.props.currentId)}}> Save Layout </button>
+						<button className="btn btn-default btn-sm" type="button" onClick={()=> {this.props.save(this.props.boxes, this.props.currentId)}}><span className="TrendHandMade closer"> Save Layout </span></button>
 
 
 				</div>
