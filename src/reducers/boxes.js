@@ -25,17 +25,23 @@ const boxesReducer = (prevState = initialState, action) => {
     case ADD_BOX:
       return prevState.set(action.box.id, Immutable.fromJS(action.box));
     case REMOVE_BOX:
-      return prevState.delete(action.boxId);
+      let deletePath;
+      prevState.get(action.boxId.toString())!==undefined ? (deletePath=action.boxId.toString()): (deletePath=action.boxId);
+      return prevState.delete(deletePath);
     case SET_PARENT:
       return prevState.setIn([action.childId, 'parent'], action.parentId);
     case ADD_CHILD:
-      return prevState.updateIn([action.parentId, 'children'], (childMap) => {
+    let addPath;
+    (prevState.get(action.parentId) !== undefined) ?(addPath = action.parentId) : (addPath = action.parentId.toString());
+     return prevState.updateIn([addPath, 'children'], (childMap) => {
         return childMap.push(action.childId);
       });
     case REMOVE_PARENT:
       return prevState.setIn([action.childId, 'parent'], null);
     case REMOVE_CHILD:
-      return prevState.updateIn([action.parentId, 'children'], (childMap) => {
+    let removePath;
+    (prevState.get(action.parentId) !== undefined) ?(removePath = action.parentId) : (removePath = action.parentId.toString());
+      return prevState.updateIn([removePath, 'children'], (childMap) => {
         return childMap.filter(child => child !== action.childId);
       });
     case COPY_BOX:
