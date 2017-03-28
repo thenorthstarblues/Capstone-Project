@@ -70,7 +70,7 @@ export const getHtmlPre = (dom, node = '0', cssClasses = {}) => {
 
   if (tag === 'img') {
       var nCss = css.replace(/in-line/g, '');
-      str += `\n<${tag} src="IMG_NAME"  class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >\n`;
+      str += `\n<${tag} src="/cat.jpg"  class="pborder ${nCss}" style=" width:${Math.floor(width/950*100)}vw; height:${Math.floor(height/950*100)}vw ;" >\n`;
   }  else {
       var nCss = css.replace(/in-line/g, '');
       //all additions and alterations go here-
@@ -117,24 +117,17 @@ export const getCss = (theCss, classes) => { // classes will be our cssClasses
     const properties = props.map((cur)=>{
           cur=cur.trim();
 
-          if (cur.includes('mT')){
+          if (cur.includes('mT')){ //auto generate margins
             var values = cur.replace('mT','');
-              return `margin-top:${values}px;`;
+              return `margin-top:${values}vw;`;
           } else if (cur.includes('mL')){
             var values = +cur.replace('mL','');
-              return `margin-left:${values}px;`;
+              return `margin-left:${values}vw;`;
           } else if (cur.includes('mR')){
             var values = +cur.replace('mR','');
-              return `margin-left:${values}px;`;
-          } else if (cur.includes('m')){ // grab margin classes to create properties
-            var values = cur.replace('m','');
-              return `margin:${values}px;`;
-
-          } else if (cur.includes('p')){ // grab padding classes to create properties
-            var values = +cur.replace('p','');
-              return `margin-left:${values}px;`;
-
+              return `margin-left:${values}vw;`;
           }
+          //auto setting of sizes already done in css series
             return theCss[cur];
 
 

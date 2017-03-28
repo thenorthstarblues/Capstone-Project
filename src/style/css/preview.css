@@ -125,6 +125,10 @@ and since we're setting child sizes, we won't need anything more than their odd 
 
 .ratioContainer {
    width: 100vw;
-   height: 53vw;
+   height: 52vw;
    border: solid 1px black;
+}
+
+.invisDiv {
+   border: dashed .25px lightgrey;
 }

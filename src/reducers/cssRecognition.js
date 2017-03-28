@@ -116,6 +116,7 @@ export const formatCheck = ((obj, parentId)=>{
   //--------------------all rows or all divs with kids as columns---------------------------------
     if (parentId>1000 && parentId<50000){
       setColMargins(obj, parentId);
+      obj[parentId].css += ' invisDiv';
   };
   //---------------------------------all columns to format child margins-------------------------
   if (parentId>50000){ //all divs that are columns, to set kid margins
@@ -127,6 +128,8 @@ export const formatCheck = ((obj, parentId)=>{
     }
 
     setChildColMargins(obj, parentId);
+
+    obj[parentId].css += ' invisDiv';
 
   };
 
