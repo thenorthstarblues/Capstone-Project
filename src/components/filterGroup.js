@@ -7,7 +7,12 @@ const FilterForm = (props) => {
   const inputValue = props.inputValue;
 
   return (
-    <form className="form-group" style={{ marginTop: '20px' }}>
+    <div className="border1">
+       <p className="closer">
+      <span className="TrendHandMade">SEARCH:</span>
+           find group by name
+        </p>
+      <form className="form-group" style={{ marginTop: '20px' }}>
       <input
         onChange={handleChange}
         value={inputValue}
@@ -15,6 +20,7 @@ const FilterForm = (props) => {
         placeholder="Enter group name"
       />
     </form>
+      </div>
   );
 };
 
@@ -49,7 +55,13 @@ export default connect(mapStateToProps)(class extends Component {
       <div>
         <FilterForm handleChange={this.handleChange} inputValue={inputValue} />
         <div className="sideThumbs">
-          {
+         <div className="border1">
+          <p className="closer">
+          <span className="TrendHandMade">CLICK GROUP:</span>
+          to view & select children
+        </p>
+        <div className="sideThumbs">
+        {
             filteredGroup && filteredGroup.map(group => (
                 <div key={group.id} onClick="">
                   <SvgThumb
@@ -62,7 +74,14 @@ export default connect(mapStateToProps)(class extends Component {
             )
           }
         </div>
+        <p className="closer">
+          <span className="TrendHandMade">OTHER:</span>
+           additional search options</p>
+        <p>or comments on contents being loaded</p>
+        </div>
+        </div>
         </div>
     );
   }
 });
+
