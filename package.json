@@ -45,7 +45,7 @@
     "redux-devtools": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run newstart react-scripts start",
     "newstart": "node ./server/main.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
