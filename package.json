@@ -26,6 +26,7 @@
     "react-notify": "^2.0.1",
     "react-redux": "^5.0.3",
     "react-router-dom": "^4.0.0",
+    "react-scripts": "0.9.5",
     "react-split-pane": "^0.1.59",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.0",
@@ -41,7 +42,6 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
-    "react-scripts": "0.9.5",
     "redux-devtools": "^3.3.2"
   },
   "scripts": {
@@ -50,6 +50,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
   }
 }
