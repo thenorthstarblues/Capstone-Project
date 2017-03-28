@@ -22,6 +22,8 @@
     "react-codemirror": "^0.3.0",
     "react-dom": "^15.4.2",
     "react-fontawesome": "^1.5.0",
+    "react-notification-system": "^0.2.13",
+    "react-notify": "^2.0.1",
     "react-redux": "^5.0.3",
     "react-router-dom": "^4.0.0",
     "react-split-pane": "^0.1.59",
