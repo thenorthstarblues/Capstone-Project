@@ -71,7 +71,7 @@ class CodeModal extends Component {
             <Code htmlString={this.props.html.css} />
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => { this.props.load(1); }}>Load </Button>
+            {/* <Button onClick={() => { this.props.load(1); }}>Load </Button>
             <Button>
           Download
           </Button>
@@ -79,7 +79,7 @@ class CodeModal extends Component {
               onClick={() => {
                 this.props.save(stateCopy, this.props.currentId);
               }}
-            >SAVE </Button>
+            >SAVE </Button> */}
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>

@@ -65,6 +65,7 @@ class Navigation extends Component{
 		let page=this.props.page;
 
 		const templates = page !== 'templates';
+		const tempN = !templates;
 		const directions = page !== 'directions';
 		const editor = page !== 'editor';
 		const preview = page !== 'preview';
@@ -77,6 +78,9 @@ class Navigation extends Component{
 	    			{templates &&
 						<Link to="/templates"><span className="menuL" > Templates <span className="glyphicon glyphicon-minus"></span></span></Link>
 	    			}
+	    			{tempN &&
+						<Link to="/"><span className="menuL" > Editor <span className="glyphicon glyphicon-minus"></span></span></Link>
+	    			}
 	    			{directions &&
 	    			<Link to="/directions"><span className="menuL" > Directions <span className="glyphicon glyphicon-minus"></span></span></Link>
 	    			}
@@ -85,14 +89,17 @@ class Navigation extends Component{
 	    			}
 	    			<span className="menuL" > Login </span>
 	    		</div>
-	    		<div className="col-lg-5 col-lg-offset-1 flexWrap spaceBetween">
+	    		<div className="col-lg-5 col-lg-offset-1 flexWrap spaceBetween bkgrey">
+	    				{templates &&
+	    				<div className="flexWrap spaceBetween">
 						<CodeModal />
 							<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm TrendHandMade closer" type="button"><span className="TrendHandMade closer">  Download Code   </span></button>
 							<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm" type="button" onClick={()=> {this.props.save(this.props.boxes, this.props.currentId)}}><span className="TrendHandMade closer"> Save Layout </span></button>
 
-
+						</div>
+						}
 				</div>
 			</div>
 		)

@@ -54,13 +54,13 @@ export default connect(mapStateToProps)(class extends Component {
     return (
       <div>
         <FilterForm handleChange={this.handleChange} inputValue={inputValue} />
-        <div className="sideThumbs">
-         <div className="border1">
+        <div className="sideThumbs border1">
+         <div className="">
           <p className="closer">
           <span className="TrendHandMade">CLICK GROUP:</span>
           to view & select children
         </p>
-        <div className="sideThumbs">
+        <div className="">
         {
             filteredGroup && filteredGroup.map(group => (
                 <div key={group.id} onClick="">
@@ -74,10 +74,6 @@ export default connect(mapStateToProps)(class extends Component {
             )
           }
         </div>
-        <p className="closer">
-          <span className="TrendHandMade">OTHER:</span>
-           additional search options</p>
-        <p>or comments on contents being loaded</p>
         </div>
         </div>
         </div>
