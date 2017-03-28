@@ -6,6 +6,7 @@ import Navigation from './Navigations';
 
 import '../style/css/App.css';
 import '../style/css/preview.css';
+import '../style/css/marginsVW.css';
 
 
 
@@ -41,9 +42,6 @@ class User extends Component {
 
 		return (
 		    <div>
-				<style>
-				{this.props.html.css}
-				</style>
 				<div className="App bkgrey">
 					<div className="container-fluid ">
 						<Navigation page="preview" />

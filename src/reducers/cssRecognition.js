@@ -27,10 +27,10 @@ function setRowMargins(obj, parentId){
   while (ind<kidsIds.length && obj[kidsIds[ind]]){ //for each row... must correct the last row catch
 
       var below=obj[kidsIds[ind]].y;
-      var mT = (Math.floor((below-above)/10))*10; //adjust spacing later
-      var mL = (Math.floor((obj[kidsIds[ind]].x-obj[parentId].x)/10))*10;
+      var mT = Math.floor((below-above)/950*100); //adjust spacing later
+      var mL = Math.floor((obj[kidsIds[ind]].x-obj[parentId].x)/950*100);
 
-        obj[kidsIds[ind]].css += 'flexRow mT'+mT+' mL'+mL+' ';
+        obj[kidsIds[ind]].css += ' flexRow mT'+mT+' mL'+mL+' ';
 
       above=obj[kidsIds[ind]].y + obj[kidsIds[ind]].height;
       ind++;
@@ -46,23 +46,23 @@ function setColMargins(obj, parentId){
   var left=obj[kidsIds[0]].x+obj[kidsIds[0]].width;
   var above=obj[parentId].y;
 
-  obj[parentId].css += 'flexRow ';
+  obj[parentId].css += ' flexRow ';
 
   while (ind<kidsIds.length){ //for each obj/col... must correct the last row catch
 
       var right=obj[kidsIds[ind]].x;
-      var mL=(Math.floor((right-left)/10))*10;
+      var mL=Math.floor((right-left)/950*100);
       var below=obj[kidsIds[ind]].y;
-      var mT = Math.abs((Math.floor((below-above)/10))*10);
+      var mT = Math.abs(Math.floor((below-above)/950*100));
 
-      obj[kidsIds[ind]].css += 'flexCol mL'+mL+ ' mT'+mT+' ';
+      obj[kidsIds[ind]].css += ' flexCol mL'+mL+ ' mT'+mT+' ';
       // increment up w/ left & index
       left=obj[kidsIds[ind]].x + obj[kidsIds[ind]].width;
       ind++;
   }
 
-  mL=(Math.floor((obj[kidsIds[0]].x - obj[parentId].x)/10))*10;
-  mT=(Math.floor((obj[kidsIds[0]].y - obj[parentId].y)/10))*10;
+  mL= Math.floor((obj[kidsIds[0]].x - obj[parentId].x)/950*100);
+  mT= Math.floor((obj[kidsIds[0]].y - obj[parentId].y)/950*100);
   obj[kidsIds[0]].css = obj[kidsIds[0]].css +' mL'+mL+ ' mT'+mT+' ';
 
 };
@@ -76,7 +76,7 @@ function setChildColMargins(obj, parentId){
     while (ind<kidsIds.length){ //for each row... must correct the last row catch
 
         var below=obj[kidsIds[ind]].y;
-        var mT=(Math.floor((below-above)/10))*10; //adjust spacing later //950x500, 1440x760 display at ratio...1.5 times spacing
+        var mT=Math.floor((below-above)/950*100); //adjust spacing later //950x500, 1440x760 display at ratio...1.5 times spacing
 
         var L = (obj[kidsIds[ind]].x-obj[parentId].x);
         var R = (obj[parentId].x+obj[parentId].width) - (obj[kidsIds[ind]].x+obj[kidsIds[ind]].width);
@@ -84,9 +84,9 @@ function setChildColMargins(obj, parentId){
 
         var align=''
         if (!C || !L || !R){
-          if(!C){align = css.center };
-          if(!L){align = css.left};
+          if(!C){align = css.center};
           if(!R){align = css.right};
+          if(!L){align = css.left};
         } else {
           align = ' mL'+L+' ';
         }
@@ -122,8 +122,8 @@ export const formatCheck = ((obj, parentId)=>{
 
     if (obj[parentId].parent === '0'){ //columns w/o row wrapper, set top margin
       var top = obj['0'].y;
-      var mT=(Math.floor((obj[parentId].y-top)/10))*10;//for math readjustment later.
-      obj[parentId].css += 'flexCol mT'+mT+' ';
+      var mT=Math.floor((obj[parentId].y-top)/950*100);//for math readjustment later.
+      obj[parentId].css += ' flexCol mT'+mT+' ';
     }
 
     setChildColMargins(obj, parentId);
