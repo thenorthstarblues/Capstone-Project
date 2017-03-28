@@ -62,7 +62,8 @@ function setColMargins(obj, parentId){
   }
 
   mL=(Math.floor((obj[kidsIds[0]].x - obj[parentId].x)/10))*10;
-  obj[kidsIds[0]].css = obj[kidsIds[0]].css +' mL'+mL+' ';
+  mT=(Math.floor((obj[kidsIds[0]].y - obj[parentId].y)/10))*10;
+  obj[kidsIds[0]].css = obj[kidsIds[0]].css +' mL'+mL+ ' mT'+mT+' ';
 
 };
 
