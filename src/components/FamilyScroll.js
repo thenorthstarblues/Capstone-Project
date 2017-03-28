@@ -32,37 +32,7 @@ SvgThumb.propTypes = {
 
 const FamilyScroll = (({ groups }) => (
     <div className="addOptionsInt">
-      <div className="border1">
-        <p className="closer">
-          <span className="TrendHandMade">SEARCH:</span>
-           find group by name
-        </p>
-        <FilterGroup />
-      </div>
-      <div className="border1">
-        <p className="closer">
-          <span className="TrendHandMade">CLICK GROUP:</span>
-          to view & select children
-        </p>
-        <div className="sideThumbs">
-          {
-            groups && groups.map(group => (
-                <div key={group.id} onClick="">
-                  <SvgThumb
-                    groupName={group.name}
-                    groupId={group.id}
-                    vers="small"
-                  />
-                </div>
-              ),
-            )
-          }
-        </div>
-        <p className="closer">
-          <span className="TrendHandMade">OTHER:</span>
-           additional search options</p>
-        <p>or comments on contents being loaded</p>
-      </div>
+      <FilterGroup />
     </div>
   ));
 

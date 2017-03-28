@@ -25,7 +25,7 @@ const PageTabs = (props) => {
 
   return (<div>
     <button className="fakeTab TrendHandMade other borders" onClick={() => { props.addGroup(props.elements, props.groupId, props.currentId); }}> Add Page +</button>
-    { pageArr.map(page => (<button onClick={() => { props.changePage(props.elements, props.currentId, page); }}key={page} className="fakeTab active bkoffwhite TrendHandMade borders">Page {page}</button>)) }
+    { pageArr.map((page, number) => (<button onClick={() => { props.changePage(props.elements, props.currentId, page); }}key={number} className="fakeTab active bkoffwhite TrendHandMade borders">Page {number+1}</button>)) }
   </div>
   );
 };
