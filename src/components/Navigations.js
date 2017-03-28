@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import Immutable from 'immutable';
-
+import NotificationSystem from 'react-notification-system';
 import {showPreview, hidePreview } from '../reducers/preview';
 import {saveOrUpdate} from '../constants_actioncreators/groups';
 import CodeModal from './codemirror_modal';
@@ -37,7 +37,16 @@ class Navigation extends Component{
 		super(props);
 		this.showHide=this.showHide.bind(this);
 		this.getPreview=this.getPreview.bind(this);
+
 	};
+
+	 addNotification = (event) => {
+    event.preventDefault();
+    this._notificationSystem.addNotification({
+      message: 'Layout Saved',
+      level: 'success'
+    });
+  }
 
 	showHide = (e) => {
 		e.preventDefault();
@@ -57,6 +66,9 @@ class Navigation extends Component{
 		//<Redirect to="/preview" push={true} />;
 		//history.pushState('/preview', []);
 	}
+	componentDidMount(){
+		this._notificationSystem = this.refs.notificationSystem;
+	}
 
 	render(){
 		//conditional rendering... will likely pull from routes
@@ -73,6 +85,7 @@ class Navigation extends Component{
 
 	return(
 	        <div className="row col-lg-12 flexWrap p20w bkgrey">
+					<NotificationSystem ref="notificationSystem" />
 	        	<div className="col-lg-6">
 	    			<Link to="/"><span className="TrendHMTitle"><img src="/AAlogo.svg" /> Agile-Armature </span></Link>
 	    			{templates &&
@@ -96,7 +109,8 @@ class Navigation extends Component{
 							<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm TrendHandMade closer" type="button"><span className="TrendHandMade closer">  Download Code   </span></button>
 							<span className="glyphicon glyphicon-minus"></span>
-						<button className="btn btn-default btn-sm" type="button" onClick={()=> {this.props.save(this.props.boxes, this.props.currentId)}}><span className="TrendHandMade closer"> Save Layout </span></button>
+						<button className="btn btn-default btn-sm" type="button" onClick={(e)=> { this.addNotification(e);
+							this.props.save(this.props.boxes, this.props.currentId)}}><span className="TrendHandMade closer"> Save Layout </span></button>
 
 						</div>
 						}
