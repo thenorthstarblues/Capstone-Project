@@ -4,7 +4,7 @@ import Navigation from './Navigations';
 import ViewGroups from './ViewGroups';
 import Immutable from 'immutable';
 import {connect} from 'react-redux';
-import {getTemplates} from '../constants_actioncreators/groups'
+import {getTemplates, getLayouts} from '../constants_actioncreators/groups'
 import {saveGroup} from '../constants_actioncreators/layout';
 import '../style/css/App.css';
 
@@ -18,13 +18,15 @@ const mapStateToProps = (state) => {
 		boxesCss: state.get('sibling'),
 		html: state.get('html'),
 		boxIds: ids,
+		groupId: state.get('pages').get('group'),
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-	onTemplateEnter(){
+	onTemplateEnter(id){
 		dispatch(getTemplates())
+		dispatch(getLayouts(id))
 		}
 	}
 }
@@ -58,7 +60,7 @@ class Templates extends Component {
   });
 }*/
 	componentDidMount(){
-		this.props.onTemplateEnter()
+		this.props.onTemplateEnter(this.props.groupId)
 	}
 	render(){
 		const boxes = this.props.boxes;
