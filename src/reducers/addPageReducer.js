@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 const initialState = Immutable.Map({
   group: 0,
   pages: Immutable.List(),
+  pageLayouts: Immutable.List(), //new
   currentPage: 0,
   groups: Immutable.List(),
 });
@@ -19,6 +20,8 @@ const pageReducer = (prevState = initialState, action) => {
       return prevState.set('groups', Immutable.fromJS(action.groups));
     case 'SET_PAGES':
       return prevState.set('pages', action.pages);
+    case 'HOLD_PAGES':
+      return prevState.set('pageLayouts', action.pageLayouts); //new
     default:
       return prevState;
   }

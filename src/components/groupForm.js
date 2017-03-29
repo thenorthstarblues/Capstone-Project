@@ -38,10 +38,10 @@ class GroupForm extends Component {
     let show = this.props.group === 0;
     return (
       <div>
-      { show &&
+      {/* show && */}
       <form name="groupName" onClick="">
         <input type="text" value={this.state.value} onChange={this.handleChange} />
-        <button 
+        <button
         className="btn btn-default btn-sm m5w bshadsm" value="" type="button" onClick={(event) => {
             this.props.save(this.state.value, this.props.currentId, this.props.elements);
 }}
@@ -49,7 +49,7 @@ class GroupForm extends Component {
         <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-plus" />  var</button>
         <button className="btn btn-default btn-sm m5w bshadsm" value="" ><span className="glyphicon glyphicon-minus" />  var</button>
       </form>
-    }
+
     </div>
     );
   }
