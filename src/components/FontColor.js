@@ -105,7 +105,7 @@ class FontColor extends Component{
                 <option value="engagement">Engagement</option>
                 <option value="nokora">Nokora</option>
               </select>
-              <p className={`${this.state.headerFont}`}>Sample</p>
+              <p className={this.state.headerFont}>Sample</p>
             </form>
           </div>
           <div className="col-lg-3">
@@ -118,7 +118,7 @@ class FontColor extends Component{
                 <option value="iceberg">Iceberg</option>
                 <option value="bungee">Bungee Inline</option>
               </select>
-              <p className={`${this.state.paragraphFont}`}>Sample</p>
+              <p className={this.state.paragraphFont}>Sample</p>
             </form>
           </div>
           <div className="col-lg-2 block-center text-center">
@@ -128,11 +128,9 @@ class FontColor extends Component{
           </button>
         </div>
           <div className="col-lg-2 block-center text-center">
-            <button className="btn btn-default btn-sm clearBtn text-center"       onClick={this.getPreview} >
-              <Link to="/preview">
+            <Link to="/preview"><button className="btn btn-default btn-sm clearBtn text-center"       onClick={this.getPreview} >
                 <span className="TrendHandMade closer">preview </span>
-              </Link>
-            </button>
+            </button></Link>
           </div>
         </div>
         <div className="col-lg-2 block-center text-center">
