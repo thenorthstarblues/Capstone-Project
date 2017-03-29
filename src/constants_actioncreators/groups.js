@@ -30,6 +30,10 @@ export const setPages = pages => ({
   type: 'SET_PAGES',
   pages,
 });
+export const holdPages = pageLayouts => ({
+  type: 'HOLD_PAGES',
+  pageLayouts,
+});
 
 export const getTemplates = () => (dispatch) => {
   axios.get('/api/group').then((groups) => {
@@ -45,6 +49,19 @@ export const getLayouts = id => (dispatch) => {
     .then((layouts) => {
       const layoutsArr = layouts.data.map(layout => layout.id);
       dispatch(setPages(Immutable.fromJS(layoutsArr)));
+
+      const grablayouts=[]
+      for (let i=0; i<layoutsArr.length; i++){
+        grablayouts.push(axios.get(`/api/elements/layout/${layoutsArr[i]}`));
+      }
+
+      Promise.all(grablayouts).then((result) => {
+        let objArrays=result.map(each=> each.data);
+        dispatch(holdPages(objArrays));
+      }).catch(err=>{
+        console.log('layout-api error', err);
+      });
+
     });
 };
 

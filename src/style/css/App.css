@@ -629,3 +629,9 @@ Resizer.disabled:hover {
   color: #ffffff;
   background-color: #757575;
 }
+
+.thinLine {
+  stroke-width: 1px;
+  stroke: #757575;
+  fill: none;
+}
