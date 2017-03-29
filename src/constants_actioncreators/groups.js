@@ -47,6 +47,7 @@ export const getLayouts = id => (dispatch) => {
       dispatch(setPages(Immutable.fromJS(layoutsArr)));
     });
 };
+
 export const updatePage = (id, stateCopy) => (dispatch) => {
   axios.get(`api/layouts/${id}`)
     .then((layout) => {

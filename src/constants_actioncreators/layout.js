@@ -35,13 +35,13 @@ export const loadLayout = id => (dispatch) => {
       if (parent === 0){element.parent = parent.toString()}
       //let children = [];
       if (element.children) { element.children = [...element.children.split(',').map(val=>+val)]; }
-      else{element.children=[]}
+      else {element.children=[]}
       //const childrenArr = children.map(val => +val);
       loads.push(dispatch(setBox(element)));
       //element.children = childrenArr;
       //newState[id] = element;
     });
-    Promise.all(loads).then(()=>{
+    Promise.all(loads).then((result)=>{ //need to spread result for its data
       dispatch(setCurrent(id));
 
     })
@@ -92,7 +92,7 @@ export const saveGroup = (name, currentId, elements) => (dispatch) => {
     }
     else {
       dispatch(addToGroup(elements, id,true))
-      
+
     }
     });
 };
@@ -105,7 +105,7 @@ export const addToGroup = (stateCopy, groupId,base) => (dispatch) => {
     groupId: groupId
   })
     .then((layout) => {
-      
+
       const id = layout.data.id;
       if(base){
         dispatch(setCurrent(id))
