@@ -465,6 +465,11 @@ Resizer.disabled:hover {
   font-size:.75em;
 }
 
+.sm2{
+  font-size:.85em;
+  margin-top: 5px;
+}
+
 .cornerR5{
   border-radius: 5px;
 }

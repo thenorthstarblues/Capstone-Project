@@ -105,7 +105,7 @@ class FontColor extends Component{
                 <option value="engagement">Engagement</option>
                 <option value="nokora">Nokora</option>
               </select>
-              <p className={this.state.headerFont}>Sample</p>
+              <p className={"sm "+ this.state.headerFont}>Sample Header</p>
             </form>
           </div>
           <div className="col-lg-3">
@@ -118,7 +118,7 @@ class FontColor extends Component{
                 <option value="iceberg">Iceberg</option>
                 <option value="bungee">Bungee Inline</option>
               </select>
-              <p className={this.state.paragraphFont}>Sample</p>
+              <p className={"sm "+ this.state.paragraphFont}>Sample Paragraph</p>
             </form>
           </div>
           <div className="col-lg-2 block-center text-center">
