@@ -15,6 +15,9 @@ const setSiblings = boxObjs => ({
 
 const boxRecog = (boxes => {
   const boxObjs = Object.assign({}, boxes);
+  //console.log('sib', boxObjs);
+  parentGuar(boxObjs);
+
   let len = Object.keys(boxObjs);
   for (let i = 0; i < len.length; i++) {
     if (boxObjs[len[i]]) {
@@ -69,3 +72,22 @@ const siblingReducer = (prevState = initialState, action) => {
 
 export default siblingReducer;
 
+
+//catch function
+
+  //const boxObjs = Object.assign({}, boxes);
+  //boxObjs...look thru all entries, find those with '0' as parent and make an array
+  //set boxObjs[0].children = that array
+
+function parentGuar(boxObjs){
+  const zer=[];
+
+  for (let item in boxObjs){
+    if (boxObjs[item].parent===0 || boxObjs[item].parent==='0'){
+      zer.push( +item);
+    }
+  }
+
+  boxObjs[0].children=zer;
+
+}

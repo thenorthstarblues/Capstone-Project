@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Immutable from 'immutable';
 import { makeGroup, addPage, setCurrent } from './groups';
-
+import {clearAll, addBox, setBox} from './boxes'
 
 export const LOAD_LAYOUT = 'LOAD_LAYOUT';
 export const SAVE = 'SAVE';
@@ -16,28 +16,36 @@ export const save = () => ({
 });
 
 export const loadLayout = id => (dispatch) => {
+  dispatch(clearAll())
+  //let loads = [];
   axios.get(`api/elements/layout/${id}`)
   .then((elements) => {
     const data = elements.data;
-    let newState = {};
+    let loads = [];
     data.forEach((element) => {
-      const id = element.layId;
+      if (element.id === 0 )return;
+      let Elemid = element.layId;
+      loads.push(dispatch(addBox(Elemid)))
       delete element.layId;
       delete element.createdAt;
       delete element.updatedAt;
       delete element.layoutId;
-      element.id = id;
+      element.id = Elemid;
       const parent = element.parent;
-      if (parent !== null){element.parent = parent.toString()}
+      if (parent === 0){element.parent = parent.toString()}
+      //let children = [];
+      if (element.children) { element.children = [...element.children.split(',').map(val=>+val)]; }
+      else {element.children=[]}
+      //const childrenArr = children.map(val => +val);
+      loads.push(dispatch(setBox(element)));
+      //element.children = childrenArr;
       //newState[id] = element;
-      let children = [];
-      if (element.children) { children = [...element.children.split(',')]; }
-      const childrenArr = children.map(val => +val);
-      element.children = Immutable.List(childrenArr);
-      newState[id] = Immutable.Map(element);
     });
-    newState = Immutable.Map(newState);
-    dispatch(load(Immutable.fromJS(newState)));
+    Promise.all(loads).then((result)=>{ //need to spread result for its data
+      dispatch(setCurrent(id));
+
+    })
+    //newState = Immutable.Map(newState);
   });
 };
 
@@ -49,15 +57,16 @@ export const saveLayout = stateCopy => (dispatch) => {
     .then((layout) => {
       const id = layout.data.id;
       const makeelements = []; // converting to array
-      const elemClone = Object.assign({}, stateCopy);
-      const elementIdArr = Object.keys(elemClone);
+      //const elemClone = Object.assign({}, stateCopy);
+      const elementIdArr = Object.keys(stateCopy);
       for (let i = 0; i < elementIdArr.length; i++) {
-        const elem = elemClone[i];
+        const elem = stateCopy[i];
         const layId = elem.id;
         elem.children = elem.children.join(',');
         delete elem.id;
         const newElement = Object.assign({}, elem, { layId, layoutId: id });
         makeelements.push(axios.post('/api/elements', newElement));
+
       }
 
       Promise.all(makeelements).then((result) => {
@@ -83,7 +92,7 @@ export const saveGroup = (name, currentId, elements) => (dispatch) => {
     }
     else {
       dispatch(addToGroup(elements, id,true))
-      
+
     }
     });
 };
@@ -96,7 +105,7 @@ export const addToGroup = (stateCopy, groupId,base) => (dispatch) => {
     groupId: groupId
   })
     .then((layout) => {
-      
+
       const id = layout.data.id;
       if(base){
         dispatch(setCurrent(id))

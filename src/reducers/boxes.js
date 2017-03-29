@@ -34,6 +34,7 @@ const boxesReducer = (prevState = initialState, action) => {
     let addPath;
     (prevState.get(action.parentId) !== undefined) ?(addPath = action.parentId) : (addPath = action.parentId.toString());
      return prevState.updateIn([addPath, 'children'], (childMap) => {
+        //console.log('childern added', childMap, action.childId);
         return childMap.push(action.childId);
       });
     case REMOVE_PARENT:
