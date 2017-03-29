@@ -38,7 +38,7 @@ export const divCreation = ((obj, parentId, largest, idRow, dir, row)=> {
 
       if (dir%20===0){ //during row checking
         rowId=1000+(50*parentId)+newdir;
-        //cssDir='flexRow ';
+        cssDir='flexRow';
 
       } else {//column defs
         if (dir===1 && parentId<1000){
@@ -46,7 +46,7 @@ export const divCreation = ((obj, parentId, largest, idRow, dir, row)=> {
         } else {
           rowId=2000+(50*parentId)+newdir;
         }
-        //cssDir='flexCol';
+        cssDir='flexCol';
       }
 
         newRow = {
