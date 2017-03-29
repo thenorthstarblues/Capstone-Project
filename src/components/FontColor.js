@@ -41,8 +41,8 @@ class FontColor extends Component{
     super(props);
     this.state= {
       colorsPicked:[],
-      headerFont:'',
-      paragraphFont:'',
+      headerFont:'Trenda',
+      paragraphFont:'Trenda',
 
     }
     this.pickColor=this.pickColor.bind(this);
@@ -60,15 +60,11 @@ class FontColor extends Component{
   })
 
   pickHeader=((e)=>{
-    // add in the js color picker here for the final workflow- npm install
-    console.log(e.target);
-
+    this.setState({headerFont: e.target.value});
   })
 
   pickParagraph=((e)=>{
-    // add in the js color picker here for the final workflow- npm install
-    console.log(e.target);
-
+    this.setState({paragraphFont: e.target.value});
   })
 
   showHide = (e) => {
@@ -91,51 +87,63 @@ class FontColor extends Component{
   }
 
 
-    render(){
-
+  render(){
     return (
-            <div className="fontOptions bkoffwhite row border1">
-              <div className="col-lg-10 row">
-                    <div className="col-lg-2">
-                          <p className="TrendHandMade closer">other options</p>
-                          <p className="small">to include in css classes</p>
-                    </div>
-                    <div className="col-lg-3">
-                      <form onChange="">
-                        <select name="headers" className="bkwhite" >
-                            <option value="volvo">google header font options</option>
-                          </select>
-                          <p className="small">sample</p>
-                      </form>
-                    </div>
-                    <div className="col-lg-3">
-                      <form onChange="">
-                        <select name="paragraphs" className="bkwhite" >
-                            <option value="volvo">google paragraph font options</option>
-                          </select>
-                          <p className="small">sample</p>
-                      </form>
-                    </div>
-                    <div className="col-lg-2 block-center text-center">
-
-                    <button className="btn btn-default btn-sm clearBtn" onClick={this.showHide} ><span className="TrendHandMade closer">hierarchies</span></button>
-
-                  </div>
-                    <div className="col-lg-2 block-center text-center">
-
-                    <button className="btn btn-default btn-sm clearBtn text-center" onClick={this.getPreview} ><Link to="/preview"><span className="TrendHandMade closer"> preview </span></Link> </button>
-
-                  </div>
-                  </div>
-                  <div className="col-lg-2 block-center text-center">
-
-                    <button className="btn btn-default btn-sm clearBtn" onClick={() => this.props.clear()} ><span className="TrendHandMade closer">clear layout</span></button>
-
-                  </div>
-              </div>
+      <div className="fontOptions bkoffwhite row border1">
+        <div className="col-lg-10 row">
+          <div className="col-lg-2">
+            <p className="TrendHandMade closer">other options</p>
+            <p className="small">to include in css classes</p>
+          </div>
+          <div className="col-lg-3">
+            <form onChange={this.pickHeader}>
+              <select name="headers" className="bkwhite">
+                <option value="Trenda">Trenda</option>
+                <option value="fellEnglish">IM Fell English SC</option>
+                <option value="geo">Geo</option>
+                <option value="rougeScript">Rouge Script</option>
+                <option value="engagement">Engagement</option>
+                <option value="nokora">Nokora</option>
+              </select>
+              <p className={`${this.state.headerFont}`}>Sample</p>
+            </form>
+          </div>
+          <div className="col-lg-3">
+            <form onChange={this.pickParagraph}>
+              <select name="paragraphs" className="bkwhite" >
+                <option value="Trenda">Trenda</option>
+                <option value="cormorant">Cormorant</option>
+                <option value="raleway">Raleway Dots</option>
+                <option value="miniver">Miniver</option>
+                <option value="iceberg">Iceberg</option>
+                <option value="bungee">Bungee Inline</option>
+              </select>
+              <p className={`${this.state.paragraphFont}`}>Sample</p>
+            </form>
+          </div>
+          <div className="col-lg-2 block-center text-center">
+          <button className="btn btn-default btn-sm clearBtn"
+            onClick={this.showHide} >
+            <span className="TrendHandMade closer">hierarchies</span>
+          </button>
+        </div>
+          <div className="col-lg-2 block-center text-center">
+            <button className="btn btn-default btn-sm clearBtn text-center"       onClick={this.getPreview} >
+              <Link to="/preview">
+                <span className="TrendHandMade closer">preview </span>
+              </Link>
+            </button>
+          </div>
+        </div>
+        <div className="col-lg-2 block-center text-center">
+          <button className="btn btn-default btn-sm clearBtn"
+            onClick={() => this.props.clear()} >
+            <span className="TrendHandMade closer">clear layout</span>
+          </button>
+        </div>
+      </div>
     )
   }
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FontColor);

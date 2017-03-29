@@ -635,3 +635,51 @@ Resizer.disabled:hover {
   stroke: #757575;
   fill: none;
 }
+
+.bungee {
+  font-family: 'Bungee Inline', cursive;
+}
+
+.fellEnglish {
+  font-family: 'IM Fell English SC', serif;
+}
+
+.geo {
+  font-family: 'Geo', sans-serif;
+}
+
+.rougeScript {
+  font-family: 'Rouge Script', cursive;
+}
+
+.engagement {
+  font-family: 'Engagement', cursive;
+}
+
+.nokora {
+  font-family: 'Nokora', serif;
+}
+
+.cormorant {
+  font-family: 'Cormorant', serif;
+}
+
+.raleway {
+  font-family: 'Raleway Dots', cursive;
+}
+
+.miniver {
+  font-family: 'Miniver', cursive;
+}
+
+.fellDouble {
+  font-family: 'IM Fell Double Pica SC', serif;
+}
+
+.iceberg {
+  font-family: 'Iceberg', cursive;
+}
+
+form p {
+  font-size: 1.5em;
+}
