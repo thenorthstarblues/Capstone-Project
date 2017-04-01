@@ -15,7 +15,6 @@ const setSiblings = boxObjs => ({
 
 const boxRecog = (boxes => {
   const boxObjs = Object.assign({}, boxes);
-  //console.log('sib', boxObjs);
   parentGuar(boxObjs);
 
   let len = Object.keys(boxObjs);

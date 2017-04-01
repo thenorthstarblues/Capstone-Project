@@ -28,6 +28,7 @@ const mapStateToProps = (state) => {
 		boxes: state.get('boxes').toJS(),
 		boxesCss: state.get('sibling'),
 		html: state.html,
+		pageLayouts: state.get('pages').get('pageLayouts'),
 		pages: state.get('pages').get('pages'),
 		groups: state.get('pages').get('groups'), // layer names and conventions
 	//	allgroups: state.layouts,
@@ -94,7 +95,7 @@ class ViewGroups extends Component {
 						  <div className="" id="">
 									<div className=" row bkoffwhite borders m90">
 										<div id="grid-snap" className="svgHolder2 col-lg-9 bkoffwhite ">
-											<FamilyThumbnails groups = {this.props.pages} clickHandle= {this.props.loadSelected} action="" />
+											<FamilyThumbnails groups = {this.props.pages} groupLayouts={this.props.pageLayouts} clickHandle= {this.props.loadSelected} action="" />
 										</div>
 										<div className="viewFam col-lg-3 bkoffwhite">
 											<FamilyScroll groups = {this.props.groups} action="" clickAdd={this.props.loadLayouts} />
