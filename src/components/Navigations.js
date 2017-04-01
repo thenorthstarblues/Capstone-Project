@@ -9,7 +9,7 @@ import {showPreview, hidePreview } from '../reducers/preview';
 import {saveOrUpdate} from '../constants_actioncreators/groups';
 import CodeModal from './codemirror_modal';
 import { previewLive } from '../reducers/siblings';
-import {download} from './Codemirror';
+import {download, downloadcss } from './Codemirror';
 
 const mapStateToProps = (state) => ({
   boxes: state.get('boxes').toJS(),
@@ -17,6 +17,7 @@ const mapStateToProps = (state) => ({
   group: state.get('pages').get('group'),
   preview: state.get('preview').toJS().preview,
 	html: state.get('html').get('html'),
+	css: state.get('html').get('css'),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -109,7 +110,7 @@ class Navigation extends Component{
 	    				<div className="flexWrap spaceBetween">
 						<CodeModal />
 							<span className="glyphicon glyphicon-minus"></span>
-						<button onClick={()=> download(this.props.html)}className="btn btn-default btn-sm TrendHandMade closer" type="button"><span className="TrendHandMade closer">  Download Code   </span></button>
+						<button onClick={()=> {download(this.props.html);downloadcss(this.props.css)}} className="btn btn-default btn-sm TrendHandMade closer" type="button"><span className="TrendHandMade closer">  Download Code   </span></button>
 							<span className="glyphicon glyphicon-minus"></span>
 						<button className="btn btn-default btn-sm" type="button" onClick={(e)=> { this.addNotification(e);
 							this.props.save(this.props.boxes, this.props.currentId)}}><span className="TrendHandMade closer"> Save Layout </span></button>

@@ -12,6 +12,11 @@ const FileSaver = require('file-saver');
    FileSaver.saveAs(blob, 'index.html');
  }
 
+  export const downloadcss = (file) => {
+   var blob = new Blob([file], { type:"html;charset=utf-8" });
+   FileSaver.saveAs(blob, 'index.css');
+ }
+
 
 const Code = (props) => {
 
