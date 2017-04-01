@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { SvgThumb } from './FamilyScroll';
 import { Link } from 'react-router-dom';
 
+
 const FamilyThumbnails= (({clickHandle, groups, groupLayouts, action})=> {
   console.log('the groups',groups);
 

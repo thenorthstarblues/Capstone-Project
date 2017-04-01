@@ -465,6 +465,11 @@ Resizer.disabled:hover {
   font-size:.75em;
 }
 
+.sm2{
+  font-size:.85em;
+  margin-top: 5px;
+}
+
 .cornerR5{
   border-radius: 5px;
 }
@@ -625,7 +630,7 @@ Resizer.disabled:hover {
   margin-top:90px;
 }
 
-.tabAct {
+.tabActives {
   color: #ffffff;
   background-color: #757575;
 }
@@ -634,4 +639,52 @@ Resizer.disabled:hover {
   stroke-width: 1px;
   stroke: #757575;
   fill: none;
+}
+
+.bungee {
+  font-family: 'Bungee Inline', cursive;
+}
+
+.fellEnglish {
+  font-family: 'IM Fell English SC', serif;
+}
+
+.geo {
+  font-family: 'Geo', sans-serif;
+}
+
+.rougeScript {
+  font-family: 'Rouge Script', cursive;
+}
+
+.engagement {
+  font-family: 'Engagement', cursive;
+}
+
+.nokora {
+  font-family: 'Nokora', serif;
+}
+
+.cormorant {
+  font-family: 'Cormorant', serif;
+}
+
+.raleway {
+  font-family: 'Raleway Dots', cursive;
+}
+
+.miniver {
+  font-family: 'Miniver', cursive;
+}
+
+.fellDouble {
+  font-family: 'IM Fell Double Pica SC', serif;
+}
+
+.iceberg {
+  font-family: 'Iceberg', cursive;
+}
+
+form p {
+  font-size: 1.5em;
 }
