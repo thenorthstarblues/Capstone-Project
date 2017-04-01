@@ -123,7 +123,7 @@ class FontColor extends Component{
                   </div>
                     <div className="col-lg-2 block-center text-center">
 
-                    <button className="btn btn-default btn-sm clearBtn text-center" onClick={this.getPreview} ><Link to="/preview"><span className="TrendHandMade closer"> preview </span></Link> </button>
+                    <Link to="/preview"><button className="btn btn-default btn-sm clearBtn text-center" onClick={this.getPreview} ><span className="TrendHandMade closer"> preview </span> </button></Link>
 
                   </div>
                   </div>
