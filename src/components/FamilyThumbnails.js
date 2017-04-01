@@ -2,36 +2,6 @@ import React, { Component } from 'react';
 import { SvgThumb } from './FamilyScroll';
 import { Link } from 'react-router-dom';
 
-let buttons= [
-  {
-    val: 'div',
-    icon: 'glyphicon glyphicon-unchecked',
-    style: '',
-  },
-  {
-    val: 'p',
-    icon: 'glyphicon glyphicon-align-left',
-    style: 'text-left',
-  },
-  {
-    val: 'p',
-    icon: 'glyphicon glyphicon-align-center',
-    style: 'text-center',
-  },
-  {
-    val: 'p',
-    icon: 'glyphicon glyphicon-align-right',
-    style: 'text-right',
-  },
-  {
-    val: 'h1',
-    icon: 'glyphicon glyphicon-plus',
-    style: '',
-  },
-];
-
-
-
 
 const FamilyThumbnails= (({clickHandle, groups, groupLayouts, action})=> {
   console.log('the groups',groups);

@@ -124,4 +124,3 @@ export const addToGroup = (stateCopy, groupId,base) => (dispatch) => {
       dispatch(addPage(id));
     });
 };
-

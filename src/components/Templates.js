@@ -39,7 +39,7 @@ class Templates extends Component {
 		this.boxAdder=this.boxAdder.bind(this);
 
 	}
-	
+
 	boxAdder = (e => {
 		let tagType = e.target.attributes.value.value;
 		const id = +this.props.nextBoxId;
@@ -70,7 +70,7 @@ class Templates extends Component {
 			<div className="App bkgrey">
 				<div className="container-fluid ">
 					<Navigation page="templates"/>
-					
+
 				{/* rework once index is revised*/}
 					<ViewGroups />
 					{/*<Footer />*/}
