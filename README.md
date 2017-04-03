@@ -2,7 +2,7 @@
 
 **A wireframing application that allows users to design layouts for websites and outputs corresponding html and css.**
 
-[**PROJECT DEMO**](https://agilearmature.herokuapp.com/)
+[**PROJECT DEMO**](https://agile-armature.com/)
 
 ## Team members
 
