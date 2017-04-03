@@ -10,7 +10,7 @@
 
 **Mack** - 
 
-**Meg** - 
+**Meg** - www.siteations.com www.github.com/siteations
 
 **Ray** - 
 
@@ -36,9 +36,9 @@
 
 #### Components:
 
-* [Grid](https://github.com/thenorthstarblues/Agile-Armature/blob/master/src/components/Grid.js) : description
-* [Window](https://github.com/thenorthstarblues/Agile-Armature/blob/master/src/components/DrawHere.js) : description
-* [DrawHere](https://github.com/thenorthstarblues/Agile-Armature/blob/master/src/components/DrawHere.js) : description
+* [Grid](https://github.com/thenorthstarblues/Agile-Armature/blob/master/src/components/Grid.js) : description to come
+* [Window](https://github.com/thenorthstarblues/Agile-Armature/blob/master/src/components/DrawHere.js) : description to come
+* [DrawHere](https://github.com/thenorthstarblues/Agile-Armature/blob/master/src/components/DrawHere.js) : description to come
 
 
 
