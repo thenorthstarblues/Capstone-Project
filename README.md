@@ -2,4 +2,4 @@ Agile-Armature
 
 Under Construction! 
 
-Demo Available @ https://agilearmature.herokuapp.com/
+Demo Available @ http://www.agile-armature.com/
