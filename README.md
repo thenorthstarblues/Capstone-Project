@@ -6,13 +6,13 @@
 
 ## Team members
 
-**David** - 
+**David Martin** - https://github.com/thenorthstarblues/
 
-**Mack** - https://github.com/tmcinerney4 -- https://www.linkedin.com/in/thomasmcinerney4/
+**Thomas McInerney** - https://github.com/tmcinerney4 -- https://www.linkedin.com/in/thomasmcinerney4/
 
-**Meg** - www.siteations.com www.github.com/siteations
+**Meg Studer** - www.siteations.com www.github.com/siteations
 
-**Ray** - 
+**Ray Coti** - https://github.com/raycoti
 
 
 
