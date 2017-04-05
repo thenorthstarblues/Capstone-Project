@@ -8,7 +8,7 @@
 
 **David** - 
 
-**Mack** - 
+**Mack** - https://github.com/tmcinerney4 -- https://www.linkedin.com/in/thomasmcinerney4/
 
 **Meg** - www.siteations.com www.github.com/siteations
 
